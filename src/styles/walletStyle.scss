@@ -1,0 +1,411 @@
+@import "./walletVal.scss";
+@import "./business.scss";
+.acc_btn {
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    &:active {
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+    }
+}
+
+.walletView {
+    .van-nav-bar .van-icon {
+        color: $text_color_dark;
+    }
+    // 主题重置样式
+    .van-button--info {
+        background: $them_color;
+        color: white;
+        border-radius: 4px;
+        background: $them_color;
+        font-size: 14px;
+        transition: all 0.3s;
+        color: white;
+        background: $them_color;
+        border: none;
+        &:active {
+            transform: scale(1.1);
+        }
+        font-size: 14px;
+        transition: all 0.3s;
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+    .van-button--plain.van-button--info {
+        border: 1px solid $them_color_dark;
+        color: $them_color_dark;
+        background: none;
+    }
+    .van-skeleton__row,
+    .van-skeleton__title {
+        background-color: #e3eaf7;
+    }
+    // 业务样式
+    .item-radius-shadow {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        background: white;
+    }
+    .full-height {
+        min-height: 100vh;
+    }
+    .qrcode {
+        overflow: hidden;
+        img,
+        canvas {
+            width: 100%;
+        }
+    }
+    //登录注册，忘记密码
+    #login,
+    .main {
+        .title {
+            .h2 {
+                font-size: 20px;
+                font-weight: bold;
+                color: $text_color_dark;
+            }
+        }
+        .them_form {
+            border-radius: 8px;
+            .input_gorup {
+                position: relative;
+                margin-top: 20px;
+                .getCode {
+                    position: absolute;
+                    right: 0;
+                    top: 20px;
+                }
+                input {
+                    display: block;
+                    width: 100%;
+                    padding: 15px 10px;
+                    background: none;
+                    outline: none;
+                    border: none;
+                    font-size: 15px;
+                    font-weight: bold;
+                    border-bottom: 1px solid $them_border_color_gray;
+                    border-radius: 0;
+                    color: $text_color_dark;
+                    &:focus {
+                        border-bottom-color: $them_color;
+                    }
+                    &::-webkit-input-placeholder {
+                        font-weight: normal;
+                    }
+                    &:disabled {
+                        color: black;
+                        opacity: 1;
+                    }
+                }
+            }
+            .submit {
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+    .dialogMain {
+        padding: 20px;
+        .van-cell {
+            background: $them_color_bgGray;
+        }
+    }
+    .nullData {
+        text-align: center;
+        padding: 30px 0;
+        .van-icon {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 20px;
+            color: $gray_text;
+        }
+        >div {
+            font-size: 17px;
+            color: $gray_text;
+        }
+    }
+    .activeBg:active {
+        background: $them_color_bgGray;
+    }
+}
+
+.change_lang {
+    @include font_small;
+    i {
+        margin-left: 5px;
+        position: relative;
+        top: 2px;
+    }
+}
+
+// 自定义样式
+.navBox {
+    height: 46px;
+    position: relative;
+    z-index: 11;
+    &.opacity {
+        height: 0;
+        .van-nav-bar {
+            background: linear-gradient(-61deg,rgba(34,239,185,1),rgba(86,107,243,1));
+            box-shadow: 0px 4px 9px 0px rgba(68,22,238,0.15);
+            .van-nav-bar__title {
+                color: white;
+            }
+        }
+        .van-hairline--bottom::after {
+            border: none;
+        }
+        .van-icon {
+            color: white;
+        }
+    }
+}
+
+.coinImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-size: 90% 90% !important;
+    background-color: white !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    &.btc {
+        background-image: url('../assets/net/btc.png');
+    }
+    &.hot {
+        background-image: url('../assets/net/hot.png');
+    }
+}
+
+.them_btn {
+    background: $them_color;
+    border-radius: 100px;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+    color: white;
+    &:active {
+        transform: scale(1.1);
+    }
+    &.small {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+    &.green {
+        background: linear-gradient(180deg, #38e645, #14d410);
+        box-shadow: 0px 0px 10px #a3ffa2;
+    }
+}
+
+.them_card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
+}
+
+.menu_row {
+    >.item {
+        padding: 15px 0;
+    }
+}
+
+.tag_group {
+    background: white;
+    .item {
+        flex: 1;
+        text-align: center;
+        position: relative;
+        padding: 10px;
+        font-size: $font_default;
+        &.active {
+            color: $them_color;
+        }
+        &.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            height: 4px;
+            width: 80px;
+            background: $them_color;
+            left: 50%;
+            margin-left: -40px;
+            border-radius: 10px;
+        }
+    }
+    &.fixed {
+        position: fixed;
+        top: 46px;
+        width: 100%;
+        background: white;
+        z-index: 11;
+    }
+}
+
+.them_btn_bottom {
+    background: white;
+    position: fixed;
+    width: 100%;
+    z-index: 11;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    .them_btn {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+// 表单
+.form_group {
+    .input_group {
+        padding: 0px 0;
+        margin-bottom: 20px;
+        position: relative;
+        .lable {
+            margin-bottom: 5px;
+        }
+        .input_info {
+            padding: 10px 0;
+            font-size: 12px;
+            color: $them_color_gray;
+        }
+    }
+    .input {
+        position: relative;
+        input {
+            flex: 1;
+            outline: none;
+            border-radius: 0;
+            background: none;
+            border: none;
+            padding: 15px 0;
+            font-size: 15px;
+            padding-right: 10px;
+            font-weight: bold;
+            color: $text_color_dark;
+            &:focus~hr {
+                border: none;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: $them_color;
+            }
+            &::-webkit-input-placeholder {
+                font-weight: normal;
+            }
+        }
+        hr {
+            border: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: $them_color_bgGray;
+        }
+        .do {
+            min-width: 60px;
+            margin-left: 10px;
+            border-left: 1px solid $them_color_gray_light;
+            padding-left: 10px;
+        }
+    }
+    .submit {
+        display: block;
+        margin: 20px auto;
+        width: 100%;
+    }
+    .info {
+        margin: 30px 0;
+        color: $them_color_gray;
+        font-size: 12px;
+    }
+}
+
+.van-overlay {
+    .main {
+        position: relative;
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .close {
+            border: 1px solid $them_color_warning;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            color: $them_color_warning;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 100px;
+        }
+    }
+}
+
+.choost_type {
+    >span {
+        padding: 5px 12px;
+        border: 1px solid $them_color_gray_light;
+        color: $them_color_gray;
+        border-radius: 100px;
+        margin-left: 5px;
+        font-size: 12px;
+        &.active {
+            background: $them_color;
+            color: white;
+            border: 1px solid $them_color;
+            box-shadow: 0px 0px 10px #f390ba;
+        }
+    }
+}
+
+.noData {
+    text-align: center;
+    padding: 20px;
+    color: #8f9eab;
+    .van-icon {
+        opacity: 0.6;
+        display: block;
+        font-size: 50px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        &::after {
+            display: block;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        &.zh_cn::after {
+            content: '暂无数据';
+        }
+        &.zh_en::after {
+            content: 'No Data';
+        }
+        &.zh_hk::after {
+            content: '暫無數據';
+        }
+    }
+    &.table_null {
+        margin-top: 20px;
+    }
+}
+
+.copyIcon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    background: url('../assets//wallet/copy.png') no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.5;
+}

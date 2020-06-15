@@ -1,0 +1,105 @@
+$them_color:#1b8db2; //#f06d54;
+$them_color_dark:#566BF3;
+$bg_color:#f3f4f6;
+$text_color_dark:#333333;
+$them_color_gray:#999999;
+$them_color_gray_light:#e8e8e8;
+$them_color_warning:#eb716e;
+$them_color_bgGray:#f3f4f6;
+$thme_color_link:#fbc025;
+$them_color_green:#030303;
+$them_color_LightGreen:#22EFB9;
+$them_color_pink:#ff4949;
+$them_color_yellow:#f06d54;
+$them_border_color_gray:#e7eaed;
+$gray_text:#bfbfbf;
+$font_default: 14px;
+$font_small:12px;
+.them_color_yellow {
+    color: $them_color_yellow;
+}
+
+.them_color_LightGreen {
+    color: $them_color_LightGreen;
+}
+
+.them_color_dark {
+    color: $them_color_dark;
+}
+
+.bg_color_gray {
+    background: $them_color_bgGray;
+}
+
+.color-gray2 {
+    color: $them_color_gray;
+}
+
+.text_color_dark {
+    color: $text_color_dark;
+}
+
+.them_color_gray {
+    color: $them_color_gray;
+}
+
+.them_color_gray_light {
+    color: $them_color_gray_light;
+}
+
+.them_color_warning {
+    color: $them_color_warning;
+}
+
+.them_color {
+    color: $them_color;
+}
+
+.font_small {
+    font-size: 12px;
+    color: $them_color_gray;
+}
+
+.font_default {
+    font-size: 14px;
+    color: $text_color_dark;
+}
+
+.font_link {
+    color: $them_color;
+}
+
+.color_red {
+    color: #fa615c;
+}
+
+.color_green {
+    color: #00d38c;
+}
+
+@mixin font_link {
+    color: $them_color;
+    font-size: 14px;
+}
+
+@mixin font_small {
+    font-size: 12px;
+    color: $them_color_gray;
+}
+
+@mixin font_default {
+    font-size: 14px;
+    color: $text_color_dark;
+}
+
+@mixin font_link {
+    color: $thme_color_link;
+    font-size: 14px;
+}
+
+@mixin box_shadow {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}

@@ -1,0 +1,225 @@
+/*
+*业务样式========================================================
+*/
+
+@import "./walletVal.scss";
+.headerBg {
+    margin: 10px;
+    background: url('../assets/business/header_bg.jpg') no-repeat;
+    background-size: 100% 100%;
+    border-radius: 8px;
+    padding: 20px;
+    * {
+        color: white;
+    }
+    .dataGroup {
+        color: white;
+        flex: 1;
+        b,
+        span {
+            display: block;
+        }
+        span {
+            font-size: 12px;
+        }
+        b {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        &.style2 {
+            >div {
+                margin-bottom: 2px;
+            }
+            b,
+            span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+    .headerBtn {
+        background: white;
+        color: $them_color;
+        font-size: 12px;
+        border-radius: 100px;
+        padding: 6px 20px;
+        &.plain {
+            color: white;
+            border: 1px solid white;
+            background: none;
+        }
+    }
+}
+
+.listTitle {
+    color: $them_color;
+    font-size: 14px;
+    font-weight: bold;
+    border-left: 4px solid $them_color;
+    padding: 2px;
+    padding-left: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.list_type1 {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    >div {
+        margin-bottom: 10px;
+    }
+    span,
+    b {
+        display: block;
+    }
+    &.list_pro {
+        span,
+        b {
+            display: inline-block;
+        }
+    }
+    .coin_icon {
+        img {
+            width: 40px;
+            height: 40px;
+            display: block;
+            border-radius: 100px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        margin-right: 10px;
+    }
+    .amout {
+        font-weight: bold;
+        font-size: 15px;
+    }
+}
+
+.actionForm {
+    .currency-select {
+        display: flex;
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        background: #F7F6FB;
+        padding: 0 20px;
+        justify-content: space-between;
+        .currency-select-left {
+          img {
+            width: 24px;
+            vertical-align: sub;
+          }
+          span {
+            font-size: 16px;
+            font-weight:bold;
+            color:rgba(53,53,53,1);
+            margin-left: 6px;
+          }
+        }
+    }
+    .formGroup {
+        padding: 0 20px;
+        margin-bottom: 10px;
+        .title {
+            font-weight: bold;
+            font-size: 15px;
+            color: #353535;
+            margin-bottom: 5px;
+        }
+        .inputItem {
+            position: relative;
+            .selecteBox {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                background: rgba(0, 0, 0, 0) url('../assets/business/downRow.png') no-repeat;
+                background-size: 8px;
+                background-position: 93%;
+            }
+            input {
+                display: block;
+                width: 100%;
+                padding: 13px;
+                border: none;
+                border-radius: 8px;
+                &:disabled {
+                    color: black;
+                    opacity: 1;
+                }
+            }
+        }
+        .inputItemButton {
+            border-bottom: 1px solid #EBEBEB;
+        }
+        .transfer-amount {
+            display: flex;
+            input {
+                width: 68%;
+            }
+            span {
+                display: inline-block;
+                width: 50px;
+                text-align: center;
+                line-height: 42px;
+                color: #AFAFAF;
+            }
+            span:nth-child(3) {
+                width: 2px;
+                color: #EBEBEB;
+            }
+            span:nth-child(4) {
+                color: #566BF3;
+            }
+        }
+        .balance {
+            padding: 13px;
+            padding-bottom: 0;
+            > span {
+                font-size: 12px;
+                font-weight: 500;
+                color: rgba(165,172,174,1);
+            }
+            > span:nth-child(2) {
+                color: #353535;
+            }
+        }
+    }
+    .submit-box {
+        padding: 0 20px;
+        margin-top: 40px;
+        .submit {
+          display: block;
+          margin: 20px auto;
+          width: 100%;
+          background: #566BF3;
+          font-size: 14px;
+          font-weight: bold;
+          color: rgba(255,255,255,1);
+        }
+    }
+}
+
+.van-tabs__nav--card {
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.van-tabs__nav--card .van-tab.van-tab--active {
+    background-color: $them_color;
+    border-right: 1px solid $them_color;
+}
+
+.van-tabs__nav--card .van-tab {
+    border-right: 1px solid $them_color;
+}
+
+.van-tabs__nav--card {
+    border: 1px solid $them_color;
+}
+
+.van-tabs__nav--card .van-tab {
+    color: $them_color;
+}
