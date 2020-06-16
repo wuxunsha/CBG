@@ -75,7 +75,7 @@
                             <img src="../../assets/wallet/deal/支付宝@2x.png">
                             <img src="../../assets/wallet/deal/微信@2x.png">
                         </p>
-                        <p class="trad"><span>出售</span> </p>
+                        <p class="trad"><span @click="$router.push('/sell')">出售</span> </p>
                     </div>
                 </div>
             </div>

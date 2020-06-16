@@ -1,13 +1,23 @@
 <template>
     <div class="people-stock">
         <div class="navBox">
-            <van-nav-bar :title="`发布买入`"
+            <van-nav-bar :title="`发布售出`"
                          fixed
                          left-arrow
                          @click-left="goback()" />
         </div>
         <div class="issue-info">
-            <p>交易大厅开放时间(工作日) <span style="color:#353535;margin:0 0 0 10px">9:00-18:00</span> </p>
+            <h3>出售数量</h3>
+            <div>
+                <input type="text"
+                       placeholder="请输入出售的数量">
+                <div class="sell-all">
+                    <span>CBK</span>
+                    <p>全部</p>
+                </div>
+            </div>
+            <p>可用：1000CBK</p>
+            <span>手续费:２％</span>
         </div>
         <div class="sell">
             <div class="sell-top">
@@ -124,12 +134,24 @@ export default {
 <style lang='scss' scoped>
 .issue-info {
     padding: 0 15px;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    background: rgba(247, 246, 251, 1);
-    p {
-        color: #556bf3;
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        input {
+            border: none;
+        }
+        .sell-all {
+            span {
+                color: #a5abad;
+            }
+            p {
+                margin: 0 0 0 10px;
+                padding: 0 0px 0 10px;
+                border-left: 1px solid #ebebeb;
+                color: #556bf3;
+            }
+        }
     }
 }
 .sell {

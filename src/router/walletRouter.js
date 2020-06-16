@@ -27,6 +27,11 @@ const shareExtract = resolve => require(['@/view/mine/shareExtract'], resolve)
 const setting = resolve => require(['@/view/mine/setting'], resolve)
 const safety = resolve => require(['@/view/mine/safety'], resolve)
 const paymentMethod = resolve => require(['@/view/mine/payment-method'], resolve)
+const issueRules = resolve => require(['@/view/walletView/issueRules'], resolve)
+const issueWait = resolve => require(['@/view/walletView/issueWait'], resolve)
+const issueAwait = resolve => require(['@/view/walletView/issueAwait'], resolve)
+const issueOlerdy = resolve => require(['@/view/walletView/issueOlerdy'], resolve)
+const sell = resolve => require(['@/view/walletView/sell'], resolve)
 
 
 // 自定义路由
@@ -63,6 +68,11 @@ let routerArr = {
     setting: setting,
     safety: safety,
     paymentMethod: paymentMethod,
+    issueRules: issueRules,
+    issueWait: issueWait,
+    issueAwait: issueAwait,
+    issueOlerdy: issueOlerdy,
+    sell: sell,
     ...business // 非通用路由
 }
 
