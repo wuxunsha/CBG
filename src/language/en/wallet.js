@@ -248,6 +248,13 @@ const lang = {
         safety_modify: "modify",
         safety_set: "To set",
         safety_binding: "Bind mailbox"
+    },
+    payment: {
+        payment_title: "payment method",
+        payment_information: "Please be sure to use your real-name account information",
+        payment_no: "No payment method",
+        payment_add: "Add to",
+        payment_edit: "edit"
     }
 }
 

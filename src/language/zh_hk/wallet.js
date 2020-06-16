@@ -249,6 +249,13 @@ const lang = {
         safety_modify: "修改",
         safety_set: "去設置",
         safety_binding: "綁定郵箱"
+    },
+    payment: {
+        payment_title: "收款方式",
+        payment_information: "請務必使用您本人的實名賬戶信息",
+        payment_no: "暫無收款方式",
+        payment_add: "添加",
+        payment_edit: "編輯"
     }
 }
 

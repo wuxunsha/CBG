@@ -255,7 +255,8 @@ const lang = {
         payment_title: "收款方式",
         payment_information: "请务必使用您本人的实名账户信息",
         payment_no: "暂无收款方式",
-        payment_add: "添加"
+        payment_add: "添加",
+        payment_edit: "编辑"
     }
 }
 

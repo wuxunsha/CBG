@@ -31,7 +31,7 @@
                         <p>13666666666</p>
                     </div>
                     <div>
-                        <span>编辑</span>
+                        <span>{{$t('wallet.payment.payment_edit')}}</span>
                     </div>
                 </div>
             </div>
