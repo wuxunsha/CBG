@@ -36,11 +36,12 @@ const lang = {
         text_id:"您的用戶ID為："
     },
     forgetPass: {
-        nav_title: "重置登錄密碼",
+        nav_title: "修改登錄密碼",
         form_input_pass: "請輸入新密碼",
         form_input_pass_re: "請再次輸入新密碼",
         check_pass_fail: "密碼不壹致",
         form_btn_back: "確認重置",
+        text_prompt: "至少8個字符，必須包含字母及數字"
     },
     home: {
         text_assets: "總資產",

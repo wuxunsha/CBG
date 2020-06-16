@@ -185,7 +185,8 @@ const lang = {
     text_title: "Set transaction password",
     input_pass: "Please enter a transaction password",
     input_pass_re: "Please enter the transaction password again",
-    btn_text: "Confirm reset"
+    btn_text: "Confirm reset",
+    text_prompt: "Set 6-digit pure digital transaction password"
   },
   transfer: {
     text_title: "Transfer",

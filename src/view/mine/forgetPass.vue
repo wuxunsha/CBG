@@ -51,7 +51,7 @@
       </div>
 
       <div class="space20"></div>
-      <van-button class="reset" @click="change_pwd()">{{$t('wallet.forgetPass.form_btn_back')}}</van-button>
+      <van-button @click="change_pwd()">{{$t('wallet.forgetPass.form_btn_back')}}</van-button>
       <div class="space30"></div>
 
       <div class="space20"></div>
@@ -179,6 +179,8 @@
 .van-button {
   display: block;
   width: 100%;
+  background: #1b8db2;
+  color: #fff;
 }
 .reset {
   width: 100%;

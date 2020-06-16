@@ -191,7 +191,8 @@ const lang = {
         text_title: "设置交易密码",
         input_pass: "请输入交易密码",
         input_pass_re: "请再次输入交易密码",
-        btn_text: "确认重置"
+        btn_text: "确认重置",
+        text_prompt: "设置6位纯数字交易密码"
     },
     transfer: {
         text_title: "转账",

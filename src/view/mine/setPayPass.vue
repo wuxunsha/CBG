@@ -1,16 +1,28 @@
 <template>
   <div>
 
-    <walletNav :title="$t('feature.setPayPass.text_title')" left-arrow @clickLeft="goback()" fixed />
+    <div class="navBox">
+      <van-nav-bar fixed left-arrow @click-left="goback()"/>
+    </div>
 
-    <!-- <div class="item_box them_form">
+    <div class="prompt">
+      <p>{{$t('feature.setPayPass.text_title')}}</p>
+      <p>{{$t('feature.setPayPass.text_prompt')}}</p>
+    </div>
 
-      <div class="input_gorup">
-        <input type="number" pattern="\d*" :placeholder="$t('wallet.register.form_input_code')" v-model="form.code"  @blur="blur_event">
-        <getCode :codeData="{type:'changePay',phone:userInfo.user.id}"/>
+    <!-- <div class="input_gorup">
+      <div class="captcha">
+        <div>
+          <input type="number" pattern="\d*" :placeholder="$t('wallet.register.form_input_code')" v-model="form.code"  @blur="blur_event">
+        </div>
+        <div>
+          <getCode :codeData="{type:'changePay',phone:userInfo.user.id}"/>
+        </div>
       </div>
+    </div> -->
 
-      <div class="input_gorup set-password">
+    <div class="input_gorup">
+      <div class="captcha">
         <div>
           <input type="password" :placeholder="`${$t('feature.register.input_payPass')}`" v-model="form.newPassword"  @blur="blur_event" class="set-password-input" ref="pass">
         </div>
@@ -18,23 +30,22 @@
           <i :class="isPasswordFlag ? 'show' : 'hidden'" @click="isShowPassIcon"></i>
         </p>
       </div>
+    </div>
 
-      <div class="input_gorup set-password">
+    <div class="input_gorup">
+      <div class="captcha">
         <div>
-          <input type="number" style="-webkit-text-security:disc" :placeholder="`${$t('feature.register.input_payPass_re')}`" v-model="loginPwd_re"  @blur="blur_event" class="set-password-input">
+          <input type="password" :placeholder="`${$t('feature.register.input_payPass_re')}`" v-model="loginPwd_re"  @blur="blur_event" class="set-password-input" ref="newPass">
         </div>
         <p>
           <i :class="isHiddenFlag ? 'show' : 'hidden'" @click="isShowIcon"></i>
         </p>
       </div>
+    </div>
 
-      <div class="space20"></div>
+    <div class="submit-btn">
       <van-button type="info" @click="change_pwd()">{{$t('feature.setPayPass.btn_text')}}</van-button>
-      <div class="space30"></div>
-
-      <div class="space20"></div>
-
-    </div> -->
+    </div>
   
   </div>
 </template>
@@ -108,13 +119,18 @@
       isShowPassIcon() {
         this.isPasswordFlag = !this.isPasswordFlag
         if (this.isPasswordFlag) {
-          this.$refs.pass.setAttribute("type", "password")
-        } else {
           this.$refs.pass.setAttribute("type", "text")
+        } else {
+          this.$refs.pass.setAttribute("type", "password")
         }
       },
       isShowIcon() {
         this.isHiddenFlag = !this.isHiddenFlag
+        if (this.isHiddenFlag) {
+          this.$refs.newPass.setAttribute("type", "text")
+        } else {
+          this.$refs.newPass.setAttribute("type", "password")
+        }
       }
     },
     computed: {
@@ -127,9 +143,47 @@
 
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
-.van-button {
-  display: block;
-  width: 100%;
+.prompt {
+  margin-top: 26px;
+  padding: 0 15px;
+  > p:nth-child(1) {
+    font-size: 28px;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: rgba(53,53,53,1);
+    line-height: 35px;
+  }
+  > p:nth-child(2) {
+    margin-top: 15px;
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(165,172,174,1);
+  }
+}
+.input_gorup {
+  padding: 0 15px;
+  margin-top: 30px;
+  .captcha {
+    width: 100%;
+    height: 41px;
+    line-height: 40px;
+    border-bottom: 1px solid #EBEBEB;
+    display: flex;
+    > div:nth-child(1) {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      input {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    }
+    > div:nth-child(1) {
+      width: 130px;
+    }
+  }
 }
 .set-password {
   display: flex;
@@ -143,6 +197,14 @@
 }
 .set-password-input {
   width: 90%!important;
+}
+.submit-btn {
+  margin-top: 50px;
+  padding: 0 15px;
+  .van-button {
+    display: block;
+    width: 100%;
+  }
 }
 .show {
   display: block;

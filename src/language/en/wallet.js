@@ -36,11 +36,12 @@ const lang = {
         text_id: "Your user ID is:"
     },
     forgetPass: {
-        nav_title: "Reset Login Password",
+        nav_title: "Change login password",
         form_input_pass: "Please enter a new password",
         form_input_pass_re: "Please enter the new password again",
         check_pass_fail: "Passwords are inconsistent",
-        form_btn_back: "Confirm reset"
+        form_btn_back: "Confirm reset",
+        text_prompt: "At least 8 characters, must contain letters and numbers"
     },
     home: {
         text_assets: "Total Assets",

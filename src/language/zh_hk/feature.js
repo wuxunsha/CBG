@@ -185,7 +185,8 @@ const lang = {
         text_title:"設置交易密碼",
         input_pass:"請輸入交易密碼",
         input_pass_re:"請再次輸入交易密碼",
-        btn_text:"確認重置"
+        btn_text:"確認重置",
+        text_prompt: "設置6位純數字交易密碼"
     },
     transfer:{
         text_title:"轉賬",

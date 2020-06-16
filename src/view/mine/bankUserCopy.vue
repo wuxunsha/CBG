@@ -67,7 +67,7 @@
         </div>
 
         <div class="news">
-            <div class="news-box bottom">
+            <div class="news-box bottom"  @click="gopage('/paymentMethod')">
                 <img src="../../assets/business/user/收款方式@2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_payment_method')}}</span>

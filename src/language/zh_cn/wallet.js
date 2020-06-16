@@ -36,11 +36,13 @@ const lang = {
         text_id: "您的用户ID为："
     },
     forgetPass: {
-        nav_title: "重置登录密码",
+        nav_title: "修改登录密码",
         form_input_pass: "请输入新密码",
         form_input_pass_re: "请再次输入新密码",
         check_pass_fail: "密码不一致",
         form_btn_back: "确认重置",
+        text_prompt: "至少8个字符，必须包含字母及数字",
+        text_phone: "邮箱或手机号"
     },
     home: {
         text_assets: "总资产",
@@ -248,6 +250,12 @@ const lang = {
         safety_modify: "修改",
         safety_set: "去设置",
         safety_binding: "绑定邮箱"
+    },
+    payment: {
+        payment_title: "收款方式",
+        payment_information: "请务必使用您本人的实名账户信息",
+        payment_no: "暂无收款方式",
+        payment_add: "添加"
     }
 }
 

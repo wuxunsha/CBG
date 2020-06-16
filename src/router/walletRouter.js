@@ -26,6 +26,7 @@ const identityTwo = resolve => require(['@/view/walletView/identityTwo'], resolv
 const shareExtract = resolve => require(['@/view/mine/shareExtract'], resolve)
 const setting = resolve => require(['@/view/mine/setting'], resolve)
 const safety = resolve => require(['@/view/mine/safety'], resolve)
+const paymentMethod = resolve => require(['@/view/mine/payment-method'], resolve)
 
 
 // 自定义路由
@@ -61,6 +62,7 @@ let routerArr = {
     shareExtract: shareExtract,
     setting: setting,
     safety: safety,
+    paymentMethod: paymentMethod,
     ...business // 非通用路由
 }
 
