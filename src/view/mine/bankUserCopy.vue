@@ -2,11 +2,10 @@
     <div id="user"
          class="full-screen">
         <div>
-            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`"
-                         fixed>
+            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`" fixed>
                 <template #right>
                     <img src="../../assets/business/user/设置@2x.png"
-                         alt="">
+                         alt="" @click="gopage('/setting')">
                 </template>
             </van-nav-bar>
         </div>
@@ -79,7 +78,7 @@
 
         <div class="news">
             <div class="news-box"
-                 @click="gopage('/news')">
+                 @click="gopage('/safety')">
                 <img src="../../assets/business/user/账户安全 @2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_account_security')}}</span>

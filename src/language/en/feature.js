@@ -182,7 +182,7 @@ const lang = {
     text_download:"APP Dwonload"
   },
   setPayPass: {
-    text_title: "Reset Transaction Password",
+    text_title: "Set transaction password",
     input_pass: "Please enter a transaction password",
     input_pass_re: "Please enter the transaction password again",
     btn_text: "Confirm reset"

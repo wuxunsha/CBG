@@ -161,7 +161,8 @@ const lang = {
         dialog_edit: "編輯用戶名",
         input_name: "請輸入用戶名",
         Toast_name: "請輸入3-10位用戶名",
-        text_confirm: "是否退出登錄?"
+        text_confirm: "是否退出登錄?",
+        text_version: "版本"
     },
     withdraw: {
         nav_title: "申請提幣",
@@ -237,6 +238,16 @@ const lang = {
     news: {
         nav_title: "公告",
         nav_title_detial: "詳情"
+    },
+    safety: {
+        safety_title: "賬戶安全",
+        safety_login: "登錄密碼",
+        safety_transaction: "交易密碼",
+        safety_phone: "手機認證",
+        safety_mailbox: "郵箱認證",
+        safety_modify: "修改",
+        safety_set: "去設置",
+        safety_binding: "綁定郵箱"
     }
 }
 

@@ -142,6 +142,7 @@ export default {
                 Toast(message);
 
                 this.actionUserInfo().then(v => {
+                    this.getToken()
                     setTimeout(() => this.$router.replace({ path: "/home" }), 1000);
                 })
 
@@ -150,7 +151,27 @@ export default {
                 this.disabled = false;
                 //Toast(e.message);
             })
-        }, //submitLogin
+        },
+        // 获取第三工程token
+        getToken() {
+            this.$http.get(this.$lib.host + 'util/gettoken').then(res => {
+                if (res.code == 200) {
+                    this.getNewToken(res.data.token_)
+                }
+            })
+        },
+        getNewToken(token) {
+        let data = {
+            account: this.phone,
+            password: this.password,
+            token_: token
+        }
+        this.$http.post(this.$lib.host + 'otc/login', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    this.$store.commit('setNewToken', res.data.token_)
+                }
+            })
+        },
         onSelect(item) {
             this.set_lang(item.type);
             this.show = false;

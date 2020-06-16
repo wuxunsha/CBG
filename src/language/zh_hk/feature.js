@@ -182,7 +182,7 @@ const lang = {
         text_download:"下載APP"
     },
     setPayPass:{
-        text_title:"重置交易密碼",
+        text_title:"設置交易密碼",
         input_pass:"請輸入交易密碼",
         input_pass_re:"請再次輸入交易密碼",
         btn_text:"確認重置"

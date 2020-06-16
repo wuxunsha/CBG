@@ -143,34 +143,9 @@ export default {
 
     },
     mounted() {
-        this.getToken()
         this.getList()
     },
     methods: {
-        getToken() {
-            this.$http.get(this.$lib.host + 'util/gettoken', {
-                params: {
-                    token_: this.$store.state.newToken
-                }
-            }).then(res => {
-                if (res.code == 200) {
-                    this.getNewToken(res.data.token_)
-                }
-            })
-        },
-        getNewToken(token) {
-            // console.log(this.$store.state.user)
-            let data = {
-                account: this.$store.state.user.uid,
-                password: this.$store.state.user.password,
-                token_: token
-            }
-            this.$http.post(this.$lib.host + 'otc/login', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    this.$store.commit('setNewToken', res.data.token_)
-                }
-            })
-        },
         passwordFocus() {
             this.$refs.newPsd.focus();
         },

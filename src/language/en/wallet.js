@@ -161,7 +161,8 @@ const lang = {
         dialog_edit: "Edit username",
         input_name: "Please enter a username",
         Toast_name: "Please enter 3-10 user names",
-        text_confirm: "Are you logged out?"
+        text_confirm: "Are you logged out?",
+        text_version: "version"
     },
     withdraw: {
         nav_title: "Apply for withdrawal",
@@ -236,6 +237,16 @@ const lang = {
     news: {
         nav_title: "Announcement",
         nav_title_detial: "Details"
+    },
+    safety: {
+        safety_title: "account security",
+        safety_login: "login password",
+        safety_transaction: "transaction password",
+        safety_phone: "Phone authentication",
+        safety_mailbox: "Email authentication",
+        safety_modify: "modify",
+        safety_set: "To set",
+        safety_binding: "Bind mailbox"
     }
 }
 

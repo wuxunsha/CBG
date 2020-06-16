@@ -49,7 +49,7 @@
   export default {
     data() {
       return {
-        searchValue: null,
+        searchValue: '',
         query:{
           pageSize:20,
           pageNum:1,

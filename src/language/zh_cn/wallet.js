@@ -161,7 +161,8 @@ const lang = {
         dialog_edit: "编辑用户名",
         input_name: "请输入用户名",
         Toast_name: "请输入3-10位用户名",
-        text_confirm: "是否退出登录?"
+        text_confirm: "是否退出登录?",
+        text_version: "版本"
     },
     withdraw: {
         nav_title: "申请提币",
@@ -237,6 +238,16 @@ const lang = {
     news: {
         nav_title: "公告",
         nav_title_detial: "详情",
+    },
+    safety: {
+        safety_title: "账户安全",
+        safety_login: "登录密码",
+        safety_transaction: "交易密码",
+        safety_phone: "手机认证",
+        safety_mailbox: "邮箱认证",
+        safety_modify: "修改",
+        safety_set: "去设置",
+        safety_binding: "绑定邮箱"
     }
 }
 

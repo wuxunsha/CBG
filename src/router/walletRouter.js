@@ -8,21 +8,24 @@ const share = resolve => require(['@/view/walletView/share'], resolve)
 const feedback = resolve => require(['@/view/walletView/feedback'], resolve)
 const login = resolve => require(['@/view/walletView/login'], resolve)
 const register = resolve => require(['@/view/walletView/register'], resolve)
-const forgetPass = resolve => require(['@/view/walletView/forgetPass'], resolve)
+const forgetPass = resolve => require(['@/view/mine/forgetPass'], resolve)
 const shareList = resolve => require(['@/view/walletView/shareList'], resolve)
 const hisDetail = resolve => require(['@/view/walletView/hisDetail'], resolve)
 const assetsDetail = resolve => require(['@/view/walletView/assetsDetail'], resolve)
 const newsDetail = resolve => require(['@/view/walletView/newsDetail'], resolve)
-const setPayPass = resolve => require(['@/view/walletView/setPayPass'], resolve)
+const setPayPass = resolve => require(['@/view/mine/setPayPass'], resolve)
 const assetsDetail_v2 = resolve => require(['@/view/walletView/assetsDetail_v2'], resolve)
 const rechargeList = resolve => require(['@/view/walletView/rechargeList'], resolve)
-const news = resolve => require(['@/view/walletView/news'], resolve)
+const news = resolve => require(['@/view/mine/news'], resolve)
 const peopleStock = resolve => require(['@/view/walletView/peopleStock'], resolve)
 const peopleDetail = resolve => require(['@/view/walletView/peopleDetail'], resolve)
 const myProperty = resolve => require(['@/view/walletView/myProperty'], resolve)
 const issue = resolve => require(['@/view/walletView/issue'], resolve)
 const identity = resolve => require(['@/view/walletView/identity'], resolve)
 const identityTwo = resolve => require(['@/view/walletView/identityTwo'], resolve)
+const shareExtract = resolve => require(['@/view/mine/shareExtract'], resolve)
+const setting = resolve => require(['@/view/mine/setting'], resolve)
+const safety = resolve => require(['@/view/mine/safety'], resolve)
 
 
 // 自定义路由
@@ -55,6 +58,9 @@ let routerArr = {
     issue: issue,
     identity: identity,
     identityTwo: identityTwo,
+    shareExtract: shareExtract,
+    setting: setting,
+    safety: safety,
     ...business // 非通用路由
 }
 

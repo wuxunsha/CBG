@@ -6,7 +6,7 @@
                          fixed
                          left-arrow
                          @click-left="goback()"
-                         @click-right="gopage('/assetsDetail_v2')">
+                         @click-right="gopage('/rechargeList')">
                 <template #right>
                     <van-icon name="orders-o"
                               size="18" />
@@ -111,7 +111,6 @@ import chooseCoins from '../../components/wallet/chooseCoins'
 export default {
     data() {
         return {
-            token: null,
             currRechargeInfo: null,//当前币种信息
             copyText: null,
             addressInfo: {},
@@ -123,35 +122,9 @@ export default {
         chooseCoins
     },
     methods: {
-        getToken() {
-            this.$http.get(this.$lib.host + 'util/gettoken', {
-                params: {
-                    token_: this.$store.state.newToken
-                }
-            }).then(res => {
-                if (res.code == 200) {
-                    this.getNewToken(res.data.token_)
-                }
-            })
-        },
-        getNewToken(token) {
-            let data = {
-                account: this.$store.state.user.uid,
-                password: this.$store.state.user.password,
-                token_: token
-            }
-            this.$http.post(this.$lib.host + 'otc/login', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    this.token = res.data.token_
-                    if (this.currRechargeInfo) {
-                        this.getRechargeList()
-                    }
-                }
-            })
-        },
         // 获取充值列表
         getRechargeList() {
-            TBListCZinfo({ token_: this.token, coinId: this.currRechargeInfo.coin.id }).then(res => {
+            TBListCZinfo({ token_: this.$store.state.newToken, coinId: this.currRechargeInfo.coin.id }).then(res => {
                 if (res.code === '200') {
                     res.data.forEach(item => {
                         item.addTime = this.getDate(item.addTime)
@@ -164,7 +137,10 @@ export default {
             // console.log(item)
             // this.qrcode(item.rechargeAddress.address);
             this.currRechargeInfo = item;
-            // console.log(this.currRechargeInfo)
+            console.log(this.currRechargeInfo)
+            if (this.currRechargeInfo) {
+                this.getRechargeList()
+            }
             // this.copyText = item.rechargeAddress.address;
 
         },//chooseCoin
@@ -218,9 +194,6 @@ export default {
         })
     },
     mounted() {
-        this.$nextTick(() => {
-            this.getToken()
-        })
         /*if(this.$route.query.coinName=='GSHT'){
           Dialog.confirm({
             title: this.$t('wallet.common.Dialog'),

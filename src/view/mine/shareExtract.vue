@@ -34,8 +34,8 @@
                     <div>推荐收益</div>
                     <div>800</div>
                     <div class="select-box">
-                        <p>
-                            <span>选择卖出等级</span>
+                        <p @click="popup = true">
+                            <span>选择卖出产业</span>
                             <van-icon name="play" />
                         </p>
                     </div>
@@ -46,7 +46,7 @@
                     <div>800</div>
                     <div class="select-box">
                         <p>
-                            <span>选择卖出等级</span>
+                            <span>选择卖出产业</span>
                             <van-icon name="play" />
                         </p>
                     </div>
@@ -54,6 +54,12 @@
                 </li>
             </ul>
         </div>
+
+        <!-- 卖出产业选择弹窗 -->
+    <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
+      <van-picker :columns="columns" show-toolbar @change="currencyChange" @cancel="popup=false" @confirm="onChange" :title=" `${$t('feature.bankBuy.text_popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
+    </van-popup>
+
     </div>
 </template>
 <script>
@@ -66,11 +72,17 @@
 export default {
     data() {
         return {
-
+            popup: false,
+            columns: ['农业', '水产业', '种植业'],
         }
     },
     methods: {
+        currencyChange() {
 
+        },
+        onChange(value, index) {
+            
+        }
     },
     created() {
 
@@ -136,10 +148,10 @@ export default {
                 color: rgba(53, 53, 53, 1);
             }
             > div:nth-child(1) {
-                flex: 0.6;
+                flex: 0.5;
             }
             > div:nth-child(2) {
-                flex: 0.6;
+                flex: 0.5;
             }
             > div:nth-child(3) {
                 flex: 1;
@@ -168,8 +180,9 @@ export default {
         .select-box {
             p {
                 border: 1px solid #c8cdd3;
-                width: 76%;
-                line-height: 20px;
+                width: 86%;
+                height: 22px;
+                line-height: 18px;
                 padding: 2px 6px;
                 span {
                     font-size: 12px;
@@ -180,7 +193,7 @@ export default {
                     vertical-align: text-top;
                     color: rgba(165, 172, 174, 1);
                     font-size: 12px;
-                    margin-left: 6px;
+                    margin-left: 10px;
                 }
             }
         }
