@@ -1,7 +1,7 @@
 <template>
     <div class="people-stock">
         <div class="navBox">
-            <van-nav-bar :title="`全民来持股`"
+            <van-nav-bar :title="$t('wallet.peopleStock.text_title')"
                          fixed
                          left-arrow
                          @click-left="goback()" />
@@ -10,7 +10,7 @@
             <img src="../../assets/wallet/people/p-header.png">
             <div class="tip">
                 <div @click="$router.push('/myProperty')"><img src="../../assets/wallet/people/changye.png"></div>
-                <div><img src="../../assets/wallet/people/rule.png"></div>
+                <div @click="gopage('/rule')"><img src="../../assets/wallet/people/rule.png"></div>
             </div>
         </div>
         <div class="main"
@@ -24,24 +24,24 @@
                 <div class="right-main">
                     <h3>{{item.level}}</h3>
                     <p>
-                        <span>产业价值(USDT)</span>
+                        <span>{{$t('wallet.peopleStock.text_industrial')}}(USDT)</span>
                         <span>{{item.maxAmount}}-{{item.minAmount}}</span>
                     </p>
                     <p>
-                        <span>持股时间</span>
-                        <span>{{item.cycle}}天</span>
+                        <span>{{$t('wallet.peopleStock.text_cgsj')}}</span>
+                        <span>{{item.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                     </p>
                     <p>
-                        <span>产业收益</span>
-                        <span>1天/{{item.rate * 100}}%</span>
+                        <span>{{$t('wallet.peopleStock.text_cyshy')}}</span>
+                        <span>1{{$t('wallet.peopleStock.text_tian')}}/{{item.rate * 100}}%</span>
                     </p>
                     <p>
-                        <span>产业数量</span>
+                        <span>{{$t('wallet.peopleStock.text_cysl')}}</span>
                         <span>{{item.number}}</span>
                     </p>
                     <div class="btn"
                          @click.stop="goBuy(item)">
-                        预约持股
+                        {{$t('wallet.peopleStock.text_yychg')}}
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <van-popup v-model="showPop"
                        :class="'popPop'">
                 <div class="pop-main">
-                    <h3>支付产业押金</h3>
+                    <h3>{{$t('wallet.peopleStock.text_zfcyyj')}}</h3>
                     <div class="pop-content">
                         <div class="pop-left">
                             <p>{{poType}}：<span style="color:#343B3A;margin: 0 0 0 15px">{{IndustryInformation.level}}</span></p>
@@ -102,9 +102,9 @@
 
                     <div class="config">
                         <div class="cancel"
-                             @click="showPop=false">取消</div>
+                             @click="showPop=false">{{$t('wallet.peopleStock.text_qx')}}</div>
                         <div class="config-on"
-                             @click="config">确定</div>
+                             @click="config">{{$t('wallet.peopleStock.text_qd')}}</div>
                     </div>
                 </div>
             </van-popup>

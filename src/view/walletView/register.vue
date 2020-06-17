@@ -112,7 +112,7 @@
                 </div>
 
                 <a class="font14 font_link"
-                   href="https://www.gscapp.cn/app/tbnpools"
+                   href="http://login.njmall.store/app.jpeg"
                    target="_bank">{{$t('feature.register.text_download')}}</a>
 
             </div>
@@ -261,7 +261,7 @@ export default {
 };
 
 </script>
-<style rel="stylesheet/scss" scoped scoped>
+<style rel="stylesheet/scss" scoped lang='scss'>
 .van-button {
   display: block;
   width: 100%;

@@ -1,7 +1,7 @@
 <template>
     <div class="myProperty">
         <div class="navBox">
-            <van-nav-bar :title="`我的产业`"
+            <van-nav-bar :title="`${$t('wallet.peopleStock.text_wdcy')}`"
                          fixed
                          left-arrow
                          @click-left="goback()" />
@@ -28,36 +28,35 @@
                 <div class="order"
                      style="margin:10px 0 0 0">
                     <!-- <h3>
-                        <img src="../../assets/wallet/people/time-lv.png">
-                        <span>付款倒计时56:30</span>
+                        <ideterminen>付款倒计时56:30</span>
                     </h3> -->
                     <div class="order-center">
                         <p>
-                            <span>股权编号:</span>
+                            <span>{{$t('wallet.peopleStock.text_gqbh')}}:</span>
                             <span>{{i.id}}</span>
                         </p>
                         <p>
-                            <span>周期:</span>
-                            <span>{{i.cycle}}天</span>
+                            <span>{{$t('wallet.peopleStock.text_zq')}}:</span>
+                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业价值:</span>
+                            <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
                             <span>{{i.cyFW}}</span>
                         </p>
                         <p>
-                            <span>股份金额:</span>
+                            <span>{{$t('wallet.peopleStock.text_gfje')}}:</span>
                             <span>{{i.amount}}U</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业收益:</span>
-                            <span>1天/{{i.rate * 100}}%</span>
+                            <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
+                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
                         </p>
                         <p>
-                            <span>到期收益:</span>
+                            <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
                             <span>{{i.amount*(1+i.cycle*i.rate)}}U</span>
                         </p>
                     </div>
@@ -73,7 +72,7 @@
 
             <div class="no-data"
                  v-if="orderList.length == 0">
-                暂无数据
+                {{$t('wallet.peopleStock.text_zwshj')}}
             </div>
         </div>
 
@@ -89,31 +88,31 @@
                     </h3> -->
                     <div class="order-center">
                         <p>
-                            <span>股权编号:</span>
+                            <span>{{$t('wallet.peopleStock.text_gqbh')}}:</span>
                             <span>{{i.id}}</span>
                         </p>
                         <p>
-                            <span>周期:</span>
-                            <span>{{i.cycle}}天</span>
+                            <span>{{$t('wallet.peopleStock.text_zq')}}:</span>
+                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业价值:</span>
+                            <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
                             <span>{{i.cyFW}}</span>
                         </p>
                         <p>
-                            <span>股份金额:</span>
+                            <span>{{$t('wallet.peopleStock.text_gfje')}}:</span>
                             <span>{{i.amount}}U</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业收益:</span>
-                            <span>1天/{{i.rate * 100}}%</span>
+                            <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
+                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
                         </p>
                         <p>
-                            <span>到期收益:</span>
+                            <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
                             <span>{{i.amount*(1+i.cycle*i.rate)}}U</span>
                         </p>
                     </div>
@@ -128,7 +127,7 @@
 
             <div class="no-data"
                  v-if="volumeList.length == 0">
-                暂无数据
+                {{$t('wallet.peopleStock.text_zwshj')}}
             </div>
 
         </div>
@@ -144,31 +143,31 @@
                     </h3> -->
                     <div class="order-center">
                         <p>
-                            <span>股权编号:</span>
+                            <span>{{$t('wallet.peopleStock.text_gqbh')}}:</span>
                             <span>{{i.id}}</span>
                         </p>
                         <p>
-                            <span>周期:</span>
-                            <span>{{i.cycle}}天</span>
+                            <span>{{$t('wallet.peopleStock.text_zq')}}:</span>
+                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业价值:</span>
+                            <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
                             <span>{{i.cyFW}}</span>
                         </p>
                         <p>
-                            <span>股份金额:</span>
+                            <span>{{$t('wallet.peopleStock.text_gfje')}}:</span>
                             <span>{{i.amount}}U</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业收益:</span>
-                            <span>1天/{{i.rate * 100}}%</span>
+                            <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
+                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
                         </p>
                         <p>
-                            <span>到期收益:</span>
+                            <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
                             <span>{{i.amount*(1+i.cycle*i.rate)}}U</span>
                         </p>
                     </div>
@@ -183,7 +182,7 @@
 
             <div class="no-data"
                  v-if="connectList.length == 0">
-                暂无数据
+                {{$t('wallet.peopleStock.text_zwshj')}}
             </div>
         </div>
         <div v-if="tabNum == 3">
@@ -198,31 +197,31 @@
                     </h3> -->
                     <div class="order-center">
                         <p>
-                            <span>股权编号:</span>
+                            <span>{{$t('wallet.peopleStock.text_gqbh')}}:</span>
                             <span>{{i.id}}</span>
                         </p>
                         <p>
-                            <span>周期:</span>
-                            <span>{{i.cycle}}天</span>
+                            <span>{{$t('wallet.peopleStock.text_zq')}}:</span>
+                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业价值:</span>
+                            <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
                             <span>{{i.cyFW}}</span>
                         </p>
                         <p>
-                            <span>股份金额:</span>
+                            <span>{{$t('wallet.peopleStock.text_gfje')}}:</span>
                             <span>{{i.amount}}U</span>
                         </p>
                     </div>
                     <div class="order-center">
                         <p>
-                            <span>产业收益:</span>
-                            <span>1天/{{i.rate * 100}}%</span>
+                            <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
+                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
                         </p>
                         <p>
-                            <span>到期收益:</span>
+                            <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
                             <span>{{i.amount*(1+i.cycle*i.rate)}}U</span>
                         </p>
                     </div>
@@ -238,7 +237,7 @@
 
             <div class="no-data"
                  v-if="crowdList.length == 0">
-                暂无数据
+                {{$t('wallet.peopleStock.text_zwshj')}}
             </div>
         </div>
 
