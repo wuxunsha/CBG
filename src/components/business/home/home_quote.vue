@@ -11,7 +11,6 @@
             <p>{{$t('feature.home.text_shareHolding')}}</p>
           </div>
           <div class="game-box-image">
-            <!-- <img src="../../../assets/wallet/home/ＧＯ！按钮@2x.png" alt="" @click="shareHolding"> -->
             <span @click="shareHolding">GO !</span>
           </div>
         </div>
@@ -49,19 +48,17 @@
         activeType: "quotes",
         rankInfo:[],
         coinsList:['TB','OKB','BNB','HT'],
-        USDT_price:0//usdt价格
+        USDT_price:0
       }
     },
     methods: {
       get_data(){//获取行情数据
         get_ranks({"unit":"usd"}).catch(v=>{
-            // console.log(v);
             let res = v.filter(x=>this.coinsList.indexOf(x.currency)>=0);
             this.USDT_price = v.find(x=>x.currency==='USDT').price;
             this.rankInfo = res;
-            // console.log(this.rankInfo)
         })
-      },//get_data
+      },
       // 跳转全民持股
       shareHolding () {
         this.$router.push('/peopleStock')
@@ -75,9 +72,8 @@
       }
     },
     activated() {
-      //console.log('//')
-      this.get_data();
-    } //mounted
+      // this.get_data();
+    }
   };
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
