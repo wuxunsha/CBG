@@ -428,7 +428,7 @@
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"
-                               type="text"
+                               type="number"
                                maxlength="6"
                                v-focus="true" />
                     </div>
@@ -792,7 +792,7 @@ export default {
     }
 }
 .popPop {
-    height: 38%;
+    height: 264px;
     width: 90%;
     border-radius: 10px;
 }

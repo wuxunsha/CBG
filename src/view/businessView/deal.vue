@@ -83,26 +83,35 @@
                     <input type="text"
                            placeholder="昵称搜索">
                 </div>
-                <div class="sell">
+                <div class="sell"
+                     v-for="(i,index) in sellList"
+                     :key="index">
                     <div class="sell-top">
-                        <p><i></i><span>孙小姐</span></p>
+                        <p><i></i><span>{{i.buyerId}}</span></p>
                         <p>515 / 99.81%</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(TB)</span><span style="color:#353535">3744.699</span><span style="margin:0 0 0 10px">需求(TB)</span><span style="color:#353535">3744.699</span></p>
+                        <p><span>需求(TB)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(TB)</span><span style="color:#353535">{{i.minNum}}</span></p>
                         <p>单价</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>限额(CNY)</span><span style="color:#353535">36.00~180.00 CNY</span></p>
-                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">0.381CNY</p>
+                        <p><span>限额(CNY)</span><span style="color:#353535">{{i.minAmount}}~{{i.maxAmount}} CNY</span></p>
+                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{i.price}}CNY</p>
                     </div>
                     <div class="sell-footer">
                         <p>
                             <img src="../../assets/wallet/deal/支付宝@2x.png">
                             <img src="../../assets/wallet/deal/微信@2x.png">
                         </p>
-                        <p class="trad"><span @click="$router.push('/sell')">出售</span> </p>
+                        <p class="trad"><span @click="$router.push('/issueWait')">购买</span> </p>
                     </div>
+                </div>
+                <div class="nodata"
+                     v-if="sellList.length == 0">
+                    <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png">
+                    <p>暂无卖单</p>
+                    <!-- <p class="go-buy"
+                       @click="$router.push('/issue')">发布买单</p> -->
                 </div>
             </div>
         </div>
