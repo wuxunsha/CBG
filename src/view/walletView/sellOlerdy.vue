@@ -9,8 +9,7 @@
         <div class="search">
             <img src="../../assets/wallet/deal/图层 5@2x (2).png">
         </div>
-        <div class="search2"
-             @click="$router.push('/service')">
+        <div class="search2">
             <img src="../../assets/wallet/deal/图层 9@2x.png">
         </div>
         <div class="issue-info">
@@ -20,8 +19,8 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 4@2x (1).png">
-                <p>待放币</p>
+                <img src="../../assets/wallet/deal/图层 10@2x (1).png">
+                <p>已完成</p>
             </div>
         </div>
         <div class="sell">
@@ -36,7 +35,6 @@
 
         </div>
         <div class="buy-num">
-
             <div class="num">
                 <span>支付方式</span>
                 <div>
@@ -49,11 +47,7 @@
                 <p>用户名</p>
                 <p style="font-size:12px">孙小姐</p>
             </div>
-            <div class="total">
-                <p>二维码</p>
-                <p style="font-size:12px">
-                    <span></span></p>
-            </div>
+
             <div class="total">
                 <p>支付宝账号</p>
                 <p style="font-size:12px">18030313795</p>
@@ -66,19 +60,16 @@
                 <p>下单时间</p>
                 <p style="font-size:12px">14:56 04/26/2020</p>
             </div>
-        </div>
-
-        <div class="issue-tip">
-            <h3>付款截图</h3>
-            <div>
-                <van-uploader :after-read="afterRead" />
+            <div class="total">
+                <p>下单时间</p>
+                <p style="font-size:12px">14:56 04/26/2020</p>
+            </div>
+            <div class="total">
+                <p>下单时间</p>
+                <p style="font-size:12px">14:56 04/26/2020</p>
             </div>
         </div>
 
-        <div class="go-buy"
-             @click="$router.push('/issueOlerdy')">
-            已付款
-        </div>
     </div>
 </template>
 
@@ -103,9 +94,6 @@ export default {
     },
     methods: {
         chooseCoin() {
-
-        },
-        afterRead() {
 
         }
     },
@@ -146,7 +134,7 @@ export default {
         margin: 20px 0 0;
     }
     div {
-        margin: 30px 0 0;
+        margin: 25px 0 0;
         display: flex;
         align-items: center;
         img {

@@ -99,10 +99,26 @@ export default {
     components: {
         myFooter
     },
+    mounted() {
+        this.getDealList()
+    },
     methods: {
         demoClick(index) {
             console.log(index);
             this.tabNum = index;
+        },
+        getDealList() {
+            this.$http.get(this.$lib.host + 'otc/selectOrderByUser', {
+                params: {
+                    token_: this.$store.state.newToken,
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+
+
+                }
+            })
         },
     }
 }
