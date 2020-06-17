@@ -36,6 +36,7 @@ const sellWait = resolve => require(['@/view/walletView/sellWait'], resolve)
 const sellAwait = resolve => require(['@/view/walletView/sellAwait'], resolve)
 const sellOlerdy = resolve => require(['@/view/walletView/sellOlerdy'], resolve)
 const addPayment = resolve => require(['@/view/mine/add-payment'], resolve)
+const service = resolve => require(['@/view/walletView/service'], resolve)
 
 
 // 自定义路由
@@ -81,6 +82,7 @@ let routerArr = {
     sellAwait: sellAwait,
     sellOlerdy: sellOlerdy,
     addPayment: addPayment,
+    service: service,
     ...business // 非通用路由
 }
 

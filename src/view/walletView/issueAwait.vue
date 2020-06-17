@@ -9,7 +9,8 @@
         <div class="search">
             <img src="../../assets/wallet/deal/图层 5@2x (2).png">
         </div>
-        <div class="search2">
+        <div class="search2"
+             @click="$router.push('/service')">
             <img src="../../assets/wallet/deal/图层 9@2x.png">
         </div>
         <div class="issue-info">
