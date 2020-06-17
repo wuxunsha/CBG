@@ -1,8 +1,11 @@
 <template>
     <div>
-        <!-- <div class="navBox opacity">
-            <van-nav-bar :title="`${$t('feature.deal.nav_title')}`" />
-        </div> -->
+        <div class="navBox">
+            <van-nav-bar :title="`交易记录`"
+                         fixed
+                         left-arrow
+                         @click-left="goback()" />
+        </div>
         <div class="content">
             <div class="detail-tab">
                 <div class="tab-bar"
@@ -11,98 +14,99 @@
                      :class="{'avtive':index == tabNum}"
                      @click="demoClick(index)">{{t}}</div>
             </div>
-            <div class="detail-pig">
-                <img @click="$router.push('/orderList')"
-                     src="../../assets/wallet/deal/图层 11@2x.png">
-                <img src="../../assets/wallet/deal/图层 12@2x.png">
-            </div>
         </div>
         <div v-if="tabNum == 0">
-            <div class="info">
-                <div class="info-left">
-                    <p><span>昨日价格</span><span>0.3600</span></p>
-                    <p><span>今日价格</span><span>0.3651</span></p>
-                </div>
-                <div class="info-right">
-                    <p>+0.514%</p>
-                </div>
-            </div>
             <div class="main">
-                <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png">
-                    <input type="text"
-                           placeholder="昵称搜索">
-                </div>
                 <div class="sell"
                      v-for="(i,index) in issueList"
                      :key="index">
                     <div class="sell-top">
-                        <p><i></i><span>{{i.buyerId}}</span></p>
-                        <p>515 / 99.81%</p>
+                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
+                        <p style="color:#3507DF">待付款</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(TB)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(TB)</span><span style="color:#353535">{{i.minNum}}</span></p>
-                        <p>单价</p>
+                        <div>
+                            <p>价格(CNY)</p>
+                            <p>0.381</p>
+                        </div>
+                        <div>
+                            <p>数量(CNY)</p>
+                            <p>500</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p>实际成交(CNY)</p>
+                            <p>190</p>
+                        </div>
                     </div>
-                    <div class="sell-center">
-                        <p><span>限额(CNY)</span><span style="color:#353535">{{i.minAmount}}~{{i.maxAmount}} CNY</span></p>
-                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{i.price}}CNY</p>
-                    </div>
-                    <div class="sell-footer">
-                        <p>
-                            <img src="../../assets/wallet/deal/支付宝@2x.png">
-                            <img src="../../assets/wallet/deal/微信@2x.png">
-                        </p>
-                        <p class="trad"><span @click="$router.push('/issueWait')">购买</span> </p>
-                    </div>
+
                 </div>
 
-                <div class="nodata"
-                     v-if="issueList.length == 0">
-                    <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png">
-                    <p>暂无买单</p>
-                    <p class="go-buy"
-                       @click="$router.push('/issue')">发布买单</p>
+                <div class="nodata">
+                    没有更多
+                </div>
+            </div>
+        </div>
+
+        <div v-if="tabNum== 2">
+            <div class="main">
+                <div class="sell"
+                     v-for="(i,index) in issueList"
+                     :key="index">
+                    <div class="sell-top">
+                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
+                        <p style="color:#3507DF">待付款</p>
+                    </div>
+                    <div class="sell-center">
+                        <div>
+                            <p>价格(CNY)</p>
+                            <p>0.381</p>
+                        </div>
+                        <div>
+                            <p>数量(CNY)</p>
+                            <p>500</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p>实际成交(CNY)</p>
+                            <p>190</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="nodata">
+                    没有更多
                 </div>
             </div>
         </div>
 
         <div v-if="tabNum== 1">
-            <div class="info">
-                <div class="info-left">
-                    <p><span>昨日价格</span><span>0.3600</span></p>
-                    <p><span>今日价格</span><span>0.3651</span></p>
-                </div>
-                <div class="info-right">
-                    <p>+0.514%</p>
-                </div>
-            </div>
             <div class="main">
-                <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png">
-                    <input type="text"
-                           placeholder="昵称搜索">
-                </div>
-                <div class="sell">
+                <div class="sell"
+                     v-for="(i,index) in issueList"
+                     :key="index">
                     <div class="sell-top">
-                        <p><i></i><span>孙小姐</span></p>
-                        <p>515 / 99.81%</p>
+                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
+                        <p style="color:#3507DF">待付款</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(TB)</span><span style="color:#353535">3744.699</span><span style="margin:0 0 0 10px">需求(TB)</span><span style="color:#353535">3744.699</span></p>
-                        <p>单价</p>
+                        <div>
+                            <p>价格(CNY)</p>
+                            <p>0.381</p>
+                        </div>
+                        <div>
+                            <p>数量(CNY)</p>
+                            <p>500</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p>实际成交(CNY)</p>
+                            <p>190</p>
+                        </div>
                     </div>
-                    <div class="sell-center">
-                        <p><span>限额(CNY)</span><span style="color:#353535">36.00~180.00 CNY</span></p>
-                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">0.381CNY</p>
-                    </div>
-                    <div class="sell-footer">
-                        <p>
-                            <img src="../../assets/wallet/deal/支付宝@2x.png">
-                            <img src="../../assets/wallet/deal/微信@2x.png">
-                        </p>
-                        <p class="trad"><span @click="$router.push('/sell')">出售</span> </p>
-                    </div>
+
+                </div>
+
+                <div class="nodata">
+                    没有更多
                 </div>
             </div>
         </div>
@@ -117,7 +121,7 @@ export default {
     data() {
         return {
             activeType: "deal",
-            tab: ["我要买", "我要卖"],
+            tab: ["未完成", "已完成", '已取消'],
             tabNum: 0,
             issueList: [],
             sellList: []
@@ -135,7 +139,7 @@ export default {
             this.tabNum = index;
         },
         getDealList() {
-            this.$http.get(this.$lib.host + 'otc/listOrder', {
+            this.$http.get(this.$lib.host + 'otc/selectOrderByUser', {
                 params: {
                     token_: this.$store.state.newToken,
                 }
@@ -208,15 +212,15 @@ export default {
 }
 .tab-bar {
     margin-right: 20px;
-    font-size: 16px;
+    font-size: 13px;
     color: #a5acae;
 }
 .avtive {
-    font-size: 20px;
+    font-size: 16px;
     color: #353535;
 }
 .main {
-    padding: 20px 0 0 0px;
+    padding: 10px 0 0 0px;
     .search {
         display: flex;
         align-items: center;
@@ -237,7 +241,7 @@ export default {
         }
     }
     .sell {
-        padding: 20px 15px;
+        padding: 8px 15px 0;
         border-bottom: 1px solid #ebebeb;
         .sell-top {
             display: flex;
@@ -262,11 +266,10 @@ export default {
             justify-content: space-between;
             align-items: center;
             p {
-                display: flex;
-                align-items: center;
-                span {
-                    color: #a5acae;
-                }
+                margin-bottom: 6px;
+            }
+            p:nth-child(2) {
+                color: #353535;
             }
         }
         .sell-footer {
@@ -303,28 +306,8 @@ export default {
     }
 }
 .nodata {
-    margin: 50px 0 0 0;
+    margin: 20px 0 0 0;
     text-align: center;
-    img {
-        width: 180px;
-        height: 90px;
-    }
-    p {
-        margin: 20px 0 0 0;
-    }
-    .go-buy {
-        margin: 36px auto;
-        width: 40%;
-        height: 33px;
-        line-height: 33px;
-        background: linear-gradient(
-            -61deg,
-            rgba(34, 239, 185, 1),
-            rgba(86, 107, 243, 1)
-        );
-        box-shadow: 0px 4px 9px 0px rgba(68, 22, 238, 0.15);
-        border-radius: 5px;
-        color: #fff;
-    }
+    color: #a5acae;
 }
 </style>
