@@ -39,8 +39,13 @@
 
         <!-- 添加按钮 -->
         <div class="add-btn">
-            <span>{{$t('wallet.payment.payment_add')}}</span>
+            <span @click="popup = true">{{$t('wallet.payment.payment_add')}}</span>
         </div>
+
+        <!-- 收款方式选择弹窗 -->
+        <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
+            <van-picker :columns="columns" show-toolbar @cancel="popup=false" @confirm="onChange" :title=" `${$t('wallet.payment.popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
+        </van-popup>
   
   </div>
 </template>
@@ -49,11 +54,18 @@
 export default {
     data() {
         return {
-            hidden: true
+            hidden: true,
+            // 收款方式弹窗开关
+            popup: false,
+            columns: ['微信', '支付宝', '银行卡']
         }
     },
     methods: {
-
+        onChange(value,index) {
+            console.log(value)
+            console.log(index)
+            this.gopage('/addPayment?type=' + index)
+        }
     },
     computed: {
         

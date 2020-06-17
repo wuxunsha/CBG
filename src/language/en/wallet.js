@@ -254,7 +254,19 @@ const lang = {
         payment_information: "Please be sure to use your real-name account information",
         payment_no: "No payment method",
         payment_add: "Add to",
-        payment_edit: "edit"
+        payment_edit: "edit",
+        popup_title: "Please choose to add payment method",
+        text_weixin: "WeChat",
+        text_zhifubao: "Alipay",
+        text_yinghangka: "Bank card",
+        text_collect_money: "Collect money",
+        text_name: "Name",
+        text_name_placeholder: "please enter",
+        text_account: "Account",
+        text_phone: "contact number",
+        text_qr_code: "Add payment QR code",
+        text_prompt: "Support JPG/PNG/JPEG format files, and no more than 2M",
+        text_save: "save"
     }
 }
 

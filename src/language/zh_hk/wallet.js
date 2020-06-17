@@ -255,7 +255,19 @@ const lang = {
         payment_information: "請務必使用您本人的實名賬戶信息",
         payment_no: "暫無收款方式",
         payment_add: "添加",
-        payment_edit: "編輯"
+        payment_edit: "編輯",
+        popup_title: "請選擇添加收款方式",
+        text_weixin: "微信",
+        text_zhifubao: "支付寶",
+        text_yinghangka: "銀行卡",
+        text_collect_money: "收款",
+        text_name: "姓名",
+        text_name_placeholder: "請輸入",
+        text_account: "賬戶",
+        text_phone: "聯系電話",
+        text_qr_code: "添加收款二維碼",
+        text_prompt: "支持JPG/PNG/JPEG格式文件，且不超過2M",
+        text_save: "保存"
     }
 }
 
