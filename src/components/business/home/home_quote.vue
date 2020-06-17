@@ -54,9 +54,9 @@
     methods: {
       get_data(){//获取行情数据
         get_ranks({"unit":"usd"}).catch(v=>{
-            let res = v.filter(x=>this.coinsList.indexOf(x.currency)>=0);
-            this.USDT_price = v.find(x=>x.currency==='USDT').price;
-            this.rankInfo = res;
+          let res = v.filter(x=>this.coinsList.indexOf(x.currency)>=0);
+          this.USDT_price = v.find(x=>x.currency==='USDT').price;
+          this.rankInfo = res;
         })
       },
       // 跳转全民持股
