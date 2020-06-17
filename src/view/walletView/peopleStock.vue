@@ -62,7 +62,7 @@
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"
-                               type="text"
+                               type="number"
                                maxlength="6"
                                v-focus="true" />
                     </div>
@@ -309,7 +309,7 @@ export default {
             display: inline;
             padding: 4px 22px;
             color: #fff;
-            background-color: #566BF3;
+            background-color: #566bf3;
         }
     }
 }
@@ -319,7 +319,7 @@ export default {
     background-color: #f7f6fb;
 }
 .popPop {
-    height: 38%;
+    height: 264px;
     width: 90%;
     border-radius: 10px;
 }
@@ -340,7 +340,7 @@ export default {
             p {
                 margin-bottom: 10px;
                 span {
-                    color: #566BF3;
+                    color: #566bf3;
                 }
             }
         }
@@ -354,7 +354,7 @@ export default {
                 margin-right: 10px;
             }
             p {
-                color: #566BF3;
+                color: #566bf3;
             }
         }
     }
@@ -394,7 +394,7 @@ export default {
         .config-on {
             width: 120px;
             height: 33px;
-            background-color: #566BF3;
+            background-color: #566bf3;
             color: #fff;
             border-radius: 2px;
             margin: 0 8px;
