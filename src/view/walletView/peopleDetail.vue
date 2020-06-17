@@ -691,7 +691,7 @@ export default {
             display: inline;
             padding: 4px 22px;
             color: #fff;
-            background-color: #566BF3;
+            background-color: #566bf3;
         }
     }
 }
@@ -733,7 +733,7 @@ export default {
                 margin-right: 10px;
             }
             span {
-                color: #566BF3;
+                color: #566bf3;
                 font-size: 12px;
             }
         }
@@ -747,7 +747,7 @@ export default {
             .status {
                 background: rgba(246, 246, 246, 1);
                 border-radius: 2px;
-                color: #566BF3;
+                color: #566bf3;
                 padding: 2px 16px;
             }
         }
@@ -781,7 +781,7 @@ export default {
         }
         .go-buy {
             text-align: center;
-            background-color: #566BF3;
+            background-color: #566bf3;
             color: #fff;
             font-size: 12px;
             height: 32px;
@@ -813,7 +813,7 @@ export default {
             p {
                 margin-bottom: 10px;
                 span {
-                    color: #566BF3;
+                    color: #566bf3;
                 }
             }
         }
@@ -827,7 +827,7 @@ export default {
                 margin-right: 10px;
             }
             p {
-                color: #566BF3;
+                color: #566bf3;
             }
         }
     }
@@ -867,7 +867,7 @@ export default {
         .config-on {
             width: 120px;
             height: 33px;
-            background-color: #566BF3;
+            background-color: #566bf3;
             color: #fff;
             border-radius: 2px;
             margin: 0 8px;

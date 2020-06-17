@@ -10,7 +10,7 @@
             <img src="../../assets/wallet/deal/图层 5@2x (2).png">
         </div>
         <div class="search2">
-            <img src="../../assets/wallet/deal/图层 9@2x.png">
+            <img src="../../assets/wallet/deal/刷新@2x.png">
         </div>
         <div class="issue-info">
             <h3 @click="$router.go(-1)">
@@ -19,14 +19,15 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 10@2x (1).png">
-                <p>已完成</p>
+                <img src="../../assets/wallet/deal/图层 4@2x (1).png">
+                <p>待对方支付</p>
             </div>
+            <p>请在15:26前确认收款 </p>
         </div>
         <div class="sell">
             <div class="sell-top">
-                <h3 style="font-size:12px">订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">190.05 CNY</p>
+                <h3>订单金额</h3>
+                <p style="color:#556BF3;font-size:18px">190.05 CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
                 <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 CBK</span></p>
             </div>
@@ -35,21 +36,8 @@
 
         </div>
         <div class="buy-num">
-            <div class="num">
-                <span>支付方式</span>
-                <div>
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
-                    <p>支付宝</p>
-                    <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
-                </div>
-            </div>
             <div class="total">
                 <p>用户名</p>
-                <p style="font-size:12px">孙小姐</p>
-            </div>
-
-            <div class="total">
-                <p>支付宝账号</p>
                 <p style="font-size:12px">18030313795</p>
             </div>
             <div class="total">
@@ -58,18 +46,53 @@
             </div>
             <div class="total">
                 <p>下单时间</p>
-                <p style="font-size:12px">14:56 04/26/2020</p>
+                <p style="font-size:12px">18030313795</p>
             </div>
-            <div class="total">
-                <p>下单时间</p>
-                <p style="font-size:12px">14:56 04/26/2020</p>
+        </div>
+        <div class="issue-tip">
+            <h3>温馨提示</h3>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>当前参加买卖CBK的用户只可同时交易1单；</p>
             </div>
-            <div class="total">
-                <p>下单时间</p>
-                <p style="font-size:12px">14:56 04/26/2020</p>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>发布求购CBK单笔数量为500至3000整数，500整数倍；</p>
+            </div>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>当天产出CBK，需等第二天才能交易;</p>
+            </div>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>支付倒计时为30分钟，买方未及时点已付款，卖币方可点联系平台申诉，要求系统退回CBK；</p>
+            </div>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>核对金额倒计时为30分钟，卖方未及时点已到帐,买方可点申诉，要求系统协助CBK到账；</p>
+            </div>
+            <div class="dot">
+                <div class="tip-dot">
+                    <span></span>
+                </div>
+                <p>卖方手续费=CBK数量*2%，不足1CBK的收1CBK；</p>
             </div>
         </div>
 
+        <div class="go-buy"
+             @click="$router.push('/sellAwait')">
+            确认已收款
+        </div>
     </div>
 </template>
 
@@ -94,6 +117,9 @@ export default {
     },
     methods: {
         chooseCoin() {
+
+        },
+        afterRead() {
 
         }
     },
@@ -126,7 +152,7 @@ export default {
 .issue-info {
     padding: 0 15px;
     width: 100%;
-    height: 130px;
+    height: 150px;
     line-height: 40px;
     background: #556bf3;
     overflow: hidden;
@@ -134,7 +160,7 @@ export default {
         margin: 20px 0 0;
     }
     div {
-        margin: 30px 0 0;
+        margin: 20px 0 0;
         display: flex;
         align-items: center;
         img {
@@ -233,15 +259,28 @@ export default {
 .issue-tip {
     padding: 0 15px;
     h3 {
-        margin: 10px 0;
+        margin: 15px 0 8px;
     }
-    div {
-        display: flex;
-        justify-content: space-between;
-    }
-    p {
-        color: #c7cdd3;
-        font-size: 12px;
+    .dot {
+        overflow: hidden;
+        .tip-dot {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 15px;
+            float: left;
+            span {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background: rgba(165, 171, 173, 1);
+                border-radius: 50%;
+                margin: -3px 0 0 0;
+            }
+        }
+        p {
+            font-size: 12px;
+        }
     }
 }
 .read {
@@ -258,7 +297,7 @@ export default {
     height: 33px;
     line-height: 33px;
     text-align: center;
-    color: #a5abad;
+    color: #a5acae;
     background-color: #ebebeb;
 }
 </style>

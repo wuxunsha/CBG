@@ -16,37 +16,45 @@
                     <p>全部</p>
                 </div>
             </div>
-            <p>可用：1000CBK</p>
-            <span>手续费:２％</span>
+            <div class="use-num">
+                <p>可用：1000CBK</p>
+                <span>手续费:２％</span>
+            </div>
         </div>
         <div class="sell">
             <div class="sell-top">
-                <p>昨日均价(CNY) <span style="color:#353535;margin:0 0 0 10px">0.36</span></p>
-                <p>交易单价(CNY)<span style="color:#353535;margin:0 0 0 10px">0.33-0.36</span></p>
-                <p>最低500CBK起售，整数倍</p>
+                <p>单价(CNY)<span style="color:#353535;margin:0 0 0 30px">0.36</span></p>
+                <p>数量(CKB)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
+                <p>限额(CNY)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
+                <p>金额(CNY)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
             </div>
-            <div class="sell-right">
-                <img src="../../assets/wallet/deal/添加数值@2x (1).png">
-                <p>0.33</p>
-                <img src="../../assets/wallet/deal/添加数值@2x (1).png">
-            </div>
+
         </div>
         <div class="buy-num">
-            <h3>购买数量</h3>
-            <div class="num">
-                <input type="text"
-                       placeholder="请输入购买的数量">
-                <p>CBK</p>
+            <div class="total">
+                <p>用户名</p>
+                <p style="font-size:12px">孙小姐</p>
             </div>
             <div class="total">
-                <p>总价</p>
-                <p style="font-size:12px">CNY</p>
+                <p>认证情况</p>
+                <p style="font-size:12px">已实名</p>
             </div>
-        </div>
-        <chooseCards v-on:chooseCoin="chooseCoin"
-                     :defaultId="$route.query.coinId"
-                     type="recharge" />
+            <div class="num">
+                <span>支付方式</span>
+                <div>
+                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
+                </div>
+            </div>
 
+            <div class="total">
+                <p>联系方式</p>
+                <p style="font-size:12px">18612345698</p>
+            </div>
+
+        </div>
         <div class="issue-tip">
             <h3>温馨提示</h3>
             <div class="dot">
@@ -94,8 +102,8 @@
         </div>
 
         <div class="go-buy"
-             @click="$router.push('/issueWait')">
-            发布买入
+             @click="$router.push('/sellWait')">
+            发布出售
         </div>
     </div>
 </template>
@@ -134,14 +142,19 @@ export default {
 <style lang='scss' scoped>
 .issue-info {
     padding: 0 15px;
+    h3 {
+        margin: 15px 0 0;
+    }
     div {
         display: flex;
         justify-content: space-between;
-        margin: 10px 0;
+        margin: 8px 0 10px 0;
+        border-bottom: 1px solid #ebebeb;
         input {
             border: none;
         }
         .sell-all {
+            border-bottom: none;
             span {
                 color: #a5abad;
             }
@@ -149,9 +162,15 @@ export default {
                 margin: 0 0 0 10px;
                 padding: 0 0px 0 10px;
                 border-left: 1px solid #ebebeb;
+
                 color: #556bf3;
             }
         }
+    }
+    .use-num {
+        display: flex;
+        justify-content: space-between;
+        border: none;
     }
 }
 .sell {
@@ -159,7 +178,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ebebeb;
-    padding: 15px;
+    padding: 0 15px 8px;
     .sell-top {
         p {
             margin-bottom: 10px;
@@ -178,30 +197,56 @@ export default {
     }
 }
 .buy-num {
-    padding: 15px 15px 0;
+    // padding: 15px 15px 0;
     .num {
         display: flex;
         border-bottom: 1px solid #ebebeb;
         justify-content: space-between;
-        padding: 8px 0;
-        input {
-            border: none;
+        padding: 8px 15px;
+        div {
+            display: flex;
+            align-items: center;
+            img {
+                width: 14px;
+                height: 14px;
+                margin-left: 5px;
+            }
+            p {
+                margin: 0 10px;
+            }
         }
-        p {
-            color: #353535;
+        span {
+            color: #a5abad;
+            font-size: 12px;
         }
     }
     .total {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
+        border-bottom: 1px solid #ebebeb;
+        padding: 8px 15px;
         p {
-            color: #353535;
+            color: #a5abad;
+            font-size: 12px;
+            span {
+                width: 70px;
+                height: 70px;
+                display: inline-block;
+                background-color: blue;
+            }
+        }
+        img {
+            width: 12px;
+            height: 12px;
+            margin: -3px 0 0 8px;
         }
     }
 }
 .issue-tip {
     padding: 0 15px;
+    h3 {
+        margin: 15px 0 8px;
+    }
     .dot {
         overflow: hidden;
         .tip-dot {

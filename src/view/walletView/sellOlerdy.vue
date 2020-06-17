@@ -134,7 +134,7 @@ export default {
         margin: 20px 0 0;
     }
     div {
-        margin: 30px 0 0;
+        margin: 25px 0 0;
         display: flex;
         align-items: center;
         img {

@@ -10,9 +10,14 @@
             <img src="../../assets/wallet/deal/图层 5@2x (2).png">
         </div>
         <div class="search2">
-            <img src="../../assets/wallet/deal/图层 5@2x (2).png">
+            <img src="../../assets/wallet/deal/图层 9@2x.png">
         </div>
         <div class="issue-info">
+            <h3 @click="$router.go(-1)">
+                <van-icon name="arrow-left"
+                          size="22"
+                          color="#fff" />
+            </h3>
             <div>
                 <img src="../../assets/wallet/deal/图层 4@2x (1).png">
                 <p>待放币</p>
@@ -136,8 +141,11 @@ export default {
     line-height: 40px;
     background: #556bf3;
     overflow: hidden;
+    h3 {
+        margin: 20px 0 0;
+    }
     div {
-        margin: 60px 0 0;
+        margin: 30px 0 0;
         display: flex;
         align-items: center;
         img {
