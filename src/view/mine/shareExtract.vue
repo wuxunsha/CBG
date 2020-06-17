@@ -56,9 +56,9 @@
         </div>
 
         <!-- 卖出产业选择弹窗 -->
-    <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
-      <van-picker :columns="columns" show-toolbar @change="currencyChange" @cancel="popup=false" @confirm="onChange" :title=" `${$t('feature.bankBuy.text_popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
-    </van-popup>
+        <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
+            <van-picker :columns="columns" show-toolbar @change="currencyChange" @cancel="popup=false" @confirm="onChange" :title=" `${$t('feature.bankBuy.text_popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
+        </van-popup>
 
     </div>
 </template>
