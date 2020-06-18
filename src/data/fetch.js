@@ -111,16 +111,18 @@ axios.interceptors.response.use(function(response) {
                 redirect: router.currentRoute.fullPath
             }
         });
-    } 
-    // else if (response.data.code == 300) {
-    //     Toast("登录过期，请重新登录!")
-    //     setTimeout(() => {
-
-    //         router.replace({
-    //             path: '/login'
-    //         });
-    //     }, 2000);
-    // }
+    } else if (response.data.code == 300) {
+        Toast("登录已过期，请重新登录!")
+        setTimeout(() => {
+            store.commit('set_token', null);
+            store.commit('setUserInfo', null);
+            store.commit('sealance', null);
+            router.replace({
+                path: '/login',
+                redirect: router.currentRoute.fullPath
+            });
+        }, 2000);
+    }
     Toast.clear();
     return response.data;
 }, function(error) {
