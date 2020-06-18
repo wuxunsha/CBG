@@ -45,7 +45,6 @@
                     </div>
                 </div>
             </div>
-            <div class="line"></div>
         </div>
 
         <div class="pop">

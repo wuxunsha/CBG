@@ -77,10 +77,10 @@
   };
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
-  @import "../../../styles/walletVal";
   .quote {
     width: 100%;
-    min-height: 350px;
+    // min-height: 350px;
+    min-height: calc(100vh - 313px);
     padding: 0 15px;
     background: #F7F6FB;
     > h3 {

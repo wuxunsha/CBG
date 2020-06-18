@@ -1,15 +1,7 @@
 <template>
-  <div id="home" class="full-height">
+  <div>
 
     <div class="navBox">
-      <!-- <van-nav-bar
-        :title="`${$t('feature.home.nav_title_home')}`"
-        fixed=""
-      /> -->
-      <!-- <van-nav-bar
-        title="CB GAME"
-        fixed=""
-      /> -->
       <img src="./../../assets/wallet/home/首页-TBGAME@2x.png" alt="">
     </div>
 
@@ -62,7 +54,6 @@
 
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
-@import "../../styles/walletVal";
 .navBox {
   background:linear-gradient(-61deg,rgba(34,239,185,1),rgba(86,107,243,1));
   box-shadow:0px 4px 9px 0px rgba(68,22,238,0.15);
