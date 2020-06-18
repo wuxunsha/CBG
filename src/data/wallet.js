@@ -221,7 +221,7 @@ export function quan_detail(params) { //推荐概览数据
     })
 }
 
-const cbkPathUrl = 'http://39.99.215.137:8080/'
+const cbkPathUrl = 'http://8.210.81.131:8080/'
 export function TBListfund(params) { //获取资产列表
     return get({
         url: `${cbkPathUrl}tb/listfund`,
