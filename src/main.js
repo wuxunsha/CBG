@@ -15,6 +15,7 @@ import {
 
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import 'amfe-flexible'
 
 import qs from 'qs';
 
