@@ -134,7 +134,9 @@ export default {
     background: #556bf3;
     overflow: hidden;
     h3 {
-        margin: 20px 0 0;
+        margin: 0;
+        margin-top: 16px;
+        font-size: 12px;
     }
     div {
         margin: 20px 0 0;
@@ -161,6 +163,11 @@ export default {
     border-bottom: 1px solid #ebebeb;
     padding: 15px 15px 0;
     .sell-top {
+        h3 {
+            font-size: 12px;
+            font-weight: bold;
+            color: rgba(53,53,53,1);
+        }
         p {
             margin-bottom: 10px;
         }
@@ -236,6 +243,7 @@ export default {
 .issue-tip {
     padding: 0 15px;
     h3 {
+        font-size: 12px;
         margin: 10px 0;
     }
     div {
@@ -263,6 +271,7 @@ export default {
     border-top: 1px solid #ebebeb;
     padding: 10px 0 0 0;
     p {
+        font-size: 14px;
         width: 160px;
         height: 33px;
         line-height: 33px;
@@ -271,6 +280,7 @@ export default {
         border-radius: 2px;
     }
     span {
+        font-size: 14px;
         width: 160px;
         height: 33px;
         line-height: 33px;

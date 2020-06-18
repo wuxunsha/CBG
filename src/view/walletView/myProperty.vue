@@ -359,6 +359,9 @@ export default {
             margin: 10px 0 6px;
             display: flex;
             align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(53,53,53,1);
             img {
                 width: 18px;
                 height: 18px;
@@ -403,6 +406,7 @@ export default {
             display: flex;
             justify-content: flex-start;
             margin: 0 0 8px 0;
+            font-size: 12px;
             span:nth-child(1) {
                 color: #c8cdd3;
             }
@@ -424,7 +428,7 @@ export default {
     }
 }
 .popPop {
-    height: 37%;
+    height: 264px;
     width: 90%;
     border-radius: 10px;
 }
@@ -434,6 +438,9 @@ export default {
         color: #343b3a;
         padding: 8px 0;
         border-bottom: 1px solid #ebebeb;
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(51,59,57,1);
     }
     .pop-content {
         margin: 20px 0;
@@ -443,6 +450,7 @@ export default {
         padding: 0 20px;
         .pop-left {
             p {
+                font-size: 12px;
                 margin-bottom: 10px;
                 span {
                     color: #566BF3;
@@ -459,6 +467,7 @@ export default {
                 margin-right: 10px;
             }
             p {
+                font-size: 12px;
                 color: #566BF3;
             }
         }
@@ -496,24 +505,32 @@ export default {
         line-height: 33px;
         .config-on {
             width: 120px;
-            height: 33px;
+            height: 32px;
+            line-height: 32px;
             background-color: #566BF3;
             color: #fff;
             border-radius: 2px;
             margin: 0 8px;
+            font-size: 14px;
         }
         .cancel {
             width: 120px;
-            height: 33px;
+            height: 32px;
+            line-height: 32px;
             background: #f7f6fb;
             color: #343b3a;
             border-radius: 2px;
             margin: 0 8px;
+            font-size: 14px;
         }
     }
 }
 .no-data {
     margin-top: 25px;
     text-align: center;
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(165,171,173,1);
 }
 </style>

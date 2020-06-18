@@ -136,14 +136,13 @@ export default {
     }
 }
 .issue-info {
-    padding: 0 15px;
+    padding: 30px 15px 0;
     width: 100%;
     height: 130px;
-    line-height: 40px;
     background: #556bf3;
     overflow: hidden;
     h3 {
-        margin: 20px 0 0;
+        font-size: 12px;
     }
     div {
         margin: 30px 0 0;
@@ -245,6 +244,7 @@ export default {
 .issue-tip {
     padding: 0 15px;
     h3 {
+        font-size: 14px;
         margin: 10px 0;
     }
     div {
@@ -265,6 +265,7 @@ export default {
     }
 }
 .go-buy {
+    font-size: 14px;
     width: 90%;
     margin: 10px auto;
     height: 33px;

@@ -197,10 +197,11 @@ import load_statueController from "../../components/common/load_statueController
   width: 100%;
   height: 150px;
   margin-top: 46px;
-  > div {
-    flex: 1;
-  }
+  // > div {
+  //   flex: 1;
+  // }
   > div:nth-child(1) {
+    flex: 0.8;
     padding: 25px 15px 0;
     > p:nth-child(1) {
       font-size: 12px;
@@ -230,13 +231,14 @@ import load_statueController from "../../components/common/load_statueController
     }
   }
   > div:nth-child(2) {
-    width: 100%;
+    flex: 1;
     display: flex;
     height: 100%;
     align-items:center;
     justify-content:center;
     > div:nth-child(1) {
       flex: 1;
+      margin-right:6px;
       span {
         font-size: 14px;
         font-weight:bold;
@@ -248,9 +250,8 @@ import load_statueController from "../../components/common/load_statueController
     }
     > div:nth-child(2) {
       flex: 0.8;
-      
       img {
-        width:74px;
+        width: 56px;
       }
     }
   }

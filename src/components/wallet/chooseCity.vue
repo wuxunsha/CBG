@@ -182,7 +182,8 @@ export default {
     width: 50vw;
     overflow-y: auto;
     .item {
-        padding: 20px;
+        font-size: 16px;
+        padding: 10px 20px;
         font-weight: bold;
         &.active {
             color: $them_color;

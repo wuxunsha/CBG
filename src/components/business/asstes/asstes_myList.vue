@@ -10,7 +10,9 @@
           <div class="asset-list-top">
             <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')" alt="">
             <span>{{item.coinId === '1001' ? 'USDT' : item.coinId === '1002' ? 'CBK' : item.coinId === '1003' ? 'CBG' : 'BTC'}}</span>
-            <button v-if="item.coinId === '1001'" :disabled="item.has === 0 ? false : true" @click="receive" :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">领取</button>
+            <div class="bot-box">
+              <span v-if="item.coinId === '1001'" :disabled="item.has === 0 ? false : true" @click="receive" :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">{{$t('feature.assets.text_lq')}}</span>
+            </div>
           </div>
           <div class="list-name">
             <p>{{$t('feature.assets.text_available')}}</p>
@@ -114,33 +116,36 @@ export default {
       }
       .asset-list-top {
         width: 100%;
-        height: 24px;
+        height: 38px;
         img {
           display: inline-block;
           height: 24px;
           width: 24px;
-          vertical-align: bottom;
+          vertical-align: middle;
         }
         span {
           font-size: 14px;
           font-weight: bold;
           color: rgba(53,53,53,1);
         }
-        .receive-btn {
+        .bot-box {
           float: right;
-          height: 24px;
-          border-radius: 5px;
-          font-size: 12px;
-          font-weight: 400;
-          border: none;
-        }
-        .received {
-          background:rgba(86,107,243,1);
-          color: rgba(255,255,255,1);
-        }
-        .unclaimed {
-          background:#F7F6FB;
-          color: #353535;
+          line-height: 32px;
+          .receive-btn {
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 400;
+            border: none;
+          }
+          .received {
+            background:rgba(86,107,243,1);
+            color: rgba(255,255,255,1);
+          }
+          .unclaimed {
+            background:#F7F6FB;
+            color: #353535;
+          }
         }
       }
       .list-name {
@@ -163,7 +168,7 @@ export default {
       .asset-sum {
         display: flex;
         justify-content: space-between;
-        margin-top: 14px;
+        margin-top: 12px;
         p {
           flex: 1;
           font-size: 14px;

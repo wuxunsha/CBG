@@ -44,7 +44,7 @@
           <input type="number" :placeholder="`${$t('feature.transfer.input_number')}`" v-model="reqParams.number" @blur="blur_event()" @change="getFee()">
           <span class="money-type" v-if="currCoin">{{currCoin.coin.coinName}}</span>
           <span>|</span>
-          <span @click="allSum">{{$t('feature.transfer.All')}}</span>
+          <span @click="allSum" class="money-type">{{$t('feature.transfer.All')}}</span>
         </div>
         <div class="balance">
           <span>{{$t('feature.transfer.text_able')}}：</span>
@@ -224,5 +224,11 @@ export default {
   border-radius: 4px;
   color:#566BF3;
   margin-left: 10px;
+}
+.inputItem input {
+  font-size: 14px;
+}
+.money-type {
+  font-size: 14px;
 }
 </style>

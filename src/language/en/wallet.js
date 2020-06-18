@@ -138,7 +138,8 @@ const lang = {
         text_p: "Transfer the recharge amount to the above payment address, and wait for the block packaging to be completed. This may take a few minutes, please wait patiently.",
         tip: 'Tips',
         list: 'Recent deposit history',
-        text_recharge: 'Recharge QR code'
+        text_recharge: 'Recharge QR code',
+        text_zwshj: 'No data'
     },
     share: {
         nav_title: "Recommended Sharing",

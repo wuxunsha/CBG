@@ -69,6 +69,7 @@ export default {
     width: 90%;
     height: 33px;
     line-height: 33px;
+    font-size: 14px;
     background: rgba(200, 205, 211, 1);
     border-radius: 2px;
     text-align: center;

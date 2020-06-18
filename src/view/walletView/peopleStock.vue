@@ -288,11 +288,17 @@ export default {
     .right-main {
         width: 50%;
         margin-left: 18px;
+        h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(53,53,53,1);
+        }
         p {
             display: flex;
             justify-content: space-between;
             width: 100%;
             margin: 0 0 8px 0;
+            font-size: 12px;
             span:nth-child(1) {
                 // float: left;
                 color: #c8cdd3;
@@ -325,9 +331,11 @@ export default {
 .pop-main {
     h3 {
         text-align: center;
-        color: #343b3a;
         padding: 8px 0;
         border-bottom: 1px solid #ebebeb;
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(51,59,57,1);
     }
     .pop-content {
         margin: 20px 0;
@@ -337,6 +345,7 @@ export default {
         padding: 0 20px;
         .pop-left {
             p {
+                font-size: 12px;
                 margin-bottom: 10px;
                 span {
                     color: #566bf3;
@@ -353,6 +362,7 @@ export default {
                 margin-right: 10px;
             }
             p {
+                font-size: 12px;
                 color: #566bf3;
             }
         }
@@ -392,19 +402,23 @@ export default {
         line-height: 33px;
         .config-on {
             width: 120px;
-            height: 33px;
+            height: 32px;
+            line-height: 32px;
             background-color: #566bf3;
             color: #fff;
             border-radius: 2px;
             margin: 0 8px;
+            font-size: 14px;
         }
         .cancel {
             width: 120px;
-            height: 33px;
+            height: 32px;
+            line-height: 32px;
             background: #f7f6fb;
             color: #343b3a;
             border-radius: 2px;
             margin: 0 8px;
+            font-size: 14px;
         }
     }
 }

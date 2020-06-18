@@ -63,6 +63,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped rel="stylesheet/scss" lang="scss">
-  @import "../../styles/walletVal";
-
+a {
+  font-size: 14px;
+  line-height: 10px;
+}
 </style>

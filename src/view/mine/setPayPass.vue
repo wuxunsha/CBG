@@ -173,8 +173,9 @@
     > div:nth-child(1) {
       flex: 1;
       width: 100%;
-      height: 100%;
+      height: 80%;
       input {
+        font-size: 12px;
         width: 100%;
         height: 100%;
         border: none;
@@ -192,6 +193,7 @@
     flex: 1;
   }
   input {
+    font-size: 12px;
     border-bottom: none!important;
   }
 }

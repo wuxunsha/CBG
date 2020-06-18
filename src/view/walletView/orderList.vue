@@ -309,5 +309,6 @@ export default {
     margin: 20px 0 0 0;
     text-align: center;
     color: #a5acae;
+    font-size: 14px;
 }
 </style>

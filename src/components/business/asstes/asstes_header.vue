@@ -137,7 +137,10 @@
         background: url('../../../assets/wallet/asstes/钱包-充-提-转按钮@2x.png') no-repeat;
         background-size: 100%;
         span {
+          display: block;
           font-size: 13px;
+          height: 28px;
+          line-height: 28px;
           font-family: PingFang SC;
           font-weight: 500;
           color: rgba(255,255,255,1);

@@ -25,12 +25,26 @@
                        placeholder="请输入身份证">
             </div>
         </div>
-        <div>
-            <van-uploader>
-                <van-button>
-                    <div class="up-load">身份证正面</div>
-                </van-button>
-            </van-uploader>
+        <div class="upload-box">
+            <div>   
+                <van-uploader class="upload-input">
+                    <van-button>
+                        <div class="up-load">身份证正面</div>
+                    </van-button>
+                </van-uploader>
+                <van-uploader class="upload-input" style="text-align:right;">
+                    <van-button>
+                        <div class="up-load">身份证反面</div>
+                    </van-button>
+                </van-uploader>
+            </div>
+            <div>
+                <van-uploader class="upload-input">
+                    <van-button>
+                        <div class="up-load">手持身份证照</div>
+                    </van-button>
+                </van-uploader>
+            </div>
             <!-- <van-uploader>
                 <van-button>上传文件</van-button>
             </van-uploader>
@@ -39,7 +53,7 @@
             </van-uploader> -->
         </div>
         <div class="footer">
-            下一步
+            确认
         </div>
     </div>
 </template>
@@ -97,22 +111,40 @@ export default {
     margin: 20px 0 0 0;
     border-bottom: 1px solid #ebebeb;
     p {
+        font-size: 12px;
         color: #353535;
     }
     input {
+        font-size: 12px;
         margin: 6px 0 3px -2px;
         border: none;
     }
 }
-.up-load {
-    background-image: url("../../assets/wallet/my/11.png");
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    width: 80px;
-    height: 44px;
-    line-height: 44px;
-    color: #c8cdd3;
+.upload-box {
+    margin-top: 35px;
+    padding: 0 15px;
+    > div {
+        display: flex;
+        justify-content: space-between;
+        .upload-input {
+            flex: 1;
+            width: 100%;
+            margin-bottom: 15px;
+            .up-load {
+                background-image: url("../../assets/wallet/my/11.png");
+                width: 100%;
+                height: 100%;
+                background-size: contain;
+                width: 100px;
+                height: 44px;
+                line-height: 44px;
+                color: #c8cdd3;
+            }
+        }
+    }
+}
+.footer {
+    font-size: 14px;
 }
 /deep/ .van-button--normal {
     width: 160px;
@@ -121,5 +153,8 @@ export default {
 /deep/ .van-uploader__input {
     width: 180px;
     height: 90px;
+}
+.in-name input {
+    font-size: 12px;
 }
 </style>

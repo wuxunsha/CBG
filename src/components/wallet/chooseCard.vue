@@ -162,6 +162,7 @@ export default {
     .token_name {
         flex: 1;
         .font16 {
+            font-size: 12px;
             img {
                 width: 24px;
                 height: 24px;
@@ -184,7 +185,8 @@ export default {
     width: 50vw;
     overflow-y: auto;
     .item {
-        padding: 20px;
+        font-size: 16px;
+        padding: 10px 20px;
         font-weight: bold;
         &.active {
             color: $them_color;

@@ -114,8 +114,9 @@
 }
 .invitation-code {
   margin-top: 95px;
-      text-align: center;
+  text-align: center;
   h2 {
+    font-size: 16px;
     display: inline-block;
     line-height: 25px;
     padding: 4px 20px;

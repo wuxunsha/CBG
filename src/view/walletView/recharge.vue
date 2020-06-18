@@ -77,7 +77,7 @@
             <div v-if="rechargeList.length === 0">
                 <img src="../../assets/wallet/deal/数据暂无.png"
                      alt="">
-                <p>暂无数据</p>
+                <p>{{$t('wallet.recharge.text_zwshj')}}</p>
             </div>
             <ul v-else>
                 <li v-for="(item, index) in rechargeList"
@@ -308,6 +308,7 @@ export default {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
+            font-size: 12px;
             > div:nth-child(1) {
                 flex: 0.5;
             }
@@ -321,5 +322,11 @@ export default {
             }
         }
     }
+}
+h3 {
+    font-size: 14px;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: rgba(53,53,53,1);
 }
 </style>

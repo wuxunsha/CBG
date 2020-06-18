@@ -157,12 +157,18 @@ export default {
 }
 .buy-num {
     padding: 15px 15px 0;
+    h3 {
+        font-size: 12px;
+        font-weight: bold;
+        color: rgba(53,53,53,1);
+    }
     .num {
         display: flex;
         border-bottom: 1px solid #ebebeb;
         justify-content: space-between;
         padding: 8px 0;
         input {
+            font-size: 12px;
             border: none;
         }
         p {
@@ -180,6 +186,11 @@ export default {
 }
 .issue-tip {
     padding: 0 15px;
+    h3 {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(53,53,53,1);
+    }
     .dot {
         overflow: hidden;
         .tip-dot {
@@ -213,6 +224,7 @@ export default {
 .go-buy {
     width: 90%;
     margin: 10px auto;
+    font-size: 14px;
     height: 33px;
     line-height: 33px;
     text-align: center;

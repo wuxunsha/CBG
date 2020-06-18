@@ -75,6 +75,7 @@ export default {
             color: rgba(53,53,53,1);
         }
         input {
+            font-size: 12px;
             margin-top: 6px;
             width: 100%;
             line-height: 35px;

@@ -109,7 +109,7 @@ export default {
                 margin-right: 16px;
                 img {
                     width: 100%;
-                    vertical-align: sub;
+                    vertical-align: unset;
                 }
             }
             > div:nth-child(2) {
