@@ -18,9 +18,9 @@
                              alt="">
                     </div>
                     <div class="info">
-                        <b>{{userInfo.user.userAccount || userInfo.user.id}}</b>
+                        <b>{{userInfo.userAccount || userInfo.id}}</b>
                         <!-- <span>{{$t('feature.bankUser.text_level')}}：{{userRole}}</span> -->
-                        <span>{{userInfo.user.userPhone}}</span>
+                        <span>{{userInfo.userPhone}}</span>
                     </div>
                 </div>
             </div>
@@ -57,8 +57,10 @@
         </div>
 
         <div class="news">
+            <!-- <div class="news-box"
+                 @click="$router.push('/identity')"> -->
             <div class="news-box"
-                 @click="$router.push('/identity')">
+                 @click="$router.push('/identityTwo')">
                 <img src="../../assets/business/user/身份认证@2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_Authentication')}}</span>
@@ -101,104 +103,39 @@
 </template>
 
 <script>
-import {
-    mapMutations,
-    mapState
-} from 'vuex'
 import myFooter from "../../components/wallet/footer.vue";
 import {
     Toast
 } from 'vant';
 import {
     change_nickname,
-    getUserInfo
+    getUser
 } from '../../data/wallet';
 export default {
     data() {
         return {
             activeType: "user",
-            showLang: false,
-            show_change_input: false, //显示修改账户名
-            newName: null,
-            showEdit: false,
-            userRole: ''
+            userInfo: {}
         }
     },
     components: {
         myFooter
     },
     methods: {
-        ...mapMutations(['setUserInfo', 'setToken']),
-        changeName(done) {//修改用户名
-            change_nickname({ "newNick": this.newName }).then(v => {
-                Toast(v.message);
-                let newInfo = this.userInfo;
-                newInfo.username = this.newName;
-                this.setUserInfo(newInfo);
-                done;
-            })
-        },//changeName
-        dialogConfirm(action, done) {//确定编辑用户名
-            if (action === 'confirm') {
-                if (this.newName.length < 3 || this.newName.length > 10) {
-                    Toast(this.$t('wallet.user.Toast_name'))
-                    done(false);
-                } else {
-                    setTimeout(() => {
-                        this.changeName(done());
-                    }, 2000);
+        // 获取用户信息
+        getUserInfo() {
+            getUser({token_: this.$store.state.newToken}).then(res => {
+                if (res.code === '200') {
+                    this.userInfo = res.data
                 }
-            } else {
-                this.newName = null;
-                done();
-            }
-        },//dialogConfirm
-        editName() {//编辑账户名
-            this.showEdit = true;
-            this.newName = this.userInfo.username;
-        },//editName
-        login_out() { //退出登录
-            Dialog.confirm({
-                message: this.$t('wallet.user.text_confirm'),
-                confirmButtonText: this.$t('wallet.common.text_confirmButtonText'),
-                cancelButtonText: this.$t('wallet.common.text_cancelButtonText')
-            }).then(() => {
-                this.get_loginout();
             })
-        }, //login_out
-        get_loginout() {
-            this.gopage_re('login');
-            setTimeout(() => {
-                this.setUserInfo(null);
-                this.setToken(null);
-                this.$store.commit('setUser', {                    user: {
-                        uid: null,
-                        password: null
-                    }                })
-                this.$store.commit('setNewToken', '')
-                localStorage.removeItem('vuex');
-                location.reload();
-            }, 500);
-        }, //get_loginout
-        onSelect(item) {//设置语言
-            this.set_lang(item.type);
-            this.showLang = false;
-        }//onSelect
-    },
-    computed: {
-        ...mapState(['userInfo', 'check_read'])
+        }
     },
     created() {
-        let roleObj = {
-            0: '普通会员',
-            1: '初级会员',
-            2: '中级会员',
-            3: '高级会员',
-            4: '超级会员'
-        }
-        getUserInfo({ userId: this.userInfo.user.id }).then(v => {
-            this.userRole = roleObj[v.data.user.userRole]
-        })
+        this.getUserInfo()
+        // getUserInfo({ userId: this.userInfo.user.id }).then(v => {
+        //     this.userRole = roleObj[v.data.user.userRole]
+        // })
     },
     mounted() {
 
@@ -341,6 +278,7 @@ export default {
             padding-right: 20px;
             span {
                 font-size: 14px;
+                line-height: 45px;
                 font-family: PingFang SC;
                 font-weight: 500;
                 color: rgba(53, 53, 53, 1);
