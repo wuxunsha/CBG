@@ -67,7 +67,7 @@ export default {
             var formdata = new FormData();
             formdata.append('fileName', this.fileList[0].file);
             formdata.append('type', this.$route.query.type);
-            formdata.append('skAccount', this.count);
+            formdata.append('skAccount', this.acount);
             formdata.append('skName', this.name);
             formdata.append('token_', this.$store.state.newToken);
             formdata.append('skPhone', this.phone);
