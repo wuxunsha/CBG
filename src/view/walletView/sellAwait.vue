@@ -29,7 +29,7 @@
                 <h3 style="font-size:12px">订单金额</h3>
                 <p style="color:#556BF3;font-size:18px">190.05 CNY</p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 CBK</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 USDT</span></p>
             </div>
         </div>
         <div class="line">

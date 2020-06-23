@@ -26,7 +26,7 @@
                 <h3>请向对方支付</h3>
                 <p style="color:#556BF3;">190.05 CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 CBK</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 USDT</span></p>
             </div>
         </div>
         <div class="line">

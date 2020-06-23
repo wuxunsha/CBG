@@ -209,8 +209,7 @@ export default {
             height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background: url("../../assets/wallet/my/11.png") no-repeat 50%
-                    50%;
+                background: url("../../assets/wallet/my/11.png") no-repeat 50% 50%;
                 width: 100%;
                 background-size: contain;
                 height: 88px;
