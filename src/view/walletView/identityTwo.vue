@@ -17,36 +17,58 @@
             <div class="in-name">
                 <p>姓名</p>
                 <input type="text"
-                       placeholder="请输入姓名">
+                       placeholder="请输入姓名"
+                       v-model="name">
             </div>
             <div class="in-name">
                 <p>身份证</p>
                 <input type="text"
-                       placeholder="请输入身份证">
+                       placeholder="请输入身份证"
+                       v-model="card">
             </div>
         </div>
         <div class="upload-box">
-            <div>   
-                <van-uploader class="upload-input" :max-count="1" accept=".jpg, .png" deletable :before-read="beforeRead" :after-read="positiveRead" v-model="positiveUrl">
+            <div>
+                <van-uploader class="upload-input"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="positiveRead"
+                              v-model="positiveUrl">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
                 </van-uploader>
-                <van-uploader class="upload-input" style="text-align:right;" :max-count="1" accept=".jpg, .png" deletable :before-read="beforeRead" :after-read="reverseRead" v-model="reverseUrl">
+                <van-uploader class="upload-input"
+                              style="text-align:right;"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="reverseRead"
+                              v-model="reverseUrl">
                     <van-button>
                         <div class="up-load">身份证反面</div>
                     </van-button>
                 </van-uploader>
             </div>
             <div>
-                <van-uploader class="upload-input" :max-count="1" accept=".jpg, .png" deletable :before-read="beforeRead" :after-read="handheldRead" v-model="handheldUrl">
+                <van-uploader class="upload-input"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="handheldRead"
+                              v-model="handheldUrl">
                     <van-button>
                         <div class="up-load">手持身份证照</div>
                     </van-button>
                 </van-uploader>
             </div>
         </div>
-        <div class="footer" @click="submit">
+        <div class="footer"
+             @click="submit">
             确认
         </div>
     </div>
@@ -60,6 +82,8 @@ import chooseCitys from '../../components/wallet/chooseCity'
 export default {
     data() {
         return {
+            name: '',
+            card: '',
             positiveUrl: [],
             reverseUrl: [],
             handheldUrl: []
@@ -80,9 +104,9 @@ export default {
         // 上传身份证正面图
         positiveRead(file) {
             console.log(file.file);
-            upload(file.file).then(res => {
+            // upload(file.file).then(res => {
 
-            })
+            // })
         },
         // 上传身份证反面图
         reverseRead(file) {
@@ -94,9 +118,34 @@ export default {
         },
         // 提交
         submit() {
-            console.log(this.positiveUrl)
+            console.log(this.positiveUrl[0])
             console.log(this.reverseUrl)
             console.log(this.handheldUrl)
+            var formdata = new FormData();
+            formdata.append('sfzzm', this.positiveUrl[0].file);
+            formdata.append('sfzfm', this.reverseUrl[0].file);
+            formdata.append('scsfz', this.handheldUrl[0].file);
+            // var a = $('#IDNumber').val();
+            formdata.append('IDNumber', this.name);
+            formdata.append('realName', this.card);
+            formdata.append('token_', this.$store.state.newToken);
+            // formdata.append('orderId', 1);
+            // formdata.append('type', 2);
+            this.$http.post(this.$lib.host + 'userInfoUpload', formdata).then(res => {
+                if (res.code == 200) {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
         }
     }
 }
@@ -129,7 +178,7 @@ export default {
     height: 33px;
     line-height: 33px;
     font-size: 14px;
-    background: #566BF3;
+    background: #566bf3;
     border-radius: 2px;
     text-align: center;
     color: #fff;
@@ -160,7 +209,8 @@ export default {
             height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background: url("../../assets/wallet/my/11.png") no-repeat 50% 50%;
+                background: url("../../assets/wallet/my/11.png") no-repeat 50%
+                    50%;
                 width: 100%;
                 background-size: contain;
                 height: 88px;
@@ -182,12 +232,12 @@ export default {
                 }
             }
             /deep/.van-uploader__preview {
-                width: 100%!important;
-                height: 88px!important;
+                width: 100% !important;
+                height: 88px !important;
             }
             /deep/.van-uploader__preview-image {
-                width: 100%!important;
-                height: 88px!important;
+                width: 100% !important;
+                height: 88px !important;
             }
         }
         .upload-input:nth-child(2) {
@@ -200,7 +250,8 @@ export default {
             height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background: url("../../assets/wallet/my/11.png") no-repeat 50% 50%;
+                background: url("../../assets/wallet/my/11.png") no-repeat 50%
+                    50%;
                 width: 100%;
                 background-size: contain;
                 height: 88px;
@@ -222,12 +273,12 @@ export default {
                 }
             }
             /deep/.van-uploader__preview {
-                width: 100%!important;
-                height: 88px!important;
+                width: 100% !important;
+                height: 88px !important;
             }
             /deep/.van-uploader__preview-image {
-                width: 100%!important;
-                height: 88px!important;
+                width: 100% !important;
+                height: 88px !important;
             }
         }
     }
