@@ -50,10 +50,16 @@
                     </div>
                     <div class="sell-footer">
                         <p>
-                            <img src="../../assets/wallet/deal/支付宝@2x.png">
-                            <img src="../../assets/wallet/deal/微信@2x.png">
+                            <span v-if="i.userInfo">
+                                <img v-if="i.userInfo.zfbPayAccount"
+                                     src="../../assets/wallet/deal/支付宝@2x.png">
+                                <img v-if="i.userInfo.wxPayAccount"
+                                     src="../../assets/wallet/deal/微信@2x.png">
+                                <img v-if="i.userInfo.bankPayAccount"
+                                     src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
+                            </span>
                         </p>
-                        <p class="trad"><span @click="$router.push('/issueWait')">购买</span> </p>
+                        <p class="trad"><span @click="$router.push({path:'/issueWait',query:{item:i}})">购买</span> </p>
                     </div>
                 </div>
 
@@ -135,13 +141,29 @@ export default {
     components: {
         myFooter
     },
-    mounted() {
+    created() {
         this.getDealList()
+    },
+    mounted() {
+        this.getPrice()
     },
     methods: {
         demoClick(index) {
             console.log(index);
             this.tabNum = index;
+        },
+        getPrice() {
+            this.$http.get(this.$lib.host + 'cguser/getPriceInfo', {
+                params: {
+                    token_: this.$store.state.newToken
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+
+                    // this.userList = res.data
+                }
+            })
         },
         getDealList() {
             this.$http.get(this.$lib.host + 'otc/listOrder', {
@@ -156,6 +178,8 @@ export default {
                             return e
                         }
                     })
+                    console.log(this.issueList);
+
                     this.sellList = res.data.filter(e => {
                         if (e.type == 1) {
                             return e
@@ -165,6 +189,7 @@ export default {
                 }
             })
         },
+
     }
 }
 

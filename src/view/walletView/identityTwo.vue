@@ -26,13 +26,14 @@
             </div>
         </div>
         <div class="upload-box">
-            <div>   
+            <div>
                 <van-uploader class="upload-input">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
                 </van-uploader>
-                <van-uploader class="upload-input" style="text-align:right;">
+                <van-uploader class="upload-input"
+                              style="text-align:right;">
                     <van-button>
                         <div class="up-load">身份证反面</div>
                     </van-button>

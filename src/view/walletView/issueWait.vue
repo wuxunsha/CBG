@@ -10,7 +10,7 @@
             <img src="../../assets/wallet/deal/图层 5@2x (2).png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.go(-1)">
+            <h3 @click="$router.push('/deal')">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -24,9 +24,12 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>请向对方支付</h3>
-                <p style="color:#556BF3;">190.05 CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
-                <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 CBK</span></p>
+                <p style="color:#556BF3;">{{infoList.price}}CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"
+                         v-clipboard:copy="infoList.price"
+                         v-clipboard:success="onCopy"
+                         v-clipboard:error="onError"></p>
+                <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}}CBK</span></p>
             </div>
         </div>
         <div class="line">
@@ -37,14 +40,18 @@
             <div class="num">
                 <span>支付方式</span>
                 <div>
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
-                    <p>支付宝</p>
-                    <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png">
+                    <img :src="typeImg">
+                    <p>{{mode}}</p>
+                    <img @click="chooseType"
+                         src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png">
                 </div>
             </div>
             <div class="total">
-                <p>总价</p>
-                <p style="font-size:12px">孙小姐<img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                <p>用户名</p>
+                <p style="font-size:12px">{{infoList.creatorId}}<img v-clipboard:copy="infoList.creatorId"
+                         v-clipboard:success="onCopy"
+                         v-clipboard:error="onError"
+                         src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
             </div>
             <div class="total">
                 <p>二维码</p>
@@ -52,12 +59,33 @@
                     <span></span></p>
             </div>
             <div class="total">
-                <p>支付宝账号</p>
-                <p style="font-size:12px">18030313795<img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                <p v-if="typeId == 1">支付宝账号</p>
+                <p v-else-if="typeId == 2">微信账号</p>
+                <p v-else-if="typeId == 0">银行卡账号</p>
+                <div v-if="infoList.userInfo">
+                    <p v-if="typeId == 1"
+                       style="font-size:12px">{{infoList.userInfo.zfbPayAccount}}<img v-clipboard:copy="infoList.userInfo.zfbPayAccount"
+                             v-clipboard:success="onCopy"
+                             v-clipboard:error="onError"
+                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                    <p v-else-if="typeId == 2"
+                       style="font-size:12px">{{infoList.userInfo.wxPayAccount}}<img v-clipboard:copy="infoList.userInfo.wxPayAccount"
+                             v-clipboard:success="onCopy"
+                             v-clipboard:error="onError"
+                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                    <p v-else-if="typeId == 0"
+                       style="font-size:12px">{{infoList.userInfo.bankPayAccount}}<img v-clipboard:copy="infoList.userInfo.bankPayAccount"
+                             v-clipboard:success="onCopy"
+                             v-clipboard:error="onError"
+                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                </div>
             </div>
             <div class="total">
                 <p>订单号</p>
-                <p style="font-size:12px">215487531214564<img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                <p style="font-size:12px">{{infoList.id}}<img v-clipboard:copy="infoList.id"
+                         v-clipboard:success="onCopy"
+                         v-clipboard:error="onError"
+                         src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
             </div>
             <div class="total">
                 <p>下单时间</p>
@@ -68,16 +96,16 @@
         <div class="issue-tip">
             <h3>上传付款截图</h3>
             <div>
-                <van-uploader :after-read="afterRead" />
-                <van-uploader :after-read="afterRead" />
-                <van-uploader :after-read="afterRead" />
+                <van-uploader v-model="fileList"
+                              :after-read="afterRead"
+                              max-count="3" />
             </div>
             <p>可上传3张,支持JPG/PNG/JPEG格式文件，且不超过2M</p>
         </div>
 
         <div class="go-buy">
-            <p @click="$router.push('/issueRules')">取消订单</p>
-            <span @click="$router.push('/issueAwait')">标记为已付款</span>
+            <p @click="cancel">取消订单</p>
+            <span @click="config">标记为已付款</span>
         </div>
     </div>
 </template>
@@ -91,23 +119,124 @@ import { Popup } from 'vant';
 export default {
     data() {
         return {
-
-            checked: false
+            fileList: [],
+            infoList: [],
+            mode: '支付宝',
+            typeImg: require('../../assets/wallet/deal/支付宝@2x.png'),
+            checked: false,
+            typeId: 1,
+            zfbPayAccount: ''
         }
     },
     components: {
         chooseCards
     },
+    created() {
+        this.infoList = this.$route.query.item
+    },
     mounted() {
-
+        this.typeId = 1
     },
     methods: {
+        chooseType() {
+            this.typeId++
+            if (this.typeId == 1) {
+                this.mode = '支付宝'
+                this.typeImg = require('../../assets/wallet/deal/支付宝@2x.png')
+            } else if (this.typeId == 2) {
+                this.mode = '微信'
+                this.typeImg = require('../../assets/wallet/deal/微信@2x.png')
+            } else if (this.typeId == 3) {
+                this.mode = '银行卡'
+                this.typeImg = require('../../assets/wallet/deal/矢量智能对象@2x (1).png')
+                this.typeId = 0
+            }
+
+        },
         chooseCoin() {
 
         },
         afterRead() {
+            let data = {
+                token_: this.$store.state.newToken,
+                type: '1',
+                orderId: 1,
+                minNum: 1,
+                minAmount: 1,
+                maxAmount: 1,
+                price: this.issuePrice,
+            }
+            this.$http.post(this.$lib.host + '/userInfoUpload', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push('/deal')
+                    this.$layer.open({
+                        content: '发布成功',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
 
-        }
+                }
+            })
+        },
+        cancel() {
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+            }
+            this.$http.post(this.$lib.host + 'otc/quxiao', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push('/deal')
+                    this.$layer.open({
+                        content: '取消成功',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+        },
+        config() {
+            this.$router.push({ path: '/issueAwait', query: { item: this.infoList } })
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+            }
+            this.$http.post(this.$lib.host + 'otc/buy', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push({ path: '/issueAwait', query: { item: this.infoList } })
+                    this.$layer.open({
+                        content: '已标记',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+
+        },
+        //复制地址
+        onCopy: function (e) {
+            console.log(11);
+
+            this.$layer.open({ time: 3, skin: 'msg', content: '复制成功' });
+        },
+        onError: function (e) {
+            this.$layer.open({ time: 3, skin: 'msg', content: '复制失败' });
+        },
+
     },
 
     watch: {
@@ -166,7 +295,7 @@ export default {
         h3 {
             font-size: 12px;
             font-weight: bold;
-            color: rgba(53,53,53,1);
+            color: rgba(53, 53, 53, 1);
         }
         p {
             margin-bottom: 10px;

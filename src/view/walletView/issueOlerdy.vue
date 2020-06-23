@@ -13,7 +13,7 @@
             <img src="../../assets/wallet/deal/图层 9@2x.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.go(-1)">
+            <h3 @click="$router.push({path:'/issueAwait',query:{item:infoList}})">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -26,9 +26,9 @@
         <div class="sell">
             <div class="sell-top">
                 <h3 style="font-size:12px">订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">190.05 CNY</p>
-                <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 CBK</span></p>
+                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY</p>
+                <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span> </p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}} CBK</span></p>
             </div>
         </div>
         <div class="line">
@@ -45,7 +45,7 @@
             </div>
             <div class="total">
                 <p>用户名</p>
-                <p style="font-size:12px">孙小姐</p>
+                <p style="font-size:12px">{{infoList.creatorId}}</p>
             </div>
 
             <div class="total">
@@ -54,18 +54,18 @@
             </div>
             <div class="total">
                 <p>订单号</p>
-                <p style="font-size:12px">215487531214564</p>
+                <p style="font-size:12px">{{infoList.id}}</p>
             </div>
             <div class="total">
                 <p>下单时间</p>
                 <p style="font-size:12px">14:56 04/26/2020</p>
             </div>
             <div class="total">
-                <p>下单时间</p>
+                <p>支付时间</p>
                 <p style="font-size:12px">14:56 04/26/2020</p>
             </div>
             <div class="total">
-                <p>下单时间</p>
+                <p>放付时间</p>
                 <p style="font-size:12px">14:56 04/26/2020</p>
             </div>
         </div>
@@ -82,7 +82,7 @@ import { Popup } from 'vant';
 export default {
     data() {
         return {
-
+            infoList: [],
             checked: false
         }
     },
@@ -90,7 +90,7 @@ export default {
         chooseCards
     },
     mounted() {
-
+        this.infoList = this.$route.query.item
     },
     methods: {
         chooseCoin() {

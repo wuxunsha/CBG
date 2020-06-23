@@ -64,6 +64,7 @@ export default {
     width: 100%;
     border-bottom: 1px solid #ebebeb;
     h3 {
+        font-size: 16px;
         color: rgba(53, 53, 53, 1);
     }
     p {

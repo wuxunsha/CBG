@@ -16,9 +16,11 @@
                 <p>最低500CBK起售，整数倍</p>
             </div>
             <div class="sell-right">
-                <img src="../../assets/wallet/deal/添加数值@2x (1).png">
-                <p>0.33</p>
-                <img src="../../assets/wallet/deal/添加数值@2x (1).png">
+                <img @click="reduce"
+                     src="../../assets/wallet/deal/添加数值@2x (1).png">
+                <p>{{issuePrice}}</p>
+                <img @click="add"
+                     src="../../assets/wallet/deal/添加数值@2x (1).png">
             </div>
         </div>
         <div class="buy-num">
@@ -84,7 +86,7 @@
         </div>
 
         <div class="go-buy"
-             @click="$router.push('/issueWait')">
+             @click="goAdd">
             发布买入
         </div>
     </div>
@@ -99,7 +101,7 @@ import { Popup } from 'vant';
 export default {
     data() {
         return {
-
+            issuePrice: 0,
             checked: false
         }
     },
@@ -110,7 +112,49 @@ export default {
 
     },
     methods: {
+        reduce() {
+            if (this.issuePrice == 0) {
+                return
+            } else {
+                this.issuePrice--
+            }
+        },
+        add() {
+            this.issuePrice++
+        },
         chooseCoin() {
+
+        },
+        goAdd() {
+            if (this.checked == false) {
+                this.$layer.open({
+                    content: '请勾选阅读规则',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            let data = {
+                token_: this.$store.state.newToken,
+                type: '1',
+                totalNum: 1,
+                minNum: 1,
+                minAmount: 1,
+                maxAmount: 1,
+                price: this.issuePrice,
+            }
+            this.$http.post(this.$lib.host + 'otc/add', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push('/deal')
+                    this.$layer.open({
+                        content: '发布成功',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+
+                }
+            })
 
         }
     },
@@ -160,7 +204,7 @@ export default {
     h3 {
         font-size: 12px;
         font-weight: bold;
-        color: rgba(53,53,53,1);
+        color: rgba(53, 53, 53, 1);
     }
     .num {
         display: flex;
@@ -189,7 +233,7 @@ export default {
     h3 {
         font-size: 14px;
         font-weight: bold;
-        color: rgba(53,53,53,1);
+        color: rgba(53, 53, 53, 1);
     }
     .dot {
         overflow: hidden;

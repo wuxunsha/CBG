@@ -9,7 +9,8 @@
         <div class="issue-info">
             <h3>出售数量</h3>
             <div>
-                <input type="text"
+                <input type="number"
+                       v-model="sellNum"
                        placeholder="请输入出售的数量">
                 <div class="sell-all">
                     <span>CBK</span>
@@ -23,21 +24,32 @@
         </div>
         <div class="sell">
             <div class="sell-top">
-                <p>单价(CNY)<span style="color:#353535;margin:0 0 0 30px">0.36</span></p>
-                <p>数量(CKB)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
-                <p>限额(CNY)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
-                <p>金额(CNY)<span style="color:#353535;margin:0 0 0 30px">0.33-0.36</span></p>
+                <p>起售(CKB)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
+                               v-model="minNum"
+                               placeholder="请输入起售"></span></p>
+                <p>限额最小(CNY)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
+                               v-model="minPrice"
+                               placeholder="请输入限额"></span></p>
+                <p>限额最大(CNY)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
+                               v-model="maxPrice"
+                               placeholder="请输入限额"></span></p>
+                <p>金额(CNY)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
+                               v-model="price"
+                               placeholder="请输入金额"></span></p>
             </div>
 
         </div>
         <div class="buy-num">
             <div class="total">
                 <p>用户名</p>
-                <p style="font-size:12px">孙小姐</p>
+                <p style="font-size:12px">{{userList.userAccount}}</p>
             </div>
             <div class="total">
                 <p>认证情况</p>
-                <p style="font-size:12px">已实名</p>
+                <p v-if="userList.isrz == 1"
+                   style="font-size:12px">已实名</p>
+                <p v-else
+                   style="font-size:12px">未实名</p>
             </div>
             <div class="num">
                 <span>支付方式</span>
@@ -51,7 +63,7 @@
 
             <div class="total">
                 <p>联系方式</p>
-                <p style="font-size:12px">18612345698</p>
+                <p style="font-size:12px">{{userList.userName}}</p>
             </div>
 
         </div>
@@ -102,37 +114,96 @@
         </div>
 
         <div class="go-buy"
-             @click="$router.push('/sellWait')">
+             @click="goAdd()">
             发布出售
         </div>
     </div>
 </template>
 
 <script>
+import {
+    mapMutations,
+    mapState
+} from 'vuex'
 import chooseCards from '../../components/wallet/chooseCard'
 import {
-    quan_detail
+    quan_detail,
+    getUserInfo
 } from '../../data/wallet';
+
 import { Popup } from 'vant';
 export default {
     data() {
         return {
-
-            checked: false
+            checked: false,
+            sellNum: "",
+            minNum: '',
+            minPrice: '',
+            maxPrice: '',
+            price: '',
+            userList: {}
         }
     },
     components: {
         chooseCards
     },
+    computed: {
+        ...mapState(['userInfo'])
+    },
     mounted() {
-
+        this.getUserInfo()
     },
     methods: {
         chooseCoin() {
 
+        },
+        goAdd() {
+            if (this.checked == false) {
+                this.$layer.open({
+                    content: '请勾选阅读规则',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+
+            let data = {
+                token_: this.$store.state.newToken,
+                type: '2',
+                totalNum: this.sellNum,
+                minNum: this.minNum,
+                minAmount: this.minPrice,
+                maxAmount: this.maxPrice,
+                price: this.price,
+            }
+            this.$http.post(this.$lib.host + 'otc/add', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push('/deal')
+                    this.$layer.open({
+                        content: '发布成功',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+
+                }
+            })
+
+        },
+        getUserInfo() {
+            this.$http.get(this.$lib.host + 'cguser/getUserInfo', {
+                params: {
+                    token_: this.$store.state.newToken
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+
+                    this.userList = res.data
+                }
+            })
         }
     },
-
     watch: {
 
     }
@@ -144,6 +215,7 @@ export default {
     padding: 0 15px;
     h3 {
         margin: 15px 0 0;
+        font-size: 16px;
     }
     div {
         display: flex;
@@ -152,11 +224,13 @@ export default {
         border-bottom: 1px solid #ebebeb;
         input {
             border: none;
+            font-size: 14px;
         }
         .sell-all {
             border-bottom: none;
             span {
                 color: #a5abad;
+                font-size: 14px;
             }
             p {
                 margin: 0 0 0 10px;
@@ -171,6 +245,7 @@ export default {
         display: flex;
         justify-content: space-between;
         border: none;
+        font-size: 14px;
     }
 }
 .sell {
@@ -182,6 +257,11 @@ export default {
     .sell-top {
         p {
             margin-bottom: 10px;
+            input {
+                width: 80px;
+                border: none;
+                border-bottom: 1px solid #ccc;
+            }
         }
     }
     .sell-right {
@@ -246,6 +326,7 @@ export default {
     padding: 0 15px;
     h3 {
         margin: 15px 0 8px;
+        font-size: 16px;
     }
     .dot {
         overflow: hidden;
@@ -285,5 +366,6 @@ export default {
     text-align: center;
     color: #fff;
     background-color: #556bf3;
+    font-size: 14px;
 }
 </style>

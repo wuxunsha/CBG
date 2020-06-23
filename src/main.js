@@ -16,6 +16,7 @@ import {
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import 'amfe-flexible'
+import VueClipboard from 'vue-clipboard2'
 
 import qs from 'qs';
 
@@ -23,6 +24,7 @@ Check_browser(); //检查浏览器是否支持本地存储
 
 import VueI18n from 'vue-i18n' //多语言
 Vue.use(VueI18n);
+Vue.use(VueClipboard)
 
 import language from './language';
 
