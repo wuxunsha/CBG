@@ -118,9 +118,21 @@ export default {
         },
         // 提交
         submit() {
-            console.log(this.positiveUrl[0])
-            console.log(this.reverseUrl)
-            console.log(this.handheldUrl)
+            if (!this.name) {
+                return Toast.fail('请输入姓名')
+            }
+            if (!this.card) {
+                return Toast.fail('请输入身份证号码')
+            }
+            if (this.positiveUrl.length <= 0) {
+                return Toast.fail('请上传身份证正面照')
+            }
+            if (this.reverseUrl.length <= 0) {
+                return Toast.fail('请上传身份证反面照')
+            }
+            if (this.handheldUrl.length <= 0) {
+                return Toast.fail('请上传手持身份证照')
+            }
             var formdata = new FormData();
             formdata.append('sfzzm', this.positiveUrl[0].file);
             formdata.append('sfzfm', this.reverseUrl[0].file);
@@ -134,10 +146,11 @@ export default {
             this.$http.post(this.$lib.host + 'userInfoUpload', formdata).then(res => {
                 if (res.code == 200) {
                     this.$layer.open({
-                        content: res.msg,
+                        content: '提交成功',
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
+                    this.$router.push({path:'/bankUser'})
                 } else {
                     this.$layer.open({
                         content: res.msg,
@@ -209,8 +222,7 @@ export default {
             height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background: url("../../assets/wallet/my/11.png") no-repeat 50%
-                    50%;
+                background: url("../../assets/wallet/my/11.png") no-repeat 50% 50%;
                 width: 100%;
                 background-size: contain;
                 height: 88px;

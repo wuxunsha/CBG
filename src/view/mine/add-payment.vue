@@ -64,6 +64,18 @@ export default {
             console.log(file)
         },
         save() {
+            if (!this.name) {
+                return Toast.fail('请输入姓名')
+            }
+            if (!this.acount) {
+                return Toast.fail('请输入账户地址')
+            }
+            if (!this.phone) {
+                return Toast.fail('请输入联系电话')
+            }
+            if (this.fileList.length <= 0) {
+                return Toast.fail('请添加收款二维码')
+            }
             var formdata = new FormData();
             formdata.append('fileName', this.fileList[0].file);
             formdata.append('type', this.$route.query.type);
@@ -74,10 +86,11 @@ export default {
             this.$http.post(this.$lib.host + 'userPayInfoUpload', formdata).then(res => {
                 if (res.code == 200) {
                     this.$layer.open({
-                        content: res.result_msg,
+                        content: '保存成功',
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
+                    this.$router.push({path:'/paymentMethod'})
                 } else {
                     this.$layer.open({
                         content: res.result_msg,
