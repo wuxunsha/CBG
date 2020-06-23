@@ -52,11 +52,12 @@ export default {
 .content {
     padding: 0 15px 20px;
     h4 {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 26px;
         margin: 10px 0;
     }
     p {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 26px;
         text-indent: 2em;
     }

@@ -13,7 +13,7 @@
             <div class="sell-top">
                 <p>昨日均价(CNY) <span style="color:#353535;margin:0 0 0 10px">0.36</span></p>
                 <p>交易单价(CNY)<span style="color:#353535;margin:0 0 0 10px">0.33-0.36</span></p>
-                <p>最低500CBK起售，整数倍</p>
+                <p>最低500USDT起售，整数倍</p>
             </div>
             <div class="sell-right">
                 <img @click="reduce"
@@ -28,7 +28,7 @@
             <div class="num">
                 <input type="text"
                        placeholder="请输入购买的数量">
-                <p>CBK</p>
+                <p>USDT</p>
             </div>
             <div class="total">
                 <p>总价</p>
@@ -45,37 +45,25 @@
                 <div class="tip-dot">
                     <span></span>
                 </div>
-                <p>当前参加买卖CBK的用户只可同时交易1单；</p>
+                <p>当前参与买卖USDT的用户只可同时交易1单；</p>
             </div>
             <div class="dot">
                 <div class="tip-dot">
                     <span></span>
                 </div>
-                <p>发布求购CBK单笔数量为500至3000整数，500整数倍；</p>
+                <p>支付倒计时为30分钟，买方未及时点击已付款，卖方可联系平台申诉，要求协助完成订单交易；</p>
             </div>
             <div class="dot">
                 <div class="tip-dot">
                     <span></span>
                 </div>
-                <p>当天产出CBK，需等第二天才能交易;</p>
+                <p>核对金额倒计时为30分钟，卖方未及时点击已到账，买方可联系平台申诉，要求协助完成订单；</p>
             </div>
             <div class="dot">
                 <div class="tip-dot">
                     <span></span>
                 </div>
-                <p>支付倒计时为30分钟，买方未及时点已付款，卖币方可点联系平台申诉，要求系统退回CBK；</p>
-            </div>
-            <div class="dot">
-                <div class="tip-dot">
-                    <span></span>
-                </div>
-                <p>核对金额倒计时为30分钟，卖方未及时点已到帐,买方可点申诉，要求系统协助CBK到账；</p>
-            </div>
-            <div class="dot">
-                <div class="tip-dot">
-                    <span></span>
-                </div>
-                <p>卖方手续费=CBK数量*2%，不足1CBK的收1CBK；</p>
+                <p>每笔订单需扣除卖方交易总币量*5%的手续费；</p>
             </div>
         </div>
 

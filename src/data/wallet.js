@@ -242,3 +242,17 @@ export function qmlcgFanli(params) { //领取
         params: params
     })
 }
+
+export function getUser(params) { // 获取我的页面用户信息
+    return get({
+        url: `${cbkPathUrl}cguser/getUserInfo`,
+        params: params
+    })
+}
+
+export function upload(params) { // 上传图片
+    return post({
+        url: `${cbkPathUrl}userInfoUpload`,
+        params: params
+    })
+}

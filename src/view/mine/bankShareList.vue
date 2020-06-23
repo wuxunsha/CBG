@@ -3,7 +3,7 @@
 
     <div class="navBox opacity">
       <van-nav-bar
-        :title="`${$t('feature.bankShareList.nav_title')}`"
+        :title="`${$t('feature.home.nav_title')}`"
         left-arrow @click-left="goback()" fixed
       />
     </div>

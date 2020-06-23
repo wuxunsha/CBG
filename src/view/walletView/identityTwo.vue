@@ -8,76 +8,150 @@
         </div>
         <div class="open-iden">
             <h3>开启身份认证</h3>
-            <div>
+            <!-- <div>
                 <p>步骤二</p>
-                <!-- <span>选择国籍</span> -->
-            </div>
+                <span>选择国籍</span>
+            </div> -->
         </div>
         <div style="margin:15px 0 0 0;padding: 0 15px">
             <div class="in-name">
                 <p>姓名</p>
                 <input type="text"
-                       placeholder="请输入姓名">
+                       placeholder="请输入姓名"
+                       v-model="name">
             </div>
             <div class="in-name">
                 <p>身份证</p>
                 <input type="text"
-                       placeholder="请输入身份证">
+                       placeholder="请输入身份证"
+                       v-model="card">
             </div>
         </div>
         <div class="upload-box">
             <div>
-                <van-uploader class="upload-input">
+                <van-uploader class="upload-input"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="positiveRead"
+                              v-model="positiveUrl">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
                 </van-uploader>
                 <van-uploader class="upload-input"
-                              style="text-align:right;">
+                              style="text-align:right;"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="reverseRead"
+                              v-model="reverseUrl">
                     <van-button>
                         <div class="up-load">身份证反面</div>
                     </van-button>
                 </van-uploader>
             </div>
             <div>
-                <van-uploader class="upload-input">
+                <van-uploader class="upload-input"
+                              :max-count="1"
+                              accept=".jpg, .png"
+                              deletable
+                              :before-read="beforeRead"
+                              :after-read="handheldRead"
+                              v-model="handheldUrl">
                     <van-button>
                         <div class="up-load">手持身份证照</div>
                     </van-button>
                 </van-uploader>
             </div>
-            <!-- <van-uploader>
-                <van-button>上传文件</van-button>
-            </van-uploader>
-            <van-uploader>
-                <van-button>上传文件</van-button>
-            </van-uploader> -->
         </div>
-        <div class="footer">
+        <div class="footer"
+             @click="submit">
             确认
         </div>
     </div>
 </template>
 
 <script>
+import {
+    upload
+} from '../../data/wallet';
 import chooseCitys from '../../components/wallet/chooseCity'
 export default {
     data() {
         return {
+            name: '',
+            card: '',
+            positiveUrl: [],
+            reverseUrl: [],
+            handheldUrl: []
         }
     },
     components: {
         chooseCitys
     },
     methods: {
-        chooseCoin() {
+        // 上传前
+        beforeRead(file) {
+            if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+                Toast('请上传 jpg/png 格式图片')
+                return false
+            }
+            return true
+        },
+        // 上传身份证正面图
+        positiveRead(file) {
+            console.log(file.file);
+            // upload(file.file).then(res => {
 
+            // })
+        },
+        // 上传身份证反面图
+        reverseRead(file) {
+            console.log(file);
+        },
+        // 上传手持照
+        handheldRead(file) {
+            console.log(file);
+        },
+        // 提交
+        submit() {
+            console.log(this.positiveUrl[0])
+            console.log(this.reverseUrl)
+            console.log(this.handheldUrl)
+            var formdata = new FormData();
+            formdata.append('sfzzm', this.positiveUrl[0].file);
+            formdata.append('sfzfm', this.reverseUrl[0].file);
+            formdata.append('scsfz', this.handheldUrl[0].file);
+            // var a = $('#IDNumber').val();
+            formdata.append('IDNumber', this.name);
+            formdata.append('realName', this.card);
+            formdata.append('token_', this.$store.state.newToken);
+            // formdata.append('orderId', 1);
+            // formdata.append('type', 2);
+            this.$http.post(this.$lib.host + 'userInfoUpload', formdata).then(res => {
+                if (res.code == 200) {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
         }
     }
 }
 
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
 .open-iden {
     padding: 0 15px;
     h3 {
@@ -103,7 +177,8 @@ export default {
     width: 90%;
     height: 33px;
     line-height: 33px;
-    background: rgba(200, 205, 211, 1);
+    font-size: 14px;
+    background: #566bf3;
     border-radius: 2px;
     text-align: center;
     color: #fff;
@@ -124,28 +199,89 @@ export default {
 .upload-box {
     margin-top: 35px;
     padding: 0 15px;
-    > div {
+    > div:nth-child(1) {
         display: flex;
         justify-content: space-between;
+        height: 88px;
+        margin-bottom: 15px;
         .upload-input {
             flex: 1;
-            width: 100%;
+            height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background-image: url("../../assets/wallet/my/11.png");
+                background: url("../../assets/wallet/my/11.png") no-repeat 50%
+                    50%;
                 width: 100%;
-                height: 100%;
                 background-size: contain;
-                width: 100px;
-                height: 44px;
-                line-height: 44px;
+                height: 88px;
+                line-height: 88px;
                 color: #c8cdd3;
+            }
+            .van-uploader__wrapper {
+                height: 88px;
+            }
+            .van-uploader__input-wrapper {
+                width: 100%;
+                height: 88px;
+            }
+            .van-button--normal {
+                width: 100%;
+                height: 88px;
+                .van-button__content {
+                    width: 100%;
+                }
+            }
+            /deep/.van-uploader__preview {
+                width: 100% !important;
+                height: 88px !important;
+            }
+            /deep/.van-uploader__preview-image {
+                width: 100% !important;
+                height: 88px !important;
+            }
+        }
+        .upload-input:nth-child(2) {
+            margin-left: 4%;
+        }
+    }
+    > div:nth-child(2) {
+        .upload-input {
+            width: 48%;
+            height: 88px;
+            margin-bottom: 15px;
+            .up-load {
+                background: url("../../assets/wallet/my/11.png") no-repeat 50%
+                    50%;
+                width: 100%;
+                background-size: contain;
+                height: 88px;
+                line-height: 88px;
+                color: #c8cdd3;
+            }
+            .van-uploader__wrapper {
+                height: 88px;
+            }
+            .van-uploader__input-wrapper {
+                width: 100%;
+                height: 88px;
+            }
+            .van-button--normal {
+                width: 100%;
+                height: 88px;
+                .van-button__content {
+                    width: 100%;
+                }
+            }
+            /deep/.van-uploader__preview {
+                width: 100% !important;
+                height: 88px !important;
+            }
+            /deep/.van-uploader__preview-image {
+                width: 100% !important;
+                height: 88px !important;
             }
         }
     }
-}
-.footer {
-    font-size: 14px;
 }
 /deep/ .van-button--normal {
     width: 160px;
