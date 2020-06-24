@@ -36,7 +36,7 @@
             </div>
         </div>
         <chooseCards v-on:chooseCoin="chooseCoin"
-                     :defaultId="$route.query.coinId"
+                     :defaultId="$route.query.coinName"
                      type="recharge" />
 
         <div class="issue-tip">
@@ -114,6 +114,7 @@ export default {
             this.issuePrice++
         },
         chooseCoin() {
+            console.log(11);
 
         },
         goAdd() {
@@ -127,7 +128,7 @@ export default {
             }
             let data = {
                 token_: this.$store.state.newToken,
-                type: '1',
+                type: '0',
                 totalNum: 1,
                 minNum: 1,
                 minAmount: 1,

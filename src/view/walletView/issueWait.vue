@@ -215,27 +215,28 @@ export default {
             })
         },
         cancel() {
-            let data = {
-                token_: this.$store.state.newToken,
-                orderId: this.infoList.id,
-            }
-            this.$http.post(this.$lib.host + 'otc/quxiao', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    console.log(res);
-                    this.$router.push('/deal')
-                    this.$layer.open({
-                        content: '取消成功',
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                } else {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                }
-            })
+            this.$router.push('/deal')
+            // let data = {
+            //     token_: this.$store.state.newToken,
+            //     orderId: this.infoList.id,
+            // }
+            // this.$http.post(this.$lib.host + 'otc/quxiao', this.qsParams(data)).then(res => {
+            //     if (res.code == 200) {
+            //         console.log(res);
+            //         this.$router.push('/deal')
+            //         this.$layer.open({
+            //             content: '取消成功',
+            //             skin: 'msg',
+            //             time: 2 //2秒后自动关闭
+            //         })
+            //     } else {
+            //         this.$layer.open({
+            //             content: res.msg,
+            //             skin: 'msg',
+            //             time: 2 //2秒后自动关闭
+            //         })
+            //     }
+            // })
         },
         config() {
             let data = {

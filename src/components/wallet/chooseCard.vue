@@ -112,8 +112,7 @@ export default {
             this.$emit('chooseCoin', this.currCoin)
         },
         chooseCoin(item) {//选择币种
-            console.log(item);
-
+            // console.log(item);
             this.showList = false;
             this.currCoin = item;
             this.$emit('chooseCoin', item)
