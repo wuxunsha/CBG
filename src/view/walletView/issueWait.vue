@@ -19,7 +19,7 @@
                 <img src="../../assets/wallet/deal/图层 4@2x (1).png">
                 <p>待支付</p>
             </div>
-            <p>请在15:26前付钱给对方 </p>
+            <p>请在{{time(count)}}前付钱给对方 </p>
         </div>
         <div class="sell">
             <div class="sell-top">
@@ -125,7 +125,9 @@ export default {
             typeImg: require('../../assets/wallet/deal/支付宝@2x.png'),
             checked: false,
             typeId: 1,
-            zfbPayAccount: ''
+            zfbPayAccount: '',
+            actEndTime: '0:0',
+            count: ''
         }
     },
     components: {
@@ -136,8 +138,41 @@ export default {
     },
     mounted() {
         this.typeId = 1
+        this.countDown()
+    },
+    computed: {
+        time() { //这个函数是每秒把时间重新计算下
+            return function (time) {
+                // console.log(time);
+                if (time >= 0) {
+                    let day = parseInt(time / 60 / 60 / 24)
+                    let hr = parseInt(time / 60 / 60 % 24)
+                    let min = parseInt(time / 60 % 60)
+                    let sec = parseInt(time % 60)
+                    day = day > 9 ? day : '0' + day
+                    hr = hr > 9 ? hr : '0' + hr
+                    min = min > 9 ? min : '0' + min
+                    sec = sec > 9 ? sec : '0' + sec
+                    return day = min + '分' + sec + '秒'
+                }
+            }
+        },
     },
     methods: {
+        countDown() {
+            const TIME_COUNT = (new Date().getTime() + 900000 - new Date().getTime()) / 1000
+            if (!this.timer) {
+                this.count = TIME_COUNT
+                this.timer = setInterval(() => {
+                    if (this.count > 0 && this.count <= TIME_COUNT) {
+                        this.count--
+                    } else {
+                        clearInterval(this.timer)
+                        this.timer = null
+                    }
+                }, 1000)
+            }
+        },
         chooseType() {
             this.typeId++
             if (this.typeId == 1) {

@@ -14,6 +14,7 @@ const state = {
     user: {
         uid: null,
         password: null
-    }
+    },
+    assetsList: []
 }
 export default state;

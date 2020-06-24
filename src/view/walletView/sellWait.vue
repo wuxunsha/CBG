@@ -22,7 +22,7 @@
                 <img src="../../assets/wallet/deal/图层 4@2x (1).png">
                 <p>待对方支付</p>
             </div>
-            <p>请在15:26前确认收款 </p>
+            <p>请在{{getTime()}}前确认收款 </p>
         </div>
         <div class="sell">
             <div class="sell-top">
@@ -97,7 +97,8 @@ export default {
     data() {
         return {
             infoList: [],
-            checked: false
+            checked: false,
+            count: ''
         }
     },
     components: {
@@ -105,6 +106,21 @@ export default {
     },
     mounted() {
         this.infoList = this.$route.query.item
+    },
+    computed: {
+        getTime() {
+            return function (time) {
+                var _this = this;
+                let yy = new Date().getFullYear();
+                let mm = new Date().getMonth() + 1;
+                let dd = new Date().getDate();
+                let hh = new Date().getHours();
+                let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
+                let ss = new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds();
+                let fen = Number(mf) + 15
+                return hh + ':' + fen;
+            }
+        }
     },
     methods: {
         chooseCoin() {

@@ -21,53 +21,21 @@
                      v-for="(i,index) in issueList"
                      :key="index">
                     <div class="sell-top">
-                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
+                        <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
                         <p style="color:#3507DF">待付款</p>
                     </div>
                     <div class="sell-center">
                         <div>
                             <p>价格(CNY)</p>
-                            <p>0.381</p>
+                            <p>{{i.price}}</p>
                         </div>
                         <div>
                             <p>数量(CNY)</p>
-                            <p>500</p>
+                            <p>{{i.totalNum}}</p>
                         </div>
                         <div style="text-align: right;">
                             <p>实际成交(CNY)</p>
-                            <p>190</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="nodata">
-                    没有更多
-                </div>
-            </div>
-        </div>
-
-        <div v-if="tabNum== 2">
-            <div class="main">
-                <div class="sell"
-                     v-for="(i,index) in issueList"
-                     :key="index">
-                    <div class="sell-top">
-                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
-                        <p style="color:#3507DF">待付款</p>
-                    </div>
-                    <div class="sell-center">
-                        <div>
-                            <p>价格(CNY)</p>
-                            <p>0.381</p>
-                        </div>
-                        <div>
-                            <p>数量(CNY)</p>
-                            <p>500</p>
-                        </div>
-                        <div style="text-align: right;">
-                            <p>实际成交(CNY)</p>
-                            <p>190</p>
+                            <p>{{i.price * i.totalNum}}</p>
                         </div>
                     </div>
 
@@ -82,24 +50,55 @@
         <div v-if="tabNum== 1">
             <div class="main">
                 <div class="sell"
-                     v-for="(i,index) in issueList"
+                     v-for="(i,index) in sellList"
                      :key="index">
                     <div class="sell-top">
-                        <p><span style="color:#2CB392">买入</span><span>15:40 04/03</span></p>
-                        <p style="color:#3507DF">待付款</p>
+                        <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
+                        <p style="color:#3507DF">已完成</p>
                     </div>
                     <div class="sell-center">
                         <div>
                             <p>价格(CNY)</p>
-                            <p>0.381</p>
+                            <p>{{i.price}}</p>
                         </div>
                         <div>
                             <p>数量(CNY)</p>
-                            <p>500</p>
+                            <p>{{i.totalNum}}</p>
                         </div>
                         <div style="text-align: right;">
                             <p>实际成交(CNY)</p>
-                            <p>190</p>
+                            <p>{{i.price * i.totalNum}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nodata">
+                    没有更多
+                </div>
+            </div>
+        </div>
+
+        <div v-if="tabNum== 2">
+            <div class="main">
+                <div class="sell"
+                     v-for="(i,index) in awaitList"
+                     :key="index">
+                    <div class="sell-top">
+                        <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
+                        <p style="color:#3507DF">已取消</p>
+                    </div>
+                    <div class="sell-center">
+                        <div>
+                            <p>价格(CNY)</p>
+                            <p>{{i.price}}</p>
+                        </div>
+                        <div>
+                            <p>数量(CNY)</p>
+                            <p>{{i.totalNum}}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p>实际成交(CNY)</p>
+                            <p>{{i.price * i.totalNum}}</p>
                         </div>
                     </div>
 
@@ -124,7 +123,8 @@ export default {
             tab: ["未完成", "已完成", '已取消'],
             tabNum: 0,
             issueList: [],
-            sellList: []
+            sellList: [],
+            awaitList: []
         }
     },
     components: {
@@ -139,24 +139,30 @@ export default {
             this.tabNum = index;
         },
         getDealList() {
-            this.$http.get(this.$lib.host + 'otc/selectOrderByUser', {
+            this.$http.get(this.$lib.host + 'otc/listbuyOrder', {
                 params: {
                     token_: this.$store.state.newToken,
                 }
             }).then(res => {
                 if (res.code == 200) {
-                    console.log(res);
+                    // console.log(res);
                     this.issueList = res.data.filter(e => {
-                        if (e.type == 0) {
+                        if (e.state == 1) {
                             return e
                         }
                     })
-                    this.sellList = res.data.filter(e => {
-                        if (e.type == 1) {
-                            return e
-                        }
-                    })
+                    console.log(this.issueList);
 
+                    this.sellList = res.data.filter(e => {
+                        if (e.state == 2) {
+                            return e
+                        }
+                    })
+                    this.awaitList = res.data.filter(e => {
+                        if (e.state == 3) {
+                            return e
+                        }
+                    })
                 }
             })
         },

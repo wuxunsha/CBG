@@ -37,3 +37,8 @@ export const setPopup = (state, params) => { //设置弹出层
     }
 
 }
+
+export const setAssetsList = (state, params) => { //设置弹出层
+    state.assetsList = params;
+
+}

@@ -11,7 +11,7 @@
         </div>
         <div class="sell">
             <div class="sell-top">
-                <p>昨日均价(CNY) <span style="color:#353535;margin:0 0 0 10px">0.36</span></p>
+                <p>昨日均价(CNY) <span style="color:#353535;margin:0 0 0 10px">{{priceList.昨日价格}}</span></p>
                 <p>交易单价(CNY)<span style="color:#353535;margin:0 0 0 10px">0.33-0.36</span></p>
                 <p>最低500USDT起售，整数倍</p>
             </div>
@@ -90,13 +90,16 @@ export default {
     data() {
         return {
             issuePrice: 0,
-            checked: false
+            checked: false,
+            priceList: []
         }
     },
     components: {
         chooseCards
     },
     mounted() {
+        this.priceList = this.$store.state.assetsList
+        console.log(this.priceList);
 
     },
     methods: {

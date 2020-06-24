@@ -20,11 +20,13 @@
         <div v-if="tabNum == 0">
             <div class="info">
                 <div class="info-left">
-                    <p><span>昨日价格</span><span>0.3600</span></p>
-                    <p><span>今日价格</span><span>0.3651</span></p>
+                    <p><span>昨日价格</span><span>{{priceList.昨日价格}}</span></p>
+                    <p><span>今日价格</span><span>{{priceList.今日价格}}</span></p>
                 </div>
                 <div class="info-right">
-                    <p>+0.514%</p>
+                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                    <p style=""
+                       v-else>-{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
                 </div>
             </div>
             <div class="main">
@@ -35,11 +37,12 @@
                            placeholder="昵称搜索"
                            v-model="serach">
                 </div>
+
                 <div class="sell"
                      v-for="(i,index) in issueList"
                      :key="index">
                     <div class="sell-top">
-                        <p><i></i><span>{{i.buyerId}}</span></p>
+                        <p><i></i><span>{{i.creatorId}}</span></p>
                         <p>515 / 99.81%</p>
                     </div>
                     <div class="sell-center">
@@ -78,24 +81,28 @@
         <div v-if="tabNum== 1">
             <div class="info">
                 <div class="info-left">
-                    <p><span>昨日价格</span><span>0.3600</span></p>
-                    <p><span>今日价格</span><span>0.3651</span></p>
+                    <p><span>昨日价格</span><span>{{priceList.昨日价格}}</span></p>
+                    <p><span>今日价格</span><span>{{priceList.今日价格}}</span></p>
                 </div>
                 <div class="info-right">
-                    <p>+0.514%</p>
+                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                    <p style=""
+                       v-else>-{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
                 </div>
             </div>
             <div class="main">
                 <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png">
+                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png"
+                         @click="search">
                     <input type="text"
-                           placeholder="昵称搜索">
+                           placeholder="昵称搜索"
+                           v-model="serach">
                 </div>
                 <div class="sell"
                      v-for="(i,index) in sellList"
                      :key="index">
                     <div class="sell-top">
-                        <p><i></i><span>{{i.buyerId}}</span></p>
+                        <p><i></i><span>{{i.creatorId}}</span></p>
                         <p>515 / 99.81%</p>
                     </div>
                     <div class="sell-center">
@@ -124,8 +131,8 @@
                      v-if="sellList.length == 0">
                     <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png">
                     <p>暂无卖单</p>
-                    <!-- <p class="go-buy"
-                       @click="$router.push('/issue')">发布买单</p> -->
+                    <p class="go-buy"
+                       @click="$router.push('/sell')">发布卖单</p>
                 </div>
             </div>
         </div>
@@ -135,6 +142,7 @@
 
 <script>
 import myFooter from "../../components/wallet/footer.vue";
+import { log } from '../../data/wallet';
 export default {
     props: ['footerNavActive'],
     data() {
@@ -144,6 +152,7 @@ export default {
             tabNum: 0,
             issueList: [],
             sellList: [],
+            priceList: [],
             serach: ''
         }
     },
@@ -158,29 +167,32 @@ export default {
     },
     methods: {
         search() {
-            if (condition) {
-
-            }
-            return this.recently.filter(item => {
-                if (item.name.includes(this.serach)) {
-                    return item
+            this.getDealList()
+            setTimeout(() => {
+                if (this.tabNum == 0) {
+                    let list = this.issueList.filter(item => item.creatorId.indexOf(this.serach) >= 0);
+                    this.issueList = list;
+                } else {
+                    let list = this.sellList.filter(item => item.creatorId.indexOf(this.serach) >= 0);
+                    this.sellList = list;
+                    console.log(this.sellList);
                 }
-            })
+            }, 1000)
         },
         demoClick(index) {
             console.log(index);
             this.tabNum = index;
         },
         getPrice() {
-            this.$http.get(this.$lib.host + 'cguser/getPriceInfo', {
+            this.$http.get(this.$lib.host + 'otc/getPriceInfo', {
                 params: {
                     token_: this.$store.state.newToken
                 }
             }).then(res => {
                 if (res.code == 200) {
                     console.log(res);
-
-                    // this.userList = res.data
+                    this.priceList = res.data
+                    this.$store.commit('setAssetsList', this.priceList)
                 }
             })
         },
