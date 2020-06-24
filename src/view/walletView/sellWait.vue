@@ -13,7 +13,7 @@
             <img src="../../assets/wallet/deal/刷新@2x.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.go(-1)">
+            <h3 @click="$router.push('/deal')">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -27,9 +27,12 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">190.05 CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
-                <p>单价<span style="color:#353535;margin:0 0 0 50px">0.33-0.36</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">500.00 USDT</span></p>
+                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"
+                         v-clipboard:copy="infoList.price"
+                         v-clipboard:success="onCopy"
+                         v-clipboard:error="onError"></p>
+                <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}}USDT</span></p>
             </div>
         </div>
         <div class="line">
@@ -38,11 +41,11 @@
         <div class="buy-num">
             <div class="total">
                 <p>用户名</p>
-                <p style="font-size:12px">18030313795</p>
+                <p style="font-size:12px">{{infoList.creatorId}}</p>
             </div>
             <div class="total">
                 <p>订单号</p>
-                <p style="font-size:12px">215487531214564</p>
+                <p style="font-size:12px">{{infoList.id}}</p>
             </div>
             <div class="total">
                 <p>下单时间</p>
@@ -78,7 +81,7 @@
         </div>
 
         <div class="go-buy"
-             @click="$router.push('/sellAwait')">
+             @click="config">
             确认已收款
         </div>
     </div>
@@ -93,7 +96,7 @@ import { Popup } from 'vant';
 export default {
     data() {
         return {
-
+            infoList: [],
             checked: false
         }
     },
@@ -101,7 +104,7 @@ export default {
         chooseCards
     },
     mounted() {
-
+        this.infoList = this.$route.query.item
     },
     methods: {
         chooseCoin() {
@@ -109,7 +112,41 @@ export default {
         },
         afterRead() {
 
-        }
+        },
+        //复制地址
+        onCopy: function (e) {
+            console.log(11);
+
+            this.$layer.open({ time: 3, skin: 'msg', content: '复制成功' });
+        },
+        onError: function (e) {
+            this.$layer.open({ time: 3, skin: 'msg', content: '复制失败' });
+        },
+        config() {
+
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+            }
+            this.$http.post(this.$lib.host + 'otc/buy', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push({ path: '/sellAwait', query: { item: this.infoList } })
+                    this.$layer.open({
+                        content: '已标记',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+
+        },
     },
 
     watch: {
@@ -145,6 +182,7 @@ export default {
     background: #556bf3;
     overflow: hidden;
     h3 {
+        font-size: 16px;
         margin: 20px 0 0;
     }
     div {
@@ -171,6 +209,9 @@ export default {
     justify-content: space-between;
     border-bottom: 1px solid #ebebeb;
     padding: 15px 15px 0;
+    h3 {
+        font-size: 16px;
+    }
     .sell-top {
         p {
             margin-bottom: 10px;
@@ -248,6 +289,7 @@ export default {
     padding: 0 15px;
     h3 {
         margin: 15px 0 8px;
+        font-size: 16px;
     }
     .dot {
         overflow: hidden;
@@ -280,6 +322,7 @@ export default {
     }
 }
 .go-buy {
+    font-size: 14px;
     width: 90%;
     margin: 10px auto;
     height: 33px;

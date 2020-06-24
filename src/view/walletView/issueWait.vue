@@ -203,7 +203,6 @@ export default {
             })
         },
         config() {
-            this.$router.push({ path: '/issueAwait', query: { item: this.infoList } })
             let data = {
                 token_: this.$store.state.newToken,
                 orderId: this.infoList.id,

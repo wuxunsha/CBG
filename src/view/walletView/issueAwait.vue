@@ -87,7 +87,7 @@
                     <h3>支付产业押金</h3>
                     <div class="pop-content">
                         <div class="pop-left">
-                            <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">190.05CNY</span></p>
+                            <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price}}CNY</span></p>
                         </div>
                     </div>
                     <div class="input-focus">
@@ -187,7 +187,7 @@ export default {
         configBuy() {
             let data = {
                 token_: this.$store.state.newToken,
-                orderId: 1,
+                orderId: this.infoList.id,
                 paypassword: this.newPassword,
             }
             this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {

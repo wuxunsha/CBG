@@ -29,9 +29,11 @@
             </div>
             <div class="main">
                 <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png">
+                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png"
+                         @click="search">
                     <input type="text"
-                           placeholder="昵称搜索">
+                           placeholder="昵称搜索"
+                           v-model="serach">
                 </div>
                 <div class="sell"
                      v-for="(i,index) in issueList"
@@ -106,10 +108,16 @@
                     </div>
                     <div class="sell-footer">
                         <p>
-                            <img src="../../assets/wallet/deal/支付宝@2x.png">
-                            <img src="../../assets/wallet/deal/微信@2x.png">
+                            <span v-if="i.userInfo">
+                                <img v-if="i.userInfo.zfbPayAccount"
+                                     src="../../assets/wallet/deal/支付宝@2x.png">
+                                <img v-if="i.userInfo.wxPayAccount"
+                                     src="../../assets/wallet/deal/微信@2x.png">
+                                <img v-if="i.userInfo.bankPayAccount"
+                                     src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
+                            </span>
                         </p>
-                        <p class="trad"><span @click="$router.push('/issueWait')">购买</span> </p>
+                        <p class="trad"><span @click="$router.push({path:'/sellWait',query:{item:i}})">出售</span> </p>
                     </div>
                 </div>
                 <div class="nodata"
@@ -135,7 +143,8 @@ export default {
             tab: ["我要买", "我要卖"],
             tabNum: 0,
             issueList: [],
-            sellList: []
+            sellList: [],
+            serach: ''
         }
     },
     components: {
@@ -148,6 +157,16 @@ export default {
         this.getPrice()
     },
     methods: {
+        search() {
+            if (condition) {
+
+            }
+            return this.recently.filter(item => {
+                if (item.name.includes(this.serach)) {
+                    return item
+                }
+            })
+        },
         demoClick(index) {
             console.log(index);
             this.tabNum = index;
