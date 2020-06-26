@@ -14,11 +14,11 @@
                        placeholder="请输入出售的数量">
                 <div class="sell-all">
                     <span>USDT</span>
-                    <p>全部</p>
+                    <p @click="all">全部</p>
                 </div>
             </div>
             <div class="use-num">
-                <p>可用：1000USDT</p>
+                <p>可用：{{total}}USDT</p>
                 <span>手续费:２％</span>
             </div>
         </div>
@@ -54,9 +54,12 @@
             <div class="num">
                 <span>支付方式</span>
                 <div>
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img v-if="userList.zfbpay == 1"
+                         src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img v-if="userList.wxpay == 1"
+                         src="../../assets/wallet/deal/微信@2x.png">
+                    <img v-if="userList.bankbpay == 1"
+                         src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
                     <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
                 </div>
             </div>
@@ -129,7 +132,8 @@ export default {
             minPrice: '',
             maxPrice: '',
             price: '',
-            userList: {}
+            userList: {},
+            total: ''
         }
     },
     components: {
@@ -140,8 +144,12 @@ export default {
     },
     mounted() {
         this.getUserInfo()
+        this.getTotal()
     },
     methods: {
+        all() {
+            this.sellNum = this.total
+        },
         chooseCoin() {
 
         },
@@ -149,6 +157,46 @@ export default {
             if (this.checked == false) {
                 this.$layer.open({
                     content: '请勾选阅读规则',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.totalNum <= 0) {
+                this.$layer.open({
+                    content: '请输入出售数量',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.minNum <= 0) {
+                this.$layer.open({
+                    content: '请输入最小出售数量',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.minAmount <= 0) {
+                this.$layer.open({
+                    content: '请输入最小限额',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.maxAmount <= 0) {
+                this.$layer.open({
+                    content: '请输入最大限额',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.price <= 0) {
+                this.$layer.open({
+                    content: '请输入交易单价',
                     skin: 'msg',
                     time: 2 //2秒后自动关闭
                 })
@@ -188,6 +236,22 @@ export default {
                     console.log(res);
 
                     this.userList = res.data
+                }
+            })
+        },
+        getTotal() {
+            this.$http.get(this.$lib.host + 'tb/listfund', {
+                params: {
+                    token_: this.$store.state.newToken
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    let totalList = res.data
+                    totalList.forEach(e => {
+                        if (e.coinId == '1002') {
+                            this.total = e.lastBalance
+                        }
+                    });
                 }
             })
         }
