@@ -57,14 +57,13 @@
         </div>
 
         <div class="news">
-            <!-- <div class="news-box"
-                 @click="$router.push('/identity')"> -->
             <div class="news-box"
-                 @click="$router.push('/identityTwo')">
+                 @click="userInfo.isrz === 0 ? '' : $router.push('/identityTwo')">
                 <img src="../../assets/business/user/身份认证@2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_Authentication')}}</span>
-                <span>{{$t('feature.bankUser.text_verified')}}</span>
+                <span v-if="userInfo.isrz === 0">{{$t('feature.bankUser.text_verified')}}</span>
+                <span v-else>{{$t('feature.bankUser.text_not_certified')}}</span>
             </div>
         </div>
 
@@ -133,9 +132,6 @@ export default {
     },
     created() {
         this.getUserInfo()
-        // getUserInfo({ userId: this.userInfo.user.id }).then(v => {
-        //     this.userRole = roleObj[v.data.user.userRole]
-        // })
     },
     mounted() {
 

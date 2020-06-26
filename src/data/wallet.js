@@ -3,6 +3,7 @@ import {
     post
 } from "./fetch"; //引用fetch.js
 import qs from 'qs';
+import { getJSON } from "js-cookie";
 
 //const urlPath = process.env.urlPath;
 //const urlPath = '/proxyUrl';
@@ -253,6 +254,27 @@ export function getUser(params) { // 获取我的页面用户信息
 export function upload(params) { // 上传图片
     return post({
         url: `${cbkPathUrl}userInfoUpload`,
+        params: params
+    })
+}
+
+export function getUserTDtotalIncome(params) { // 获取团队总收益
+    return get({
+        url: `${cbkPathUrl}cguser/getUserTDtotalIncome`,
+        params: params
+    })
+}
+
+export function getUserTDIncome(params) { // 获取直推和团队实时剩余收益
+    return get({
+        url: `${cbkPathUrl}cguser/getUserTDIncome`,
+        params: params
+    })
+}
+
+export function getUserTeamInfo(params) { // 获取团队信息下面贡献列表
+    return get({
+        url: `${cbkPathUrl}cguser/getUserTeamInfo`,
         params: params
     })
 }

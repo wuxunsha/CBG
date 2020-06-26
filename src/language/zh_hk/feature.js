@@ -124,6 +124,7 @@ const lang = {
         text_changePayPass:"重置交易密碼",
         text_Authentication: "身份認證",
         text_verified: "已認證",
+        text_not_certified: "未認證",
         text_payment_method: "收款方式",
         text_account_security: "賬戶安全",
         text_about_us: "關於我們"

@@ -12,13 +12,13 @@
             <div>
                 <img src="../../assets/business/user/我的－选中@2x.png"
                      alt="">
-                <span>吴先生</span>
+                <span>{{userInfo.userAccount}}</span>
             </div>
             <div>
                 <p>
                     总收益
                 </p>
-                <p>12345</p>
+                <p>{{totalIncome}}</p>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 </li>
                 <li>
                     <div>推荐收益</div>
-                    <div>800</div>
+                    <div>{{income.ztincome}}</div>
                     <div class="select-box">
                         <p @click="popup = true">
                             <span>选择卖出产业</span>
@@ -43,7 +43,7 @@
                 </li>
                 <li>
                     <div>团队收益</div>
-                    <div>800</div>
+                    <div>{{income.teamincome}}</div>
                     <div class="select-box">
                         <p>
                             <span>选择卖出产业</span>
@@ -63,20 +63,43 @@
     </div>
 </template>
 <script>
-//   import {
-//     childList,
-//     childInfo,
-//     getTeamInfo
-//   } from '../../data/business';
-
+import {
+  getUser,
+  getUserTDIncome
+} from '../../data/wallet'
 export default {
     data() {
         return {
+            userInfo: {},
+            // 收益数量
+            income: {
+                teamincome: 0,
+                ztincome: 0
+            },
+            // 总收益
+            totalIncome: 0,
             popup: false,
             columns: ['农业', '水产业', '种植业'],
         }
     },
     methods: {
+        // 获取用户信息
+        getUserInfo() {
+            getUser({token_: this.$store.state.newToken}).then(res => {
+                if (res.code === '200') {
+                    this.userInfo = res.data
+                }
+            })
+        },
+        // 获取直推和团队实时剩余收益
+        getTDIncome() {
+            getUserTDIncome({token_: this.$store.state.newToken}).then(res => {
+                if (res.code === '200') {
+                    this.income = res.data
+                    this.totalIncome = res.data.teamincome + res.data.ztincome
+                }
+            })
+        },
         currencyChange() {
 
         },
@@ -85,7 +108,8 @@ export default {
         }
     },
     created() {
-
+        this.getUserInfo()
+        this.getTDIncome()
     },
     mounted() {
 
@@ -180,7 +204,7 @@ export default {
         .select-box {
             p {
                 border: 1px solid #c8cdd3;
-                width: 86%;
+                width: 90%;
                 height: 22px;
                 line-height: 18px;
                 padding: 2px 6px;

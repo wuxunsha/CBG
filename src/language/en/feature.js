@@ -124,6 +124,7 @@ const lang = {
     text_changePayPass: "Reset Transaction Password",
     text_Authentication: "Authentication",
     text_verified: "verified",
+    text_not_certified: "not certified",
     text_payment_method: "payment method",
     text_account_security: "account security",
     text_about_us: "about us"

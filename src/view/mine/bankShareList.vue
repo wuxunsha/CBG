@@ -11,7 +11,7 @@
     <div class="earnings">
       <div>
         <p>总收益</p>
-        <p>4531.00</p>
+        <p>{{totalIncome}}</p>
         <p @click="gopage(`/shareExtract`)">提取</p>
       </div>
       <div>
@@ -31,15 +31,15 @@
       <div class="summary">
         <div>
           <p>团队总人数</p>
-          <p>12</p>
+          <p>{{totalpeople}}</p>
         </div>
         <div>
           <p>推荐收益(USDT)</p>
-          <p>4588</p>
+          <p>{{income.ztTotal}}</p>
         </div>
         <div>
           <p>团队收益(USDT)</p>
-          <p>4588</p>
+          <p>{{income.teamTotal}}</p>
         </div>
       </div>
       <div class="summary-title">
@@ -53,153 +53,76 @@
           <p>贡献收益(USDT)</p>
         </div>
       </div>
-      <ul>
-        <li>
-          <p>阿凡达</p>
-          <p>1000000</p>
-          <p>200000</p>
-        </li>
-        <li>
-          <p>阿凡达</p>
-          <p>1000000</p>
-          <p>200000</p>
+      <ul v-if="teamInfoList.length > 0">
+        <li v-for="(item, index) in teamInfoList" :key="index">
+          <p>{{item.gxAccount}}</p>
+          <p>{{item.yeji}}</p>
+          <p>{{item.gx}}</p>
         </li>
       </ul>
+      <p v-else class="no-data">
+        暂无数据
+      </p>
 
     </div>
-
-    <!-- <div class="user_info flex align between animated fadeIn" v-if="topInfo" style="padding-top:60px;">
-        <div class="item">
-          <div class=" font18">{{team.myYeJi || '--'}}</div>
-          <div class=" font12">{{$t('feature.bankShareList.text_amount')}}</div>
-        </div>
-        <div class="item">
-          <div class=" font18">{{team.total || '--'}}</div>
-          <div class=" font12">{{$t('feature.bankShareList.text_number')}}</div>
-        </div>
-    </div>
-
-    <div class="shareList" v-if="teamList.length">
-
-        <div class=" flex align border-bottom animated fadeIn" v-for="(item,index) in teamList" :key="index">
-
-          <div class="icon">
-            <img src="../../assets/business/nav_user.png" alt="">
-          </div>
-
-          <div class="info">
-            <div class=" font12" style="margin-bottom:5px;">{{item.userName}}
-            </div>
-            <div class=" font12 color-gray2">{{item.addTime}}</div>
-          </div>
-
-          <div class="amout font12">{{$t('feature.bankShareList.text_amount')}}：{{item.userYeji}}</div>
-
-        </div>
-
-    </div> -->
-
-    <!-- <load_statueController 
-      :dataLength="teamList.length" 
-      :pageSize="query.pageSize"
-      v-on:loadData="loadmore" 
-      :pageNum="currentPage"
-      ref="load_statueController"
-      class="loadController"
-    /> -->
 
   </div>
 </template>
 <script>
-import load_statueController from "../../components/common/load_statueController.vue";
-  import {
-    mapMutations,
-    mapState
-  } from 'vuex'
-  import {
-    childList,
-    childInfo,
-    getTeamInfo
-  } from '../../data/business';
-
-  export default {
-    computed: {
-      ...mapState(['userInfo'])
-    },
-    data() {
-      return {
-        child:[],
-        topInfo:null,
-        query:{
-          pageSize:20,
-          pageNum:1,
-        },
-        team:{},
-        teamList:[],
-        currentPage:1
-      }
-    },
-    components: {
-      load_statueController
-    },
-    methods: {
-      getChild(){//获取列表
-        childList(this.query).then(v=>{
-          v.data.list.forEach((v, k) => {
-            this.child.push(v);
-          });
-          setTimeout(() => {
-            // this.$refs.load_statueController.listen()
-          }, 10);
-        })
-      },//getChild
-      getTeam (page) {
-        getTeamInfo({
-          pageSize:20,
-          pageNum:page,
-          userId: this.userInfo.user.id
-        }).then(v=>{
-          this.team = v.data
-          this.teamList = v.data.list
-        })
+import {
+  getUserTDtotalIncome,
+  getUserTeamInfo
+} from '../../data/wallet';
+export default {
+  data() {
+    return {
+      // 收益
+      income: {
+        ztTotal: 0,
+        teamTotal: 0
       },
-      getChildInfo(){//获取头部数据
-        childInfo().then(v=>{
-          this.topInfo = v.data;
-        })
-      },//getChildInfo
-      loadmore() { //加载更多
-        // ++this.query.pageNum;
-        // this.getChild();
-        this.currentPage++
-        this.getTeam(this.currentPage)
-      }, //loadmore
+      // 总收益
+      totalIncome: 0,
+      teamInfoList: [],
+      // 团队总人数
+      totalpeople: 0
+    }
+  },
+  methods: {
+    // 获取团队总收益
+    getUserTotalIncome() {
+      getUserTDtotalIncome({token_: this.$store.state.newToken}).then(res => {
+        if (res.code === '200') {
+          this.income = res.data[0]
+          this.totalIncome = res.data[0].ztTotal + res.data[0].teamTotal
+        }
+      })
     },
-    created () {
-      this.getTeam(1)
-    },
-    mounted() {
-      this.getChild();
-      this.getChildInfo();
-    } //mounted
-  };
-
+    // 获取团队信息下面贡献列表
+    getUserTeamInfoList() {
+      getUserTeamInfo({token_: this.$store.state.newToken}).then(res => {
+        if (res.code === '200') {
+          this.teamInfoList = res.data
+          this.totalpeople = res.data.length
+        }
+      })
+    }
+  },
+  created () {
+    this.getUserTotalIncome()
+    this.getUserTeamInfoList()
+  },
+  mounted() {
+    
+  }
+}
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
-  @import "../../styles/walletVal";
-
-  #user {
-    box-sizing: border-box;
-  }
-
 .earnings {
   display: flex;
   width: 100%;
   height: 150px;
   margin-top: 46px;
-  // > div {
-  //   flex: 1;
-  // }
   > div:nth-child(1) {
     flex: 0.8;
     padding: 25px 15px 0;
@@ -335,51 +258,10 @@ import load_statueController from "../../components/common/load_statueController
       }
     }
   }
+  .no-data {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+  }
 }
-
-  // .user_info {
-  //   margin-top: 0;
-  //   padding: 20px 10px;
-  //   position: relative;
-  //   background: $them_color_dark;
-  //   padding-bottom: 60px;
-
-  //   * {
-  //     color: white;
-  //   }
-  //   >div{
-  //     width: 50%;
-  //     text-align: center;
-  //     .data{
-  //       margin-bottom: 10px;
-  //     }
-  //   }
-  // }
-  // .shareList{
-  //   padding: 20px;
-  //   position: relative;
-  //   margin-top: -50px;
-  //   border-top-right-radius: 20px;
-  //   border-top-left-radius: 20px;
-  //   background: white;
-  //   >.flex{
-  //     padding: 15px 0;
-  //   }
-  //   .icon{
-  //     width: 45px;
-  //     height: 45px;
-  //     border-radius: 100px;
-  //     margin-right: 10px;
-  //     overflow: hidden;
-  //     background: rgba(0,0,0,0.1);
-  //     img{
-  //       display: block;
-  //       width: 100%;
-  //       height: 100%;
-  //     }
-  //   }
-  //   .info{
-  //     flex: 1;
-  //   }
-  // }
 </style>
