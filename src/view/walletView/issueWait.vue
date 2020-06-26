@@ -55,8 +55,15 @@
             </div>
             <div class="total">
                 <p>二维码</p>
-                <p style="font-size:12px">
-                    <span></span></p>
+                <p v-if="typeId == 1&&infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.zfbPayPath"></span></p>
+                <p v-else-if="typeId == 2&&infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.wxPayPath"></span></p>
+                <p v-else-if="typeId == 0&&infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.bankPayPath"></span></p>
             </div>
             <div class="total">
                 <p v-if="typeId == 1">支付宝账号</p>
@@ -127,18 +134,23 @@ export default {
             typeId: 1,
             zfbPayAccount: '',
             actEndTime: '0:0',
-            count: ''
+            count: '',
+            img: ''
         }
     },
     components: {
         chooseCards
     },
     created() {
-        this.infoList = this.$route.query.item
+
     },
     mounted() {
         this.typeId = 1
-        this.countDown()
+        this.infoList = this.$route.query.item
+        // this.img = this.$route.query.item.userInfo.zfbPayPath
+        // console.log(this.img);
+        // this.img = require(this.img)
+        // this.countDown()
     },
     computed: {
         time() { //这个函数是每秒把时间重新计算下
@@ -394,7 +406,12 @@ export default {
                 width: 70px;
                 height: 70px;
                 display: inline-block;
-                background-color: blue;
+                // background-color: blue;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                }
             }
         }
         img {

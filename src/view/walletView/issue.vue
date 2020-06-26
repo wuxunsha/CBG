@@ -12,13 +12,17 @@
         <div class="sell">
             <div class="sell-top">
                 <p>昨日均价(CNY) <span style="color:#353535;margin:0 0 0 10px">{{priceList.昨日价格}}</span></p>
-                <p>交易单价(CNY)<span style="color:#353535;margin:0 0 0 10px">0.33-0.36</span></p>
+                <p>交易单价(CNY)<span style="color:#353535;margin:0 0 0 10px">{{(priceList.昨日价格 * 0.7).toFixed(2)}}-{{(priceList.昨日价格 * 1.3).toFixed(2)}}</span></p>
                 <p>最低500USDT起售，整数倍</p>
             </div>
             <div class="sell-right">
                 <img @click="reduce"
                      src="../../assets/wallet/deal/添加数值@2x (1).png">
-                <p>{{issuePrice}}</p>
+                <p>
+                    <input type="number"
+                           placeholder=""
+                           v-model="issuePrice">
+                </p>
                 <img @click="add"
                      src="../../assets/wallet/deal/添加数值@2x (1).png">
             </div>
@@ -26,8 +30,9 @@
         <div class="buy-num">
             <h3>购买数量</h3>
             <div class="num">
-                <input type="text"
-                       placeholder="请输入购买的数量">
+                <input type="number"
+                       placeholder="请输入购买的数量"
+                       v-model="num">
                 <p>USDT</p>
             </div>
             <div class="total">
@@ -91,7 +96,8 @@ export default {
         return {
             issuePrice: 0,
             checked: false,
-            priceList: []
+            priceList: [],
+            num: ''
         }
     },
     components: {
@@ -126,13 +132,31 @@ export default {
                 })
                 return
             }
+            console.log(this.issuePrice, this.priceList.昨日价格 * 0.7);
+
+            if (this.issuePrice < this.priceList.昨日价格 * 0.7 || this.issuePrice > this.priceList.昨日价格 * 1.3) {
+                this.$layer.open({
+                    content: '请输入合理交易单价',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+            if (this.num <= 0) {
+                this.$layer.open({
+                    content: '请输入购买数量',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
             let data = {
                 token_: this.$store.state.newToken,
                 type: '0',
-                totalNum: 1,
-                minNum: 1,
-                minAmount: 1,
-                maxAmount: 1,
+                totalNum: this.num,
+                minNum: '',
+                minAmount: '',
+                maxAmount: '',
                 price: this.issuePrice,
             }
             this.$http.post(this.$lib.host + 'otc/add', this.qsParams(data)).then(res => {
@@ -188,6 +212,12 @@ export default {
         }
         p {
             margin: 0 20px;
+            input {
+                text-align: center;
+                border: none;
+                border-bottom: 1px solid #ccc;
+                width: 30px;
+            }
         }
     }
 }
