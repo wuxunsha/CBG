@@ -54,7 +54,7 @@
 export default {
     data() {
         return {
-            hidden: false,
+            hidden: true,
             // 收款方式弹窗开关
             popup: false,
             columns: ['银行卡', '支付宝', '微信']

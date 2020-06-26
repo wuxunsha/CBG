@@ -29,7 +29,7 @@
                 <h3 style="font-size:12px">订单金额</h3>
                 <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY</p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}} CBK</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}} USDT</span></p>
             </div>
         </div>
         <div class="line">

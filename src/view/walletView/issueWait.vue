@@ -29,7 +29,7 @@
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"></p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
-                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}}CBK</span></p>
+                <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}}USDT</span></p>
             </div>
         </div>
         <div class="line">
@@ -150,7 +150,7 @@ export default {
         // this.img = this.$route.query.item.userInfo.zfbPayPath
         // console.log(this.img);
         // this.img = require(this.img)
-        // this.countDown()
+        this.countDown()
     },
     computed: {
         time() { //这个函数是每秒把时间重新计算下
