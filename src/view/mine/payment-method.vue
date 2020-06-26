@@ -54,17 +54,17 @@
 export default {
     data() {
         return {
-            hidden: true,
+            hidden: false,
             // 收款方式弹窗开关
             popup: false,
-            columns: ['微信', '支付宝', '银行卡']
+            columns: ['银行卡', '支付宝', '微信']
         }
     },
     methods: {
         onChange(value,index) {
             console.log(value)
             console.log(index)
-            this.gopage('/addPayment?type=' + index)
+            this.gopage('/addPayment?type=' + (index + 1))
         }
     },
     computed: {

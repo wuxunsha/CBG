@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="navBox">
-            <van-nav-bar :title="this.$route.query.type == 0 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_collect_money')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_collect_money')}` : `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_collect_money')}`"
+            <van-nav-bar :title="this.$route.query.type == 3 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_collect_money')}` : this.$route.query.type == 2 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_collect_money')}` : `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_collect_money')}`"
                          fixed
                          left-arrow
                          @click-left="goback()" />
@@ -15,10 +15,10 @@
                        :placeholder="`${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_name')}`">
             </div>
             <div class="input-box">
-                <p>{{this.$route.query.type == 0 ? $t('wallet.payment.text_weixin') : this.$route.query.type == 1 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_yinghangka')}}{{$t('wallet.payment.text_account')}}</p>
+                <p>{{this.$route.query.type == 3 ? $t('wallet.payment.text_weixin') : this.$route.query.type == 2 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_yinghangka')}}{{$t('wallet.payment.text_account')}}</p>
                 <input type="text"
                        v-model="acount"
-                       :placeholder="this.$route.query.type == 0 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
+                       :placeholder="this.$route.query.type == 3 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
             </div>
             <div class="input-box">
                 <p>{{$t('wallet.payment.text_phone')}}</p>

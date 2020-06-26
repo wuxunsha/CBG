@@ -24,7 +24,7 @@
                 <p>身份证</p>
                 <input type="text"
                        placeholder="请输入身份证"
-                       v-model="card">
+                       v-model="card" maxlength="18">
             </div>
         </div>
         <div class="upload-box">

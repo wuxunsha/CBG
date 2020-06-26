@@ -12,7 +12,17 @@
 
     <div class="listBox">
       <div class="search">
-        <van-search v-model="searchValue" placeholder="搜索" />
+        <!-- <van-search v-model="searchValue" placeholder="搜索" @search="onSearch"
+    @cancel="onCancel"/> -->
+        <van-search
+          v-model="query.searchValue"
+          show-action
+          placeholder="搜索" @clear="clear"
+        >
+          <template #action>
+            <div @click="onSearch">搜索</div>
+          </template>
+        </van-search>
       </div>
       <newsItem  v-for="(item,index) in newData" :key="index" :item="item"/>
     </div>
@@ -49,11 +59,11 @@
   export default {
     data() {
       return {
-        searchValue: '',
         query:{
           pageSize:20,
           pageNum:1,
-          type:'notice'
+          type:'notice',
+          searchValue: ''
         },
         newData:[]
       }
@@ -70,11 +80,18 @@
             this.$refs.load_statueController.listen()
           }, 10);
         })
-      },//getNotice
-      loadmore() { //加载更多
+      },
+      //加载更多
+      loadmore() {
         ++this.query.pageNum;
         this.getNotice();
-      }, //loadmore
+      },
+      onSearch() {
+        console.log('开始搜索')
+      },
+      clear() {
+        console.log('删除关键字')
+      }
     },
     mounted() {
       this.getNotice();
