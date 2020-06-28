@@ -33,22 +33,6 @@ export function checkTbAddress(params) { //用户注册
 
 const urlPath = isProduction ? 'http://tb.njmall.store/proxyUrl/wallet/v1' : 'proxyUrl/wallet/v1'; //线上路由
 
-export function register(params) { //用户注册
-    return post({
-        url: `${urlPath}/user/register`,
-        params: params
-    })
-} //register
-
-
-
-export function send_message(params) { //获取验证码
-    return post({
-        url: `${urlPath}/user/send_code`,
-        params: qs.stringify(params)
-    })
-} //send_message
-
 export function login(params) { //帐号登录
     return post({
         url: `${urlPath}/user/login`,
@@ -101,12 +85,12 @@ export function send_feedback(params) { //提交反馈
     })
 } //feedback
 
-export function notice(params) { //获取公告列表
-    return get({
-        url: `${urlPath}/user/notice/list`,
-        params: params
-    })
-} //notice
+// export function notice(params) { //获取公告列表
+//     return get({
+//         url: `${urlPath}/user/notice/list`,
+//         params: params
+//     })
+// } //notice
 
 export function noticeDetail(params) { //获取公告详情
     return get({
@@ -222,6 +206,21 @@ export function quan_detail(params) { //推荐概览数据
     })
 }
 
+const registerPath = 'http://trex.top/proxyUrl/wallet/v1/'
+export function send_message(params) { //获取验证码
+    return post({
+        url: `${registerPath}user/send_code`,
+        params: qs.stringify(params)
+    })
+}
+
+export function register(params) { //用户注册
+    return post({
+        url: `${registerPath}user/register`,
+        params: params
+    })
+}
+
 const cbkPathUrl = 'http://8.210.81.131:8080/'
 export function TBListfund(params) { //获取资产列表
     return get({
@@ -278,3 +277,10 @@ export function getUserTeamInfo(params) { // 获取团队信息下面贡献列�
         params: params
     })
 }
+
+export function notice(params) { //获取公告列表
+    return get({
+        url: `${cbkPathUrl}cguser/getnotice`,
+        params: params
+    })
+} //notice

@@ -133,8 +133,7 @@
 
 <script>
 import {
-    register,
-    registerNew
+    register
 } from '../../data/wallet';
 
 import getCode from '../../components/wallet/getCode'
@@ -238,14 +237,7 @@ export default {
                 console.error(e);
                 //Toast(e.message);
             })
-            // registerNew({phone:this.form.userAccount,invitation:this.form.invitation}).then(data => {
-            //   console.log(JSON.stringify(data))
-
-            // }).catch(e => {
-            //   console.error(e);
-            //   //Toast(e.message);
-            // })
-        }, //submitLogin
+        },
         onSelect(item) {
             this.set_lang(item.type);
             this.show = false;
