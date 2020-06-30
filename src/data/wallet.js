@@ -33,12 +33,12 @@ export function checkTbAddress(params) { //用户注册
 
 const urlPath = isProduction ? 'http://tb.njmall.store/proxyUrl/wallet/v1' : 'proxyUrl/wallet/v1'; //线上路由
 
-export function login(params) { //帐号登录
-    return post({
-        url: `${urlPath}/user/login`,
-        params: params
-    })
-} //login
+// export function login(params) { //帐号登录
+//     return post({
+//         url: `${urlPath}/user/login`,
+//         params: params
+//     })
+// } //login
 
 export function user_info() { //获取用户信息
     return get({
@@ -222,6 +222,21 @@ export function register(params) { //用户注册
 }
 
 const cbkPathUrl = 'http://8.210.81.131:8080/'
+
+export function gettoken(params) { //获取token
+    return get({
+        url: `${cbkPathUrl}util/gettoken`,
+        params: params
+    })
+}
+
+export function login(params) { //帐号登录
+    return post({
+        url: `${cbkPathUrl}otc/login`,
+        params: params
+    })
+}
+
 export function TBListfund(params) { //获取资产列表
     return get({
         url: `${cbkPathUrl}tb/listfund`,

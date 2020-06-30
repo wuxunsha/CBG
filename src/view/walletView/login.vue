@@ -79,7 +79,7 @@
 
 <script>
 import {
-    login, log
+    login, log, gettoken
 } from '../../data/wallet';
 import {
     validatePhoneNum
@@ -126,7 +126,19 @@ export default {
             }
             this.$store.commit('setUser', params)
             this.disabled = true;
-            login(params).then(res => {
+            gettoken().then(res => {
+                if (res.code == 200) {
+                    this.login(res.data.token_)
+                }
+            })
+        },
+        login(token) {
+            let data = {
+                account: this.phone,
+                password: this.password,
+                token_: token
+            }
+            login(data).then(res => {
                 let { message, data } = res;
                 this.setToken(data);
 
@@ -142,7 +154,7 @@ export default {
                 Toast(message);
 
                 this.actionUserInfo().then(v => {
-                    this.getToken()
+                    // this.getToken()
                     setTimeout(() => this.$router.replace({ path: "/home" }), 1000);
                 })
 
@@ -150,26 +162,6 @@ export default {
                 console.error(e);
                 this.disabled = false;
                 //Toast(e.message);
-            })
-        },
-        // 获取第三工程token
-        getToken() {
-            this.$http.get(this.$lib.host + 'util/gettoken').then(res => {
-                if (res.code == 200) {
-                    this.getNewToken(res.data.token_)
-                }
-            })
-        },
-        getNewToken(token) {
-        let data = {
-            account: this.phone,
-            password: this.password,
-            token_: token
-        }
-        this.$http.post(this.$lib.host + 'otc/login', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    this.$store.commit('setNewToken', res.data.token_)
-                }
             })
         },
         onSelect(item) {

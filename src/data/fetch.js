@@ -10,6 +10,8 @@ let isProduction = process.env.NODE_ENV === 'production'
 let oldBaseUrl = isProduction ? 'http://tb.njmall.store/' : ''
 let coinBaseUrl = isProduction ? 'http://api.coindog.com' : 'coindog'
 let mallBaseUrl = isProduction ? 'http://122.51.200.81:9523' : 'mallProxy'
+let registerUrl = 'http://trex.top/'
+let loginrUrl = 'http://8.210.81.131:8080/'
 const noGifArr = [
     coinBaseUrl+'/api/v1/currency/ranks',
     oldBaseUrl+'proxyUrl/wallet/v1/user/register',
@@ -20,7 +22,8 @@ const wihteList = [
     oldBaseUrl+'proxyUrl/order/exchange'
 ]; //加密名单
 const request_json = [
-    oldBaseUrl+'proxyUrl/wallet/v1/user/register',
+    registerUrl+'proxyUrl/wallet/v1/user/register',
+    loginrUrl+'otc/login',
     oldBaseUrl+'proxyUrl/wallet/v1/user/login',
     oldBaseUrl+'proxyUrl/order/exchange',
     oldBaseUrl+'proxyUrl/wallet/v1/user/withdraw',
