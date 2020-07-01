@@ -46,7 +46,9 @@
             </div>
 
             <div class="space30"></div>
-            <van-button @click="submitLogin()" :disabled="disabled" class="submitBtn">{{$t('wallet.login.form_btn_login')}}</van-button>
+            <van-button @click="submitLogin()"
+                        :disabled="disabled"
+                        class="submitBtn">{{$t('wallet.login.form_btn_login')}}</van-button>
 
             <div class="space40"></div>
 
@@ -126,8 +128,10 @@ export default {
             }
             this.$store.commit('setUser', params)
             this.disabled = true;
+
             gettoken().then(res => {
                 if (res.code == 200) {
+                    this.$store.commit('setNewToken', res.data.token_)
                     this.login(res.data.token_)
                 }
             })
@@ -138,7 +142,7 @@ export default {
                 password: this.password,
                 token_: token
             }
-            login(data).then(res => {
+            login(this.qsParams(data)).then(res => {
                 let { message, data } = res;
                 this.setToken(data);
 
@@ -153,10 +157,10 @@ export default {
 
                 Toast(message);
 
-                this.actionUserInfo().then(v => {
-                    // this.getToken()
-                    setTimeout(() => this.$router.replace({ path: "/home" }), 1000);
-                })
+                // this.actionUserInfo().then(v => {
+                // this.getToken()
+                setTimeout(() => this.$router.replace({ path: "/home" }), 1000);
+                // })
 
             }).catch(e => {
                 console.error(e);
@@ -239,9 +243,13 @@ export default {
 .submitBtn {
     height: 34px;
     line-height: 34px;
-    background:linear-gradient(-61deg,rgba(33,239,185,1),rgba(85,107,243,1));
-    box-shadow:0px 4px 9px 0px rgba(67,21,237,0.15);
-    border-radius:4px;
+    background: linear-gradient(
+        -61deg,
+        rgba(33, 239, 185, 1),
+        rgba(85, 107, 243, 1)
+    );
+    box-shadow: 0px 4px 9px 0px rgba(67, 21, 237, 0.15);
+    border-radius: 4px;
     color: #fff;
 }
 </style>

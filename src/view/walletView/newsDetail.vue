@@ -59,16 +59,19 @@ export default {
         }
     },
     methods: {
-        get_data() { //获取详情
-            noticeDetail({
-                id: this.$route.query.id
-            }).then(v => {
-                this.content = v.data;
-            })
-        } //get_data
+        // get_data() { //获取详情
+        //     noticeDetail({
+        //         id: this.$route.query.id
+        //     }).then(v => {
+        //         this.content = v.data;
+        //     })
+        // } //get_data
     },
     mounted() {
-        this.get_data();
+        // this.get_data();
+        this.content = this.$route.query.item
+        console.log(this.content);
+
     } //mounted
 };
 
@@ -125,17 +128,17 @@ export default {
         margin-right: 10px;
     }
     span:nth-child(2) {
-        font-size:22px;
-        font-family:Swis721 Blk BT;
-        font-weight:900;
-        color:rgba(86,107,243,1);
+        font-size: 22px;
+        font-family: Swis721 Blk BT;
+        font-weight: 900;
+        color: rgba(86, 107, 243, 1);
         margin-right: 6px;
     }
     span:nth-child(3) {
-        font-size:22px;
-        font-family:Swis721 Blk BT;
-        font-weight:900;
-        color:#22EFB9;
+        font-size: 22px;
+        font-family: Swis721 Blk BT;
+        font-weight: 900;
+        color: #22efb9;
     }
 }
 .line {

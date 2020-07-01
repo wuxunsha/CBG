@@ -34,38 +34,48 @@
                     <div>推荐收益</div>
                     <div>{{income.ztincome}}</div>
                     <div class="select-box">
-                        <p @click="popup = true">
+                        <!-- <p @click="popup = true">
                             <span>选择卖出产业</span>
                             <van-icon name="play" />
-                        </p>
+                        </p> -->
                     </div>
-                    <div>提取</div>
+                    <div @click="extract(2)">提取</div>
                 </li>
                 <li>
                     <div>团队收益</div>
                     <div>{{income.teamincome}}</div>
                     <div class="select-box">
-                        <p>
+                        <!-- <p>
                             <span>选择卖出产业</span>
                             <van-icon name="play" />
-                        </p>
+                        </p> -->
                     </div>
-                    <div>提取</div>
+                    <div @click="extract(3)">提取</div>
                 </li>
             </ul>
         </div>
 
         <!-- 卖出产业选择弹窗 -->
-        <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
-            <van-picker :columns="columns" show-toolbar @change="currencyChange" @cancel="popup=false" @confirm="onChange" :title=" `${$t('feature.bankBuy.text_popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
+        <van-popup v-model="popup"
+                   position="bottom"
+                   :style="{ height: '30%' }">
+            <van-picker :columns="columns"
+                        show-toolbar
+                        @change="currencyChange"
+                        @cancel="popup=false"
+                        @confirm="onChange"
+                        :title=" `${$t('feature.bankBuy.text_popup_title')}`"
+                        :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`"
+                        :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`" />
         </van-popup>
 
     </div>
 </template>
 <script>
 import {
-  getUser,
-  getUserTDIncome
+    getUser,
+    getUserTDIncome,
+    getExtract
 } from '../../data/wallet'
 export default {
     data() {
@@ -85,7 +95,7 @@ export default {
     methods: {
         // 获取用户信息
         getUserInfo() {
-            getUser({token_: this.$store.state.newToken}).then(res => {
+            getUser({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
                     this.userInfo = res.data
                 }
@@ -93,7 +103,7 @@ export default {
         },
         // 获取直推和团队实时剩余收益
         getTDIncome() {
-            getUserTDIncome({token_: this.$store.state.newToken}).then(res => {
+            getUserTDIncome({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
                     this.income = res.data
                     this.totalIncome = res.data.teamincome + res.data.ztincome
@@ -104,7 +114,15 @@ export default {
 
         },
         onChange(value, index) {
-            
+
+        },
+        extract(id) {
+            getExtract({ token_: this.$store.state.newToken, type: id }).then(res => {
+                if (res.code === '200') {
+                    console.log(res);
+
+                }
+            })
         }
     },
     created() {

@@ -31,111 +31,111 @@ export function checkTbAddress(params) { //用户注册
 } //checkTbAddress
 
 
-const urlPath = isProduction ? 'http://tb.njmall.store/proxyUrl/wallet/v1' : 'proxyUrl/wallet/v1'; //线上路由
+// const urlPath = isProduction ? 'http://tb.njmall.store/proxyUrl/wallet/v1' : 'proxyUrl/wallet/v1'; //线上路由
 
-// export function login(params) { //帐号登录
-//     return post({
-//         url: `${urlPath}/user/login`,
-//         params: params
-//     })
-// } //login
+// // export function login(params) { //帐号登录
+// //     return post({
+// //         url: `${urlPath}/user/login`,
+// //         params: params
+// //     })
+// // } //login
 
-export function user_info() { //获取用户信息
-    return get({
-        url: `${urlPath}/user/info`
-    })
-} //user_info
-
-
-
-
-export function banner_list() { //获取首页banner
-    return get({
-        url: `${urlPath}/user/banner/list`
-    })
-} //banner_list
-
-
-export function recharge_address(params) { //获取充值地址
-    return get({
-        url: `${urlPath}/user/recharge_address`,
-        params: params
-    })
-} //recharge_address
-
-
-export function withdraw(params) { //申请提现
-    return post({
-        url: `${urlPath}/user/withdraw/submit`,
-        params: qs.stringify(params)
-    })
-} //withdraw
-
-export function feedback_list(params) { //获取反馈列表
-    return get({
-        url: `${urlPath}/user/feedback/list`,
-        params: params
-    })
-} //get_feedback
-
-export function send_feedback(params) { //提交反馈
-    return post({
-        url: `${urlPath}/user/feedback/submit`,
-        params: qs.stringify(params)
-    })
-} //feedback
-
-// export function notice(params) { //获取公告列表
+// export function user_info() { //获取用户信息
 //     return get({
-//         url: `${urlPath}/user/notice/list`,
+//         url: `${urlPath}/user/info`
+//     })
+// } //user_info
+
+
+
+
+// export function banner_list() { //获取首页banner
+//     return get({
+//         url: `${urlPath}/user/banner/list`
+//     })
+// } //banner_list
+
+
+// export function recharge_address(params) { //获取充值地址
+//     return get({
+//         url: `${urlPath}/user/recharge_address`,
 //         params: params
 //     })
-// } //notice
-
-export function noticeDetail(params) { //获取公告详情
-    return get({
-        url: `${urlPath}/user/notice/detail`,
-        params: params
-    })
-} //noticeDetail
-
-export function log(params) { //获取流水
-    return get({
-        url: `${urlPath}/user/log`,
-        params: params
-    })
-} //log
+// } //recharge_address
 
 
-export function logType(params) { //获取流水类型判断
-    return get({
-        url: `${urlPath}/public/log/type`,
-        params: params
-    })
-} //logTpe
+// export function withdraw(params) { //申请提现
+//     return post({
+//         url: `${urlPath}/user/withdraw/submit`,
+//         params: qs.stringify(params)
+//     })
+// } //withdraw
+
+// export function feedback_list(params) { //获取反馈列表
+//     return get({
+//         url: `${urlPath}/user/feedback/list`,
+//         params: params
+//     })
+// } //get_feedback
+
+// export function send_feedback(params) { //提交反馈
+//     return post({
+//         url: `${urlPath}/user/feedback/submit`,
+//         params: qs.stringify(params)
+//     })
+// } //feedback
+
+// // export function notice(params) { //获取公告列表
+// //     return get({
+// //         url: `${urlPath}/user/notice/list`,
+// //         params: params
+// //     })
+// // } //notice
+
+// export function noticeDetail(params) { //获取公告详情
+//     return get({
+//         url: `${urlPath}/user/notice/detail`,
+//         params: params
+//     })
+// } //noticeDetail
+
+// export function log(params) { //获取流水
+//     return get({
+//         url: `${urlPath}/user/log`,
+//         params: params
+//     })
+// } //log
+
+
+// export function logType(params) { //获取流水类型判断
+//     return get({
+//         url: `${urlPath}/public/log/type`,
+//         params: params
+//     })
+// } //logTpe
 
 
 
-export function headUpload(params) { //头像上传
-    return post({
-        url: `${urlPath}/user/headUpload`,
-        params: params
-    })
-} //headUpload
+// export function headUpload(params) { //头像上传
+//     return post({
+//         url: `${urlPath}/user/headUpload`,
+//         params: params
+//     })
+// } //headUpload
 
-export function rechargeList(params) { //获取充值明细
-    return get({
-        url: `${urlPath}/user/recharge_list`,
-        params: params
-    })
-} //rechargeList
+// export function rechargeList(params) { //获取充值明细
+//     return get({
+//         url: `${urlPath}/user/recharge_list`,
+//         params: params
+//     })
+// } //rechargeList
 
-export function withdrawList(params) { //获取提现明细
-    return get({
-        url: `${urlPath}/user/withdraw/list`,
-        params: params
-    })
-} //withdrawList
+// export function withdrawList(params) { //获取提现明细
+//     return get({
+//         url: `${urlPath}/user/withdraw/list`,
+//         params: params
+//     })
+// } //withdrawList
 
 let coinBaseUrl = isProduction ? 'http://api.coindog.com' : 'coindog'
 export function get_ranks(params) { //获取行情
@@ -258,6 +258,12 @@ export function qmlcgFanli(params) { //领取
     })
 }
 
+// export function user_info() { //获取用户信息
+//     return get({
+//         url: `${cbkPathUrl}cguser/getUserInfo`,
+//     })
+// } //user_info
+
 export function getUser(params) { // 获取我的页面用户信息
     return get({
         url: `${cbkPathUrl}cguser/getUserInfo`,
@@ -299,3 +305,10 @@ export function notice(params) { //获取公告列表
         params: params
     })
 } //notice
+
+export function getExtract(params) { //获取公告列表
+    return get({
+        url: `${cbkPathUrl}qmlcg/tqTeamIncome`,
+        params: params
+    })
+} //notice`,
