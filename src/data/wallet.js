@@ -106,50 +106,44 @@ export function get_ranks(params) { //获取行情
         url: `${coinBaseUrl}/api/v1/currency/ranks`,
         params: params
     })
-} //get_ranks
+}
 
 // 目前所用接口结束====================================
-
-
 
 export function child(params) { //推荐人列表
     return get({
         url: `${urlPath}/user/child`,
         params: params
     })
-} //child
+}
 
 export function change_nickname(params) { //修改用户名
     return post({
         url: `${urlPath}/user/change_nickname`,
         params: qs.stringify(params)
     })
-} //change_nickname
+}
 
 export function change_pay_password(params) { //修改支付密码
     return post({
         url: `${urlPath}/user/changePayPwd`,
         params: qs.stringify(params)
     })
-} //change_pay_password
-
-
+}
 
 export function log_record(params) { //流水记录
     return get({
         url: `${urlPath}/user/log`,
         params: params
     })
-} //log
-
-
+}
 
 export function child_detail(params) { //推荐概览数据
     return get({
         url: `${urlPath}/user/child_detail`,
         params: params
     })
-} //child_detail'
+}
 
 
 const quanPath = isProduction ? 'http://39.99.215.137' : 'quanProxy'; //线上路由
@@ -255,7 +249,7 @@ export function notice(params) { //获取公告列表
         url: `${cbkPathUrl}cguser/getnotice`,
         params: params
     })
-} //notice
+}
 
 export function getExtract(params) { //获取公告列表
     return get({
@@ -281,5 +275,12 @@ export function change_password(params) { //修改用户密码
     return post({
         url: `${cbkPathUrl}otc/updateUserPwd`,
         params: qs.stringify(params)
+    })
+}
+
+export function getRollImg(params) { //获取首页轮播图
+    return get({
+        url: `${cbkPathUrl}qmlcg/getRollImg`,
+        params: params
     })
 }

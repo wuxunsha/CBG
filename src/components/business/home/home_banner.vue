@@ -8,7 +8,7 @@
                                 :key="index"
                                 @click="openLink(item.bcontent)"
                                 class=" animated fadeIn">
-                    <img :src="setImgUrl(item.img)"
+                    <img :src="item"
                          alt="">
                 </van-swipe-item>
             </van-swipe>
@@ -37,7 +37,7 @@
 
 <script>
 import {
-    banner_list,
+    getRollImg,
     notice
 } from '../../../data/wallet';
 export default {
@@ -59,26 +59,29 @@ export default {
             this.$router.push({ path: '/newsDetail', query: { item: item } })
         },
         geanner() { //获取广告
-            banner_list().then(v => {
-                this.bannerArr = v.data.list;
+            getRollImg().then(res => {
+                if (res.code === '200') {
+                    this.bannerArr = res.data
+                    console.log(this.bannerArr)
+                }
             })
-        }, //geanner
+        },
         arrTrans(num, arr) { //数组转换
             const newArr = [];
             while (arr.length > 0) {
                 newArr.push(arr.splice(0, num));
             }
             return newArr;
-        }, //arrTrans
+        },
         getNotice() {
             notice(this.query).then(v => {
                 this.noticeArr = v.data.items;
             })
-        } //getNotice
+        }
     },
     activated() {
-        // this.geanner();
-        this.getNotice();
+        this.geanner()
+        this.getNotice()
     }
 };
 

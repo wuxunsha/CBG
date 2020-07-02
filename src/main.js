@@ -128,9 +128,9 @@ Vue.prototype.setPopup = (data) => {
 }
 
 
-Vue.prototype.setImgUrl = (key) => {
-    return (`https://xmtop.cn/proxyUrl/wallet/img/${key}`)
-}
+// Vue.prototype.setImgUrl = (key) => {
+//     return (`https://xmtop.cn/proxyUrl/wallet/img/${key}`)
+// }
 
 
 Vue.prototype.qsParams = (params) => {

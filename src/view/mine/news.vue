@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             query: {
-                pageSize: 20,
+                pageSize: 10,
                 pageNum: 1,
                 type: 'notice',
                 token_: this.$store.state.newToken,
@@ -83,10 +83,19 @@ export default {
             this.getNotice();
         },
         onSearch() {
-            console.log('开始搜索')
+            notice(this.query).then(res => {
+                if (res.code === '200') {
+                    this.newData = res.data.items
+                }
+            })
         },
         clear() {
-            console.log('删除关键字')
+            this.query.searchValue = ''
+            notice(this.query).then(res => {
+                if (res.code === '200') {
+                    this.newData = res.data.items
+                }
+            })
         }
     },
     mounted() {

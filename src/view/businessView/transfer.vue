@@ -13,11 +13,11 @@
     </div>
 
     <div class="actionForm">
-      <div class="currency-select" @click="show = true" v-if="currCoin">
+      <div class="currency-select" @click="show = true">
         <div class="currency-select-left">
           <img src="../../assets/wallet/asstes/USDT@2x.png" alt="">
           <span>
-            {{currCoin.coin.coinName}}
+            {{currCoin}}
           </span>
         </div>
         <div>
@@ -34,30 +34,28 @@
           <span v-if="idName==='UIDNULL'">{{$t('feature.transfer.text_noName')}}</span>
           <span v-else>{{idName}}</span>
         </div>
-        <!-- info -->
       </div>
 
       <div class="formGroup">
-        <!-- <div class="title">{{$t('feature.transfer.text_number')}} <small v-if="currCoin">( {{$t('feature.transfer.text_able')}}{{currCoin.amount}} {{currCoin.coin.coinName}} )</small></div> -->
         <div class="title">{{$t('feature.transfer.text_number')}}</div>
         <div class="inputItem inputItemButton transfer-amount">
-          <input type="number" :placeholder="`${$t('feature.transfer.input_number')}`" v-model="reqParams.number" @blur="blur_event()" @change="getFee()">
-          <span class="money-type" v-if="currCoin">{{currCoin.coin.coinName}}</span>
+           <input type="number" :placeholder="`${$t('feature.transfer.input_number')}`" v-model="reqParams.number" @blur="blur_event()" @change="getFee()">
+          <span class="money-type">{{currCoin}}</span>
           <span>|</span>
           <span @click="allSum" class="money-type">{{$t('feature.transfer.All')}}</span>
         </div>
         <div class="balance">
           <span>{{$t('feature.transfer.text_able')}}：</span>
-          <span v-if="currCoin">{{currCoin.amount}}&nbsp;{{currCoin.coin.coinName}}</span>
+          <span>{{balance}}&nbsp;{{currCoin}}</span>
         </div>
-        <div class="info" v-if="fee" style="margin-top:10px;">{{$t('wallet.withdraw.Toast_Handling')}}：{{fee}} {{currCoin.coin.coinName}}</div>
       </div>
 
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_code')}}</div>
         <div class="inputItem flex align inputItemButton">
             <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.code" @blur="blur_event()">
-            <div class="getCode"> <getCode :codeData="{type:'transfer',phone:userInfo.user.id}"/></div>
+            <div class="getCode"> <getCode :codeData="{type:'transfer',phone:userInfo.id}"/></div>
+            <!-- <div class="getCode"> <getCode /></div> -->
         </div>
       </div>
 
@@ -71,7 +69,6 @@
       <div class="submit-box">
         <van-button class="submit" @click="checkParams()">{{$t('feature.transfer.text_btn')}}</van-button>
       </div>
-      {{this.reqParams.coin}}
   </div>
 
   <van-popup position="bottom" v-model="show">
@@ -94,12 +91,14 @@ import {
   mapState,
   mapActions
 } from 'vuex'
-import {
-  transfer,idGetName,transferFee
-} from '../../data/business';
+// import {
+//   transfer,idGetName,transferFee
+// } from '../../data/business';
 import getCode from '../../components/wallet/getCode'
 import { Toast } from 'vant';
-import { log } from '../../data/wallet';
+import { 
+  TBListfund
+  } from '../../data/wallet';
 
 export default {
   data() {
@@ -113,25 +112,15 @@ export default {
         coinId:null // 币种ID
       },
       currCoin:null,//当前币种
-      idName:null,//帐号名称
-      fee:null,//手续费
-      scale:null,//手续费比例
-      submitFlag: false
+      // 币种列表
+      coins: [],
+      // 余额
+      balance: ''
     }
   },
   components:{getCode},
   computed: {
-    ...mapState(['userInfo']),
-    //设置周期
-    coins(){
-      let res = this.userInfo.balanceModels.map(v=>{
-        v.text = `${v.coin.coinName}(${this.$t('feature.transfer.text_balance')}${v.amount})`
-        return v;
-      }).filter(v=>v.coin.transfer=='Y');
-      this.currCoin = res[0];
-      this.reqParams.coinId = res[0].coin.id
-      return res;
-    }
+    ...mapState(['userInfo'])
   },
   methods: {
     //获取手续费
@@ -153,7 +142,7 @@ export default {
     },
     // 全部金额
     allSum () {
-      this.reqParams.number = this.currCoin.amount
+      this.reqParams.number = this.balance
     },
     //确认转账
     checkParams(){
@@ -173,13 +162,12 @@ export default {
         Toast(this.$t('feature.transfer.input_pass'));
         return;
       }
-      console.log(this.reqParams)
-      // this.reqParams.coinId = this.currCoin.coin.id;
       this.transfer();
     },
     transfer(){
       transfer(this.reqParams).then(v=>{
-        console.log(v);
+        console.TBListfund
+        (v);
         Toast.success(v.message);
         setTimeout(() => {
           this.goback();
@@ -200,15 +188,42 @@ export default {
       })
     },
     //选择币种
-    onChange(value, index){
-      console.log(value,index);
-      this.currCoin = value;
-      this.reqParams.coinId = value.coin.id
+    onChange(value){
+      console.log(value)
+      this.currCoin = value.text
+      this.reqParams.coinId = value.coinId
+      this.balance = value.lastBalance
       this.show = false;
     },
+    // 获取资产列表信息
+    getBalanceAll() {
+      TBListfund({token_: this.$store.state.newToken}).then(res => {
+        if (res.code === '200') {
+          res.data.forEach(item => {
+            if (item.coinId === '1001') {
+              item.text = 'USDT'
+            } else if (item.coinId === '1002') {
+              item.text = 'CBK'
+            } else if (item.coinId === '1003') {
+              item.text = 'CBG'
+            } else if (item.coinId === '1004') {
+              item.text = 'BTC'
+            }
+          })
+          this.coins = res.data
+          this.currCoin = res.data[0].text
+          this.reqParams.coinId = res.data[0].coinId
+          this.balance = res.data[0].lastBalance
+        }
+      })
+    }
   },
   mounted() {
-    this.getScale();
+    this.getBalanceAll();
+        
+  },
+  created() {
+    console.log(this.userInfo)
   }
 };
 
