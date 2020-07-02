@@ -674,7 +674,7 @@ export default {
         h3 {
             font-size: 16px;
             font-weight: bold;
-            color: rgba(53,53,53,1);
+            color: rgba(53, 53, 53, 1);
         }
         p {
             display: flex;
@@ -735,7 +735,7 @@ export default {
             align-items: center;
             font-size: 16px;
             font-weight: bold;
-            color: rgba(53,53,53,1);
+            color: rgba(53, 53, 53, 1);
             img {
                 width: 18px;
                 height: 18px;
@@ -813,7 +813,7 @@ export default {
         border-bottom: 1px solid #ebebeb;
         font-size: 16px;
         font-weight: 500;
-        color: rgba(51,59,57,1);
+        color: rgba(51, 59, 57, 1);
     }
     .pop-content {
         margin: 20px 0;
@@ -906,6 +906,6 @@ export default {
     font-size: 12px;
     font-family: PingFang SC;
     font-weight: 500;
-    color: rgba(165,171,173,1);
+    color: rgba(165, 171, 173, 1);
 }
 </style>

@@ -53,13 +53,17 @@ export default {
     props: ['user'],
     data() {
         return {
-            isHiddenFlag: true
+            isHiddenFlag: true,
+            sumAmount: 0
         }
     },
     computed: {
+
         // ...mapState(['userInfo']),
         // sumAmount() {//设置总额
         //     let num = 0;
+        //     console.log(this.userInfo);
+
         //     this.userInfo.balanceModels.forEach(v => {
         //         num += parseFloat(v.coin.coinPrice) * parseFloat(v.amount);
         //     })
@@ -80,10 +84,22 @@ export default {
         // 图标切换
         isShowIcon() {
             this.isHiddenFlag = !this.isHiddenFlag
-        }
+        },
+        getNum(itm) {
+            this.$http.get(this.$lib.host + 'tb/getTotalFund', {
+                params: {
+                    token_: this.$store.state.newToken
+                }
+            }).then(res => {
+                console.log(res);
+                this.sumAmount = res.data.totalAmount
+                console.log(this.sumAmount);
+
+            })
+        },
     },
     mounted() {
-
+        this.getNum()
     }
 };
 

@@ -186,8 +186,10 @@ export default {
         ...mapState(['userInfo'])
     },
     created() {
+        console.log(this.userInfo);
+
         checkTbAddress({
-            userId: this.userInfo.user.id
+            userId: this.userInfo.id
         }).then(v => {
             this.addressInfo = v.data
             this.copyText = this.addressInfo.address;
@@ -327,6 +329,6 @@ h3 {
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: bold;
-    color: rgba(53,53,53,1);
+    color: rgba(53, 53, 53, 1);
 }
 </style>

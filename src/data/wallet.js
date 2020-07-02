@@ -17,12 +17,7 @@ export function getUserInfo(params) { //获取用户信息
         params: params
     })
 } //getUserInfo
-export function checkTbAddress(params) { //用户注册
-    return post({
-        url: `${newUrlPath}/index/user/checkTbAddress`,
-        params: params
-    })
-} //checkTbAddress
+
 
 // export function recharge_address(params) { //获取充值地址
 //     return get({
@@ -181,13 +176,6 @@ export function register(params) { //用户注册
     })
 }
 
-export function change_password(params) { //修改用户密码
-    return post({
-        url: `${registerPath}user/change_password`,
-        params: qs.stringify(params)
-    })
-}
-
 const cbkPathUrl = 'http://8.210.81.131:8080/'
 
 export function gettoken(params) { //获取token
@@ -225,11 +213,7 @@ export function qmlcgFanli(params) { //领取
     })
 }
 
-// export function user_info() { //获取用户信息
-//     return get({
-//         url: `${cbkPathUrl}cguser/getUserInfo`,
-//     })
-// } //user_info
+
 
 export function getUser(params) { // 获取我的页面用户信息
     return get({
@@ -279,3 +263,23 @@ export function getExtract(params) { //获取公告列表
         params: params
     })
 } //notice`,
+
+export function user_info() { //获取用户信息
+    return get({
+        url: `${cbkPathUrl}cguser/getUserInfo`,
+    })
+} //user_info
+
+export function checkTbAddress(params) { //用户注册
+    return post({
+        url: `${cbkPathUrl}/index/user/checkTbAddress`,
+        params: params
+    })
+} //checkTbAddress
+
+export function change_password(params) { //修改用户密码
+    return post({
+        url: `${cbkPathUrl}otc/updateUserPwd`,
+        params: qs.stringify(params)
+    })
+}
