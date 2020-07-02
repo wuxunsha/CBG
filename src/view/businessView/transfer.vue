@@ -30,10 +30,6 @@
         <div class="inputItem inputItemButton">
           <input type="text" :placeholder="`${$t('feature.transfer.input_id')}`" v-model="reqParams.toId" @blur="blur_event()" @change="getName()">
         </div>
-        <div class="info" :class="idName==='UIDNULL'?'color-red':''" v-if="idName" style="margin-top:10px;">{{$t('feature.transfer.text_nameTitle')}}：
-          <span v-if="idName==='UIDNULL'">{{$t('feature.transfer.text_noName')}}</span>
-          <span v-else>{{idName}}</span>
-        </div>
       </div>
 
       <div class="formGroup">
@@ -54,8 +50,7 @@
         <div class="title">{{$t('feature.transfer.text_code')}}</div>
         <div class="inputItem flex align inputItemButton">
             <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.code" @blur="blur_event()">
-            <div class="getCode"> <getCode :codeData="{type:'transfer',phone:userInfo.id}"/></div>
-            <!-- <div class="getCode"> <getCode /></div> -->
+            <div class="getCode"> <getCode :codeData="{type:'transfer',phone:userInfo.userPhone}"/></div>
         </div>
       </div>
 
@@ -91,14 +86,11 @@ import {
   mapState,
   mapActions
 } from 'vuex'
-// import {
-//   transfer,idGetName,transferFee
-// } from '../../data/business';
 import getCode from '../../components/wallet/getCode'
 import { Toast } from 'vant';
 import { 
   TBListfund
-  } from '../../data/wallet';
+} from '../../data/wallet';
 
 export default {
   data() {
