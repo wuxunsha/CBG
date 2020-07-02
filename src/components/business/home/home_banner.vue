@@ -13,8 +13,6 @@
                 </van-swipe-item>
             </van-swipe>
         </div>
-        <!-- banner -->
-
         <div class="notes border-bottom"
              v-show="noticeArr.length">
 
@@ -27,15 +25,12 @@
                                 class=" animated fadeIn">
                     <div class="flex align"
                          @click="goDetail(item)">
-                        <!-- <div class="title">{{$t('feature.home.text_notes')}}</div> -->
                         <div class="note_item ellipse">{{item.title}}</div>
                     </div>
-                    <!-- note_item -->
                 </van-swipe-item>
             </van-swipe>
 
         </div>
-        <!-- notes -->
 
     </div>
 </template>

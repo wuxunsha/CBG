@@ -130,7 +130,7 @@ export default {
             this.disabled = true;
 
             gettoken().then(res => {
-                if (res.code == 200) {
+                if (res.code === '200') {
                     this.$store.commit('setNewToken', res.data.token_)
                     this.login(res.data.token_)
                 }

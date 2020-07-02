@@ -14,16 +14,16 @@ let registerUrl = 'http://trex.top/'
 let loginrUrl = 'http://8.210.81.131:8080/'
 const noGifArr = [
     coinBaseUrl + '/api/v1/currency/ranks',
-    oldBaseUrl + 'proxyUrl/wallet/v1/user/register',
+    registerUrl + 'proxyUrl/wallet/v1/user/register',
     mallBaseUrl + '/wallet/v1/user/info',
-    mallBaseUrl + '/product/list'
+    mallBaseUrl + '/product/list',
+    registerUrl + 'proxyUrl/wallet/v1/user/send_code',
 ]; //不显示加载框路由
 const wihteList = [
     oldBaseUrl + 'proxyUrl/order/exchange'
 ]; //加密名单
 const request_json = [
     registerUrl + 'proxyUrl/wallet/v1/user/register',
-    loginrUrl + 'otc/login',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/login',
     oldBaseUrl + 'proxyUrl/order/exchange',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/withdraw',
@@ -68,7 +68,7 @@ axios.interceptors.request.use(function (config) {
         contentType = 'multipart/form-data';
         // console.log(config)
     } else if (request_json.indexOf(config.url) > -1 || config.url.indexOf('currency/ranks') > -1) {
-        contentType = 'application/x-www-form-urlencoded';
+        contentType = 'application/json';
     } else {
         // contentType = 'application/json';
         contentType = 'application/x-www-form-urlencoded';

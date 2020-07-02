@@ -17,44 +17,12 @@ export function getUserInfo(params) { //获取用户信息
         params: params
     })
 } //getUserInfo
-export function registerNew(params) { //用户注册
-    return post({
-        url: `${newUrlPath}/index/user/add`,
-        params: params
-    })
-} //registerNew
 export function checkTbAddress(params) { //用户注册
     return post({
         url: `${newUrlPath}/index/user/checkTbAddress`,
         params: params
     })
 } //checkTbAddress
-
-
-// const urlPath = isProduction ? 'http://tb.njmall.store/proxyUrl/wallet/v1' : 'proxyUrl/wallet/v1'; //线上路由
-
-// // export function login(params) { //帐号登录
-// //     return post({
-// //         url: `${urlPath}/user/login`,
-// //         params: params
-// //     })
-// // } //login
-
-// export function user_info() { //获取用户信息
-//     return get({
-//         url: `${urlPath}/user/info`
-//     })
-// } //user_info
-
-
-
-
-// export function banner_list() { //获取首页banner
-//     return get({
-//         url: `${urlPath}/user/banner/list`
-//     })
-// } //banner_list
-
 
 // export function recharge_address(params) { //获取充值地址
 //     return get({
@@ -163,14 +131,6 @@ export function change_nickname(params) { //修改用户名
     })
 } //change_nickname
 
-
-export function change_password(params) { //修改用户密码
-    return post({
-        url: `${urlPath}/user/change_password`,
-        params: qs.stringify(params)
-    })
-} //change_password
-
 export function change_pay_password(params) { //修改支付密码
     return post({
         url: `${urlPath}/user/changePayPwd`,
@@ -218,6 +178,13 @@ export function register(params) { //用户注册
     return post({
         url: `${registerPath}user/register`,
         params: params
+    })
+}
+
+export function change_password(params) { //修改用户密码
+    return post({
+        url: `${registerPath}user/change_password`,
+        params: qs.stringify(params)
     })
 }
 
