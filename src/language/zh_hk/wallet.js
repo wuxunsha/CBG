@@ -37,6 +37,7 @@ const lang = {
     },
     forgetPass: {
         nav_title: "修改登錄密碼",
+        change_pass: "找回登錄密碼",
         form_input_pass: "請輸入新密碼",
         form_input_pass_re: "請再次輸入新密碼",
         check_pass_fail: "密碼不壹致",

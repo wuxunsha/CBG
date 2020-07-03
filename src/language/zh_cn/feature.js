@@ -190,7 +190,7 @@ const lang = {
         text_download: "下载APP"
     },
     setPayPass: {
-        text_title: "设置交易密码",
+        text_title: "找回交易密码",
         input_pass: "请输入交易密码",
         input_pass_re: "请再次输入交易密码",
         btn_text: "确认重置",

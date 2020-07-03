@@ -2,8 +2,21 @@
     <div id="login"
          class="login_form padding20  full-screen">
 
-        <walletNav :title="$t('wallet.forgetPass.change_pass')" left-arrow @clickLeft="goback()">
-            <div class="rightText" @click="show = true" v-if="!exist">
+        <!-- <van-nav-bar
+        :title="$t('wallet.forgetPass.nav_title')"
+        left-arrow
+        fixed
+        @click-left="goback()"
+      />
+
+    <div class="space50"></div> -->
+
+        <walletNav :title="$t('wallet.forgetPass.nav_title')"
+                   left-arrow
+                   @clickLeft="goback()">
+            <div class="rightText"
+                 @click="show = true"
+                 v-if="!exist">
                 <small v-if="$i18n.locale=='en'">English</small>
                 <small v-if="$i18n.locale=='zh_hk'">繁體中文</small>
                 <small v-if="$i18n.locale=='zh_cn'">简体中文</small>
@@ -13,21 +26,48 @@
 
         <div class="item_box them_form">
 
+            <!-- <div class="title flex align between" v-if="!exist">
+        <div class="h2"></div>
+        <div class="change_lang" @click="show = true" v-if="$i18n.locale=='en'">English<van-icon name="arrow-down" /></div>
+      <div class="change_lang" @click="show = true" v-if="$i18n.locale=='zh_hk'">繁體中文<van-icon name="arrow-down" /></div>
+      <div class="change_lang" @click="show = true" v-if="$i18n.locale=='zh_cn'">简体中文<van-icon name="arrow-down" /></div>
+      </div>
+      <div class="space20"></div> -->
+
             <div class="input_gorup">
-                <input type="text" :placeholder="`${$t('wallet.login.form_mail')}`" v-model="phone" :disabled="exist" @blur="blur_event" v-if="!exist">
+                <!-- <input type="text"
+                       :placeholder="`${$t('wallet.login.form_mail')}`"
+                       v-model="form.phone"
+                       :disabled="exist"
+                       @blur="blur_event"
+                       v-if="!exist"> -->
+
+                <!-- <a class="btn_border_them getCode" v-if="second">{{second}} {{$t('wallet.register.form_input_second')}}</a>
+        <a class="btn_border_them getCode" v-else @click="getCode()">{{$t('wallet.register.form_input_getCode')}}</a> -->
             </div>
 
             <div class="input_gorup">
-                <input type="number" pattern="\d*" :placeholder="`请输入验证码`" v-model="form.yzCode"  @blur="blur_event">
-                <forgetGetCode :codeData="{type:'3'}"/>
+                <!-- <input type="number" pattern="\d*" :placeholder="`请输入验证码`" v-model="form.code"  @blur="blur_event"> -->
+                <!-- $t('wallet.register.form_input_code') -->
+                <!-- <getCode :codeData="{type:'pwd',phone:form.phone,}"/> -->
+                <input type="password"
+                       placeholder="原密码"
+                       v-model="form.olduserPwd"
+                       @blur="blur_event">
             </div>
 
             <div class="input_gorup">
-                <input type="password" :placeholder="$t('wallet.register.form_input_loginPwd')" v-model="form.newuserPwd" @blur="blur_event">
+                <input type="password"
+                       :placeholder="$t('wallet.register.form_input_loginPwd')"
+                       v-model="form.newuserPwd"
+                       @blur="blur_event">
             </div>
 
             <div class="input_gorup">
-                <input type="password" :placeholder="$t('wallet.register.form_input_loginPwd_re')" v-model="loginPwd_re" @blur="blur_event">
+                <input type="password"
+                       :placeholder="$t('wallet.register.form_input_loginPwd_re')"
+                       v-model="loginPwd_re"
+                       @blur="blur_event">
             </div>
 
             <div class="space20"></div>
@@ -37,14 +77,20 @@
             <div class="space20"></div>
 
         </div>
-        <van-action-sheet v-model="show" :title="$t('wallet.common.exchange_lang')" :actions="lang_actions" @select="onSelect" />
+        <!-- them_form -->
+
+        <van-action-sheet v-model="show"
+                          :title="$t('wallet.common.exchange_lang')"
+                          :actions="lang_actions"
+                          @select="onSelect" />
 
     </div>
+    <!-- index -->
 </template>
 
 <script>
 import {
-    forgetUserPwd
+    change_password
 } from '../../data/wallet';
 import {
     validatePhoneNum
@@ -59,24 +105,24 @@ import {
 import {
     Dialog, Toast
 } from 'vant';
-import forgetGetCode from '../../components/wallet/forgetGetCode'
+import getCode from '../../components/wallet/getCode'
 export default {
     data() {
         return {
             show: false,
             form: {
                 "token_": this.$store.state.newToken,
-                "yzCode": null,
+                "olduserPwd": null,
                 "newuserPwd": null
             },
-            phone: '',
+            // oldpassword: '',
             loginPwd_re: null,
             payPwd_re: null,
             exist: false//已登录成功
         }
     },
     components: {
-        forgetGetCode
+        getCode
     },
     methods: {
         ...mapMutations(['setUserInfo', 'setToken']),
@@ -85,7 +131,7 @@ export default {
             //     Toast(`请输入用户ID`)
             //     return false;
             // }
-            if (!this.form.yzCode) {
+            if (!this.form.olduserPwd) {
                 Toast(this.$t('wallet.register.form_input_code'))
                 return false;
             }
@@ -108,7 +154,7 @@ export default {
             if (!this.verifynfo()) {
                 return;
             }
-            forgetUserPwd(this.form).then(data => {
+            change_password(this.form).then(data => {
                 Toast(data.message)
                 setTimeout(() => {
                     this.gopage_re('/login');

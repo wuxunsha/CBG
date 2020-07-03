@@ -155,7 +155,7 @@ export default {
                     return;
                 }
 
-                Toast(message);
+                Toast('登录成功');
 
                 // this.actionUserInfo().then(v => {
                 // this.getToken()
