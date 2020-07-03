@@ -156,12 +156,7 @@ export function quan_detail(params) { //推荐概览数据
 }
 
 const registerPath = 'http://trex.top/proxyUrl/wallet/v1/'
-export function send_message(params) { //获取验证码
-    return post({
-        url: `${registerPath}user/send_code`,
-        params: qs.stringify(params)
-    })
-}
+
 
 export function register(params) { //用户注册
     return post({
@@ -282,5 +277,12 @@ export function getRollImg(params) { //获取首页轮播图
     return get({
         url: `${cbkPathUrl}qmlcg/getRollImg`,
         params: params
+    })
+}
+
+export function send_message(params) { //获取验证码
+    return post({
+        url: `${registerPath}user/send_code`,
+        params: qs.stringify(params)
     })
 }

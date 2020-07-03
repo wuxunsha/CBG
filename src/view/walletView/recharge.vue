@@ -18,9 +18,24 @@
                    @clickLeft="goback()" /> -->
         <!-- <div class="rightText" @click="gopage('/wallet/book?type=recharge')"><van-icon name="todo-list-o" size="20px"/>{{$t('wallet.recharge.text_list')}}</div>
     </walletNav> -->
-        <chooseCoins v-on:chooseCoin="chooseCoin"
+        <!-- <chooseCoins v-on:chooseCoin="chooseCoin"
                      :defaultId="$route.query.coinId"
-                     type="recharge" />
+                     type="recharge" /> -->
+        <div class="actionForm">
+            <div class="currency-select"
+                 @click="show = true">
+                <div class="currency-select-left">
+                    <img src="../../assets/wallet/asstes/USDT@2x.png"
+                         alt="">
+                    <span>
+                        {{currCoin}}
+                    </span>
+                </div>
+                <div>
+                    <van-icon name="arrow" />
+                </div>
+            </div>
+        </div>
 
         <div class="item_box"
              style="padding:0 20px">
@@ -28,7 +43,7 @@
             <div>
                 <div style="color:#AFAFAF;font-size:12px">{{$t('wallet.recharge.text_addr')}}</div>
                 <div class="addr font-bold font12 copy-address">
-                    <div>{{addressInfo.address}}</div>
+                    <div>{{copyText}}</div>
                     <van-button plain
                                 type="default"
                                 class="copycode"
@@ -91,6 +106,18 @@
 
         <div class="space20"></div>
 
+        <van-popup position="bottom"
+                   v-model="show">
+            <van-picker :columns="coins"
+                        show-toolbar
+                        @change="currencyChange"
+                        @cancel="show=false"
+                        @confirm="onChange"
+                        :title=" `${$t('feature.transfer.text_pickerTitle')}`"
+                        :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`"
+                        :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`" />
+        </van-popup>
+
     </div>
     <!-- index -->
 </template>
@@ -98,7 +125,8 @@
 <script>
 import {
     checkTbAddress,
-    TBListCZinfo
+    TBListCZinfo,
+    TBListfund
 } from '../../data/wallet';
 import {
     mapMutations,
@@ -106,7 +134,7 @@ import {
 } from 'vuex'
 import QRCode from 'qrcodejs2'
 import Clipboard from 'clipboard';
-import chooseCoins from '../../components/wallet/chooseCoins'
+// import chooseCoins from '../../components/wallet/chooseCoins'
 
 export default {
     data() {
@@ -115,13 +143,53 @@ export default {
             copyText: null,
             addressInfo: {},
             // 充值记录
-            rechargeList: []
+            rechargeList: [],
+            show: false,
+            currCoin: null,//当前币种
+            // 币种列表
+            coins: [],
+            // 余额
+            balance: ''
         }
     },
-    components: {
-        chooseCoins
-    },
+    // components: {
+    //     chooseCoins
+    // },
     methods: {
+        //选择币种
+        onChange(value) {
+            console.log(value)
+            this.currCoin = value.text
+            this.reqParams.coinId = value.coinId
+            this.balance = value.lastBalance
+            this.show = false;
+        },
+        // 币种改变
+        currencyChange() {
+            this.reqParams.number = null
+        },
+        // 获取资产列表信息
+        getBalanceAll() {
+            TBListfund({ token_: this.$store.state.newToken }).then(res => {
+                if (res.code === '200') {
+                    res.data.forEach(item => {
+                        if (item.coinId === '1001') {
+                            item.text = 'USDT'
+                        } else if (item.coinId === '1002') {
+                            item.text = 'CBK'
+                        } else if (item.coinId === '1003') {
+                            item.text = 'CBG'
+                        } else if (item.coinId === '1004') {
+                            item.text = 'BTC'
+                        }
+                    })
+                    this.coins = res.data
+                    this.currCoin = res.data[0].text
+                    this.reqParams.coinId = res.data[0].coinId
+                    this.balance = res.data[0].lastBalance
+                }
+            })
+        },
         // 获取充值列表
         getRechargeList() {
             TBListCZinfo({ token_: this.$store.state.newToken, coinId: this.currRechargeInfo.coin.id }).then(res => {
@@ -145,6 +213,8 @@ export default {
 
         },//chooseCoin
         async qrcode(address) { //生成二维码
+            console.log(address);
+
             this.$refs.qrCodeUrl.innerHTML = "";//先移除
             var qrcode = new QRCode(this.$refs.qrCodeUrl, {
                 text: address,
@@ -188,14 +258,17 @@ export default {
     created() {
         console.log(this.userInfo);
 
-        checkTbAddress({
-            userId: this.userInfo.id
-        }).then(v => {
-            this.addressInfo = v.data
-            this.copyText = this.addressInfo.address;
-        })
+        this.copyText = this.userInfo.czAddress
+
+        // checkTbAddress({
+        //     userId: this.userInfo.id
+        // }).then(v => {
+        //     this.addressInfo = v.data
+        //     this.copyText = this.addressInfo.address;
+        // })
     },
     mounted() {
+        this.getBalanceAll()
         /*if(this.$route.query.coinName=='GSHT'){
           Dialog.confirm({
             title: this.$t('wallet.common.Dialog'),
@@ -210,6 +283,9 @@ export default {
         setTimeout(() => {
           this.qrcode();
         }, 50);*/
+        setTimeout(() => {
+            this.qrcode(this.copyText);
+        }, 50);
     } //mounted
 };
 
