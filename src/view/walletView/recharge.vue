@@ -5,12 +5,11 @@
             <van-nav-bar :title="$t('wallet.recharge.nav_title')"
                          fixed
                          left-arrow
-                         @click-left="goback()"
-                         @click-right="gopage('/rechargeList')">
-                <template #right>
+                         @click-left="goback()">
+                <!-- <template #right>
                     <van-icon name="orders-o"
                               size="18" />
-                </template>
+                </template> -->
             </van-nav-bar>
         </div>
         <!-- <walletNav :title="$t('wallet.recharge.nav_title')"
@@ -21,7 +20,7 @@
         <!-- <chooseCoins v-on:chooseCoin="chooseCoin"
                      :defaultId="$route.query.coinId"
                      type="recharge" /> -->
-        <div class="actionForm">
+        <!-- <div class="actionForm">
             <div class="currency-select"
                  @click="show = true">
                 <div class="currency-select-left">
@@ -35,7 +34,7 @@
                     <van-icon name="arrow" />
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="item_box"
              style="padding:0 20px">
@@ -106,18 +105,6 @@
 
         <div class="space20"></div>
 
-        <van-popup position="bottom"
-                   v-model="show">
-            <van-picker :columns="coins"
-                        show-toolbar
-                        @change="currencyChange"
-                        @cancel="show=false"
-                        @confirm="onChange"
-                        :title=" `${$t('feature.transfer.text_pickerTitle')}`"
-                        :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`"
-                        :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`" />
-        </van-popup>
-
     </div>
     <!-- index -->
 </template>
@@ -156,18 +143,7 @@ export default {
     //     chooseCoins
     // },
     methods: {
-        //选择币种
-        onChange(value) {
-            console.log(value)
-            this.currCoin = value.text
-            this.reqParams.coinId = value.coinId
-            this.balance = value.lastBalance
-            this.show = false;
-        },
-        // 币种改变
-        currencyChange() {
-            this.reqParams.number = null
-        },
+
         // 获取资产列表信息
         getBalanceAll() {
             TBListfund({ token_: this.$store.state.newToken }).then(res => {
@@ -201,17 +177,7 @@ export default {
                 }
             })
         },
-        chooseCoin(item) {//当前币种选择
-            // console.log(item)
-            // this.qrcode(item.rechargeAddress.address);
-            this.currRechargeInfo = item;
-            console.log(this.currRechargeInfo)
-            if (this.currRechargeInfo) {
-                this.getRechargeList()
-            }
-            // this.copyText = item.rechargeAddress.address;
 
-        },//chooseCoin
         async qrcode(address) { //生成二维码
             console.log(address);
 
@@ -268,7 +234,7 @@ export default {
         // })
     },
     mounted() {
-        this.getBalanceAll()
+
         /*if(this.$route.query.coinName=='GSHT'){
           Dialog.confirm({
             title: this.$t('wallet.common.Dialog'),

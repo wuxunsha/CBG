@@ -40,7 +40,7 @@ const request_file = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/headUpload'
 ]; //headers: {'Content-Type': 'multipart/form-data'}
 
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function(config) {
 
     //console.log(config)
 
@@ -89,23 +89,33 @@ axios.interceptors.request.use(function (config) {
         lang = 'zh_cn';
     }
 
-    config.headers = {
-        'content-type': contentType,
-        'token_': store.state.newToken,
-        'locale': lang
+    if (config.url == tbUrl + '/withDraw/apply') {
+        config.headers = {
+            'content-type': contentType,
+            'access-token': store.state.newToken,
+            'locale': lang
+        }
+    } else {
+        config.headers = {
+            'content-type': contentType,
+            'token_': store.state.newToken,
+            'locale': lang
+        }
     }
+
+
     //zh_cn,zh_hk,en_us
 
     if (config.url == oldBaseUrl + 'proxyUrl/wallet/v1/user/login')
         delete config.headers['Authorization']
 
     return config;
-}, function (error) {
+}, function(error) {
     Toast.clear();
     return Promise.reject(error);
 });
 
-axios.interceptors.response.use(function (response) {
+axios.interceptors.response.use(function(response) {
     // console.log(response)
     if (response.data.code == 401) {
         Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'please sign in' : '请登录');
@@ -132,72 +142,72 @@ axios.interceptors.response.use(function (response) {
     }
     Toast.clear();
     return response.data;
-}, function (error) {
+}, function(error) {
     Toast.clear();
     return Promise.reject(error);
 });
 
 
 export const get = (data, that) => {
-    return new Promise(function (resolve, reject) {
-        axios({
-            method: 'GET',
-            url: data.url,
-            params: data.params
-        })
-            .then(res => {
-                if (res.code == 200) {
-                    resolve(res);
-                } else {
-                    // console.log('错误/////')
-                    // console.log(res)
+        return new Promise(function(resolve, reject) {
+            axios({
+                    method: 'GET',
+                    url: data.url,
+                    params: data.params
+                })
+                .then(res => {
+                    if (res.code == 200) {
+                        resolve(res);
+                    } else {
+                        // console.log('错误/////')
+                        // console.log(res)
+                        setTimeout(() => {
+                            if (res.message)
+                                Toast.fail(res.message);
+                        }, 500);
+                        reject(res);
+                    }
+                    Toast.clear();
+                })
+                .catch(err => {
+                    reject(err);
+                    console.error(err);
                     setTimeout(() => {
-                        if (res.message)
-                            Toast.fail(res.message);
+                        Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
                     }, 500);
-                    reject(res);
-                }
-                Toast.clear();
-            })
-            .catch(err => {
-                reject(err);
-                console.error(err);
-                setTimeout(() => {
-                    Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
-                }, 500);
-                Toast.clear();
-            })
-    })
-} //get
+                    Toast.clear();
+                })
+        })
+    } //get
 
 export const post = (data, ...reset) => {
-    return new Promise(function (resolve, reject) {
-        axios({
-            method: 'POST',
-            url: data.url,
-            data: data.params
-        })
-            .then(res => {
-                //  console.log(res)
-                if (res.code == 200) {
-                    resolve(res);
-                } else {
+        return new Promise(function(resolve, reject) {
+            axios({
+                    method: 'POST',
+                    url: data.url,
+                    data: data.params
+                })
+                .then(res => {
+                    //  console.log(res)
+                    if (res.code == 200) {
+                        resolve(res);
+                    } else {
+                        setTimeout(() => {
+                            Toast.fail(res.message);
+                        }, 500);
+                        reject(res);
+                    }
+                })
+                .catch(err => {
+                    reject(err);
+                    console.error(err);
                     setTimeout(() => {
-                        Toast.fail(res.message);
+                        Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
                     }, 500);
-                    reject(res);
-                }
-            })
-            .catch(err => {
-                reject(err);
-                console.error(err);
-                setTimeout(() => {
-                    Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
-                }, 500);
-                Toast.clear();
-            })
-    })
-} //get
+                    Toast.clear();
+                })
+        })
+    } //get
 
 export default {
     get,

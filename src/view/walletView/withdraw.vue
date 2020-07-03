@@ -73,7 +73,7 @@
                     <ul class="withdraw-detail"
                         v-if="currCoin">
                         <li>{{$t('wallet.withdraw.Toast_Handling')}}: 2%/{{$t('wallet.withdraw.pen')}}</li>
-                        <!-- <li>{{$t('wallet.withdraw.Actually_Arrived')}}：{{arrivalAmount}}&nbsp;&nbsp;{{currCoin.coin.coinName}}</li> -->
+                        <li>{{$t('wallet.withdraw.Actually_Arrived')}}：{{arrivalAmount}}&nbsp;&nbsp;{{currCoin}}</li>
                     </ul>
 
                     <!-- 温馨提示 -->
