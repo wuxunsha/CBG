@@ -140,11 +140,11 @@ axios.interceptors.response.use(function(response) {
             });
         }, 2000);
     }
-    Toast.clear();
+    // Toast.clear();
     return response.data;
 }, function(error) {
-    Toast.clear();
-    return Promise.reject(error);
+    // Toast.clear();
+    // return Promise.reject(error);
 });
 
 
@@ -188,23 +188,25 @@ export const post = (data, ...reset) => {
                     data: data.params
                 })
                 .then(res => {
-                    //  console.log(res)
+                    console.log(res)
                     if (res.code == 200) {
                         resolve(res);
                     } else {
                         setTimeout(() => {
-                            Toast.fail(res.message);
+                            // Toast.fail(res.message);
                         }, 500);
                         reject(res);
                     }
                 })
                 .catch(err => {
-                    reject(err);
-                    console.error(err);
-                    setTimeout(() => {
-                        Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
-                    }, 500);
-                    Toast.clear();
+                    console.log(112);
+
+                    // reject(err);
+                    // console.error(err);
+                    // setTimeout(() => {
+                    //     Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
+                    // }, 500);
+                    // Toast.clear();
                 })
         })
     } //get
