@@ -12,6 +12,8 @@ let coinBaseUrl = isProduction ? 'http://api.coindog.com' : 'coindog'
 let mallBaseUrl = isProduction ? 'http://122.51.200.81:9523' : 'mallProxy'
 let registerUrl = 'http://trex.top/'
 let loginrUrl = 'http://8.210.81.131:8080/'
+let tbUrl = 'http://trex.top/payservice'
+
 const noGifArr = [
     coinBaseUrl + '/api/v1/currency/ranks',
     registerUrl + 'proxyUrl/wallet/v1/user/register',
@@ -29,7 +31,9 @@ const request_json = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/withdraw',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/pool/buy',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/product/buy',
-    oldBaseUrl + 'proxyUrl/wallet/v1/user/transfer'
+    oldBaseUrl + 'proxyUrl/wallet/v1/user/transfer',
+    tbUrl + '/withDraw/apply'
+
 ]; //application/json方式请求接口
 
 const request_file = [
@@ -74,7 +78,7 @@ axios.interceptors.request.use(function (config) {
         contentType = 'application/x-www-form-urlencoded';
     }
     // console.log(config.url)
-    // console.log(contentType)
+    console.log(contentType)
 
     let lang = window.localStorage.getItem('lang');
     if (lang == 'zh_hk') {

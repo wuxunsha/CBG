@@ -12,7 +12,7 @@
 <script>
 let timer;
 import {
-    getCode
+    getCode, getLoginCode
 } from '../../data/wallet';
 import {
     validatePhoneNum
@@ -32,11 +32,11 @@ export default {
             //   return false;
             // }
             let params = {
-                "token_": this.codeData.token_,
+                "sendAddress": this.codeData.sendAddress,
                 "type": this.codeData.type
             }
-            getCode(params).then(v => {
-                Toast(v.message);
+            getLoginCode(params).then(v => {
+                Toast(v.msg);
                 this.setGetCodeStatue();
             })
         }, //getCode

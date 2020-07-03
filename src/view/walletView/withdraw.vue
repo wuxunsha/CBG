@@ -4,11 +4,10 @@
         <van-nav-bar :title="$t('wallet.withdraw.Withdraw')"
                      left-arrow
                      fixed
-                     @click-left="goback()"
-                     @click-right="gopage('/withdrawList')">
+                     @click-left="goback()">
             <template #right>
-                <van-icon name="orders-o"
-                          size="18" />
+                <!-- <van-icon name="orders-o"
+                          size="18" /> -->
             </template>
         </van-nav-bar>
 
@@ -62,7 +61,7 @@
                     <div class="extract-state"
                          v-if="currCoin">
                         <div>
-                            <!-- <span>{{$t('wallet.withdraw.Toast_Handling')}}：{{serviceNumber}} {{currCoin.coin.coinName}}</span> -->
+                            <span>{{$t('wallet.withdraw.Toast_Handling')}}：{{serviceNumber}} {{currCoin}}</span>
                         </div>
                         <div @click="extractAll">
                             <img src="../../assets/wallet/deal/提取全部.png"
@@ -132,14 +131,14 @@
 
                 <div class="them_form"
                      style="padding:10px 20px;">
-                    <div class="input_gorup">
+                    <!-- <div class="input_gorup">
                         <input type="number"
                                :placeholder="$t('feature.cpopupCode.text_input')"
                                v-model="withrawInfo.code"
                                @blur="blur_event"
                                style="padding-right:100px;">
                         <getCode :codeData="{type:1, token_: $store.state.newToken}" />
-                    </div>
+                    </div> -->
                     <div class="input_gorup">
                         <input type="number"
                                style="-webkit-text-security:disc"
@@ -183,7 +182,7 @@ import {
     withdraw, log, TBListfund
 } from '../../data/wallet';
 // import chooseCoins from '../../components/wallet/chooseCoins'
-import getCode from '../../components/wallet/getCode'
+import getCode from '../../components/wallet/forgetGetCode'
 import { Toast } from 'vant'
 export default {
     data() {
@@ -204,6 +203,7 @@ export default {
             // coins: [],
             balance: null,
             coinId: null,
+            coins: []
         }
     },
     components: {
@@ -226,14 +226,14 @@ export default {
         // },
         // 手续费
         serviceNumber() {
-            if (this.withrawInfo.amount) {
-                return this.withrawInfo.amount * 0.02
+            if (this.balance) {
+                return this.balance * 0.02
             }
             return '0.00'
         },
         arrivalAmount() {
-            if (this.withrawInfo.amount) {
-                return this.withrawInfo.amount - this.withrawInfo.amount * 0.02
+            if (this.balance) {
+                return this.balance - this.balance * 0.02
             }
             return '0.00'
         }
@@ -273,10 +273,12 @@ export default {
         },
         // 申请提现
         submitWithdraw() {
-            if (!this.withrawInfo.code) {
-                Toast(this.$t('feature.cpopupCode.text_input'));
-                return;
-            }
+            console.log(111);
+
+            // if (!this.withrawInfo.code) {
+            //     Toast(this.$t('feature.cpopupCode.text_input'));
+            //     return;
+            // }
             if (!this.withrawInfo.transactionPwd) {
                 Toast(this.$t('feature.transfer.input_pass'));
                 return;
@@ -285,16 +287,16 @@ export default {
             let data = {
                 address: this.withrawInfo.address, // 收款地址
                 amount: this.withrawInfo.amount,  // 金额
-                code: this.withrawInfo.code, // 验证码
+                // code: this.withrawInfo.code, // 验证码
                 coinId: this.coinId, // 币种id
-                transactionPwd: this.withrawInfo.transactionPwd, //支付密码
-                token_: this.$store.state.newToken
+                userPayPwd: this.withrawInfo.transactionPwd, //支付密码
+                // token_: this.$store.state.newToken
             }
 
             withdraw(data).then(v => {
                 Toast(v.message);
 
-                this.currCoinInfo.balance.amount -= this.withrawInfo.amount;
+                this.balance -= this.withrawInfo.amount;
                 this.show_popup = false;
                 this.withrawInfo = {
                     address: null,

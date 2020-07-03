@@ -124,13 +124,6 @@ export function change_nickname(params) { //修改用户名
     })
 }
 
-export function change_pay_password(params) { //修改支付密码
-    return post({
-        url: `${urlPath}/user/changePayPwd`,
-        params: qs.stringify(params)
-    })
-}
-
 export function log_record(params) { //流水记录
     return get({
         url: `${urlPath}/user/log`,
@@ -158,12 +151,7 @@ export function quan_detail(params) { //推荐概览数据
 const registerPath = 'http://trex.top/proxyUrl/wallet/v1/'
 
 
-export function getCode(params) { //找回密码获取验证码
-    return get({
-        url: `${registerPath}getCode`,
-        params: params
-    })
-}
+
 
 export function register(params) { //用户注册
     return post({
@@ -294,9 +282,33 @@ export function getRollImg(params) { //获取首页轮播图
     })
 }
 
-export function send_message(params) { //获取验证码
+export function getCode(params) { //找回密码获取验证码
+    return get({
+        url: `${cbkPathUrl}getCode`,
+        params: params
+    })
+}
+
+export function change_pay_password(params) { //修改支付密码
     return post({
-        url: `${registerPath}user/send_code`,
+        url: `${cbkPathUrl}/otc/updateUserPwd`,
         params: qs.stringify(params)
     })
 }
+
+export function getLoginCode(params) { //忘记登陆密码
+    return get({
+        url: `${cbkPathUrl}getNologinCode`,
+        params: params
+    })
+}
+
+
+const txPathUrl = 'http://trex.top/payservice/'
+
+export function withdraw(params) { //申请提现
+    return post({
+        url: `${txPathUrl}withDraw/apply`,
+        params: qs.parse(params)
+    })
+} //withdraw
