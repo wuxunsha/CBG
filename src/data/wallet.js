@@ -163,6 +163,13 @@ export function send_message(params) { //获取验证码
     })
 }
 
+export function getCode(params) { //找回密码获取验证码
+    return get({
+        url: `${registerPath}getCode`,
+        params: params
+    })
+}
+
 export function register(params) { //用户注册
     return post({
         url: `${registerPath}user/register`,
@@ -274,6 +281,13 @@ export function checkTbAddress(params) { //用户注册
 export function change_password(params) { //修改用户密码
     return post({
         url: `${cbkPathUrl}otc/updateUserPwd`,
+        params: qs.stringify(params)
+    })
+}
+
+export function forgetUserPwd(params) { //找回密码
+    return post({
+        url: `${cbkPathUrl}otc/forgetUserPwd`,
         params: qs.stringify(params)
     })
 }

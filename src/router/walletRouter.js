@@ -9,6 +9,8 @@ const feedback = resolve => require(['@/view/walletView/feedback'], resolve)
 const login = resolve => require(['@/view/walletView/login'], resolve)
 const register = resolve => require(['@/view/walletView/register'], resolve)
 const forgetPass = resolve => require(['@/view/mine/forgetPass'], resolve)
+const changePassword = resolve => require(['@/view/mine/change-password'], resolve)
+
 const shareList = resolve => require(['@/view/walletView/shareList'], resolve)
 const hisDetail = resolve => require(['@/view/walletView/hisDetail'], resolve)
 const assetsDetail = resolve => require(['@/view/walletView/assetsDetail'], resolve)
@@ -56,6 +58,7 @@ let routerArr = {
     feedback: feedback,
     login: login,
     forgetPass: forgetPass,
+    changePassword: changePassword,
     register: register,
     shareList: shareList,
     hisDetail: hisDetail,

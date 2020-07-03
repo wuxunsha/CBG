@@ -10,16 +10,16 @@
       <p>{{$t('feature.setPayPass.text_prompt')}}</p>
     </div>
 
-    <!-- <div class="input_gorup">
+    <div class="input_gorup">
       <div class="captcha">
         <div>
           <input type="number" pattern="\d*" :placeholder="$t('wallet.register.form_input_code')" v-model="form.code"  @blur="blur_event">
         </div>
         <div>
-          <getCode :codeData="{type:'changePay',phone:userInfo.user.id}"/>
+          <forgetGetCode :codeData="{type:'3'}"/>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="input_gorup">
       <div class="captcha">
@@ -58,7 +58,7 @@
     mapMutations,
     mapState
   } from 'vuex'
-  import getCode from '../../components/wallet/getCode'
+import forgetGetCode from '../../components/wallet/forgetGetCode'
   export default {
     data() {
       return {
@@ -75,7 +75,7 @@
       }
     },
     components: {
-      getCode
+      forgetGetCode
     },
     methods: {
       ...mapMutations(['setUserInfo', 'setToken']),

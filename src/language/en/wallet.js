@@ -37,6 +37,7 @@ const lang = {
     },
     forgetPass: {
         nav_title: "Change login password",
+        change_pass: "Retrieve login password",
         form_input_pass: "Please enter a new password",
         form_input_pass_re: "Please enter the new password again",
         check_pass_fail: "Passwords are inconsistent",

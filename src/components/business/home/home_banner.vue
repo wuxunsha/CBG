@@ -90,10 +90,12 @@ export default {
 @import "../../../styles/walletVal";
 
 .banner {
-    min-height: 150px;
+    height: 150px;
     background: rgba(0, 0, 0, 0.05);
     .van-swipe {
+        height: 100%;
         .van-swipe-item {
+            height: 100%;
             img {
                 width: 100%;
                 height: 100%;

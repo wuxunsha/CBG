@@ -37,6 +37,7 @@ const lang = {
     },
     forgetPass: {
         nav_title: "修改登录密码",
+        change_pass: "找回登录密码",
         form_input_pass: "请输入新密码",
         form_input_pass_re: "请再次输入新密码",
         check_pass_fail: "密码不一致",

@@ -7,7 +7,7 @@
 
     <div class="setting-box">
         <!-- 登录密码 -->
-        <div class="version" @click="gopage('/forgetPass')">
+        <div class="version" @click="gopage('/changePassword')">
             <div>
                 {{$t('wallet.safety.safety_login')}}
             </div>
@@ -22,7 +22,7 @@
                 {{$t('wallet.safety.safety_transaction')}}
             </div>
              <div>
-                {{$t('wallet.safety.safety_set')}}
+                {{$t('wallet.safety.safety_modify')}}
                 <van-icon name="arrow" />
             </div>
         </div>
