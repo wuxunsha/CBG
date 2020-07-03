@@ -286,10 +286,8 @@ export default {
                 userPayPwd: this.withrawInfo.transactionPwd, //支付密码
             }
             withdraw(data).then(res => {
-                // console.log(res)
-                // console.log('11111')
+                
             }).catch((e) => {
-                // console.log(res)
                 if (e.code == 1000) {
                     Toast('提现申请成功');
                     this.balance -= this.withrawInfo.amount;
@@ -303,26 +301,6 @@ export default {
                     }
                 }
             })
-            // withdraw(data).then(res => {
-            //     console.log(11111);
-
-            //     console.log(res)
-            //     // if (v.code == 1000) {
-            //     //     Toast('提现申请成功');
-            //     //     this.balance -= this.withrawInfo.amount;
-            //     //     this.show_popup = false;
-            //     //     this.withrawInfo = {
-            //     //         address: null,
-            //     //         amount: null,
-            //     //         code: null,
-            //     //         coinId: null,
-            //     //         transactionPwd: null
-            //     //     }
-            //     // } else {
-            //     //     Toast(v.msg);
-            //     // }
-
-            // })
         },
         // 获取资产列表信息
         getBalanceAll() {
