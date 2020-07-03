@@ -36,7 +36,7 @@ export default {
                 "type": this.codeData.type
             }
             getCode(params).then(v => {
-                Toast(v.message);
+                Toast('发送成功');
                 this.setGetCodeStatue();
             })
         }, //getCode

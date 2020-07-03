@@ -5,10 +5,10 @@
       <van-nav-bar
         :title="`${$t('feature.transfer.text_title')}`"
         fixed
-        left-arrow @click-left="goback()" @click-right="gopage('/assetsDetail_v2')">
-        <template #right>
+        left-arrow @click-left="goback()">
+        <!-- <template #right>
           <van-icon name="orders-o" size="18" />
-        </template>
+        </template> -->
       </van-nav-bar>
     </div>
 
@@ -28,14 +28,14 @@
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_id')}}</div>
         <div class="inputItem inputItemButton">
-          <input type="text" :placeholder="`${$t('feature.transfer.input_id')}`" v-model="reqParams.toId" @blur="blur_event()" @change="getName()">
+          <input type="text" :placeholder="`${$t('feature.transfer.input_id')}`" v-model="reqParams.skAccount">
         </div>
       </div>
 
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_number')}}</div>
         <div class="inputItem inputItemButton transfer-amount">
-           <input type="number" :placeholder="`${$t('feature.transfer.input_number')}`" v-model="reqParams.number" @blur="blur_event()" @change="getFee()">
+           <input type="number" :placeholder="`${$t('feature.transfer.input_number')}`" v-model="reqParams.amount">
           <span class="money-type">{{currCoin}}</span>
           <span>|</span>
           <span @click="allSum" class="money-type">{{$t('feature.transfer.All')}}</span>
@@ -49,15 +49,15 @@
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_code')}}</div>
         <div class="inputItem flex align inputItemButton">
-            <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.code" @blur="blur_event()">
-            <div class="getCode"> <getCode :codeData="{type:'transfer',phone:userInfo.userPhone}"/></div>
+            <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.yzCode">
+            <div class="getCode"> <forgetGetCode :codeData="{phone:userInfo.userPhone,type:'2'}" /></div>
         </div>
       </div>
 
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_pass')}}</div>
         <div class="inputItem inputItemButton">
-          <input type="number" style="-webkit-text-security:disc" :placeholder="`${$t('feature.transfer.input_pass')}`" v-model="reqParams.transactionPwd" @blur="blur_event()">
+          <input type="number" style="-webkit-text-security:disc" :placeholder="`${$t('feature.transfer.input_pass')}`" v-model="reqParams.payPassWord">
         </div>
       </div>
 
@@ -83,13 +83,13 @@
 <script>
 import {
   mapMutations,
-  mapState,
-  mapActions
+  mapState
 } from 'vuex'
-import getCode from '../../components/wallet/getCode'
+import forgetGetCode from '../../components/wallet/forgetGetCode'
 import { Toast } from 'vant';
 import { 
-  TBListfund
+  TBListfund,
+  transfer
 } from '../../data/wallet';
 
 export default {
@@ -97,10 +97,10 @@ export default {
     return {
       show:false,
       reqParams:{
-        number:null, // 金额
-        toId:null, // 收款人账号
-        code:null,//验证码
-        transactionPwd:null,//支付密码
+        amount:null, // 金额
+        skAccount:null, // 收款人账号
+        yzCode:null,//验证码
+        payPassWord:null,//支付密码
         coinId:null // 币种ID
       },
       currCoin:null,//当前币种
@@ -110,15 +110,15 @@ export default {
       balance: ''
     }
   },
-  components:{getCode},
+  components:{forgetGetCode},
   computed: {
     ...mapState(['userInfo'])
   },
   methods: {
     //获取手续费
     getFee(){
-      if(this.reqParams.number)
-        this.fee = this.scale<1 ? this.toFixed_4(this.reqParams.number * this.scale) : this.scale;
+      if(this.reqParams.amount)
+        this.fee = this.scale<1 ? this.toFixed_4(this.reqParams.amount * this.scale) : this.scale;
       else
         this.fee = null;
     },
@@ -130,27 +130,27 @@ export default {
     },
     // 币种改变
     currencyChange() {
-      this.reqParams.number = null
+      this.reqParams.amount = null
     },
     // 全部金额
     allSum () {
-      this.reqParams.number = this.balance
+      this.reqParams.amount = this.balance
     },
     //确认转账
     checkParams(){
-      if(!this.reqParams.toId){
+      if(!this.reqParams.skAccount){
         Toast(this.$t('feature.transfer.text_id'))
         return;
       }
-      if(!this.reqParams.number){
+      if(!this.reqParams.amount){
         Toast(this.$t('feature.transfer.input_number'));
         return;
       }
-      if(!this.reqParams.code){
+      if(!this.reqParams.yzCode){
         Toast(this.$t('feature.transfer.input_code'));
         return;
       }
-      if(!this.reqParams.transactionPwd){
+      if(!this.reqParams.payPassWord){
         Toast(this.$t('feature.transfer.input_pass'));
         return;
       }
@@ -168,11 +168,11 @@ export default {
     },
     //获取id名称
     getName(){
-      if(!this.reqParams.toId){
+      if(!this.reqParams.skAccount){
         this.idName = null;
         return;
       }
-      idGetName({id:this.reqParams.toId}).then(v=>{
+      idGetName({id:this.reqParams.skAccount}).then(v=>{
         if(v.data)
           this.idName  = v.data;
         else
@@ -215,7 +215,7 @@ export default {
         
   },
   created() {
-    console.log(this.userInfo)
+    // console.log(this.userInfo)
   }
 };
 

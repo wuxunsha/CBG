@@ -150,9 +150,6 @@ export function quan_detail(params) { //推荐概览数据
 
 const registerPath = 'http://trex.top/proxyUrl/wallet/v1/'
 
-
-
-
 export function register(params) { //用户注册
     return post({
         url: `${registerPath}user/register`,
@@ -299,6 +296,13 @@ export function change_pay_password(params) { //修改支付密码
 export function getLoginCode(params) { //忘记登陆密码
     return get({
         url: `${cbkPathUrl}getNologinCode`,
+        params: params
+    })
+}
+
+export function transfer(params) { // 转账
+    return post({
+        url: `${cbkPathUrl}otc/transfer`,
         params: params
     })
 }
