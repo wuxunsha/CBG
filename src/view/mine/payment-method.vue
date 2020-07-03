@@ -51,6 +51,9 @@
 </template>
 
 <script>
+import {
+    mapState
+} from 'vuex'
 export default {
     data() {
         return {
@@ -68,10 +71,10 @@ export default {
         }
     },
     computed: {
-        
+        ...mapState(['userInfo'])
     },
-    mounted() {
-        
+    created() {
+        console.log(this.userInfo)
     }
 };
 
