@@ -28,7 +28,8 @@ const lang = {
     text_available: "Available",
     text_freeze: "freeze",
     text_crowdfunding: "Cowdfunding",
-    text_lq: "receive"
+    text_lq: "receive",
+    text_ylq: "Received"
   },
   bank: {
     nav_title: "Yu Yuan Bao",

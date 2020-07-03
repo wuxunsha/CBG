@@ -11,7 +11,7 @@
             <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')" alt="">
             <span>{{item.coinId === '1001' ? 'USDT' : item.coinId === '1002' ? 'CBK' : item.coinId === '1003' ? 'CBG' : 'BTC'}}</span>
             <div class="bot-box">
-              <span v-if="item.coinId === '1001'" :disabled="item.has === 0 ? false : true" @click="receive" :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">{{$t('feature.assets.text_lq')}}</span>
+              <span v-if="item.coinId === '1001'" :disabled="item.has === 0 ? false : true" @click="item.has === 0 ? receive : ''" :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">{{item.has === 0 ? $t('feature.assets.text_lq') : $t('feature.assets.text_ylq')}}</span>
             </div>
           </div>
           <div class="list-name">

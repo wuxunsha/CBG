@@ -30,7 +30,8 @@ const lang = {
         text_available: "可用",
         text_freeze: "冻结",
         text_crowdfunding: "众筹",
-        text_lq: "领取"
+        text_lq: "领取",
+        text_ylq: "已领取"
     },
     bank: {
         nav_title: "余币宝",

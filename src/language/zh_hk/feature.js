@@ -28,7 +28,8 @@ const lang = {
         text_available: "可用",
         text_freeze: "凍結",
         text_crowdfunding: "眾籌",
-        text_lq: "領取"
+        text_lq: "領取",
+        text_ylq: "已領取"
     },
     bank: {
         nav_title: "余幣寶",
