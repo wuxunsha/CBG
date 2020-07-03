@@ -193,7 +193,7 @@ export default {
         > div:nth-child(1) {
             flex: 1;
             width: 100%;
-            height: 80%;
+            height: 75%;
             input {
                 font-size: 12px;
                 width: 100%;

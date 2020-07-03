@@ -31,7 +31,7 @@ const request_json = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/withdraw',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/pool/buy',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/product/buy',
-    oldBaseUrl + 'proxyUrl/wallet/v1/user/transfer',
+    loginrUrl + 'otc/transfer',
     tbUrl + '/withDraw/apply'
 
 ]; //application/json方式请求接口
