@@ -274,11 +274,6 @@ export default {
         // 申请提现
         submitWithdraw() {
             console.log(111);
-
-            // if (!this.withrawInfo.code) {
-            //     Toast(this.$t('feature.cpopupCode.text_input'));
-            //     return;
-            // }
             if (!this.withrawInfo.transactionPwd) {
                 Toast(this.$t('feature.transfer.input_pass'));
                 return;
@@ -287,25 +282,33 @@ export default {
             let data = {
                 address: this.withrawInfo.address, // 收款地址
                 amount: this.withrawInfo.amount,  // 金额
-                // code: this.withrawInfo.code, // 验证码
                 coinId: this.coinId, // 币种id
                 userPayPwd: this.withrawInfo.transactionPwd, //支付密码
-                // token_: this.$store.state.newToken
             }
-
-            withdraw(data).then(v => {
-                Toast(v.message);
-
-                this.balance -= this.withrawInfo.amount;
-                this.show_popup = false;
-                this.withrawInfo = {
-                    address: null,
-                    amount: null,
-                    code: null,
-                    coinId: null,
-                    transactionPwd: null
-                }
+            withdraw(data).then(res => {
+                console.log(res)
+                console.log('11111')
             })
+            // withdraw(data).then(res => {
+            //     console.log(11111);
+
+            //     console.log(res)
+            //     // if (v.code == 1000) {
+            //     //     Toast('提现申请成功');
+            //     //     this.balance -= this.withrawInfo.amount;
+            //     //     this.show_popup = false;
+            //     //     this.withrawInfo = {
+            //     //         address: null,
+            //     //         amount: null,
+            //     //         code: null,
+            //     //         coinId: null,
+            //     //         transactionPwd: null
+            //     //     }
+            //     // } else {
+            //     //     Toast(v.msg);
+            //     // }
+
+            // })
         },
         // 获取资产列表信息
         getBalanceAll() {
