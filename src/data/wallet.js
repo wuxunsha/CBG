@@ -325,6 +325,8 @@ export function withdraw(params) { //申请提现
 }
 
 export function uploadFile(params) { // 上传图片
+    console.log(typeof params)
+    console.log(qs.parse(params))
     return post({
         url: `${txPathUrl}upload/file`,
         params: qs.parse(params)

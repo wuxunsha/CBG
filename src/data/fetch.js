@@ -43,7 +43,7 @@ const request_json = [
 
 const request_file = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/headUpload',
-    // tbUrl + '/upload/file'
+    tbUrl + '/upload/file'
 ]; //headers: {'Content-Type': 'multipart/form-data'}
 
 axios.interceptors.request.use(function(config) {
