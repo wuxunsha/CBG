@@ -33,7 +33,13 @@ const request_json = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/product/buy',
     loginrUrl + 'otc/transfer',
     tbUrl + '/withDraw/apply',
-    tbUrl + '/user/subIdcardInfo'
+    tbUrl + '/user/subIdcardInfo',
+    tbUrl + '/user/addUserOtc',
+    tbUrl + '/user/getUserPayType',
+    tbUrl + '/user/updateUserOtc',
+
+    // tbUrl + '/upload/file'
+
 ]; //application/json方式请求接口
 
 const request_file = [
@@ -90,7 +96,7 @@ axios.interceptors.request.use(function(config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/subIdcardInfo') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,

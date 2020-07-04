@@ -1,31 +1,70 @@
 <template>
-  <div>
+    <div>
         <div class="navBox">
-            <van-nav-bar :title="`${$t('wallet.payment.payment_title')}`" fixed left-arrow @click-left="goback()"/>
+            <van-nav-bar :title="`${$t('wallet.payment.payment_title')}`"
+                         fixed
+                         left-arrow
+                         @click-left="goback()" />
         </div>
 
         <div class="content-box">
-            <div class="no-data" v-if="!payInfoList">
+            <div class="no-data"
+                 v-if="payInfoList.length == 0">
                 <p>{{$t('wallet.payment.payment_information')}}</p>
-                <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png" alt="">
+                <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png"
+                     alt="">
                 <p>{{$t('wallet.payment.payment_no')}}</p>
             </div>
 
-            <div class="with-data" v-else>
-                <div class="the-way" v-if="payInfoList.wxPayAccount">
-                    <div>
-                        <img src="../../assets/wallet/deal/微信@2x.png" alt="">
+            <div class="with-data"
+                 v-else>
+                <div v-for="(t,index) in payInfoList"
+                     :key="index">
+                    <div class="the-way"
+                         v-if="t.payType==1">
+                        <div>
+                            <img src="../../assets/wallet/deal/支付宝@2x.png"
+                                 alt="">
+                        </div>
+                        <div>
+                            <p>{{t.payAccount}}</p>
+                        </div>
+                        <div>
+                            <span @click="editWxPay(t)">{{$t('wallet.payment.payment_edit')}}</span>
+                        </div>
                     </div>
-                    <div>
-                        <p>{{payInfoList.wxPayAccount}}</p>
+                    <div class="the-way"
+                         v-if="t.payType==2">
+                        <div>
+                            <img src="../../assets/wallet/deal/微信@2x.png"
+                                 alt="">
+                        </div>
+                        <div>
+                            <p>{{t.payAccount}}</p>
+                        </div>
+                        <div>
+                            <span @click="editWxPay(t)">{{$t('wallet.payment.payment_edit')}}</span>
+                        </div>
                     </div>
-                    <div>
-                        <span @click="editWxPay">{{$t('wallet.payment.payment_edit')}}</span>
+                    <div class="the-way"
+                         v-if="t.payType==3">
+                        <div>
+                            <img src="../../assets/wallet/deal/银行卡@2x.png"
+                                 alt="">
+                        </div>
+                        <div>
+                            <p>{{t.payAccount}}</p>
+                        </div>
+                        <div>
+                            <span @click="editWxPay(t)">{{$t('wallet.payment.payment_edit')}}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="the-way" v-if="payInfoList.zfbpayAccount">
+                <!-- <div class="the-way"
+                     v-if="payInfoList.zfbpayAccount">
                     <div>
-                        <img src="../../assets/wallet/deal/支付宝@2x.png" alt="">
+                        <img src="../../assets/wallet/deal/支付宝@2x.png"
+                             alt="">
                     </div>
                     <div>
                         <p>{{payInfoList.zfbpayAccount}}</p>
@@ -33,7 +72,7 @@
                     <div>
                         <span @click="editZfb">{{$t('wallet.payment.payment_edit')}}</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -43,19 +82,27 @@
         </div>
 
         <!-- 收款方式选择弹窗 -->
-        <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
-            <van-picker :columns="columns" show-toolbar @cancel="popup=false" @confirm="onChange" :title=" `${$t('wallet.payment.popup_title')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`"/>
+        <van-popup v-model="popup"
+                   position="bottom"
+                   :style="{ height: '30%' }">
+            <van-picker :columns="columns"
+                        show-toolbar
+                        @cancel="popup=false"
+                        @confirm="onChange"
+                        :title=" `${$t('wallet.payment.popup_title')}`"
+                        :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`"
+                        :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`" />
         </van-popup>
-  
-  </div>
+
+    </div>
 </template>
 
 <script>
 import {
     mapState
 } from 'vuex'
-import { 
-  getUserPayInfo
+import {
+    getUserPayInfo
 } from '../../data/wallet'
 export default {
     data() {
@@ -64,34 +111,56 @@ export default {
             // 收款方式弹窗开关
             popup: false,
             columns: ['银行卡', '支付宝', '微信'],
-            payInfoList: {}
+            payInfoList: []
         }
     },
     methods: {
         // 获取用户收款方式
         getUserPayInfoList() {
-            getUserPayInfo({token_: this.$store.state.newToken}).then(res => {
-                if (res.code === '200') {
-                    this.payInfoList = res.data[0]
+            // getUserPayInfo({token_: this.$store.state.newToken}).then(res => {
+            //     if (res.code === '200') {
+            //         this.payInfoList = res.data[0]
+            //     }
+            // })
+            this.$http.post('http://trex.top/payservice/' + 'user/getUserPayType').then(res => {
+                console.log(res);
+
+                if (res.code == 1000) {
+                    this.payInfoList = res.data
+                    console.log(this.payInfoList);
+
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    // this.$router.push({ path: '/paymentMethod' })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
                 }
             })
         },
-        onChange(value,index) {
+        onChange(value, index) {
             console.log(value)
             console.log(index)
             this.gopage('/addPayment?type=' + (index + 1) + "&mode=1")
         },
         // 编辑微信收款方式
-        editWxPay() {
-            sessionStorage.setItem("account",this.payInfoList.wxPayAccount)
-            sessionStorage.setItem("name",this.payInfoList.wxPayName)
-            sessionStorage.setItem("path",this.payInfoList.wxPayPath)
-            sessionStorage.setItem("phone",this.payInfoList.wxPayPhone)
+        editWxPay(t) {
+            // sessionStorage.setItem("account", this.payInfoList.wxPayAccount)
+            // sessionStorage.setItem("name", this.payInfoList.wxPayName)
+            // sessionStorage.setItem("path", this.payInfoList.wxPayPath)
+            // sessionStorage.setItem("phone", this.payInfoList.wxPayPhone)
             this.$router.push({
-                path:'/addPayment',
-                query:{
+                path: '/addPayment',
+                query: {
                     type: 3,
                     mode: '2',
+                    item: t
                     // account: this.payInfoList.wxPayAccount,
                     // name: this.payInfoList.wxPayName,
                     // path: this.payInfoList.wxPayPath,
@@ -102,8 +171,8 @@ export default {
         // 编辑支付宝收款方式
         editZfb() {
             this.$router.push({
-                path:'/addPayment',
-                query:{
+                path: '/addPayment',
+                query: {
                     type: 2,
                     mode: '2',
                     account: this.payInfoList.zfbpayAccount,
@@ -132,7 +201,7 @@ export default {
         > p {
             font-size: 12px;
             font-weight: 500;
-            color: rgba(53,53,53,1);
+            color: rgba(53, 53, 53, 1);
             margin-bottom: 38px;
             text-align: center;
         }
@@ -141,7 +210,7 @@ export default {
             margin-bottom: 18px;
         }
         > p:nth-child(3) {
-            color: rgba(200,205,211,1);
+            color: rgba(200, 205, 211, 1);
         }
     }
     .with-data {
@@ -150,7 +219,7 @@ export default {
             padding: 0 15px;
             height: 50px;
             line-height: 50px;
-            border-bottom: 1px solid #EBEBEB;
+            border-bottom: 1px solid #ebebeb;
             > div:nth-child(1) {
                 width: 18px;
                 margin-right: 16px;
@@ -165,7 +234,7 @@ export default {
                     font-size: 12px;
                     font-family: PingFang SC;
                     font-weight: 500;
-                    color: rgba(53,53,53,1);
+                    color: rgba(53, 53, 53, 1);
                 }
             }
             > div:nth-child(3) {
@@ -174,12 +243,12 @@ export default {
                 span {
                     // display: inline-block;
                     padding: 4px 14px;
-                    background: #566BF3;
+                    background: #566bf3;
                     font-size: 12px;
                     font-family: PingFang SC;
                     font-weight: 500;
-                    color: rgba(255,255,255,1);
-                    border-radius:4px;
+                    color: rgba(255, 255, 255, 1);
+                    border-radius: 4px;
                 }
             }
         }
@@ -192,15 +261,15 @@ export default {
     line-height: 62px;
     padding: 0 15px;
     width: 100%;
-    border-top: 1px solid rgba(235,235,235,1);
+    border-top: 1px solid rgba(235, 235, 235, 1);
     text-align: center;
     span {
         display: inline-block;
         width: 100%;
         height: 34px;
         line-height: 34px;
-        background: rgba(86,107,243,1);
-        border-radius: 4px; 
+        background: rgba(86, 107, 243, 1);
+        border-radius: 4px;
         cursor: pointer;
         color: #fff;
         font-size: 14px;
