@@ -104,7 +104,10 @@ export default {
         // 上传身份证正面图
         positiveRead(file) {
             console.log(file.file)
-            uploadFile(file.file).then(res => {
+            // uploadFile(file.file).then(res => {
+
+            // })
+            this.$http.post('http://trex.top/payservice/upload/file', file.file).then(res => {
 
             })
         },
