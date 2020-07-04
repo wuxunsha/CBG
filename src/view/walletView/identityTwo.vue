@@ -24,7 +24,8 @@
                 <p>身份证</p>
                 <input type="text"
                        placeholder="请输入身份证"
-                       v-model="card" maxlength="18">
+                       v-model="card"
+                       maxlength="18">
             </div>
         </div>
         <div class="upload-box">
@@ -35,7 +36,8 @@
                               deletable
                               :before-read="beforeRead"
                               :after-read="positiveRead"
-                              v-model="positiveUrl" result-type="dataUrl">
+                              v-model="positiveUrl"
+                              result-type="dataUrl">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
@@ -101,12 +103,20 @@ export default {
             }
             return true
         },
+
         // 上传身份证正面图
         positiveRead(file) {
-            console.log(file.file)
-            uploadFile(file.file).then(res => {
+
+            console.log(file);
+            let param = new FormData();
+            param.append('file', file.file);
+
+            this.$http.post('http://trex.top/payservice/' + 'upload/file', param).then(res => {
+                console.log(res);
 
             })
+
+
         },
         // 上传身份证反面图
         reverseRead(file) {
@@ -150,7 +160,7 @@ export default {
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
-                    this.$router.push({path:'/bankUser'})
+                    this.$router.push({ path: '/bankUser' })
                 } else {
                     this.$layer.open({
                         content: res.msg,
@@ -222,7 +232,8 @@ export default {
             height: 88px;
             margin-bottom: 15px;
             .up-load {
-                background: url("../../assets/wallet/my/11.png") no-repeat 50% 50%;
+                background: url("../../assets/wallet/my/11.png") no-repeat 50%
+                    50%;
                 width: 100%;
                 background-size: contain;
                 height: 88px;
