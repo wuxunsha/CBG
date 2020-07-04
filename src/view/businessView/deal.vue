@@ -13,8 +13,8 @@
             </div>
             <div class="detail-pig">
                 <img @click="$router.push('/orderList')"
-                     src="../../assets/wallet/deal/图层 11@2x.png">
-                <img src="../../assets/wallet/deal/图层 12@2x.png">
+                     src="../../assets/wallet/deal/zhizhi.png">
+                <img src="../../assets/wallet/deal/zhizh.png">
             </div>
         </div>
         <div v-if="tabNum == 0">
@@ -31,7 +31,7 @@
             </div>
             <div class="main">
                 <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png"
+                    <img src="../../assets/wallet/deal/se.png"
                          @click="search">
                     <input type="text"
                            placeholder="昵称搜索"
@@ -57,11 +57,11 @@
                         <p>
                             <span v-if="i.userInfo">
                                 <img v-if="i.userInfo.zfbPayAccount"
-                                     src="../../assets/wallet/deal/支付宝@2x.png">
+                                     src="../../assets/wallet/deal/zfb.png">
                                 <img v-if="i.userInfo.wxPayAccount"
-                                     src="../../assets/wallet/deal/微信@2x.png">
+                                     src="../../assets/wallet/deal/wx.png">
                                 <img v-if="i.userInfo.bankPayAccount"
-                                     src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
+                                     src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
                         <p class="trad"><span @click="$router.push({path:'/issueWait',query:{item:i}})">购买</span> </p>
@@ -70,7 +70,7 @@
 
                 <div class="nodata"
                      v-if="issueList.length == 0">
-                    <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png">
+                    <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无买单</p>
                     <p class="go-buy"
                        @click="$router.push('/issue')">发布买单</p>
@@ -92,7 +92,7 @@
             </div>
             <div class="main">
                 <div class="search">
-                    <img src="../../assets/wallet/deal/矢量智能对象@2x.png"
+                    <img src="../../assets/wallet/deal/se.png"
                          @click="search">
                     <input type="text"
                            placeholder="昵称搜索"
@@ -117,11 +117,11 @@
                         <p>
                             <span v-if="i.userInfo">
                                 <img v-if="i.userInfo.zfbPayAccount"
-                                     src="../../assets/wallet/deal/支付宝@2x.png">
+                                     src="../../assets/wallet/deal/zfb.png">
                                 <img v-if="i.userInfo.wxPayAccount"
-                                     src="../../assets/wallet/deal/微信@2x.png">
+                                     src="../../assets/wallet/deal/wx.png">
                                 <img v-if="i.userInfo.bankPayAccount"
-                                     src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
+                                     src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
                         <p class="trad"><span @click="$router.push({path:'/sellWait',query:{item:i}})">出售</span> </p>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="nodata"
                      v-if="sellList.length == 0">
-                    <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png">
+                    <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无卖单</p>
                     <p class="go-buy"
                        @click="$router.push('/sell')">发布卖单</p>

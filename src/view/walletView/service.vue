@@ -38,7 +38,7 @@
                    @keyup.enter="sendText()" />
             <div class="btn"
                  :class="{['btn-active']:contentText}"
-                 @click="sendText()"><img src="../../assets/wallet/deal/发送信息@2x.png"></div>
+                 @click="sendText()"><img src="../../assets/wallet/deal/fa.png"></div>
             <div class="btn"
                  :class="{['btn-active']:contentText}">
                 <label for="uploadImg">
@@ -49,7 +49,7 @@
                            multiple
                            style="display:none;"
                            id="uploadImg">
-                    <img src="../../assets/wallet/deal/图片@2x.png">
+                    <img src="../../assets/wallet/deal/qw.png">
                 </label>
 
             </div>

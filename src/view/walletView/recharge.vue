@@ -89,7 +89,7 @@
         <div class="rechargeList">
             <h3>{{$t('wallet.recharge.list')}}</h3>
             <div v-if="rechargeList.length === 0">
-                <img src="../../assets/wallet/deal/数据暂无.png"
+                <img src="../../assets/wallet/deal/no.png"
                      alt="">
                 <p>{{$t('wallet.recharge.text_zwshj')}}</p>
             </div>

@@ -9,7 +9,7 @@
         <div class="main">
             <div class="people-main">
                 <div class="left-main">
-                    <img src="../../assets/wallet/people/农业@2x.png">
+                    <img src="../../assets/wallet/people/nongye.png">
                 </div>
                 <div class="right-main">
                     <h3>{{list.level}}</h3>

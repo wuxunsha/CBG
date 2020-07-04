@@ -55,12 +55,12 @@
                 <span>支付方式</span>
                 <div>
                     <img v-if="userList.zfbpay == 1"
-                         src="../../assets/wallet/deal/支付宝@2x.png">
+                         src="../../assets/wallet/deal/zfb.png">
                     <img v-if="userList.wxpay == 1"
-                         src="../../assets/wallet/deal/微信@2x.png">
+                         src="../../assets/wallet/deal/wx.png">
                     <img v-if="userList.bankbpay == 1"
-                         src="../../assets/wallet/deal/矢量智能对象@2x (1).png">
-                    <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
+                         src="../../assets/wallet/deal/ying.png">
+                    <!-- <img src="../../assets/wallet/deal/kao.png"> -->
                 </div>
             </div>
 

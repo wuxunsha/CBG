@@ -233,8 +233,7 @@ export default {
     width: 16px;
     height: 47px;
     line-height: 47px;
-    background: url("../../assets/wallet/user/可显示@3x.png") no-repeat center
-        center;
+    background: url("../../assets/wallet/user/show.png") no-repeat center center;
     background-size: 100%;
 }
 .hidden {
@@ -242,7 +241,7 @@ export default {
     width: 16px;
     height: 47px;
     line-height: 47px;
-    background: url("../../assets/wallet/user/不显示@3x.png") no-repeat center
+    background: url("../../assets/wallet/user/unshow.png") no-repeat center
         center;
     background-size: 100%;
 }
