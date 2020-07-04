@@ -114,19 +114,19 @@ export default {
 }
 
   .item .icon.home {
-    background: url(../../assets/business/首页@3x.png);
+    background: url(../../assets/business/sy3x.png);
   }
 
   .item.active .icon.home {
-    background: url(../../assets/business/首页－选中.png);
+    background: url(../../assets/business/sy.png);
   }
 
 .item .icon.deal {
-    background: url(../../assets/business/交易@2.png);
+    background: url(../../assets/business/jy01.png);
 }
 
 .item.active .icon.deal {
-    background: url(../../assets/business/交易@2x.png);
+    background: url(../../assets/business/jy2x.png);
 }
 
 //  .item .icon.mining {
@@ -138,20 +138,20 @@ export default {
 // }
 
 .item .icon.assets {
-    background: url(../../assets/business/钱包@2x.png);
+    background: url(../../assets/business/qb2x.png);
 }
 
   .item.active .icon.assets {
-    background: url(../../assets/business/钱包@3x.png);
+    background: url(../../assets/business/qb3x.png);
   }
 
 
   .item .icon.user {
-    background: url(../../assets/business/我的@2x.png);
+    background: url(../../assets/business/wd2x.png);
   }
 
   .item.active .icon.user {
-    background: url(../../assets/business/我的－选中@3x.png);
+    background: url(../../assets/business/wd3x.png);
   }
 
 </style>

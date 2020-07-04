@@ -20,7 +20,7 @@
           <span>钻石</span>
         </div>
         <div>
-          <img src="../../assets/business/user/图层 1 拷贝 5@2x.png" alt="">
+          <img src="../../assets/business/user/hydj2x.png" alt="">
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@
 
         <div class="user-info">
             <div>
-                <img src="../../assets/business/user/我的－选中@2x.png"
+                <img src="../../assets/business/user/wdxzh2x.png"
                      alt="">
                 <span>{{userInfo.userAccount}}</span>
             </div>

@@ -109,7 +109,7 @@ export default {
 .header {
     width: 100%;
     height: 200px;
-    background: url("../../../assets/wallet/asstes/钱包顶部@2x.png") no-repeat;
+    background: url("../../../assets/wallet/asstes/qbdb.png") no-repeat;
     background-size: 100% 100%;
     padding: 15px;
     .property-title {
@@ -123,7 +123,7 @@ export default {
             height: 18px;
             line-height: 18px;
             margin-left: 18px;
-            background: url("../../../assets/wallet/asstes/可显示-白色@2x.png")
+            background: url("../../../assets/wallet/asstes/kxsbs2x.png")
                 no-repeat center center;
             background-size: 100%;
         }
@@ -133,7 +133,7 @@ export default {
             height: 18px;
             line-height: 18px;
             margin-left: 18px;
-            background: url("../../../assets/wallet/asstes/不显示-白色@2x.png")
+            background: url("../../../assets/wallet/asstes/bxsbs2x.png")
                 no-repeat center center;
             background-size: 100%;
         }
@@ -153,7 +153,7 @@ export default {
             height: 28px;
             line-height: 28px;
             text-align: center;
-            background: url("../../../assets/wallet/asstes/钱包-充-提-转按钮@2x.png")
+            background: url("../../../assets/wallet/asstes/qban.png")
                 no-repeat;
             background-size: 100%;
             span {

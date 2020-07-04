@@ -4,7 +4,7 @@
         <div>
             <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`" fixed>
                 <template #right>
-                    <img src="../../assets/business/user/设置@2x.png"
+                    <img src="../../assets/business/user/szh2x.png"
                          alt="" @click="gopage('/setting')">
                 </template>
             </van-nav-bar>
@@ -14,7 +14,7 @@
             <div class="user-left">
                 <div class="user_info flex align">
                     <div class="header_text">
-                        <img src="../../assets/business/user/我的－选中@2x.png"
+                        <img src="../../assets/business/user/wdxzh2x.png"
                              alt="">
                     </div>
                     <div class="info">
@@ -31,7 +31,7 @@
                              alt="">
                     </div>
                     <div>
-                        <img src="../../assets/business/user/图层 1 拷贝 5@2x.png"
+                        <img src="../../assets/business/user/hydj2x.png"
                              alt="">
                     </div>
                 </div>
@@ -50,7 +50,7 @@
         <div class="news">
             <div class="news-box"
                  @click="gopage('/news')">
-                <img src="../../assets/business/user/公告消息@2x.png"
+                <img src="../../assets/business/user/ggxx2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_news')}}</span>
             </div>
@@ -59,7 +59,7 @@
         <div class="news">
             <div class="news-box"
                  @click="userInfo.isrz === 0 ? '' : $router.push('/identityTwo')">
-                <img src="../../assets/business/user/身份认证@2x.png"
+                <img src="../../assets/business/user/ssrz2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_Authentication')}}</span>
                 <span v-if="userInfo.isrz === 0">{{$t('feature.bankUser.text_verified')}}</span>
@@ -69,7 +69,7 @@
 
         <div class="news">
             <div class="news-box bottom"  @click="gopage('/paymentMethod')">
-                <img src="../../assets/business/user/收款方式@2x.png"
+                <img src="../../assets/business/user/skfsh2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_payment_method')}}</span>
             </div>
@@ -80,7 +80,7 @@
         <div class="news">
             <div class="news-box"
                  @click="gopage('/safety')">
-                <img src="../../assets/business/user/账户安全 @2x.png"
+                <img src="../../assets/business/user/zhan2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_account_security')}}</span>
             </div>
@@ -88,7 +88,7 @@
 
         <div class="news">
             <div class="news-box bottom">
-                <img src="../../assets/business/user/关于我们@2x.png"
+                <img src="../../assets/business/user/gywm2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_about_us')}}</span>
             </div>
