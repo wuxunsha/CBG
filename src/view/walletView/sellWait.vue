@@ -7,10 +7,10 @@
                          @click-left="goback()" />
         </div> -->
         <div class="search">
-            <img src="../../assets/wallet/deal/图层 5@2x (2).png">
+            <img src="../../assets/wallet/deal/dian.png">
         </div>
         <div class="search2">
-            <img src="../../assets/wallet/deal/刷新@2x.png">
+            <img src="../../assets/wallet/deal/shua.png">
         </div>
         <div class="issue-info">
             <h3 @click="$router.push('/deal')">
@@ -19,7 +19,7 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 4@2x (1).png">
+                <img src="../../assets/wallet/deal/shi.png">
                 <p>待对方支付</p>
             </div>
             <p>请在{{getTime()}}前确认收款 </p>
@@ -27,7 +27,7 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"
+                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY <img src="../../assets/wallet/deal/fufufu.png"
                          v-clipboard:copy="infoList.price"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"></p>

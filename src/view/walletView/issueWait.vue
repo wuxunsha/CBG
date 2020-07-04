@@ -7,7 +7,7 @@
                          @click-left="goback()" />
         </div> -->
         <div class="search">
-            <img src="../../assets/wallet/deal/图层 5@2x (2).png">
+            <img src="../../assets/wallet/deal/dian.png">
         </div>
         <div class="issue-info">
             <h3 @click="$router.push('/deal')">
@@ -16,7 +16,7 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 4@2x (1).png">
+                <img src="../../assets/wallet/deal/shi.png">
                 <p>待支付</p>
             </div>
             <p>请在{{time(count)}}前付钱给对方 </p>
@@ -24,7 +24,7 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>请向对方支付</h3>
-                <p style="color:#556BF3;">{{infoList.price}}CNY <img src="../../assets/wallet/deal/图层 7@2x (2).png"
+                <p style="color:#556BF3;">{{infoList.price}}CNY <img src="../../assets/wallet/deal/fufufu.png"
                          v-clipboard:copy="infoList.price"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"></p>
@@ -43,7 +43,7 @@
                     <img :src="typeImg">
                     <p>{{mode}}</p>
                     <img @click="chooseType"
-                         src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png">
+                         src="../../assets/wallet/deal/kao.png">
                 </div>
             </div>
             <div class="total">
@@ -51,7 +51,7 @@
                 <p style="font-size:12px">{{infoList.creatorId}}<img v-clipboard:copy="infoList.creatorId"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"
-                         src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                         src="../../assets/wallet/deal/fufufu.png"></p>
             </div>
             <div class="total">
                 <p>二维码</p>
@@ -74,17 +74,17 @@
                        style="font-size:12px">{{infoList.userInfo.zfbPayAccount}}<img v-clipboard:copy="infoList.userInfo.zfbPayAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                             src="../../assets/wallet/deal/fufufu.png"></p>
                     <p v-else-if="typeId == 2"
                        style="font-size:12px">{{infoList.userInfo.wxPayAccount}}<img v-clipboard:copy="infoList.userInfo.wxPayAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                             src="../../assets/wallet/deal/fufufu.png"></p>
                     <p v-else-if="typeId == 0"
                        style="font-size:12px">{{infoList.userInfo.bankPayAccount}}<img v-clipboard:copy="infoList.userInfo.bankPayAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                             src="../../assets/wallet/deal/fufufu.png"></p>
                 </div>
             </div>
             <div class="total">
@@ -92,7 +92,7 @@
                 <p style="font-size:12px">{{infoList.id}}<img v-clipboard:copy="infoList.id"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"
-                         src="../../assets/wallet/deal/图层 7@2x (2).png"></p>
+                         src="../../assets/wallet/deal/fufufu.png"></p>
             </div>
             <div class="total">
                 <p>下单时间</p>
@@ -129,7 +129,7 @@ export default {
             fileList: [],
             infoList: [],
             mode: '支付宝',
-            typeImg: require('../../assets/wallet/deal/支付宝@2x.png'),
+            typeImg: require('../../assets/wallet/deal/zfb.png'),
             checked: false,
             typeId: 1,
             zfbPayAccount: '',
@@ -189,13 +189,13 @@ export default {
             this.typeId++
             if (this.typeId == 1) {
                 this.mode = '支付宝'
-                this.typeImg = require('../../assets/wallet/deal/支付宝@2x.png')
+                this.typeImg = require('../../assets/wallet/deal/zfb.png')
             } else if (this.typeId == 2) {
                 this.mode = '微信'
-                this.typeImg = require('../../assets/wallet/deal/微信@2x.png')
+                this.typeImg = require('../../assets/wallet/deal/wx.png')
             } else if (this.typeId == 3) {
                 this.mode = '银行卡'
-                this.typeImg = require('../../assets/wallet/deal/矢量智能对象@2x (1).png')
+                this.typeImg = require('../../assets/wallet/deal/ying.png')
                 this.typeId = 0
             }
 

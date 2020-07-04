@@ -7,10 +7,10 @@
                          @click-left="goback()" />
         </div> -->
         <div class="search">
-            <img src="../../assets/wallet/deal/图层 5@2x (2).png">
+            <img src="../../assets/wallet/deal/dian.png">
         </div>
         <div class="search2">
-            <img src="../../assets/wallet/deal/刷新@2x.png">
+            <img src="../../assets/wallet/deal/shua.png">
         </div>
         <div class="issue-info">
             <h3 @click="$router.push({path:'/sellWait',query:{item:infoList}})">
@@ -19,7 +19,7 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 4@2x (1).png">
+                <img src="../../assets/wallet/deal/shi.png">
                 <p>对方已支付</p>
             </div>
             <p>请在15:26前确认收款 </p>
@@ -40,9 +40,9 @@
             <div class="num">
                 <span>支付方式</span>
                 <div>
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img src="../../assets/wallet/deal/zfb.png">
                     <p>支付宝</p>
-                    <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
+                    <!-- <img src="../../assets/wallet/deal/kao.png"> -->
                 </div>
             </div>
             <div class="total">

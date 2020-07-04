@@ -17,14 +17,14 @@
             </div>
             <div class="sell-right">
                 <img @click="reduce"
-                     src="../../assets/wallet/deal/添加数值@2x (1).png">
+                     src="../../assets/wallet/deal/tian.png">
                 <p>
                     <input type="number"
                            placeholder=""
                            v-model="issuePrice">
                 </p>
                 <img @click="add"
-                     src="../../assets/wallet/deal/添加数值@2x (1).png">
+                     src="../../assets/wallet/deal/tian.png">
             </div>
         </div>
         <div class="buy-num">

@@ -64,7 +64,7 @@
                             <span>{{$t('wallet.withdraw.Toast_Handling')}}：{{serviceNumber}} {{currCoin}}</span>
                         </div>
                         <div @click="extractAll">
-                            <img src="../../assets/wallet/deal/提取全部.png"
+                            <img src="../../assets/wallet/deal/ti.png"
                                  alt="">
                             {{$t('wallet.withdraw.text_allin')}}
                         </div>
@@ -286,7 +286,7 @@ export default {
                 userPayPwd: this.withrawInfo.transactionPwd, //支付密码
             }
             withdraw(data).then(res => {
-                
+
             }).catch((e) => {
                 if (e.code == 1000) {
                     Toast('提现申请成功');

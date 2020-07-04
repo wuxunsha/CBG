@@ -19,7 +19,7 @@
              :key="index">
             <div class="people-main">
                 <div class="left-main">
-                    <img :src="item.level === '农业' ? require('../../assets/wallet/people/农业@2x.png') : item.level === '水产业' ? require('../../assets/wallet/people/水产业-未开启@2x.png') : item.level === '建筑业' ? require('../../assets/wallet/people/建筑业-未开启@2x.png') : require('../../assets/wallet/people/图@2x.png')">
+                    <img :src="item.level === '农业' ? require('../../assets/wallet/people/nongye.png') : item.level === '水产业' ? require('../../assets/wallet/people/shui.png') : item.level === '建筑业' ? require('../../assets/wallet/people/jian.png') : require('../../assets/wallet/people/tu.png')">
                 </div>
                 <div class="right-main">
                     <h3>{{item.level}}</h3>
@@ -291,7 +291,7 @@ export default {
         h3 {
             font-size: 16px;
             font-weight: bold;
-            color: rgba(53,53,53,1);
+            color: rgba(53, 53, 53, 1);
         }
         p {
             display: flex;
@@ -335,7 +335,7 @@ export default {
         border-bottom: 1px solid #ebebeb;
         font-size: 16px;
         font-weight: 500;
-        color: rgba(51,59,57,1);
+        color: rgba(51, 59, 57, 1);
     }
     .pop-content {
         margin: 20px 0;

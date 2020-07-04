@@ -129,8 +129,8 @@ export default {
             height: 100%;
             left: 0;
             top: 0;
-            background: url("../../../assets/wallet/home/首页-公告@2x.png")
-                no-repeat center;
+            background: url("../../../assets/wallet/home/shouye.png") no-repeat
+                center;
             background-size: 100%;
         }
 

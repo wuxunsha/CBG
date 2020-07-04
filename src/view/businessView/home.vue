@@ -2,7 +2,7 @@
     <div>
 
         <div class="navBox">
-            <img src="./../../assets/wallet/home/首页-TBGAME@2x.png"
+            <img src="./../../assets/wallet/home/shou.png"
                  alt="">
         </div>
 

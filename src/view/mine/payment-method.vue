@@ -11,7 +11,7 @@
             <div class="no-data"
                  v-if="payInfoList.length == 0">
                 <p>{{$t('wallet.payment.payment_information')}}</p>
-                <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png"
+                <img src="../../assets/wallet/deal/nodata.png"
                      alt="">
                 <p>{{$t('wallet.payment.payment_no')}}</p>
             </div>
@@ -23,7 +23,7 @@
                     <div class="the-way"
                          v-if="t.payType==1">
                         <div>
-                            <img src="../../assets/wallet/deal/支付宝@2x.png"
+                            <img src="../../assets/wallet/deal/zfb.png"
                                  alt="">
                         </div>
                         <div>
@@ -36,7 +36,7 @@
                     <div class="the-way"
                          v-if="t.payType==2">
                         <div>
-                            <img src="../../assets/wallet/deal/微信@2x.png"
+                            <img src="../../assets/wallet/deal/wx.png"
                                  alt="">
                         </div>
                         <div>
@@ -49,7 +49,7 @@
                     <div class="the-way"
                          v-if="t.payType==3">
                         <div>
-                            <img src="../../assets/wallet/deal/银行卡@2x.png"
+                            <img src="../../assets/wallet/deal/yh.png"
                                  alt="">
                         </div>
                         <div>
@@ -63,7 +63,7 @@
                 <!-- <div class="the-way"
                      v-if="payInfoList.zfbpayAccount">
                     <div>
-                        <img src="../../assets/wallet/deal/支付宝@2x.png"
+                        <img src="../../assets/wallet/deal/zfb.png"
                              alt="">
                     </div>
                     <div>

@@ -7,10 +7,10 @@
                          @click-left="goback()" />
         </div> -->
         <div class="search">
-            <img src="../../assets/wallet/deal/图层 5@2x (2).png">
+            <img src="../../assets/wallet/deal/dian.png">
         </div>
         <div class="search2">
-            <img src="../../assets/wallet/deal/图层 9@2x.png">
+            <img src="../../assets/wallet/deal/dianhua.png">
         </div>
         <div class="issue-info">
             <h3 @click="$router.push({path:'/issueAwait',query:{item:infoList}})">
@@ -19,7 +19,7 @@
                           color="#fff" />
             </h3>
             <div>
-                <img src="../../assets/wallet/deal/图层 10@2x (1).png">
+                <img src="../../assets/wallet/deal/true.png">
                 <p>已完成</p>
             </div>
         </div>
@@ -38,9 +38,9 @@
             <div class="num">
                 <span>支付方式</span>
                 <div>
-                    <img src="../../assets/wallet/deal/支付宝@2x.png">
+                    <img src="../../assets/wallet/deal/zfb.png">
                     <p>支付宝</p>
-                    <!-- <img src="../../assets/wallet/deal/图层 5 拷贝@2x (1).png"> -->
+                    <!-- <img src="../../assets/wallet/deal/kao.png"> -->
                 </div>
             </div>
             <div class="total">
