@@ -325,10 +325,15 @@ export function withdraw(params) { //申请提现
 }
 
 export function uploadFile(params) { // 上传图片
-    console.log(typeof params)
-    console.log(qs.parse(params))
     return post({
         url: `${txPathUrl}upload/file`,
-        params: qs.parse(params)
+        params
+    })
+}
+
+export function subIdcardInfo(params) { // 提交身份证认证信息
+    return post({
+        url: `${txPathUrl}user/subIdcardInfo`,
+        params
     })
 }

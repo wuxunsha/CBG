@@ -78,7 +78,8 @@
 
 <script>
 import {
-    uploadFile
+    uploadFile,
+    subIdcardInfo
 } from '../../data/wallet';
 import chooseCitys from '../../components/wallet/chooseCity'
 export default {
@@ -88,7 +89,13 @@ export default {
             card: '',
             positiveUrl: [],
             reverseUrl: [],
-            handheldUrl: []
+            handheldUrl: [],
+            // 身份证正面照
+            idCardFrontImg: '',
+            // 身份证反面照
+            idCardSideImg: '',
+            // 手持身份证照
+            idCardHandImg: ''
         }
     },
     components: {
@@ -106,25 +113,39 @@ export default {
 
         // 上传身份证正面图
         positiveRead(file) {
-
-            console.log(file);
-            let param = new FormData();
-            param.append('file', file.file);
-
-            this.$http.post('http://trex.top/payservice/' + 'upload/file', param).then(res => {
-                console.log(res);
-
+            let param = new FormData()
+            param.append('file', file.file)
+            uploadFile(param).then(res => {
+                console.log(res.code)
+            }).catch(e => {
+                if (e.code === 1000) {
+                    this.idCardFrontImg = e.data
+                }
             })
-
-
         },
         // 上传身份证反面图
         reverseRead(file) {
-            console.log(file);
+            let param = new FormData()
+            param.append('file', file.file)
+            uploadFile(param).then(res => {
+                console.log(res.code)
+            }).catch(e => {
+                if (e.code === 1000) {
+                    this.idCardSideImg = e.data
+                }
+            })
         },
         // 上传手持照
         handheldRead(file) {
-            console.log(file);
+            let param = new FormData()
+            param.append('file', file.file)
+            uploadFile(param).then(res => {
+                console.log(res.code)
+            }).catch(e => {
+                if (e.code === 1000) {
+                    this.idCardHandImg = e.data
+                }
+            })
         },
         // 提交
         submit() {
@@ -143,30 +164,27 @@ export default {
             if (this.handheldUrl.length <= 0) {
                 return Toast.fail('请上传手持身份证照')
             }
-            var formdata = new FormData();
-            formdata.append('sfzzm', this.positiveUrl[0].file);
-            formdata.append('sfzfm', this.reverseUrl[0].file);
-            formdata.append('scsfz', this.handheldUrl[0].file);
-            // var a = $('#IDNumber').val();
-            formdata.append('IDNumber', this.name);
-            formdata.append('realName', this.card);
-            formdata.append('token_', this.$store.state.newToken);
-            // formdata.append('orderId', 1);
-            // formdata.append('type', 2);
-            this.$http.post(this.$lib.host + 'userInfoUpload', formdata).then(res => {
-                if (res.code == 200) {
-                    this.$layer.open({
-                        content: '提交成功',
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                    this.$router.push({ path: '/bankUser' })
+            this.subIdcard()
+        },
+        // 提交身份认证信息
+        subIdcard() {
+            const data = {
+                idCardFrontImg: this.idCardFrontImg,
+                idCardHandImg: this.idCardHandImg,
+                idCardSideImg: this.idCardSideImg,
+                idCardCode: this.card,
+                realName: this.name
+            }
+            subIdcardInfo(data).then(res => {
+                console.log(res.code)
+            }).catch(e => {
+                if (e.code === 1000) {
+                    Toast.success('提交成功')
+                    setTimeout(() => {
+                        this.$router.push('/bankUser')
+                    }, 1500);
                 } else {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
+                    return Toast.fail(e.msg)
                 }
             })
         }
