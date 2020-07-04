@@ -329,6 +329,6 @@ export function uploadFile(params) { // 上传图片
     console.log(qs.parse(params))
     return post({
         url: `${txPathUrl}upload/file`,
-        params
+        params: qs.parse(params)
     })
 }
