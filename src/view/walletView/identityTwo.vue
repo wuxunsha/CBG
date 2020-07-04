@@ -35,7 +35,7 @@
                               deletable
                               :before-read="beforeRead"
                               :after-read="positiveRead"
-                              v-model="positiveUrl">
+                              v-model="positiveUrl" result-type="dataUrl">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
@@ -76,7 +76,7 @@
 
 <script>
 import {
-    upload
+    uploadFile
 } from '../../data/wallet';
 import chooseCitys from '../../components/wallet/chooseCity'
 export default {
@@ -103,10 +103,10 @@ export default {
         },
         // 上传身份证正面图
         positiveRead(file) {
-            console.log(file.file);
-            // upload(file.file).then(res => {
+            console.log(file.file)
+            uploadFile(file.file).then(res => {
 
-            // })
+            })
         },
         // 上传身份证反面图
         reverseRead(file) {

@@ -5,33 +5,33 @@
         </div>
 
         <div class="content-box">
-            <div class="no-data" v-if="hidden">
+            <div class="no-data" v-if="!payInfoList">
                 <p>{{$t('wallet.payment.payment_information')}}</p>
                 <img src="../../assets/wallet/deal/图层 7 拷贝@2x.png" alt="">
                 <p>{{$t('wallet.payment.payment_no')}}</p>
             </div>
 
             <div class="with-data" v-else>
-                <div class="the-way">
+                <div class="the-way" v-if="payInfoList.wxPayAccount">
                     <div>
                         <img src="../../assets/wallet/deal/微信@2x.png" alt="">
                     </div>
                     <div>
-                        <p>13666666666</p>
+                        <p>{{payInfoList.wxPayAccount}}</p>
                     </div>
                     <div>
-                        <span>编辑</span>
+                        <span @click="editWxPay">{{$t('wallet.payment.payment_edit')}}</span>
                     </div>
                 </div>
-                <div class="the-way">
+                <div class="the-way" v-if="payInfoList.zfbpayAccount">
                     <div>
                         <img src="../../assets/wallet/deal/支付宝@2x.png" alt="">
                     </div>
                     <div>
-                        <p>13666666666</p>
+                        <p>{{payInfoList.zfbpayAccount}}</p>
                     </div>
                     <div>
-                        <span>{{$t('wallet.payment.payment_edit')}}</span>
+                        <span @click="editZfb">{{$t('wallet.payment.payment_edit')}}</span>
                     </div>
                 </div>
             </div>
@@ -54,27 +54,71 @@
 import {
     mapState
 } from 'vuex'
+import { 
+  getUserPayInfo
+} from '../../data/wallet'
 export default {
     data() {
         return {
             hidden: true,
             // 收款方式弹窗开关
             popup: false,
-            columns: ['银行卡', '支付宝', '微信']
+            columns: ['银行卡', '支付宝', '微信'],
+            payInfoList: {}
         }
     },
     methods: {
+        // 获取用户收款方式
+        getUserPayInfoList() {
+            getUserPayInfo({token_: this.$store.state.newToken}).then(res => {
+                if (res.code === '200') {
+                    this.payInfoList = res.data[0]
+                }
+            })
+        },
         onChange(value,index) {
             console.log(value)
             console.log(index)
-            this.gopage('/addPayment?type=' + (index + 1))
+            this.gopage('/addPayment?type=' + (index + 1) + "&mode=1")
+        },
+        // 编辑微信收款方式
+        editWxPay() {
+            sessionStorage.setItem("account",this.payInfoList.wxPayAccount)
+            sessionStorage.setItem("name",this.payInfoList.wxPayName)
+            sessionStorage.setItem("path",this.payInfoList.wxPayPath)
+            sessionStorage.setItem("phone",this.payInfoList.wxPayPhone)
+            this.$router.push({
+                path:'/addPayment',
+                query:{
+                    type: 3,
+                    mode: '2',
+                    // account: this.payInfoList.wxPayAccount,
+                    // name: this.payInfoList.wxPayName,
+                    // path: this.payInfoList.wxPayPath,
+                    // phone: this.payInfoList.wxPayPhone,
+                }
+            })
+        },
+        // 编辑支付宝收款方式
+        editZfb() {
+            this.$router.push({
+                path:'/addPayment',
+                query:{
+                    type: 2,
+                    mode: '2',
+                    account: this.payInfoList.zfbpayAccount,
+                    name: this.payInfoList.zfbPayName,
+                    path: this.payInfoList.zfbPayPath,
+                    phone: this.payInfoList.zfbPayPhone,
+                }
+            })
         }
     },
     computed: {
         ...mapState(['userInfo'])
     },
     created() {
-        console.log(this.userInfo)
+        this.getUserPayInfoList()
     }
 };
 

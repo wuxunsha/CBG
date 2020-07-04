@@ -32,12 +32,14 @@ const request_json = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/pool/buy',
     oldBaseUrl + 'proxyUrl/wallet/v1/user/product/buy',
     loginrUrl + 'otc/transfer',
-    tbUrl + '/withDraw/apply'
+    tbUrl + '/withDraw/apply',
+    // tbUrl + '/upload/file'
 
 ]; //application/json方式请求接口
 
 const request_file = [
-    oldBaseUrl + 'proxyUrl/wallet/v1/user/headUpload'
+    oldBaseUrl + 'proxyUrl/wallet/v1/user/headUpload',
+    // tbUrl + '/upload/file'
 ]; //headers: {'Content-Type': 'multipart/form-data'}
 
 axios.interceptors.request.use(function(config) {
@@ -89,7 +91,7 @@ axios.interceptors.request.use(function(config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,
@@ -140,11 +142,11 @@ axios.interceptors.response.use(function(response) {
             });
         }, 2000);
     }
-    // Toast.clear();
+    Toast.clear();
     return response.data;
 }, function(error) {
-    // Toast.clear();
-    // return Promise.reject(error);
+    Toast.clear();
+    return Promise.reject(error);
 });
 
 
@@ -201,12 +203,12 @@ export const post = (data, ...reset) => {
                 .catch(err => {
                     console.log(112);
 
-                    // reject(err);
-                    // console.error(err);
-                    // setTimeout(() => {
-                    //     Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
-                    // }, 500);
-                    // Toast.clear();
+                    reject(err);
+                    console.error(err);
+                    setTimeout(() => {
+                        Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'Network Error' : '网络错误');
+                    }, 500);
+                    Toast.clear();
                 })
         })
     } //get

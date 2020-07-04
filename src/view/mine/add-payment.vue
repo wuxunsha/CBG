@@ -111,8 +111,16 @@ export default {
     computed: {
 
     },
-    mounted() {
-
+    created() {
+        if (this.$route.query.mode === '2') {
+            console.log(sessionStorage.getItem("path"))
+            this.name = sessionStorage.getItem("name")
+            this.acount = sessionStorage.getItem("account")
+            this.phone = sessionStorage.getItem("phone")
+            this.fileList = [
+                { url: 'http://8.210.81.131:8080/img/111.jpg' }
+            ]
+        }
     }
 };
 
@@ -140,6 +148,18 @@ export default {
         }
         .van-uploader {
             margin-top: 20px;
+            .upload-button {
+                width: 80px;
+                height: 80px;
+                overflow: hidden;
+                border-radius: 8px;
+                background: #fff;
+                border: 1px solid #ccc;
+                .van-icon {
+                    color: #ccc!important;
+                    font-size: 20px;
+                }
+            }
         }
         p:nth-child(3) {
             font-size: 12px;

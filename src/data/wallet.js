@@ -307,6 +307,13 @@ export function transfer(params) { // 转账
     })
 }
 
+export function getUserPayInfo(params) { // 获取用户收款方式
+    return get({
+        url: `${cbkPathUrl}cguser/getUserPayInfo`,
+        params: params
+    })
+}
+
 
 const txPathUrl = 'http://trex.top/payservice/'
 
@@ -315,4 +322,11 @@ export function withdraw(params) { //申请提现
         url: `${txPathUrl}withDraw/apply`,
         params: qs.parse(params)
     })
-} //withdraw
+}
+
+export function uploadFile(params) { // 上传图片
+    return post({
+        url: `${txPathUrl}upload/file`,
+        params
+    })
+}
