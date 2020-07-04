@@ -55,13 +55,38 @@ export default {
             fileList: [],
             name: '',
             acount: '',
-            phone: ''
+            phone: '',
+            img: ''
         }
     },
     methods: {
         afterRead(file) {
             // 此时可以自行将文件上传至服务器
-            console.log(file)
+            // console.log(file)
+            // console.log(file);
+            let param = new FormData();
+            param.append('file', file.file);
+
+            this.$http.post('http://trex.top/payservice/' + 'upload/file', param).then(res => {
+                if (res.code == 1000) {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    this.img = res.data
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+
+            }).catch(v => {
+                console.log(v);
+
+            })
         },
         save() {
             if (!this.name) {
@@ -76,29 +101,84 @@ export default {
             if (this.fileList.length <= 0) {
                 return Toast.fail('请添加收款二维码')
             }
-            var formdata = new FormData();
-            formdata.append('fileName', this.fileList[0].file);
-            formdata.append('type', this.$route.query.type);
-            formdata.append('skAccount', this.acount);
-            formdata.append('skName', this.name);
-            formdata.append('token_', this.$store.state.newToken);
-            formdata.append('skPhone', this.phone);
-            this.$http.post(this.$lib.host + 'userPayInfoUpload', formdata).then(res => {
-                if (res.code == 200) {
-                    this.$layer.open({
-                        content: '保存成功',
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                    this.$router.push({path:'/paymentMethod'})
-                } else {
-                    this.$layer.open({
-                        content: res.result_msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
+            if (!this.img) {
+                return Toast.fail('请添加收款二维码')
+            }
+            this.img
+
+            if (this.$route.query.mode === '1') {
+                let data = {
+                    'payAccount': this.acount,
+                    // 收款账号
+
+                    'payName': this.name,
+                    // 真实姓名
+
+                    'payPhone': this.phone,
+                    // 联系方式
+
+                    'payType': this.$route.query.type,
+                    // 支付方式：1，支付宝，2，微信，3，银行
+
+                    'payUrl': this.img,
+                    // 收款二维码
                 }
-            })
+                this.$http.post('http://trex.top/payservice/' + 'user/addUserOtc', data).then(res => {
+                    console.log(res);
+
+                    if (res.code == 1000) {
+                        this.$layer.open({
+                            content: res.msg,
+                            skin: 'msg',
+                            time: 2 //2秒后自动关闭
+                        })
+                        this.$router.push({ path: '/paymentMethod' })
+                    } else {
+                        this.$layer.open({
+                            content: res.msg,
+                            skin: 'msg',
+                            time: 2 //2秒后自动关闭
+                        })
+                    }
+                })
+            } else if (this.$route.query.mode === '2') {
+                let data = {
+                    id: this.$route.query.item.id,
+                    'payAccount': this.acount,
+                    // 收款账号
+
+                    'payName': this.name,
+                    // 真实姓名
+
+                    'payPhone': this.phone,
+                    // 联系方式
+
+                    'payType': this.$route.query.item.payType,
+                    // 支付方式：1，支付宝，2，微信，3，银行
+
+                    'payUrl': this.img,
+                    // 收款二维码
+                }
+                this.$http.post('http://trex.top/payservice/' + 'user/updateUserOtc', data).then(res => {
+                    console.log(res);
+
+                    if (res.code == 1000) {
+                        this.$layer.open({
+                            content: res.msg,
+                            skin: 'msg',
+                            time: 2 //2秒后自动关闭
+                        })
+                        this.$router.push({ path: '/paymentMethod' })
+                    } else {
+                        this.$layer.open({
+                            content: res.msg,
+                            skin: 'msg',
+                            time: 2 //2秒后自动关闭
+                        })
+                    }
+                })
+            }
+
         },
         beforeRead(file) {
             if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
@@ -111,14 +191,14 @@ export default {
     computed: {
 
     },
-    created() {
+    mounted() {
         if (this.$route.query.mode === '2') {
-            console.log(sessionStorage.getItem("path"))
-            this.name = sessionStorage.getItem("name")
-            this.acount = sessionStorage.getItem("account")
-            this.phone = sessionStorage.getItem("phone")
+            // console.log(sessionStorage.getItem("path"))
+            this.name = this.$route.query.item.payName
+            this.acount = this.$route.query.item.payAccount
+            this.phone = this.$route.query.item.payPhone
             this.fileList = [
-                { url: 'http://8.210.81.131:8080/img/111.jpg' }
+                { url: this.$route.query.item.payUrl }
             ]
         }
     }
@@ -156,7 +236,7 @@ export default {
                 background: #fff;
                 border: 1px solid #ccc;
                 .van-icon {
-                    color: #ccc!important;
+                    color: #ccc !important;
                     font-size: 20px;
                 }
             }
