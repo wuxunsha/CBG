@@ -33,6 +33,7 @@ const request_json = [
     oldBaseUrl + 'proxyUrl/wallet/v1/user/product/buy',
     loginrUrl + 'otc/transfer',
     tbUrl + '/withDraw/apply',
+    tbUrl + '/user/subIdcardInfo',
     tbUrl + '/user/addUserOtc',
     tbUrl + '/user/getUserPayType',
     tbUrl + '/user/updateUserOtc',
