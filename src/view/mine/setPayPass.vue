@@ -15,12 +15,21 @@
         <div class="input_gorup">
             <div class="captcha">
                 <div>
-                    <input type="number"
+                    <!-- <input type="number"
                            pattern="\d*"
                            placeholder="请输入原密码"
                            v-model="form.olduserPwd"
-                           @blur="blur_event">
+                           @blur="blur_event"> -->
+                        <input type="password"
+                           placeholder="请输入原密码"
+                           v-model="form.olduserPwd"
+                           class="set-password-input"
+                           ref="olduserPwd">
                 </div>
+                <p>
+                    <i :class="isOlduserPwdFlag ? 'show' : 'hidden'"
+                       @click="isShowOlduserPwdIcon"></i>
+                </p>
                 <!-- <div>
                     <forgetGetCode :codeData="{type:'3',token_: $store.state.newToken}" />
                 </div> -->
@@ -81,6 +90,7 @@ import forgetGetCode from '../../components/wallet/forgetGetCode'
 export default {
     data() {
         return {
+            isOlduserPwdFlag: false,
             isPasswordFlag: false,
             isHiddenFlag: false,
             show: false,
@@ -135,6 +145,14 @@ export default {
         onSelect(item) {
             this.set_lang(item.type);
             this.show = false;
+        },
+        isShowOlduserPwdIcon() {
+            this.isOlduserPwdFlag = !this.isOlduserPwdFlag
+            if (this.isOlduserPwdFlag) {
+                this.$refs.olduserPwd.setAttribute("type", "text")
+            } else {
+                this.$refs.olduserPwd.setAttribute("type", "password")
+            }
         },
         isShowPassIcon() {
             this.isPasswordFlag = !this.isPasswordFlag

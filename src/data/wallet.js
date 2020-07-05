@@ -288,7 +288,7 @@ export function getCode(params) { //找回密码获取验证码
 
 export function change_pay_password(params) { //修改支付密码
     return post({
-        url: `${cbkPathUrl}/otc/updateUserPwd`,
+        url: `${cbkPathUrl}otc/updateUserPayPwd`,
         params: qs.stringify(params)
     })
 }

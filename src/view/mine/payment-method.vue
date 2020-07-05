@@ -117,24 +117,9 @@ export default {
     methods: {
         // 获取用户收款方式
         getUserPayInfoList() {
-            // getUserPayInfo({token_: this.$store.state.newToken}).then(res => {
-            //     if (res.code === '200') {
-            //         this.payInfoList = res.data[0]
-            //     }
-            // })
-            this.$http.post('http://trex.top/payservice/' + 'user/getUserPayType').then(res => {
-                console.log(res);
-
+            this.$http.post('http://trex.top/payservice/user/getUserPayType').then(res => {
                 if (res.code == 1000) {
                     this.payInfoList = res.data
-                    console.log(this.payInfoList);
-
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                    // this.$router.push({ path: '/paymentMethod' })
                 } else {
                     this.$layer.open({
                         content: res.msg,
@@ -145,16 +130,10 @@ export default {
             })
         },
         onChange(value, index) {
-            console.log(value)
-            console.log(index)
             this.gopage('/addPayment?type=' + (index + 1) + "&mode=1")
         },
         // 编辑微信收款方式
         editWxPay(t) {
-            // sessionStorage.setItem("account", this.payInfoList.wxPayAccount)
-            // sessionStorage.setItem("name", this.payInfoList.wxPayName)
-            // sessionStorage.setItem("path", this.payInfoList.wxPayPath)
-            // sessionStorage.setItem("phone", this.payInfoList.wxPayPhone)
             this.$router.push({
                 path: '/addPayment',
                 query: {
