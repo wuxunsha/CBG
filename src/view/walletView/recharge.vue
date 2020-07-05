@@ -111,7 +111,6 @@
 
 <script>
 import {
-    checkTbAddress,
     TBListCZinfo,
     TBListfund
 } from '../../data/wallet';
@@ -225,13 +224,6 @@ export default {
         console.log(this.userInfo);
 
         this.copyText = this.userInfo.czAddress
-
-        // checkTbAddress({
-        //     userId: this.userInfo.id
-        // }).then(v => {
-        //     this.addressInfo = v.data
-        //     this.copyText = this.addressInfo.address;
-        // })
     },
     mounted() {
 

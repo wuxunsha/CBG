@@ -218,7 +218,6 @@ export default {
             let params = Object.assign({}, this.form);
             params.phoneOrEmail = this.form.phone;
             params.username = this.form.phone;
-            console.log(JSON.stringify(params))
             register(JSON.stringify(params)).then(data => {
                 Toast(data.message)
 
@@ -236,7 +235,7 @@ export default {
 
             }).catch(e => {
                 console.error(e);
-                //Toast(e.message);
+                Toast(e.message);
             })
         },
         onSelect(item) {

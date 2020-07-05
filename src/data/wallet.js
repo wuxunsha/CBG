@@ -157,6 +157,13 @@ export function register(params) { //用户注册
     })
 }
 
+export function send_message(params) { //获取验证码
+    return post({
+        url: `${registerPath}user/send_code`,
+        params: qs.stringify(params)
+    })
+}
+
 const cbkPathUrl = 'http://8.210.81.131:8080/'
 
 export function gettoken(params) { //获取token
@@ -250,13 +257,6 @@ export function user_info() { //获取用户信息
         url: `${cbkPathUrl}cguser/getUserInfo`,
     })
 } //user_info
-
-export function checkTbAddress(params) { //用户注册
-    return post({
-        url: `${cbkPathUrl}/index/user/checkTbAddress`,
-        params: params
-    })
-} //checkTbAddress
 
 export function change_password(params) { //修改用户密码
     return post({
