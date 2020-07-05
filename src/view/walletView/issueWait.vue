@@ -105,14 +105,75 @@
             <div>
                 <van-uploader v-model="fileList"
                               :after-read="afterRead"
-                              max-count="3" />
+                              max-count="1" />
             </div>
             <p>可上传3张,支持JPG/PNG/JPEG格式文件，且不超过2M</p>
         </div>
 
         <div class="go-buy">
             <p @click="cancel">取消订单</p>
-            <span @click="config">标记为已付款</span>
+            <span @click="showPop = true">标记为已付款</span>
+        </div>
+
+        <div class="pop">
+            <van-popup v-model="showPop"
+                       :class="'popPop'">
+                <div class="pop-main">
+                    <h3>标记为已付款</h3>
+                    <div class="pop-content">
+                        <div class="pop-left">
+                            <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price}}CNY</span></p>
+                        </div>
+                    </div>
+                    <div class="input-focus">
+                        <input ref="newPsd"
+                               v-model="newPassword"
+                               type="text"
+                               maxlength="6"
+                               v-focus="true" />
+                    </div>
+
+                    <div class="box">
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>0"
+                               class="dot"></p>
+                        </div>
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>1"
+                               class="dot"></p>
+                        </div>
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>2"
+                               class="dot"></p>
+                        </div>
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>3"
+                               class="dot"></p>
+                        </div>
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>4"
+                               class="dot"></p>
+                        </div>
+                        <div class="pop-box"
+                             @click="passwordFocus">
+                            <p v-if="newPassword.length>5"
+                               class="dot"></p>
+                        </div>
+                    </div>
+
+                    <div class="config">
+                        <div class="cancel"
+                             @click="showPop=false">取消</div>
+                        <div class="config-on"
+                             @click="configBuy">确认付款</div>
+                    </div>
+                </div>
+            </van-popup>
         </div>
     </div>
 </template>
@@ -135,11 +196,23 @@ export default {
             zfbPayAccount: '',
             actEndTime: '0:0',
             count: '',
-            img: ''
+            img: '',
+            showPop: false,
+            newPassword: '',
         }
     },
     components: {
         chooseCards
+    },
+    directives: {
+        focus: {
+            inserted: function (el, { value }) {
+                if (value) {
+                    el.focus();
+                }
+            }
+        }
+
     },
     created() {
 
@@ -203,64 +276,21 @@ export default {
         chooseCoin() {
 
         },
-        afterRead() {
-            let data = {
-                token_: this.$store.state.newToken,
-                type: '1',
-                orderId: 1,
-                minNum: 1,
-                minAmount: 1,
-                maxAmount: 1,
-                price: this.issuePrice,
-            }
-            this.$http.post(this.$lib.host + '/userInfoUpload', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    console.log(res);
-                    this.$router.push('/deal')
-                    this.$layer.open({
-                        content: '发布成功',
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
+        afterRead(file) {
+            let param = new FormData()
+            console.log(file);
 
-                }
-            })
-        },
-        cancel() {
-            this.$router.push('/deal')
-            // let data = {
-            //     token_: this.$store.state.newToken,
-            //     orderId: this.infoList.id,
-            // }
-            // this.$http.post(this.$lib.host + 'otc/quxiao', this.qsParams(data)).then(res => {
-            //     if (res.code == 200) {
-            //         console.log(res);
-            //         this.$router.push('/deal')
-            //         this.$layer.open({
-            //             content: '取消成功',
-            //             skin: 'msg',
-            //             time: 2 //2秒后自动关闭
-            //         })
-            //     } else {
-            //         this.$layer.open({
-            //             content: res.msg,
-            //             skin: 'msg',
-            //             time: 2 //2秒后自动关闭
-            //         })
-            //     }
-            // })
-        },
-        config() {
-            let data = {
-                token_: this.$store.state.newToken,
-                orderId: this.infoList.id,
-            }
-            this.$http.post(this.$lib.host + 'otc/buy', this.qsParams(data)).then(res => {
+            param.append('fileName', file.file)
+            param.append('type', 1)
+            param.append('orderId', this.infoList.id)
+            param.append('token_', this.$store.state.newToken)
+
+            this.$http.post(this.$lib.host + '/imageUpload', param).then(res => {
                 if (res.code == 200) {
                     console.log(res);
-                    this.$router.push({ path: '/issueAwait', query: { item: this.infoList } })
+                    this.img = res.data.relativePath
                     this.$layer.open({
-                        content: '已标记',
+                        content: res.data.result_msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
@@ -272,7 +302,54 @@ export default {
                     })
                 }
             })
-
+        },
+        cancel() {
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+            }
+            this.$http.post(this.$lib.host + 'otc/quxiao', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push('/deal')
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+        },
+        configBuy() {
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+                paypassword: this.newPassword,
+            }
+            this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    this.$router.push({ path: '/issueAwait', query: { item: this.infoList, img: this.img } })
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+            // this.$router.push('/sellOlerdy')
         },
         //复制地址
         onCopy: function (e) {
@@ -283,12 +360,37 @@ export default {
         onError: function (e) {
             this.$layer.open({ time: 3, skin: 'msg', content: '复制失败' });
         },
-
+        passwordFocus() {
+            this.$refs.newPsd.focus();
+        },
     },
 
     watch: {
+        password: function (newV, oldV) {
+            if (newV.length == 6) {
 
-    }
+            }
+        },
+        show: function (newV, oldV) {
+            if (newV == true) {
+                this.$nextTick(function () {
+                    this.$refs.setPsd.focus();
+                })
+            } else {
+                this.password = ''
+            }
+        },
+        showPop: function (newV, oldV) {
+            if (newV == true) {
+                this.$nextTick(function () {
+                    this.$refs.newPsd.focus();
+                })
+            } else {
+                this.newPassword = ''
+            }
+        },
+
+    },
 }
 
 </script>
@@ -467,6 +569,101 @@ export default {
         line-height: 33px;
         background: #556bf3;
         color: #fff;
+    }
+}
+.popPop {
+    height: 253px;
+    width: 337px;
+    border-radius: 10px;
+}
+.pop-main {
+    h3 {
+        text-align: center;
+        color: #343b3a;
+        padding: 8px 0;
+        border-bottom: 1px solid #ebebeb;
+        font-size: 16px;
+    }
+    .pop-content {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        .pop-left {
+            text-align: center;
+            margin: 0 auto;
+            p {
+                margin-bottom: 10px;
+                span {
+                    color: #566bf3;
+                }
+            }
+        }
+        .pop-right {
+            margin: -8px 0 0 0;
+            display: flex;
+            align-items: center;
+            img {
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
+            }
+            p {
+                color: #566bf3;
+            }
+        }
+    }
+    .input-focus {
+        margin: -33px 0 0 0;
+        input {
+            opacity: 0;
+        }
+    }
+    .box {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        .pop-box {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            border: 1px solid #afafaf;
+            border-radius: 2px;
+        }
+        .dot {
+            margin: 10px auto 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #000;
+        }
+    }
+    .config {
+        border-top: 1px solid #ebebeb;
+        padding: 10px 0 0 0;
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        line-height: 33px;
+        font-size: 14px;
+        .config-on {
+            width: 120px;
+            height: 33px;
+            background-color: #566bf3;
+            color: #fff;
+            border-radius: 2px;
+            margin: 0 8px;
+        }
+        .cancel {
+            width: 120px;
+            height: 33px;
+            background: #f7f6fb;
+            color: #343b3a;
+            border-radius: 2px;
+            margin: 0 8px;
+        }
     }
 }
 </style>

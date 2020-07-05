@@ -64,7 +64,7 @@
                                      src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
-                        <p class="trad"><span @click="$router.push({path:'/issueWait',query:{item:i}})">购买</span> </p>
+                        <p class="trad"><span @click="config(i)">购买</span> </p>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                                      src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
-                        <p class="trad"><span @click="$router.push({path:'/sellWait',query:{item:i}})">出售</span> </p>
+                        <p class="trad"><span @click="config(i)">出售</span> </p>
                     </div>
                 </div>
                 <div class="nodata"
@@ -132,7 +132,7 @@
                     <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无卖单</p>
                     <p class="go-buy"
-                       @click="$router.push('/sell')">发布卖单</p>
+                       @click="$router.push({path:'/sell',query:{item:i}})">发布卖单</p>
                 </div>
             </div>
         </div>
@@ -219,6 +219,34 @@ export default {
 
                 }
             })
+        },
+        config(i) {
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: i.id,
+            }
+            this.$http.post(this.$lib.host + 'otc/buy', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    console.log(res);
+                    if (i.type == 0) {
+                        this.$router.push({ path: '/issueWait', query: { item: i } })
+                    } else {
+                        this.$router.push({ path: '/sellWait', query: { item: i } })
+                    }
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+
         },
 
     }

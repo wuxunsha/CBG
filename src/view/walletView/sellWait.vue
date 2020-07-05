@@ -143,13 +143,13 @@ export default {
             let data = {
                 token_: this.$store.state.newToken,
                 orderId: this.infoList.id,
+                paypassword: this.newPassword,
             }
-            this.$http.post(this.$lib.host + 'otc/buy', this.qsParams(data)).then(res => {
+            this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {
                 if (res.code == 200) {
-                    console.log(res);
-                    this.$router.push({ path: '/sellAwait', query: { item: this.infoList } })
+                    this.$router.push({ path: '/sellOlerdy', query: { item: this.infoList } })
                     this.$layer.open({
-                        content: '已标记',
+                        content: res.msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })

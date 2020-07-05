@@ -19,7 +19,8 @@
             <div class="main">
                 <div class="sell"
                      v-for="(i,index) in issueList"
-                     :key="index">
+                     :key="index"
+                     @click="goBuy(i)">
                     <div class="sell-top">
                         <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
                         <p style="color:#3507DF">待付款</p>
@@ -166,6 +167,14 @@ export default {
                 }
             })
         },
+        goBuy(i) {
+            if (i.type == 0) {
+                this.$router.push({ path: '/issueWait', query: { item: i } })
+            } else {
+                this.$router.push({ path: '/sellWait', query: { item: i } })
+            }
+
+        }
     }
 }
 

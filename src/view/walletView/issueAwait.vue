@@ -71,7 +71,9 @@
         <div class="issue-tip">
             <h3>付款截图</h3>
             <div>
-                <van-uploader :after-read="afterRead" />
+                <van-uploader v-model="fileList"
+                              :after-read="afterRead"
+                              max-count="1" />
             </div>
         </div>
 
@@ -155,7 +157,8 @@ export default {
             showPop: false,
             newPassword: '',
             checked: false,
-            infoList: []
+            infoList: [],
+            fileList: []
         }
     },
     directives: {
@@ -173,6 +176,11 @@ export default {
     },
     mounted() {
         this.infoList = this.$route.query.item
+        this.fileList = [
+            { url: this.$route.query.img }
+        ]
+        console.log(this.fileList);
+
     },
     methods: {
         chooseCoin() {
@@ -185,29 +193,7 @@ export default {
             this.$refs.newPsd.focus();
         },
         configBuy() {
-            let data = {
-                token_: this.$store.state.newToken,
-                orderId: this.infoList.id,
-                paypassword: this.newPassword,
-            }
-            this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
-                    console.log(res);
-                    this.$router.push({ path: '/issueOlerdy', query: { item: this.infoList } })
-                    this.$layer.open({
-                        content: '付款成功',
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                } else {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                }
-            })
-            // this.$router.push('/sellOlerdy')
+            this.$router.push({ path: '/issueOlerdy', query: { item: this.infoList } })
         }
     },
 
