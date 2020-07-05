@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="navBox">
-            <van-nav-bar :title="this.$route.query.type == 3 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_collect_money')}` : this.$route.query.type == 2 ? `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_collect_money')}` : `${$t('wallet.payment.payment_add')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_collect_money')}`"
+            <van-nav-bar :title="this.$route.query.type == 3 ? titleName  : this.$route.query.type == 2 ? titleName : titleName"
                          fixed
                          left-arrow
                          @click-left="goback()" />
@@ -56,7 +56,8 @@ export default {
             name: '',
             acount: '',
             phone: '',
-            img: ''
+            img: '',
+            titleName: '添加收款方式'
         }
     },
     methods: {
@@ -69,20 +70,8 @@ export default {
 
             this.$http.post('http://trex.top/payservice/' + 'upload/file', param).then(res => {
                 if (res.code == 1000) {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
                     this.img = res.data
-                } else {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                }
-
+                } 
             }).catch(v => {
                 console.log(v);
 
@@ -193,6 +182,7 @@ export default {
     },
     mounted() {
         if (this.$route.query.mode === '2') {
+            this.titleName = '修改收款方式'
             // console.log(sessionStorage.getItem("path"))
             this.name = this.$route.query.item.payName
             this.acount = this.$route.query.item.payAccount
@@ -200,6 +190,9 @@ export default {
             this.fileList = [
                 { url: this.$route.query.item.payUrl }
             ]
+            this.img = this.$route.query.item.payUrl
+        } else if (this.$route.query.mode === '1') {
+            this.titleName = '添加收款方式'
         }
     }
 };

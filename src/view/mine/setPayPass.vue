@@ -15,11 +15,6 @@
         <div class="input_gorup">
             <div class="captcha">
                 <div>
-                    <!-- <input type="number"
-                           pattern="\d*"
-                           placeholder="请输入原密码"
-                           v-model="form.olduserPwd"
-                           @blur="blur_event"> -->
                         <input type="password"
                            placeholder="请输入原密码"
                            v-model="form.olduserPwd"
@@ -30,9 +25,6 @@
                     <i :class="isOlduserPwdFlag ? 'show' : 'hidden'"
                        @click="isShowOlduserPwdIcon"></i>
                 </p>
-                <!-- <div>
-                    <forgetGetCode :codeData="{type:'3',token_: $store.state.newToken}" />
-                </div> -->
             </div>
         </div>
 
@@ -110,7 +102,6 @@ export default {
         ...mapMutations(['setUserInfo', 'setToken']),
         verifynfo() { //登陆验证
             if (!this.form.olduserPwd) {
-                // Toast(this.$t('wallet.register.form_input_code'))
                 Toast('请输入原密码')
                 return false;
             }
@@ -134,7 +125,7 @@ export default {
                 return;
             }
             change_pay_password(this.form).then(data => {
-                Toast(data.msg)
+                Toast.success('修改交易密码成功!')
                 setTimeout(() => {
                     this.goback();
                 }, 1000);
@@ -176,7 +167,7 @@ export default {
     },
     mounted() {
 
-    } //mounted
+    }
 };
 
 </script>
