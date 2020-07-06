@@ -422,7 +422,7 @@
                     <div class="pop-content">
                         <div class="pop-left">
                             <p>{{$t('wallet.peopleStock.text_lx')}}<span style="color:#343B3A;margin: 0 0 0 15px">{{IndustryInformation.level}}</span></p>
-                            <p>{{$t('wallet.peopleStock.text_je')}}：<span style="margin: 0 0 0 15px">{{IndustryInformation.maxAmount * IndustryInformation.baozjl}}TB</span></p>
+                            <p>{{$t('wallet.peopleStock.text_je')}}：<span style="margin: 0 0 0 15px">{{IndustryInformation.maxAmount * IndustryInformation.baozjl}}USDT</span></p>
                         </div>
                     </div>
                     <div class="input-focus">
