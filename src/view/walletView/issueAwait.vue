@@ -14,7 +14,7 @@
             <img src="../../assets/wallet/deal/dianhua.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.push({path:'/issueWait',query:{item:infoList}})">
+            <h3 @click="$router.go(-1)">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -51,8 +51,15 @@
             </div>
             <div class="total">
                 <p>二维码</p>
-                <p style="font-size:12px">
-                    <span></span></p>
+                <p v-if="infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.zfbPayPath"></span></p>
+                <p v-else-if="infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.wxPayPath"></span></p>
+                <p v-else-if="infoList.userInfo"
+                   style="font-size:12px"><span>
+                        <img :src="infoList.userInfo.bankPayPath"></span></p>
             </div>
             <div class="total">
                 <p>支付宝账号</p>
@@ -158,7 +165,8 @@ export default {
             newPassword: '',
             checked: false,
             infoList: [],
-            fileList: []
+            fileList: [],
+            typeId: 1,
         }
     },
     directives: {
@@ -177,7 +185,7 @@ export default {
     mounted() {
         this.infoList = this.$route.query.item
         this.fileList = [
-            { url: this.$route.query.img }
+            { url: this.$route.query.item.payImgPath }
         ]
         console.log(this.fileList);
 
@@ -192,8 +200,31 @@ export default {
         passwordFocus() {
             this.$refs.newPsd.focus();
         },
+
         configBuy() {
-            this.$router.push({ path: '/issueOlerdy', query: { item: this.infoList } })
+            let data = {
+                token_: this.$store.state.newToken,
+                orderId: this.infoList.id,
+                paypassword: this.newPassword,
+            }
+            this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {
+                if (res.code == 200) {
+                    this.$router.push({ path: '/issueOlerdy', query: { item: this.infoList } })
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+
         }
     },
 
@@ -341,7 +372,11 @@ export default {
                 width: 70px;
                 height: 70px;
                 display: inline-block;
-                background-color: blue;
+                // background-color: blue;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
         img {

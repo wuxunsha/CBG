@@ -23,7 +23,11 @@
                      @click="goBuy(i)">
                     <div class="sell-top">
                         <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
-                        <p style="color:#3507DF">待付款</p>
+
+                        <p v-if="i.state == '1'"
+                           style="color:#3507DF">待付款</p>
+                        <p v-if="i.state == '4'"
+                           style="color:#3507DF">已付款未确认</p>
                     </div>
                     <div class="sell-center">
                         <div>
@@ -148,7 +152,7 @@ export default {
                 if (res.code == 200) {
                     // console.log(res);
                     this.issueList = res.data.filter(e => {
-                        if (e.state == 1) {
+                        if (e.state == 1 || e.state == 4) {
                             return e
                         }
                     })
@@ -169,9 +173,18 @@ export default {
         },
         goBuy(i) {
             if (i.type == 0) {
-                this.$router.push({ path: '/issueWait', query: { item: i } })
+                if (i.state == 1) {
+                    this.$router.push({ path: '/issueWait', query: { item: i } })
+                } else {
+                    this.$router.push({ path: '/issueAwait', query: { item: i } })
+                }
+
             } else {
-                this.$router.push({ path: '/sellWait', query: { item: i } })
+                if (i.state == 1) {
+                    this.$router.push({ path: '/sellWait', query: { item: i } })
+                } else {
+                    this.$router.push({ path: '/sellAWait', query: { item: i } })
+                }
             }
 
         }

@@ -132,7 +132,7 @@
                     <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无卖单</p>
                     <p class="go-buy"
-                       @click="$router.push({path:'/sell',query:{item:i}})">发布卖单</p>
+                       @click="$router.push({path:'/sell',query:{item:''}})">发布卖单</p>
                 </div>
             </div>
         </div>

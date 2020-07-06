@@ -13,7 +13,7 @@
             <img src="../../assets/wallet/deal/dianhua.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.push({path:'/issueAwait',query:{item:infoList}})">
+            <h3 @click="$router.push({path:'/deal',query:{item:''}})">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />

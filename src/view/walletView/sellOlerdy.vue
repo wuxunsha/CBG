@@ -13,7 +13,7 @@
             <img src="../../assets/wallet/deal/dianhua.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.push({path:'/sellAwait',query:{item:infoList}})">
+            <h3 @click="$router.push({path:'/deal',query:{item:infoList}})">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -82,7 +82,8 @@ import { Popup } from 'vant';
 export default {
     data() {
         return {
-            checked: false
+            checked: false,
+            infoList: []
         }
     },
     components: {
@@ -90,6 +91,8 @@ export default {
     },
     mounted() {
         this.infoList = this.$route.query.item
+        console.log(this.infoList);
+
     },
     methods: {
         chooseCoin() {
@@ -131,6 +134,8 @@ export default {
     overflow: hidden;
     h3 {
         margin: 20px 0 0;
+        // margin: 0;
+        font-size: 14px;
     }
     div {
         margin: 25px 0 0;

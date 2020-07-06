@@ -10,7 +10,7 @@
             <img src="../../assets/wallet/deal/dian.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.push('/deal')">
+            <h3 @click="$router.go(-1)">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -112,7 +112,7 @@
 
         <div class="go-buy">
             <p @click="cancel">取消订单</p>
-            <span @click="showPop = true">标记为已付款</span>
+            <span @click="configBuy">标记为已付款</span>
         </div>
 
         <div class="pop">
@@ -327,20 +327,29 @@ export default {
             })
         },
         configBuy() {
+            if (!this.img) {
+                this.$layer.open({
+                    content: '请上传合适截图',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                this.showPop = false
+                return
+            }
+
             let data = {
                 token_: this.$store.state.newToken,
                 orderId: this.infoList.id,
-                paypassword: this.newPassword,
             }
-            this.$http.post(this.$lib.host + 'otc/agree', this.qsParams(data)).then(res => {
+            this.$http.post(this.$lib.host + 'otc/updateYzf', this.qsParams(data)).then(res => {
                 if (res.code == 200) {
-                    console.log(res);
-                    this.$router.push({ path: '/issueAwait', query: { item: this.infoList, img: this.img } })
+                    this.$router.push({ path: '/orderList', query: { item: this.infoList, img: this.img } })
                     this.$layer.open({
                         content: res.msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
+
                 } else {
                     this.$layer.open({
                         content: res.msg,
@@ -349,7 +358,8 @@ export default {
                     })
                 }
             })
-            // this.$router.push('/sellOlerdy')
+
+
         },
         //复制地址
         onCopy: function (e) {

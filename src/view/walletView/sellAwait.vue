@@ -13,7 +13,7 @@
             <img src="../../assets/wallet/deal/shua.png">
         </div>
         <div class="issue-info">
-            <h3 @click="$router.push({path:'/sellWait',query:{item:infoList}})">
+            <h3 @click="$router.go(-1)">
                 <van-icon name="arrow-left"
                           size="22"
                           color="#fff" />
@@ -66,12 +66,13 @@
         <div class="issue-tip">
             <h3>付款截图</h3>
             <div>
-                <van-uploader :after-read="afterRead" />
+                <van-uploader :after-read="afterRead"
+                              v-model="fList" />
             </div>
         </div>
 
         <div class="go-buy"
-             @click="showPop=true">
+             @click="showPop = true">
             确认收款，去放币
         </div>
 
@@ -150,7 +151,8 @@ export default {
             showPop: false,
             checked: false,
             newPassword: '',
-            infoList: []
+            infoList: [],
+            fList: []
         }
     },
     directives: {
@@ -168,6 +170,9 @@ export default {
     },
     mounted() {
         this.infoList = this.$route.query.item
+        this.fList = [
+            { url: this.$route.query.item.payImgPath }
+        ]
     },
     methods: {
         chooseCoin() {
@@ -201,7 +206,6 @@ export default {
                     })
                 }
             })
-            // this.$router.push('/sellOlerdy')
         }
     },
     watch: {
