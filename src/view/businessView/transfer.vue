@@ -20,7 +20,7 @@
             {{currCoin}}
           </span>
         </div>
-        <div>
+        <div class="currency-select-right">
           <van-icon name="arrow" />
         </div>
       </div>
@@ -237,5 +237,10 @@ export default {
 }
 .money-type {
   font-size: 14px;
+}
+.currency-select-right {
+  .van-icon {
+    font-size: 20px;
+  }
 }
 </style>

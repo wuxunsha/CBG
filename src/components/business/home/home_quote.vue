@@ -1,5 +1,5 @@
 <template>
-    <div class="quote">
+    <div class="quote" ref="pageScroll1">
         <h3>{{$t('feature.home.text_recommend')}}</h3>
         <div class="game-type">
             <div>
@@ -49,7 +49,9 @@ export default {
             activeType: "quotes",
             rankInfo: [],
             coinsList: ['TB', 'OKB', 'BNB', 'HT'],
-            USDT_price: 0
+            USDT_price: 0,
+            //当前所需屏幕高度
+            boxHeight: null
         }
     },
     methods: {
@@ -72,8 +74,16 @@ export default {
             return coin[0].coin.coinPrice || 0;
         }
     },
-    activated() {
-        // this.get_data();
+    created() {
+        
+    },
+    mounted() {
+        // console.log(document.documentElement.clientHeight)
+        // console.log(this.$refs.pageScroll1.offsetTop)
+        // let boxOffsetTop = this.$refs.pageScroll1.offsetTop
+        // let curHeight = document.documentElement.clientHeight
+        // this.boxHeight = curHeight - boxOffsetTop
+        // console.log(this.boxHeight)
     }
 };
 </script>

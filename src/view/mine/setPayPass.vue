@@ -199,6 +199,7 @@ export default {
         line-height: 40px;
         border-bottom: 1px solid #ebebeb;
         display: flex;
+        overflow: hidden;
         > div:nth-child(1) {
             flex: 1;
             width: 100%;
