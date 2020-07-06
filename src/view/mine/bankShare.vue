@@ -36,9 +36,12 @@
 <script>
 import {
     mapMutations,
-    mapState
+    mapState,
+    mapActions
 } from 'vuex'
-
+import {
+    userInfo
+} from '../../data/wallet';
 import QRCode from 'qrcodejs2'
 import Clipboard from 'clipboard';
 
@@ -47,11 +50,12 @@ export default {
         return {
             code_text: null,
             chilData: null, //邀请数据
-            area: 'left'//默认区域
+            area: 'left',//默认区域
         }
     },
     methods: {
         ...mapMutations(['setUserInfo']),
+        ...mapActions(['actionUserInfo']),
         changeType(name, title) {//修改类型
             this.area = name;
             this.qrcode();
@@ -59,7 +63,7 @@ export default {
         qrcode() { //生成二维码
             this.$refs.qrCodeUrl.innerHTML = "";//先移除
             // this.code_text = `${window.location.protocol}//${window.location.host}/#/register?invitation=${this.area=='left' ? this.userInfo.user.userInvitation : this.userInfo.user.userInvitationRight}`;
-            this.code_text = `http://tb.njmall.store/#/register?invitation=${this.area == 'left' ? this.userInfo.userInvitation : this.userInfo.userInvitationRight}`;
+            this.code_text = `http://trex.top/#/register?invitation=${this.area == 'left' ? this.userInfo.userInvitation : this.userInfo.userInvitationRight}`;
             console.log(this.code_text);
             var qrcode = new QRCode(this.$refs.qrCodeUrl, {
                 text: this.code_text,
@@ -86,6 +90,9 @@ export default {
     },
     mounted() {
         this.qrcode();
+        this.actionUserInfo();
+        console.log(this.userInfo);
+
     }
 };
 
