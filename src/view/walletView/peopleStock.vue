@@ -198,11 +198,11 @@ export default {
                 return
             }
             let data = {
-                orderId: 4,
+                cyId: this.IndustryInformation.id,
                 payPassWord: this.newPassword,
                 token_: this.$store.state.newToken
             }
-            this.$http.post(this.$lib.host + 'qmlcg/yuyue', this.qsParams(data)).then(res => {
+            this.$http.post(this.$lib.host + 'qmlcg/payYuyue', this.qsParams(data)).then(res => {
                 if (res.code == 200) {
                     this.showPop = false
                     this.$layer.open({

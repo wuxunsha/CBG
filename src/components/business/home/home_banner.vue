@@ -6,7 +6,6 @@
                        indicator-color="white">
                 <van-swipe-item v-for="(item,index) in bannerArr"
                                 :key="index"
-                                @click="openLink(item.bcontent)"
                                 class=" animated fadeIn">
                     <img :src="item"
                          alt="">

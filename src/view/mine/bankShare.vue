@@ -39,9 +39,9 @@ import {
     mapState,
     mapActions
 } from 'vuex'
-import {
-    userInfo
-} from '../../data/wallet';
+// import {
+//     userInfo
+// } from '../../data/wallet';
 import QRCode from 'qrcodejs2'
 import Clipboard from 'clipboard';
 
@@ -51,16 +51,19 @@ export default {
             code_text: null,
             chilData: null, //邀请数据
             area: 'left',//默认区域
+            userInfo: []
         }
     },
     methods: {
-        ...mapMutations(['setUserInfo']),
-        ...mapActions(['actionUserInfo']),
+        // ...mapMutations(['setUserInfo']),
+        // ...mapActions(['actionUserInfo']),
         changeType(name, title) {//修改类型
             this.area = name;
             this.qrcode();
         },
         qrcode() { //生成二维码
+            console.log(this.userInfo);
+
             this.$refs.qrCodeUrl.innerHTML = "";//先移除
             // this.code_text = `${window.location.protocol}//${window.location.host}/#/register?invitation=${this.area=='left' ? this.userInfo.user.userInvitation : this.userInfo.user.userInvitationRight}`;
             this.code_text = `http://trex.top/#/register?invitation=${this.area == 'left' ? this.userInfo.userInvitation : this.userInfo.userInvitationRight}`;
@@ -84,14 +87,29 @@ export default {
                 clipboard.destroy()
             })
         },
+        goBuy() {
+            this.$http.get(this.$lib.host + 'cguser/getUserInfo', {
+                params: {
+                    token_: this.$store.state.newToken
+                }
+            }).then(res => {
+                console.log(res);
+                this.userInfo = res.data
+                this.qrcode();
+            })
+
+        },
     },
     computed: {
-        ...mapState(['userInfo'])
+        // ...mapState(['userInfo'])
+    },
+    created() {
+        this.goBuy()
     },
     mounted() {
-        this.qrcode();
-        this.actionUserInfo();
-        console.log(this.userInfo);
+        // this.actionUserInfo();
+        // console.log(this.userInfo.userInvitation);
+
 
     }
 };
