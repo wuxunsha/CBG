@@ -16,7 +16,7 @@
                 <div class="sub_title ellipse">{{item.subtitle}}</div>
                 <div class="info flex align">
                     <!-- <div><van-icon name="manager-o" />user</div> -->
-                    <div>{{item.addTime}}</div>
+                    <div>{{timerExchange(item.addTime)}}</div>
                 </div>
             </div>
         </div>
@@ -33,6 +33,18 @@ export default {
     methods: {
         gopage(item) {
             this.$router.push({ path: '/newsDetail', query: { item: item } })
+        },
+        timerExchange(time) {
+            var dt = new Date(time)
+            var yy = dt.getFullYear()
+            var mm = (dt.getMonth() + 1) > 9 ? dt.getMonth() + 1 : dt.getMonth() + 1
+            mm = mm > 9 ? mm : '0' + mm
+            var dd = dt.getDate() > 9 ? dt.getDate() : '0' + dt.getDate()
+            var hh = dt.getHours() > 9 ? dt.getHours() : '0' + dt.getHours()
+            var mi = dt.getMinutes() > 9 ? dt.getMinutes() : '0' + dt.getMinutes()
+            var ss = dt.getSeconds() > 9 ? dt.getSeconds() : '0' + dt.getSeconds()
+            var dy = dt.getDay() > 9 ? dt.getDay() : '0' + dt.getDay()
+            return `${yy}-${mm}-${dd} ${hh}:${mi}:${ss}`
         }
     },
     mounted() { },
