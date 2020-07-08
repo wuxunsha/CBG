@@ -33,6 +33,34 @@
             </ul>
         </div>
 
+        <div class="asset-list">
+            <ul>
+                <li v-for="(item, index) in balanceList"
+                    :key="index">
+                    <div class="asset-list-top">
+                        <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')"
+                             alt="">
+                        <span>{{item.coinId === '1001' ? 'USDT' : item.coinId === '1002' ? 'CBK' : item.coinId === '1003' ? 'CBG' : 'BTC'}}</span>
+                        <div class="bot-box">
+                            <span v-if="item.coinId === '1001'"
+                                  @click="receive(item.has)"
+                                  :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">{{item.has === 0 ? $t('feature.assets.text_lq') : $t('feature.assets.text_ylq')}}</span>
+                        </div>
+                    </div>
+                    <div class="list-name">
+                        <p>{{$t('feature.assets.text_available')}}</p>
+                        <p>{{$t('feature.assets.text_freeze')}}</p>
+                        <p>{{$t('feature.assets.text_crowdfunding')}}</p>
+                    </div>
+                    <div class="asset-sum">
+                        <p>{{financial(item.lastBalance)}}</p>
+                        <p>{{financial(item.freezemoney)}}</p>
+                        <p>{{financial(item.zcfund)}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
 </template>
@@ -45,7 +73,8 @@ import {
 import {
     TBListfund,
     qmlcgFanli
-} from '../../../data/wallet';
+} from '../../../data/wallet'
+import { Toast } from 'vant'
 export default {
     props: ['user'],
     data() {
