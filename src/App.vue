@@ -29,7 +29,19 @@ export default {
 </script>
 
 <style  lang="scss">
-	.transitionRouter-enter-active,
+/* 适配iphoneX iphoneXS */
+@media screen and (device-width:375px) and (device-height:812px){
+    .footer {
+      margin-bottom:34px;
+    }
+}
+/* 适配iphoneXR iphoneXSMax */
+@media screen and (device-width:414px) and (device-height:896px){
+    .footer {
+      margin-bottom:34px;
+    }
+}
+.transitionRouter-enter-active,
 .transitionRouter-leave-active {
 	transition: all 0.3s;
 	opacity: 1;
