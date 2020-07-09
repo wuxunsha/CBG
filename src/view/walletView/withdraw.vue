@@ -230,14 +230,14 @@ export default {
         // },
         // 手续费
         serviceNumber() {
-            if (this.balance) {
-                return this.balance * 0.02
+            if (this.withrawInfo.amount) {
+                return (this.withrawInfo.amount * 0.02).toFixed(2)
             }
             return '0.00'
         },
         arrivalAmount() {
-            if (this.balance) {
-                return this.balance - this.balance * 0.02
+            if (this.withrawInfo.amount) {
+                return (this.withrawInfo.amount - this.withrawInfo.amount * 0.02).toFixed(2)
             }
             return '0.00'
         }
@@ -256,8 +256,8 @@ export default {
             this.currCoin = value.text
             this.balance = value.lastBalance
             this.coinId = value.coinId
-            // this.withrawInfo.amount = null
-            // this.withrawInfo.coinId = value.coin.id
+            this.withrawInfo.amount = null
+            this.withrawInfo.coinId = value.coinId
             this.popup = false;
         },
         // 提取全部
