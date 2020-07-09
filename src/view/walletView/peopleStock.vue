@@ -55,7 +55,7 @@
                     <div class="pop-content">
                         <div class="pop-left">
                             <p>{{poType}}：<span style="color:#343B3A;margin: 0 0 0 15px">{{IndustryInformation.level}}</span></p>
-                            <p>{{poNum}}：<span style="margin: 0 0 0 15px">{{IndustryInformation.maxAmount * IndustryInformation.baozjl}}USDT</span></p>
+                            <p>{{poNum}}：<span style="margin: 0 0 0 15px">{{IndustryInformation.maxAmount * IndustryInformation.baozjl}}CBK(0.2U)</span></p>
                         </div>
                     </div>
                     <div class="input-focus">

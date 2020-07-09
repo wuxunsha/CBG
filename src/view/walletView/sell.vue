@@ -19,7 +19,7 @@
             </div>
             <div class="use-num">
                 <p>可用：{{total}}USDT</p>
-                <span>手续费:２％</span>
+                <span>手续费:5％</span>
             </div>
         </div>
         <div class="sell">
