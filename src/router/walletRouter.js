@@ -41,6 +41,7 @@ const addPayment = resolve => require(['@/view/mine/add-payment'], resolve)
 const service = resolve => require(['@/view/walletView/service'], resolve)
 const orderList = resolve => require(['@/view/walletView/orderList'], resolve)
 const rule = resolve => require(['@/view/walletView/rule'], resolve)
+const myList = resolve => require(['@/view/walletView/myList'], resolve)
 
 
 // 自定义路由
@@ -90,6 +91,7 @@ let routerArr = {
     service: service,
     orderList: orderList,
     rule: rule,
+    myList: myList,
     ...business // 非通用路由
 }
 

@@ -205,7 +205,7 @@ export default {
 
             let data = {
                 token_: this.$store.state.newToken,
-                type: '2',
+                type: '1',
                 totalNum: this.sellNum,
                 minNum: this.minNum,
                 minAmount: this.minPrice,

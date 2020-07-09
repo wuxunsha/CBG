@@ -12,9 +12,10 @@
                      @click="demoClick(index)">{{t}}</div>
             </div>
             <div class="detail-pig">
-                <img @click="$router.push('/orderList')"
+                <img @click="$router.push('/myList')"
                      src="../../assets/wallet/deal/zhizhi.png">
-                <img src="../../assets/wallet/deal/zhizh.png">
+                <img @click="$router.push('/orderList')"
+                     src="../../assets/wallet/deal/zhizh.png">
             </div>
         </div>
         <div v-if="tabNum == 0">
@@ -229,9 +230,9 @@ export default {
                 if (res.code == 200) {
                     console.log(res);
                     if (i.type == 0) {
-                        this.$router.push({ path: '/issueWait', query: { item: i } })
-                    } else {
                         this.$router.push({ path: '/sellWait', query: { item: i } })
+                    } else {
+                        this.$router.push({ path: '/issueWait', query: { item: i } })
                     }
                     this.$layer.open({
                         content: res.msg,
