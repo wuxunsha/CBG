@@ -77,6 +77,7 @@ import {
     getUserTDIncome,
     getExtract
 } from '../../data/wallet'
+import { Toast } from 'vant'
 export default {
     data() {
         return {
@@ -120,7 +121,13 @@ export default {
             getExtract({ token_: this.$store.state.newToken, type: id }).then(res => {
                 if (res.code === '200') {
                     console.log(res);
-
+                    Toast.success(res.msg)
+                }
+            }).catch(e => {
+                if (e.code === '200') {
+                    Toast.success(e.msg)
+                } else {
+                    Toast(e.msg)
                 }
             })
         }

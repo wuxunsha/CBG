@@ -85,7 +85,7 @@
             </p>
         </div>
 
-        <div style="height:10px;background:rgba(247,246,251,1);width:100%"></div>
+        <!-- <div style="height:10px;background:rgba(247,246,251,1);width:100%"></div>
         <div class="rechargeList">
             <h3>{{$t('wallet.recharge.list')}}</h3>
             <div v-if="rechargeList.length === 0">
@@ -101,7 +101,7 @@
                     <div>{{item.addTime}}</div>
                 </li>
             </ul>
-        </div>
+        </div> -->
 
         <div class="space20"></div>
 
