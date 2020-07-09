@@ -29,7 +29,7 @@
             <p style="text-indent: 4em;">{{$t('wallet.rule.text_22')}}</p>
             <p style="text-indent: 4em;">{{$t('wallet.rule.text_23')}}</p>
             <p style="text-indent: 4em;">{{$t('wallet.rule.text_24')}}</p>
-            <p>{{$t('wallet.rule.text_25')}}</p>
+            <!-- <p>{{$t('wallet.rule.text_25')}}</p> -->
         </div>
 
     </div>

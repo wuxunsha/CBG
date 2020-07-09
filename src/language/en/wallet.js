@@ -314,16 +314,16 @@ const lang = {
         text_13: "four. Referral income",
         text_14: "There will be a static income for the deposit of the deposit in the national shareholding. Recommend friends to play the national shareholding to receive the corresponding rewards. The details are as follows:",
         text_15: "A), recommended income (the income rate can be modified in the background)",
-        text_16: "1. Take 8% of the first generation node revenue",
-        text_17: "2. Take the 2nd generation node revenue 3%",
+        text_16: "1. Take 10% of the first generation node revenue",
+        text_17: "2. Take the 2nd generation node revenue 5%",
         text_18: "3. Take the third-generation node's revenue 5%",
         text_19: "B) Team income",
         text_20: "1. Vip1 node directly pushes 10 nodes, the recommended income is 500U, and the node income under the umbrella is 1%",
-        text_21: "2. The VIP2 node directly pushes 20 nodes, the recommended income is 300U, and the node income under the umbrella is 3%",
-        text_22: "3. The VIP3 node directly pushes 40 nodes, the recommended income is 7000U, and the node income under the umbrella is 5%",
-        text_23: "4. VIP4 nodes share 80 nodes, the recommended revenue is 15000U, and the node revenue under the umbrella is 8%",
-        text_24: "5. VIP5 nodes share 160 nodes, the recommended income is 30000U, and the node income under the umbrella is 10%",
-        text_25: "The above revenues are all taken as a percentage of smart contract revenue. 1% at level 1 and 1% at level",
+        text_21: "2. The VIP2 node directly pushes 10 nodes, the recommended income is 300U, and the node income under the umbrella is 3%",
+        text_22: "3. The VIP3 node directly pushes 10 nodes, the recommended income is 7000U, and the node income under the umbrella is 5%",
+        text_23: "4. VIP4 nodes share 10 nodes, the recommended revenue is 15000U, and the node revenue under the umbrella is 8%",
+        text_24: "5. VIP5 nodes share 10 nodes, the recommended income is 30000U, and the node income under the umbrella is 10%",
+        // text_25: "The above revenues are all taken as a percentage of smart contract revenue. 1% at level 1 and 1% at level",
     }
 }
 
