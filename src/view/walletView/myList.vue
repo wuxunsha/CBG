@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="navBox">
-            <van-nav-bar :title="`交易记录`"
+            <van-nav-bar :title="`我的订单`"
                          fixed
                          left-arrow
                          @click-left="goback()" />
@@ -144,7 +144,7 @@ export default {
             this.tabNum = index;
         },
         getDealList() {
-            this.$http.get(this.$lib.host + 'otc/listbuyOrder', {
+            this.$http.get(this.$lib.host + 'otc/selectOrderByUser', {
                 params: {
                     token_: this.$store.state.newToken,
                 }
@@ -174,15 +174,16 @@ export default {
         goBuy(i) {
             if (i.type == 0) {
                 if (i.state == 1) {
-                    this.$router.push({ path: '/sellWait', query: { item: i } })
-                } else {
-                    this.$router.push({ path: '/sellAWait', query: { item: i } })
-                }
-            } else {
-                if (i.state == 1) {
                     this.$router.push({ path: '/issueWait', query: { item: i } })
                 } else {
                     this.$router.push({ path: '/issueAwait', query: { item: i } })
+                }
+
+            } else {
+                if (i.state == 1) {
+                    this.$router.push({ path: '/sellWait', query: { item: i } })
+                } else {
+                    this.$router.push({ path: '/sellAWait', query: { item: i } })
                 }
             }
 
