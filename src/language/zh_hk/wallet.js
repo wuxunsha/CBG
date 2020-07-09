@@ -8,7 +8,7 @@ const lang = {
         form_btn_forget: "忘記密碼",
         none_user: "還有沒有平臺帳號？",
         btn_register: "立即註冊",
-        toast_mail: "請輸入正確手機號碼",
+        toast_mail: "請輸入用戶名",
         toast_pass: "請輸入密碼"
     },
     register: {

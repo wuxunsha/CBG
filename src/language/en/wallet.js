@@ -8,7 +8,7 @@ const lang = {
         form_btn_forget: "forget password",
         none_user: "Don't have a CB GAME account yet?",
         btn_register: "registered",
-        toast_mail: "Please enter the correct mobile number",
+        toast_mail: "please enter user name",
         toast_pass: "Please enter the password"
     },
     register: {

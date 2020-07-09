@@ -8,7 +8,7 @@ const lang = {
         form_btn_forget: "忘记密码",
         none_user: "还没有CB GAME账号？",
         btn_register: "注册",
-        toast_mail: "请输入正确手机号码",
+        toast_mail: "请输入用户名",
         toast_pass: "请输入密码"
     },
     register: {
