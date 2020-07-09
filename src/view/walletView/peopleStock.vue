@@ -25,7 +25,7 @@
                     <h3>{{item.level}}</h3>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_industrial')}}(USDT)</span>
-                        <span>{{item.maxAmount}}-{{item.minAmount}}</span>
+                        <span>{{item.minAmount}}-{{item.maxAmount}}</span>
                     </p>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cgsj')}}</span>
@@ -33,7 +33,7 @@
                     </p>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cyshy')}}</span>
-                        <span>1{{$t('wallet.peopleStock.text_tian')}}/{{item.rate * 100}}%</span>
+                        <span>1{{$t('wallet.peopleStock.text_tian')}}/{{(item.rate * 100).toFixed(2)}}%</span>
                     </p>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cysl')}}</span>
