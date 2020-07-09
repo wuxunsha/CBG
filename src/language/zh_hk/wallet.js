@@ -2,7 +2,7 @@ const lang = {
     login: {
         text_active: "當前帳號已被限制登錄,請聯系管理員",
         title: "CB帳號登錄",
-        form_mail: "請輸入用戶ID",
+        form_mail: "用戶名",
         form_pass: "請輸入賬戶密碼",
         form_btn_login: "登錄帳號",
         form_btn_forget: "忘記密碼",

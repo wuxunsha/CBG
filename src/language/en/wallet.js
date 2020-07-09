@@ -2,7 +2,7 @@ const lang = {
     login: {
         text_active: "The current account has been restricted to log in, please contact the administrator",
         title: "Login CB",
-        form_mail: "email or mobile phone number",
+        form_mail: "username",
         form_pass: "password",
         form_btn_login: "log in",
         form_btn_forget: "forget password",

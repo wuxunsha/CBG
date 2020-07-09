@@ -2,7 +2,7 @@ const lang = {
     login: {
         text_active: "当前帐号已被限制登录,请联系管理员",
         title: "登录CB",
-        form_mail: "邮箱或手机号码",
+        form_mail: "用户名",
         form_pass: "密码",
         form_btn_login: "登录",
         form_btn_forget: "忘记密码",

@@ -1,284 +1,141 @@
 <template>
     <div id="user"
          class="full-screen">
-
-        <div class="navBox opacity">
-            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`" />
+        <div>
+            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`" fixed>
+                <template #right>
+                    <img src="../../assets/business/user/szh2x.png"
+                         alt="" @click="gopage('/setting')">
+                </template>
+            </van-nav-bar>
         </div>
 
-        <div class="user_info flex align"
-             style="padding-top:60px;">
-            <div class="header_text">{{userInfo.user.userName.substring(0,1).toUpperCase()}}</div>
-            <div class="info">
-                <b>UUID&nbsp;:&nbsp;{{userInfo.user.userAccount || userInfo.user.id}}</b>
-                <span>{{$t('feature.bankUser.text_level')}}：{{userRole}}</span>
-                <!-- <span>{{$t('feature.bankUser.text_level')}}：{{userInfo.user.userLevelId > 0 ? userInfo.user.userLevelId-1 : `${$t('feature.bankUser.text_level_n')}` }}</span> -->
+        <div class="user-box">
+            <div class="user-left">
+                <div class="user_info flex align">
+                    <div class="header_text">
+                        <img src="../../assets/business/user/wdxzh2x.png"
+                             alt="">
+                    </div>
+                    <div class="info">
+                        <b>{{userInfo.userAccount || userInfo.id}}</b>
+                        <!-- <span>{{$t('feature.bankUser.text_level')}}：{{userRole}}</span> -->
+                        <span>{{userInfo.userPhone}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-right">
+                <div class="VIP-level flex align">
+                    <div>
+                        <img src="../../assets/business/user/ＶＩＰ@2x.png"
+                             alt="">
+                    </div>
+                    <div>
+                        <img src="../../assets/business/user/hydj2x.png"
+                             alt="">
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- user_info -->
 
-        <div class="menu_item_box">
-
-            <div class="iconMenu flex align">
-                <div class="item"
-                     @click="gopage('/bankShare')">
-                    <i class="menu_1"></i>
-                    <div class=" text_color_dark textCenter">{{$t('feature.bankUser.text_bankShare')}}</div>
-                </div>
-                <div class="item"
-                     @click="gopage('/bankShareList')">
-                    <i class="menu_2"></i>
-                    <div class=" text_color_dark textCenter">{{$t('feature.bankUser.text_shareList')}}</div>
-                </div>
+        <div class="bankShare">
+            <div @click="gopage('/bankShare')">
+                {{$t('feature.bankUser.text_bankShare')}}
             </div>
-            <!-- iconMenu -->
-
-            <div class="bg_color_gray space10"></div>
-
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/assetsDetail_v2')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_mx.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_assets')}}</div>
-                <van-icon name="arrow" />
+            <div @click="gopage('/bankShareList')">
+                {{$t('feature.bankUser.text_shareList')}}
             </div>
-            <!-- menu_list -->
+        </div>
 
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/rechargeList')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_cz.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_rechargeList')}}</div>
-                <van-icon name="arrow" />
-            </div>
-            <!-- menu_list -->
-
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/withdrawList')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_tx.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_withdrawList')}}</div>
-                <van-icon name="arrow" />
-            </div>
-            <!-- menu_list -->
-
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/forgetPass')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_dl.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_forgetPass')}}</div>
-                <van-icon name="arrow" />
-            </div>
-            <!-- menu_list -->
-
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/setPayPass')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_zfmm.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_changePayPass')}}</div>
-                <van-icon name="arrow" />
-            </div>
-            <!-- menu_list -->
-
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="gopage('/feedback')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_kf.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_feedback')}}</div>
-                <van-icon name="arrow" />
-            </div>
-            <!-- menu_list -->
-
-            <div class="flex align menu_list right_row border-bottom"
+        <div class="news">
+            <div class="news-box"
                  @click="gopage('/news')">
-                <div class="icon">
-                    <img src="../../assets/business/menu_gg.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_news')}}</div>
-                <van-icon name="arrow" />
+                <img src="../../assets/business/user/ggxx2x.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_news')}}</span>
             </div>
-            <!-- menu_list -->
-
-            <!-- <div class="flex align menu_list right_row border-bottom" @click="gopage('/setPayPass')" v-if="false">
-        <div class="icon">
-          <img src="../../assets/business/menu_jy.png" alt="" srcset="">
         </div>
-        <div class="title font12 text_color_dark  font-bold">修改交易密码</div>
-         <van-icon name="arrow" />
-      </div> -->
-            <!-- menu_list -->
 
-            <div class="flex align menu_list right_row border-bottom"
-                 @click="showLang=true">
-                <div class="icon">
-                    <img src="../../assets/business/menu_yy.png"
-                         alt=""
-                         srcset="">
-                </div>
-                <div class="title font12 text_color_dark  font-bold">{{$t('feature.bankUser.text_lang')}}</div>
-                <van-icon name="arrow" />
+        <div class="news">
+            <div class="news-box"
+                 @click="userInfo.isrz === 0 ? '' : $router.push('/identityTwo')">
+                <img src="../../assets/business/user/ssrz2x.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_Authentication')}}</span>
+                <span v-if="userInfo.isrz === 0">{{$t('feature.bankUser.text_verified')}}</span>
+                <span v-else>{{$t('feature.bankUser.text_not_certified')}}</span>
             </div>
-            <!-- menu_list -->
-
         </div>
-        <!-- menu_item_box -->
 
-        <div class="space20"></div>
-
-        <div class="login_out"
-             @click="login_out()">{{$t('wallet.user.text_loginout')}}</div>
-
-        <div class="space20"></div>
-
-        <van-dialog v-model="showEdit"
-                    :title="$t('wallet.user.dialog_edit')"
-                    show-cancel-button
-                    :closeOnClickOverlay="true"
-                    :beforeClose="dialogConfirm">
-            <div class="dialogMain">
-                <van-field v-model="newName"
-                           border
-                           clickable
-                           :placeholder="$t('wallet.user.input_name')" />
+        <div class="news">
+            <div class="news-box bottom"  @click="gopage('/paymentMethod')">
+                <img src="../../assets/business/user/skfsh2x.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_payment_method')}}</span>
             </div>
-        </van-dialog>
+        </div>
 
-        <!-- <van-popup v-model="showEdit">内容</van-popup> -->
+        <div class="Partition"></div>
 
-        <van-action-sheet v-model="showLang"
-                          :title="$t('wallet.common.exchange_lang')"
-                          :actions="lang_actions"
-                          @select="onSelect" />
+        <div class="news">
+            <div class="news-box"
+                 @click="gopage('/safety')">
+                <img src="../../assets/business/user/zhan2x.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_account_security')}}</span>
+            </div>
+        </div>
+
+        <div class="news">
+            <div class="news-box bottom">
+                <img src="../../assets/business/user/gywm2x.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_about_us')}}</span>
+            </div>
+        </div>
+
+        <div class="Partition"></div>
 
         <myFooter :footerNavActive="activeType"></myFooter>
 
     </div>
-    <!-- index -->
 </template>
 
 <script>
-import {
-    mapMutations,
-    mapState
-} from 'vuex'
 import myFooter from "../../components/wallet/footer.vue";
 import {
     Toast
 } from 'vant';
 import {
     change_nickname,
-    getUserInfo
+    getUser
 } from '../../data/wallet';
 export default {
     data() {
         return {
             activeType: "user",
-            showLang: false,
-            show_change_input: false, //显示修改账户名
-            newName: null,
-            showEdit: false,
-            userRole: ''
+            userInfo: {}
         }
     },
     components: {
         myFooter
     },
     methods: {
-        ...mapMutations(['setUserInfo', 'setToken']),
-        changeName(done) {//修改用户名
-            change_nickname({ "newNick": this.newName }).then(v => {
-                Toast(v.message);
-                let newInfo = this.userInfo;
-                newInfo.username = this.newName;
-                this.setUserInfo(newInfo);
-                done;
-            })
-        },//changeName
-        dialogConfirm(action, done) {//确定编辑用户名
-            if (action === 'confirm') {
-                if (this.newName.length < 3 || this.newName.length > 10) {
-                    Toast(this.$t('wallet.user.Toast_name'))
-                    done(false);
-                } else {
-                    setTimeout(() => {
-                        this.changeName(done());
-                    }, 2000);
+        // 获取用户信息
+        getUserInfo() {
+            getUser({token_: this.$store.state.newToken}).then(res => {
+                if (res.code === '200') {
+                    this.userInfo = res.data
                 }
-            } else {
-                this.newName = null;
-                done();
-            }
-        },//dialogConfirm
-        editName() {//编辑账户名
-            this.showEdit = true;
-            this.newName = this.userInfo.username;
-        },//editName
-        login_out() { //退出登录
-            Dialog.confirm({
-                message: this.$t('wallet.user.text_confirm'),
-                confirmButtonText: this.$t('wallet.common.text_confirmButtonText'),
-                cancelButtonText: this.$t('wallet.common.text_cancelButtonText')
-            }).then(() => {
-                this.get_loginout();
             })
-        }, //login_out
-        get_loginout() {
-            this.gopage_re('login');
-            setTimeout(() => {
-                this.setUserInfo(null);
-                this.setToken(null);
-                this.$store.commit('setUser', {                    user: {
-                        uid: null,
-                        password: null
-                    }                })
-                this.$store.commit('setNewToken', '')
-                localStorage.removeItem('vuex');
-                location.reload();
-            }, 500);
-        }, //get_loginout
-        onSelect(item) {//设置语言
-            this.set_lang(item.type);
-            this.showLang = false;
-        }//onSelect
-    },
-    computed: {
-        ...mapState(['userInfo', 'check_read'])
+        }
     },
     created() {
-        let roleObj = {
-            0: '普通会员',
-            1: '初级会员',
-            2: '中级会员',
-            3: '高级会员',
-            4: '超级会员'
-        }
-        getUserInfo({ userId: this.userInfo.user.id }).then(v => {
-            this.userRole = roleObj[v.data.user.userRole]
-        })
+        this.getUserInfo()
     },
     mounted() {
 
-    } //mounted
+    }
 };
 
 </script>
@@ -289,58 +146,157 @@ export default {
     box-sizing: border-box;
 }
 
-.user_info {
-    margin-top: 0;
-    padding: 30px 20px;
-    position: relative;
-    background: $them_color_dark;
-    padding-bottom: 80px;
-
-    * {
-        color: white;
-    }
-
-    .header_text {
-        width: 50px;
-        height: 50px;
-        background: white;
-        color: $them_color;
-        text-align: center;
-        line-height: 50px;
-        border-radius: 100px;
+.van-nav-bar {
+    border-bottom: 1px solid #ebebeb;
+    .van-nav-bar__title {
+        font-size: 16px;
+        font-family: PingFang SC;
         font-weight: bold;
-        font-size: 30px;
-        margin-right: 15px;
+        color: rgba(53, 53, 53, 1);
     }
-    .info {
-        b {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 15px;
+    img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.full-screen {
+    .user-box {
+        display: flex;
+        margin-top: 47px;
+        height: 72px;
+        padding: 0 20px;
+        border-bottom: 1px solid #ebebeb;
+        .user-left {
+            flex: 1;
+            .user_info {
+                position: relative;
+                height: 100%;
+                .header_text {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .info {
+                    b {
+                        display: block;
+                        margin-bottom: 5px;
+                        font-size: 14px;
+                        font-family: PingFang SC;
+                        font-weight: bold;
+                        color: rgba(53, 53, 53, 1);
+                    }
+                    span {
+                        display: block;
+                        font-size: 12px;
+                        font-family: PingFang SC;
+                        font-weight: bold;
+                        color: rgba(34, 239, 185, 1);
+                    }
+                }
+            }
         }
-        span {
-            display: block;
-            font-size: 12px;
+        .user-right {
+            margin-right: 28px;
+            .VIP-level {
+                height: 72px;
+                > div:nth-child(1) {
+                    position: relative;
+                    width: 36px;
+                    height: 72px;
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateY(-8px);
+                        width: 100%;
+                        height: 16px;
+                    }
+                }
+                > div:nth-child(2) {
+                    position: relative;
+                    width: 54px;
+                    height: 72px;
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateY(-24px);
+                        width: 100%;
+                        height: 49px;
+                    }
+                }
+            }
+            // img:nth-child(1) {
+            //     width: 36px;
+            //     height: 16px;
+            // }
+            // img:nth-child(2) {
+            //     width: 54px;
+            //     height: 49px;
+            // }
         }
     }
 
-    .main,
-    .number-info,
-    .btn-row {
-        position: relative;
-        z-index: 11;
-    }
-    .header {
-        margin-right: 10px;
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 100px;
-            -webkit-border-radius: 100px;
-            overflow: hidden;
-            background: white;
-            padding: 5px;
+    .bankShare {
+        display: flex;
+        width: 100%;
+        height: 47px;
+        line-height: 42px;
+        border-bottom: 5px solid #f7f6fb;
+        > div {
+            flex: 1;
+            height: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(53, 53, 53, 1);
         }
+        > div:nth-child(1) {
+            border-right: 1px solid #ebebeb;
+        }
+    }
+
+    .news {
+        width: 100%;
+        height: 45px;
+        padding-left: 20px;
+        .news-box {
+            width: 100%;
+            height: 100%;
+            line-height: 45px;
+            border-bottom: 1px solid #ebebeb;
+            padding-right: 20px;
+            span {
+                font-size: 14px;
+                line-height: 45px;
+                font-family: PingFang SC;
+                font-weight: 500;
+                color: rgba(53, 53, 53, 1);
+            }
+            > span:nth-child(3) {
+                float: right;
+                color: #566bf3;
+            }
+            img {
+                width: 16px;
+                margin-right: 10px;
+            }
+        }
+        .bottom {
+            border-bottom: none;
+        }
+    }
+
+    .Partition {
+        width: 100%;
+        height: 5px;
+        background: #f7f6fb;
     }
 }
 
