@@ -314,6 +314,13 @@ export function getUserPayInfo(params) { // 获取用户收款方式
     })
 }
 
+export function listZJinfo(params) { // 获取资产列表
+    return get({
+        url: `${cbkPathUrl}tb/listZJinfo`,
+        params: params
+    })
+}
+
 
 const txPathUrl = 'http://trex.top/payservice/'
 

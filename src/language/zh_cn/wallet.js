@@ -269,7 +269,7 @@ const lang = {
         text_account: "账户",
         text_phone: "联系电话",
         text_qr_code: "添加收款二维码",
-        text_prompt: "支持JPG/PNG/JPEG格式文件，且不超过2M",
+        text_prompt: "支持JPG/PNG/JPEG格式文件",
         text_save: "保存"
     },
     peopleStock: {

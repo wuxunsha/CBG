@@ -7,7 +7,7 @@
         <div class="asset-list">
             <ul>
                 <li v-for="(item, index) in balanceList"
-                    :key="index">
+                    :key="index" @click="assetsDetail(item.coinId)">
                     <div class="asset-list-top">
                         <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')"
                              alt="">
@@ -15,7 +15,7 @@
                         <div class="bot-box">
                             <span v-if="item.coinId === '1001'"
                                   :disabled="item.has === 0 ? false : true"
-                                  @click="item.has === 0 ? receive() : ''"
+                                  @click="item.has === 0 ? receive($event) : ''"
                                   :class="item.has === 0 ? 'receive-btn received' : 'receive-btn unclaimed'">{{item.has === 0 ? $t('feature.assets.text_lq') : $t('feature.assets.text_ylq')}}</span>
                         </div>
                     </div>
@@ -62,12 +62,6 @@ export default {
     methods: {
         // 获取资产列表信息
         getBalanceAll() {
-            // let res = this.userInfo.balanceModels.map(v=>{
-            //     v.text = `${v.coin.coinName}(${this.$t('feature.transfer.text_balance')}${v.amount})`
-            //     return v;
-            // }).filter(v=>v.coin.transfer=='Y');
-            // this.balanceList = res
-            // console.log(this.balanceList)
             TBListfund({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
                     this.balanceList = res.data
@@ -75,9 +69,8 @@ export default {
             })
         },
         // 领取
-        receive() {
-
-
+        receive(event) {
+            event.stopPropagation()
             qmlcgFanli({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
                     this.getBalanceAll()
@@ -101,6 +94,15 @@ export default {
                     })
                 }
 
+            })
+        },
+        // 跳转资产明细页面
+        assetsDetail(coinId) {
+            this.$router.push({ 
+                path: '/assetsDetail_v2', 
+                query: { 
+                    coinId: coinId 
+                } 
             })
         },
         // 保留小数点

@@ -33,7 +33,8 @@
                     </p>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cyshy')}}</span>
-                        <span>1{{$t('wallet.peopleStock.text_tian')}}/{{(item.rate * 100).toFixed(2)}}%</span>
+                        <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{(item.rate * 100).toFixed(2)}}%</span> -->
+                        <span>{{item.cycle === 1 ? 5: item.cycle === 5 ? 12 : item.cycle === 10 ? 20 : 25}}%</span>
                     </p>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cysl')}}</span>

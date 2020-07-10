@@ -53,7 +53,8 @@
                     <div class="order-center">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
-                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
+                            <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
+                            <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
@@ -109,7 +110,8 @@
                     <div class="order-center">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
-                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
+                            <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
+                            <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
@@ -164,7 +166,8 @@
                     <div class="order-center">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
-                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
+                            <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
+                            <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
@@ -218,7 +221,8 @@
                     <div class="order-center">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
-                            <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span>
+                            <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
+                            <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>

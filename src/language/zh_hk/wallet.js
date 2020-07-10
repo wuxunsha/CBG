@@ -268,7 +268,7 @@ const lang = {
         text_account: "賬戶",
         text_phone: "聯系電話",
         text_qr_code: "添加收款二維碼",
-        text_prompt: "支持JPG/PNG/JPEG格式文件，且不超過2M",
+        text_prompt: "支持JPG/PNG/JPEG格式文件",
         text_save: "保存"
     },
     peopleStock: {

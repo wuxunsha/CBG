@@ -267,7 +267,7 @@ const lang = {
         text_account: "Account",
         text_phone: "contact number",
         text_qr_code: "Add payment QR code",
-        text_prompt: "Support JPG/PNG/JPEG format files, and no more than 2M",
+        text_prompt: "Support JPG/PNG/JPEG format files",
         text_save: "save"
     },
     peopleStock: {
