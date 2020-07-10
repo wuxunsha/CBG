@@ -211,14 +211,14 @@ export default {
                 if (res.code == 200) {
                     console.log(res);
                     this.issueList = res.data.filter(e => {
-                        if (e.type == 0) {
+                        if (e.type == 1) {
                             return e
                         }
                     })
                     console.log(this.issueList);
 
                     this.sellList = res.data.filter(e => {
-                        if (e.type == 1) {
+                        if (e.type == 0) {
                             return e
                         }
                     })

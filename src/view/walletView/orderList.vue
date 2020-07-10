@@ -173,13 +173,13 @@ export default {
         },
         goBuy(i) {
             if (i.type == 0) {
-                if (i.state == 1) {
+                if (i.state == 1 || i.state == 1) {
                     this.$router.push({ path: '/sellWait', query: { item: i } })
                 } else {
                     this.$router.push({ path: '/sellAWait', query: { item: i } })
                 }
             } else {
-                if (i.state == 1) {
+                if (i.state == 1 || i.state == 1) {
                     this.$router.push({ path: '/issueWait', query: { item: i } })
                 } else {
                     this.$router.push({ path: '/issueAwait', query: { item: i } })
