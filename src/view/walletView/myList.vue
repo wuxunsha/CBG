@@ -24,6 +24,8 @@
                     <div class="sell-top">
                         <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
 
+                        <p v-if="i.state == '0'"
+                           style="color:#3507DF">未交易</p>
                         <p v-if="i.state == '1'"
                            style="color:#3507DF">待付款</p>
                         <p v-if="i.state == '4'"
@@ -152,7 +154,7 @@ export default {
                 if (res.code == 200) {
                     // console.log(res);
                     this.issueList = res.data.filter(e => {
-                        if (e.state == 1 || e.state == 4) {
+                        if (e.state == 0 || e.state == 1 || e.state == 4) {
                             return e
                         }
                     })
@@ -173,8 +175,12 @@ export default {
         },
         goBuy(i) {
             if (i.type == 0) {
+
+
                 if (i.state == 1) {
                     this.$router.push({ path: '/issueWait', query: { item: i } })
+                } else if (i.state == 0) {
+                    this.$router.push({ path: '/deal', query: { item: '' } })
                 } else {
                     this.$router.push({ path: '/issueAwait', query: { item: i } })
                 }
@@ -182,6 +188,8 @@ export default {
             } else {
                 if (i.state == 1) {
                     this.$router.push({ path: '/sellWait', query: { item: i } })
+                } else if (i.state == 0) {
+                    this.$router.push({ path: '/deal', query: { item: '' } })
                 } else {
                     this.$router.push({ path: '/sellAWait', query: { item: i } })
                 }
