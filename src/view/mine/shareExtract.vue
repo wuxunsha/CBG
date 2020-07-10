@@ -26,13 +26,13 @@
             <ul class="revenue-list">
                 <li>
                     <div>收益</div>
-                    <div>数量</div>
-                    <div>方式</div>
-                    <div>提取</div>
+                    <div style="text-align:center;">数量</div>
+                    <div></div>
+                    <div style="text-align:center;">提取</div>
                 </li>
                 <li>
                     <div>推荐收益</div>
-                    <div>{{income.ztincome}}</div>
+                    <div style="text-align:center;">{{income.ztincome}}</div>
                     <div class="select-box">
                         <!-- <p @click="popup = true">
                             <span>选择卖出产业</span>
@@ -43,7 +43,7 @@
                 </li>
                 <li>
                     <div>团队收益</div>
-                    <div>{{income.teamincome}}</div>
+                    <div style="text-align:center;">{{income.teamincome}}</div>
                     <div class="select-box">
                         <!-- <p>
                             <span>选择卖出产业</span>
