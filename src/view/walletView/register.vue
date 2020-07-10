@@ -219,7 +219,7 @@ export default {
             params.phoneOrEmail = this.form.phone;
             params.username = this.form.phone;
             register(JSON.stringify(params)).then(data => {
-                Toast(data.message)
+                Toast(data.msg)
 
                 Dialog.alert({
                     title: data.message,
@@ -235,7 +235,7 @@ export default {
 
             }).catch(e => {
                 console.error(e);
-                Toast(e.message);
+                Toast(e.msg);
             })
         },
         onSelect(item) {

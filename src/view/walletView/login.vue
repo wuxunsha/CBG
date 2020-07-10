@@ -165,7 +165,7 @@ export default {
             }).catch(e => {
                 console.error(e);
                 this.disabled = false;
-                //Toast(e.message);
+                Toast(e.msg);
             })
         },
         onSelect(item) {

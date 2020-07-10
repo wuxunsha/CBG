@@ -292,8 +292,8 @@ export default {
             withdraw(data).then(res => {
 
             }).catch((e) => {
-                if (e.code == 1000) {
-                    Toast('提现申请成功');
+                if (e.code === 1000) {
+                    Toast.success('提现申请成功')
                     this.balance -= this.withrawInfo.amount;
                     this.show_popup = false;
                     this.withrawInfo = {
@@ -303,6 +303,8 @@ export default {
                         coinId: null,
                         transactionPwd: null
                     }
+                } else {
+                    Toast(e.msg)
                 }
             })
         },

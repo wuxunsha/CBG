@@ -155,7 +155,7 @@ export default {
                 }, 1000);
             }).catch(e => {
                 console.error(e);
-                //Toast(e.message);
+                Toast(e.msg);
             })
         }, //submitLogin
         onSelect(item) {
