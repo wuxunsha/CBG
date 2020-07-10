@@ -164,7 +164,7 @@ const lang = {
     btn_submit: "Invest Now"
   },
   assetsDetail_v2: {
-    nav_title: "Fund Details",
+    nav_title: "Asset Details",
     text_in: "Payee",
     text_out: "Transfer",
     text_fee: "Handling Fee"

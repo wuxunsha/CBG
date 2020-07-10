@@ -164,7 +164,7 @@ const lang = {
         btn_submit: "立即投資"
     },
     assetsDetail_v2: {
-        nav_title: "資金明細",
+        nav_title: "資產明細",
         text_in:"收款人",
         text_out:"轉賬人",
         text_fee:"手續費"

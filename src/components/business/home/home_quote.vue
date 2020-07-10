@@ -91,7 +91,7 @@ export default {
 .quote {
     width: 100%;
     // min-height: 350px;
-    min-height: calc(100vh - 313px);
+    min-height: calc(100vh - 273px);
     padding: 0 15px;
     background: #f7f6fb;
     > h3 {

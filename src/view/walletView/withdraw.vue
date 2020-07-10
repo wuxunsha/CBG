@@ -344,7 +344,7 @@ export default {
 @import "../../styles/walletVal";
 #funds {
     .item_box {
-        margin-top: 46px;
+        padding-top: 46px;
         .remind-box {
             background: #eef0ff;
             .remind {

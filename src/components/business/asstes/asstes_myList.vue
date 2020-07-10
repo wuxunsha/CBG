@@ -120,6 +120,7 @@ export default {
 <style rel="stylesheet/scss" scoped lang="scss">
 @import "../../../styles/walletVal";
 .mylist {
+    padding-bottom: 50px;
     .asset-list-title {
         width: 100%;
         height: 54px;

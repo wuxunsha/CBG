@@ -52,7 +52,7 @@ export default {
     opacity: 0;
 }
 #app{
-	min-height: 100vh;
+	// min-height: 100vh;
 	box-sizing: border-box;
 }
 </style>

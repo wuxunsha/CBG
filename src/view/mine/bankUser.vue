@@ -49,6 +49,15 @@
 
         <div class="news">
             <div class="news-box"
+                @click="gopage('/assetsDetail_v2')">
+                <img src="../../assets/business/user/menu_mx.png"
+                     alt="">
+                <span>{{$t('feature.bankUser.text_assets')}}</span>
+            </div>
+        </div>
+
+        <div class="news">
+            <div class="news-box"
                  @click="gopage('/news')">
                 <img src="../../assets/business/user/ggxx2x.png"
                      alt="">

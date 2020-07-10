@@ -169,7 +169,7 @@ const lang = {
         btn_submit: "立即投资"
     },
     assetsDetail_v2: {
-        nav_title: "资金明细",
+        nav_title: "资产明细",
         text_in: "收款人",
         text_out: "转账人",
         text_fee: "手续费"
