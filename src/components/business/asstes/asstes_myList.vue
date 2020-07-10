@@ -57,7 +57,7 @@ export default {
         }
     },
     created() {
-        this.getBalanceAll()
+
     },
     methods: {
         // 获取资产列表信息
@@ -112,7 +112,9 @@ export default {
         ...mapState(['userInfo'])
     },
     mounted() {
-        // console.log(this.$store.state.user)
+    },
+    activated() {
+        this.getBalanceAll()
     }
 };
 

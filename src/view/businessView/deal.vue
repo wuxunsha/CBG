@@ -31,12 +31,16 @@
                 </div>
             </div>
             <div class="main">
-                <div class="search">
-                    <img src="../../assets/wallet/deal/se.png"
-                         @click="search">
-                    <input type="text"
-                           placeholder="昵称搜索"
-                           v-model="serach">
+                <div class="main-buy">
+                    <div class="search">
+                        <img src="../../assets/wallet/deal/se.png"
+                             @click="search">
+                        <input type="text"
+                               placeholder="昵称搜索"
+                               v-model="serach">
+                    </div>
+                    <p class="go-buy"
+                       @click="$router.push('/issue')">发布买单</p>
                 </div>
 
                 <div class="sell"
@@ -47,7 +51,7 @@
                         <p>515 / 99.81%</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(TB)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(TB)</span><span style="color:#353535">{{i.minNum}}</span></p>
+                        <p><span>需求(USDT)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(USDT)</span><span style="color:#353535">{{i.minNum}}</span></p>
                         <p>单价</p>
                     </div>
                     <div class="sell-center">
@@ -73,8 +77,7 @@
                      v-if="issueList.length == 0">
                     <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无买单</p>
-                    <p class="go-buy"
-                       @click="$router.push('/issue')">发布买单</p>
+
                 </div>
             </div>
         </div>
@@ -92,12 +95,16 @@
                 </div>
             </div>
             <div class="main">
-                <div class="search">
-                    <img src="../../assets/wallet/deal/se.png"
-                         @click="search">
-                    <input type="text"
-                           placeholder="昵称搜索"
-                           v-model="serach">
+                <div class="main-buy">
+                    <div class="search">
+                        <img src="../../assets/wallet/deal/se.png"
+                             @click="search">
+                        <input type="text"
+                               placeholder="昵称搜索"
+                               v-model="serach">
+                    </div>
+                    <p class="go-buy"
+                       @click="$router.push({path:'/sell',query:{item:''}})">发布卖单</p>
                 </div>
                 <div class="sell"
                      v-for="(i,index) in sellList"
@@ -107,7 +114,7 @@
                         <p>515 / 99.81%</p>
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(TB)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(TB)</span><span style="color:#353535">{{i.minNum}}</span></p>
+                        <p><span>需求(USDT)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(USDT)</span><span style="color:#353535">{{i.minNum}}</span></p>
                         <p>单价</p>
                     </div>
                     <div class="sell-center">
@@ -132,8 +139,6 @@
                      v-if="sellList.length == 0">
                     <img src="../../assets/wallet/deal/nodata.png">
                     <p>暂无卖单</p>
-                    <p class="go-buy"
-                       @click="$router.push({path:'/sell',query:{item:''}})">发布卖单</p>
                 </div>
             </div>
         </div>
@@ -406,11 +411,16 @@ export default {
     p {
         margin: 20px 0 0 0;
     }
+}
+.main-buy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
     .go-buy {
-        margin: 36px auto;
-        width: 40%;
-        height: 33px;
-        line-height: 33px;
+        width: 20%;
+        height: 30px;
+        line-height: 30px;
         background: linear-gradient(
             -61deg,
             rgba(34, 239, 185, 1),
@@ -419,6 +429,7 @@ export default {
         box-shadow: 0px 4px 9px 0px rgba(68, 22, 238, 0.15);
         border-radius: 5px;
         color: #fff;
+        margin: 0 15px 0 0;
     }
 }
 </style>
