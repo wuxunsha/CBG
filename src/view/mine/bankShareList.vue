@@ -17,10 +17,10 @@
       <div>
         <div>
           <span>团队等级:</span>
-          <span>钻石</span>
+          <span>{{user.userLevelId === 1 ? '青铜' : user.userLevelId === 2 ? '白银' : user.userLevelId === 3 ? '黄金' : user.userLevelId === 4 ? '铂金' : user.userLevelId === 5 ? '钻石' : '无'}}</span>
         </div>
         <div>
-          <img src="../../assets/business/user/hydj2x.png" alt="">
+          <img :src="user.userLevelId === 1 ? require('../../assets/business/user/qt.png') : user.userLevelId === 2 ? require('../../assets/business/user/by.png') : user.userLevelId === 3 ? require('../../assets/business/user/hj.png') : user.userLevelId === 4 ? require('../../assets/business/user/bj.png') : user.userLevelId === 5 ? require('../../assets/business/user/zsh.png') : ''" alt="">
         </div>
       </div>
     </div>
@@ -71,11 +71,13 @@
 <script>
 import {
   getUserTDtotalIncome,
-  getUserTeamInfo
+  getUserTeamInfo,
+  getUser
 } from '../../data/wallet';
 export default {
   data() {
     return {
+      user: {},
       // 收益
       income: {
         ztTotal: 0,
@@ -89,6 +91,14 @@ export default {
     }
   },
   methods: {
+    // 获取用户信息
+    getUserInfo() {
+      getUser({token_: this.$store.state.newToken}).then(res => {
+        if (res.code === '200') {
+          this.user = res.data
+        }
+      })
+    },
     // 获取团队总收益
     getUserTotalIncome() {
       getUserTDtotalIncome({token_: this.$store.state.newToken}).then(res => {
@@ -109,6 +119,7 @@ export default {
     }
   },
   created () {
+    this.getUserInfo()
     this.getUserTotalIncome()
     this.getUserTeamInfoList()
   },

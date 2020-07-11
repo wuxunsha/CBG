@@ -18,9 +18,9 @@
                              alt="">
                     </div>
                     <div class="info">
-                        <b>{{userInfo.userAccount || userInfo.id}}</b>
+                        <b>{{user.userAccount || user.id}}</b>
                         <!-- <span>{{$t('feature.bankUser.text_level')}}：{{userRole}}</span> -->
-                        <span>{{userInfo.userPhone}}</span>
+                        <span>{{user.userPhone}}</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                              alt="">
                     </div>
                     <div>
-                        <img src="../../assets/business/user/hydj2x.png"
+                        <img :src="user.userLevelId === 1 ? require('../../assets/business/user/qt.png') : user.userLevelId === 2 ? require('../../assets/business/user/by.png') : user.userLevelId === 3 ? require('../../assets/business/user/hj.png') : user.userLevelId === 4 ? require('../../assets/business/user/bj.png') : user.userLevelId === 5 ? require('../../assets/business/user/zsh.png') : ''"
                              alt="">
                     </div>
                 </div>
@@ -58,11 +58,11 @@
 
         <div class="news">
             <div class="news-box"
-                 @click="userInfo.isrz === 0 ? '' : $router.push('/identityTwo')">
+                 @click="user.isrz === 0 ? '' : $router.push('/identityTwo')">
                 <img src="../../assets/business/user/ssrz2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_Authentication')}}</span>
-                <span v-if="userInfo.isrz === 0">{{$t('feature.bankUser.text_verified')}}</span>
+                <span v-if="user.isrz === 0">{{$t('feature.bankUser.text_verified')}}</span>
                 <span v-else>{{$t('feature.bankUser.text_not_certified')}}</span>
             </div>
         </div>
@@ -114,7 +114,7 @@ export default {
     data() {
         return {
             activeType: "user",
-            userInfo: {}
+            user: {}
         }
     },
     components: {
@@ -125,7 +125,7 @@ export default {
         getUserInfo() {
             getUser({token_: this.$store.state.newToken}).then(res => {
                 if (res.code === '200') {
-                    this.userInfo = res.data
+                    this.user = res.data
                 }
             })
         }
@@ -136,7 +136,7 @@ export default {
     mounted() {
 
     }
-};
+}
 
 </script>
 <style rel="stylesheet/scss" scoped lang="scss">
