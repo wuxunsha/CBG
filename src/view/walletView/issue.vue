@@ -37,7 +37,7 @@
             </div>
             <div class="total">
                 <p>总价</p>
-                <p style="font-size:12px">CNY</p>
+                <p style="font-size:12px">{{totleCny}}CNY</p>
             </div>
         </div>
         <chooseCards v-on:chooseCoin="chooseCoin"
@@ -97,7 +97,8 @@ export default {
             issuePrice: 0,
             checked: false,
             priceList: [],
-            num: ''
+            num: 0,
+            totleCny: 0
         }
     },
     components: {
@@ -174,9 +175,16 @@ export default {
 
         }
     },
+    computed: {
 
+    },
     watch: {
-
+        num(oldValue, newValue) {
+            this.totleCny = Number(oldValue) * Number(this.issuePrice)
+        },
+        issuePrice(oldValue, newValue) {
+            this.totleCny = Number(oldValue) * Number(this.num)
+        }
     }
 }
 

@@ -18,16 +18,17 @@
                      src="../../assets/wallet/deal/zhizh.png">
             </div>
         </div>
-        <div v-if="tabNum == 0">
+        <div v-if="tabNum == 0"
+             style="margin:0 0 50px 0">
             <div class="info">
                 <div class="info-left">
                     <p><span>昨日价格</span><span>{{priceList.昨日价格}}</span></p>
                     <p><span>今日价格</span><span>{{priceList.今日价格}}</span></p>
                 </div>
                 <div class="info-right">
-                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                     <p style=""
-                       v-else>-{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                       v-else>-{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                 </div>
             </div>
             <div class="main">
@@ -48,7 +49,7 @@
                      :key="index">
                     <div class="sell-top">
                         <p><i></i><span>{{i.creatorId}}</span></p>
-                        <p>515 / 99.81%</p>
+                        <!-- <p>515 / 99.81%</p> -->
                     </div>
                     <div class="sell-center">
                         <p><span>需求(USDT)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(USDT)</span><span style="color:#353535">{{i.minNum}}</span></p>
@@ -82,16 +83,17 @@
             </div>
         </div>
 
-        <div v-if="tabNum== 1">
+        <div v-if="tabNum== 1"
+             style="margin:0 0 50px 0">
             <div class="info">
                 <div class="info-left">
                     <p><span>昨日价格</span><span>{{priceList.昨日价格}}</span></p>
                     <p><span>今日价格</span><span>{{priceList.今日价格}}</span></p>
                 </div>
                 <div class="info-right">
-                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                    <p v-if="priceList.今日价格 > priceList.昨日价格">+{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                     <p style=""
-                       v-else>-{{(priceList.今日价格/priceList.昨日价格).toFixed(2)}}%</p>
+                       v-else>-{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                 </div>
             </div>
             <div class="main">
@@ -111,15 +113,16 @@
                      :key="index">
                     <div class="sell-top">
                         <p><i></i><span>{{i.creatorId}}</span></p>
-                        <p>515 / 99.81%</p>
+                        <!-- <p>515 / 99.81%</p> -->
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(USDT)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(USDT)</span><span style="color:#353535">{{i.minNum}}</span></p>
-                        <p>单价</p>
+                        <p><span>需求(USDT) </span><span style="color:#353535;margin:0 0 0 5px">{{i.totalNum}}</span></p>
+                        <p style="font-size:14px;font-weight:400;color:#a5acae;"><span style="font-size:14px;color:#a5acae;font-weight:400;">单价： </span> {{i.price}}CNY</p>
+
                     </div>
                     <div class="sell-center">
-                        <p><span>限额(CNY)</span><span style="color:#353535">{{i.minAmount}}~{{i.maxAmount}} CNY</span></p>
-                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{i.price}}CNY</p>
+                        <p><span>总价(CNY)</span><span style="color:#353535"></span></p>
+                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{ Number(i.totalNum) * Number(i.price)}}CNY</p>
                     </div>
                     <div class="sell-footer">
                         <p>

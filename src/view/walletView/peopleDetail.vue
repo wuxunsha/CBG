@@ -430,6 +430,7 @@
                             <p>{{$t('wallet.peopleStock.text_je')}}：<span style="margin: 0 0 0 15px">{{IndustryInformation.bzjcbk}}CBK({{IndustryInformation.baozjl*IndustryInformation.maxAmount}}U)</span></p>
                         </div>
                     </div>
+                    <p style="text-align: center;margin:10px 0">请输入交易密码</p>
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"
@@ -806,7 +807,7 @@ export default {
     }
 }
 .popPop {
-    height: 264px;
+    height: 300px;
     width: 90%;
     border-radius: 10px;
 }
