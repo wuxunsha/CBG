@@ -219,23 +219,28 @@ export default {
             params.phoneOrEmail = this.form.phone;
             params.username = this.form.phone;
             register(JSON.stringify(params)).then(data => {
-                Toast(data.msg)
+                console.log(data);
 
-                Dialog.alert({
-                    title: data.message,
-                    // message: `${this.$t('wallet.register.text_id')}${data.data}`,
-                    confirmButtonText: this.$t('wallet.register.login_now')
-                }).then(() => {
+                if (data.code == 200) {
+                    // Toast('注册成功')
+                    Dialog.alert({
+                        title: data.message,
+                        // message: `${this.$t('wallet.register.text_id')}${data.data}`,
+                        confirmButtonText: this.$t('wallet.register.login_now')
+                    }).then(() => {
 
-                    this.$router.replace({
-                        path: `/login`
-                    })
+                        this.$router.replace({
+                            path: `/login`
+                        })
 
-                });//Dialog
+                    });//Dialog
+                } else {
+                    Toast(data.message)
+                }
 
             }).catch(e => {
                 console.error(e);
-                Toast(e.msg);
+                Toast(e.message);
             })
         },
         onSelect(item) {
@@ -255,16 +260,20 @@ export default {
 </script>
 <style rel="stylesheet/scss" scoped lang='scss'>
 .van-button {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 .register {
-  width: 100%;
-  height: 34px;
-  line-height: 34px;
-  background:linear-gradient(-61deg,rgba(34,239,185,1),rgba(86,107,243,1));
-  box-shadow:0px 4px 9px 0px rgba(68,22,238,0.15);
-  border-radius:4px;
-  color: #fff;
+    width: 100%;
+    height: 34px;
+    line-height: 34px;
+    background: linear-gradient(
+        -61deg,
+        rgba(34, 239, 185, 1),
+        rgba(86, 107, 243, 1)
+    );
+    box-shadow: 0px 4px 9px 0px rgba(68, 22, 238, 0.15);
+    border-radius: 4px;
+    color: #fff;
 }
 </style>
