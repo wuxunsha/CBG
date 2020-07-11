@@ -248,7 +248,7 @@ export default {
                 if (res.code == 200) {
                     let totalList = res.data
                     totalList.forEach(e => {
-                        if (e.coinId == '1002') {
+                        if (e.coinId == '1001') {
                             this.total = e.lastBalance
                         }
                     });
