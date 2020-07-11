@@ -18,13 +18,13 @@
                 </div>
             </div>
             <div class="use-num">
-                <p>可用：{{total}}USDT</p>
+                <p>可用：{{total}}&nbsp;&nbsp;&nbsp;&nbsp;USDT</p>
                 <span>手续费:5％</span>
             </div>
         </div>
         <div class="sell">
             <div class="sell-top">
-                <p>起售(CKB)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
+                <p>起售(USDT)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
                                v-model="minNum"
                                placeholder="请输入起售"></span></p>
                 <p>限额最小(CNY)<span style="color:#353535;margin:0 0 0 30px"><input type="number"
