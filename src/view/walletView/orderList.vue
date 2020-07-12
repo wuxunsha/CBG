@@ -22,7 +22,7 @@
                      :key="index"
                      @click="goBuy(i)">
                     <div class="sell-top">
-                        <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>15:40 04/03</span></p>
+                        <p><span style="color:#2CB392">{{i.type == 0?'买入':'出售'}}</span><span>{{format(i.buyTime)}}</span></p>
 
                         <p v-if="i.state == '1'"
                            style="color:#3507DF">待付款</p>
@@ -186,6 +186,21 @@ export default {
                 }
             }
 
+        }
+    },
+    computed: {
+        format() {
+            return function (shijianchuo) {
+                var time = new Date(shijianchuo);
+                var y = time.getFullYear();
+                var m = time.getMonth() + 1;
+                var d = time.getDate();
+                var h = time.getHours();
+                var mm = time.getMinutes();
+                var s = time.getSeconds();
+                var value = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+                return value
+            }
         }
     }
 }

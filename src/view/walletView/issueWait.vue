@@ -24,8 +24,8 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>请向对方支付</h3>
-                <p style="color:#556BF3;">{{infoList.price}}CNY <img src="../../assets/wallet/deal/fufufu.png"
-                         v-clipboard:copy="infoList.price"
+                <p style="color:#556BF3;">{{infoList.price * infoList.totalNum}}CNY <img src="../../assets/wallet/deal/fufufu.png"
+                         v-clipboard:copy="infoList.price * infoList.totalNum"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"></p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
@@ -125,6 +125,7 @@
                             <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price}}CNY</span></p>
                         </div>
                     </div>
+                    <p style="text-align: center;margin:10px 0">请输入交易密码</p>
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"

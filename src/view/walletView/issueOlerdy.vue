@@ -26,7 +26,7 @@
         <div class="sell">
             <div class="sell-top">
                 <h3 style="font-size:12px">订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY</p>
+                <p style="color:#556BF3;font-size:18px">{{infoList.price * infoList.totalNum}} CNY</p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span> </p>
                 <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}} CBK</span></p>
             </div>

@@ -28,7 +28,7 @@
                 <div class="info-right">
                     <p v-if="priceList.今日价格 > priceList.昨日价格">+{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                     <p style=""
-                       v-else>-{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
+                       v-else>{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                 </div>
             </div>
             <div class="main">
@@ -93,7 +93,7 @@
                 <div class="info-right">
                     <p v-if="priceList.今日价格 > priceList.昨日价格">+{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                     <p style=""
-                       v-else>-{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
+                       v-else>{{((Number(priceList.今日价格)-Number(priceList.昨日价格)) / Number(priceList.昨日价格)).toFixed(2) * 100}}%</p>
                 </div>
             </div>
             <div class="main">
