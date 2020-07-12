@@ -27,8 +27,8 @@
         <div class="sell">
             <div class="sell-top">
                 <h3>订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY <img src="../../assets/wallet/deal/fufufu.png"
-                         v-clipboard:copy="infoList.price"
+                <p style="color:#556BF3;font-size:18px">{{infoList.price * infoList.totalNum}} CNY <img src="../../assets/wallet/deal/fufufu.png"
+                         v-clipboard:copy="infoList.price * infoList.totalNum"
                          v-clipboard:success="onCopy"
                          v-clipboard:error="onError"></p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
@@ -95,6 +95,7 @@
                             <p>收款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price}}CNY</span></p>
                         </div>
                     </div>
+
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"
@@ -456,7 +457,7 @@ export default {
     background-color: #ebebeb;
 }
 .popPop {
-    height: 256px;
+    height: 300px;
     width: 90%;
     border-radius: 10px;
 }

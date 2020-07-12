@@ -27,7 +27,7 @@
         <div class="sell">
             <div class="sell-top">
                 <h3 style="font-size:12px">订单金额</h3>
-                <p style="color:#556BF3;font-size:18px">{{infoList.price}} CNY</p>
+                <p style="color:#556BF3;font-size:18px">{{infoList.price * infoList.totalNum}} CNY</p>
                 <p>单价<span style="color:#353535;margin:0 0 0 50px">{{infoList.price}}</span></p>
                 <p>数量<span style="color:#353535;margin:0 0 0 50px">{{infoList.totalNum}} USDT</span></p>
             </div>
@@ -93,12 +93,13 @@
             <van-popup v-model="showPop"
                        :class="'popPop'">
                 <div class="pop-main">
-                    <h3>支付产业押金</h3>
+                    <h3>确认付款</h3>
                     <div class="pop-content">
                         <div class="pop-left">
-                            <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price}}CNY</span></p>
+                            <p>付款金额<span style="color:#566BF3;margin: 0 0 0 15px">{{infoList.price * infoList.totalNum}}CNY</span></p>
                         </div>
                     </div>
+                    <p style="text-align: center;margin:10px 0">请输入交易密码</p>
                     <div class="input-focus">
                         <input ref="newPsd"
                                v-model="newPassword"
@@ -420,7 +421,7 @@ export default {
     background-color: #ebebeb;
 }
 .popPop {
-    height: 253px;
+    height: 300px;
     width: 337px;
     border-radius: 10px;
 }
