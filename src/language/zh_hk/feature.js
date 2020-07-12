@@ -195,6 +195,7 @@ const lang = {
         text_title:"轉賬",
         text_coin:"轉賬幣種",
         input_chooseCoin:"選擇轉賬幣種",
+        input_recharge: "選擇充值幣種",
         text_id:"收款人帳號",
         input_id:"請輸入收款人帳號",
         text_number:"轉賬金額",

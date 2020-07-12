@@ -195,6 +195,7 @@ const lang = {
     text_title: "Transfer",
     text_coin: "Transfer Currency",
     input_chooseCoin: "Choose a transfer currency",
+    input_recharge: "Choose recharge currency",
     text_id: "Payee Account",
     input_id: "Please enter the payee account",
     text_number: "Transfer Amount",

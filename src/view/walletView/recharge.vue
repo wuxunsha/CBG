@@ -6,23 +6,11 @@
                          fixed
                          left-arrow
                          @click-left="goback()">
-                <!-- <template #right>
-                    <van-icon name="orders-o"
-                              size="18" />
-                </template> -->
             </van-nav-bar>
         </div>
-        <!-- <walletNav :title="$t('wallet.recharge.nav_title')"
-                   left-arrow
-                   @clickLeft="goback()" /> -->
-        <!-- <div class="rightText" @click="gopage('/wallet/book?type=recharge')"><van-icon name="todo-list-o" size="20px"/>{{$t('wallet.recharge.text_list')}}</div>
-    </walletNav> -->
-        <!-- <chooseCoins v-on:chooseCoin="chooseCoin"
-                     :defaultId="$route.query.coinId"
-                     type="recharge" /> -->
-        <!-- <div class="actionForm">
+        <div class="actionForm">
             <div class="currency-select"
-                 @click="show = true">
+                 @click="popup = true">
                 <div class="currency-select-left">
                     <img src="../../assets/wallet/asstes/USDT@2x.png"
                          alt="">
@@ -30,11 +18,11 @@
                         {{currCoin}}
                     </span>
                 </div>
-                <div>
+                <div class="currency-select-right">
                     <van-icon name="arrow" />
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="item_box"
              style="padding:0 20px">
@@ -85,7 +73,7 @@
             </p>
         </div>
 
-        <!-- <div style="height:10px;background:rgba(247,246,251,1);width:100%"></div>
+        <div style="height:10px;background:rgba(247,246,251,1);width:100%"></div>
         <div class="rechargeList">
             <h3>{{$t('wallet.recharge.list')}}</h3>
             <div v-if="rechargeList.length === 0">
@@ -101,9 +89,14 @@
                     <div>{{item.addTime}}</div>
                 </li>
             </ul>
-        </div> -->
+        </div>
 
         <div class="space20"></div>
+
+        <!-- 币种选择弹窗 -->
+        <van-popup v-model="popup" position="bottom" :style="{ height: '30%' }">
+            <van-picker :columns="coins" show-toolbar  @cancel="popup=false" @confirm="onChange" :title=" `${$t('feature.transfer.input_recharge')}`" :confirm-button-text="`${$t('feature.bankBuy.text_ok')}`" :cancel-button-text="`${$t('feature.bankBuy.text_cancel')}`" />
+        </van-popup>
 
     </div>
     <!-- index -->
@@ -119,8 +112,7 @@ import {
     mapState
 } from 'vuex'
 import QRCode from 'qrcodejs2'
-import Clipboard from 'clipboard';
-// import chooseCoins from '../../components/wallet/chooseCoins'
+import Clipboard from 'clipboard'
 
 export default {
     data() {
@@ -130,44 +122,42 @@ export default {
             addressInfo: {},
             // 充值记录
             rechargeList: [],
-            show: false,
-            currCoin: null,//当前币种
+            currCoin: null, // 当前币种名称
+            currCoinId: null, // 当前币种id
             // 币种列表
             coins: [],
             // 余额
-            balance: ''
+            balance: '',
+            popup: false, // 币种选择弹窗
+            coins: []
         }
     },
-    // components: {
-    //     chooseCoins
-    // },
     methods: {
-
         // 获取资产列表信息
         getBalanceAll() {
             TBListfund({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
-                    res.data.forEach(item => {
+                    const currList = []
+                    res.data.map(item => {
                         if (item.coinId === '1001') {
                             item.text = 'USDT'
+                            currList.push(item)
                         } else if (item.coinId === '1002') {
                             item.text = 'CBK'
-                        } else if (item.coinId === '1003') {
-                            item.text = 'CBG'
-                        } else if (item.coinId === '1004') {
-                            item.text = 'BTC'
+                            currList.push(item)
                         }
                     })
-                    this.coins = res.data
-                    this.currCoin = res.data[0].text
-                    this.reqParams.coinId = res.data[0].coinId
-                    this.balance = res.data[0].lastBalance
+                    this.coins = currList
+                    this.currCoin = currList[0].text
+                    this.currCoinId = currList[0].coinId
+                    this.balance = currList[0].lastBalance
+                    this.getRechargeList()
                 }
             })
         },
         // 获取充值列表
         getRechargeList() {
-            TBListCZinfo({ token_: this.$store.state.newToken, coinId: this.currRechargeInfo.coin.id }).then(res => {
+            TBListCZinfo({ token_: this.$store.state.newToken, coinId: this.currCoinId }).then(res => {
                 if (res.code === '200') {
                     res.data.forEach(item => {
                         item.addTime = this.getDate(item.addTime)
@@ -176,7 +166,13 @@ export default {
                 }
             })
         },
-
+        onChange(value, index) {
+            this.currCoin = value.text
+            this.balance = value.lastBalance
+            this.currCoinId = value.coinId
+            this.popup = false
+            this.getRechargeList()
+        },
         async qrcode(address) { //生成二维码
             console.log(address);
 
@@ -222,8 +218,8 @@ export default {
     },
     created() {
         console.log(this.userInfo);
-
         this.copyText = this.userInfo.czAddress
+        this.getBalanceAll()
     },
     mounted() {
 
@@ -364,5 +360,31 @@ h3 {
     font-family: PingFang SC;
     font-weight: bold;
     color: rgba(53, 53, 53, 1);
+}
+.currency-select {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    background: #f7f6fb;
+    padding: 0 20px;
+    justify-content: space-between;
+    .currency-select-left {
+        img {
+            width: 24px;
+            vertical-align: sub;
+        }
+        span {
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(53, 53, 53, 1);
+            margin-left: 6px;
+        }
+    }
+    .currency-select-right {
+        .van-icon {
+            font-size: 20px;
+        }
+    }
 }
 </style>

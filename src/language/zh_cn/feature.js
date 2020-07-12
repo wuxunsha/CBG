@@ -201,6 +201,7 @@ const lang = {
         text_title: "转账",
         text_coin: "转账币种",
         input_chooseCoin: "选择转账币种",
+        input_recharge: "选择充值币种",
         text_id: "收款人帐号",
         input_id: "请输入收款人帐号",
         text_number: "转账金额",

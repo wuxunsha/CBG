@@ -15,10 +15,10 @@
                        :placeholder="`${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_name')}`">
             </div>
             <div class="input-box">
-                <p>{{this.$route.query.type == 3 ? $t('wallet.payment.text_weixin') : this.$route.query.type == 2 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_yinghangka')}}{{$t('wallet.payment.text_account')}}</p>
+                <p>{{this.$route.query.type == 3 ? $t('wallet.payment.text_yinghangka') : this.$route.query.type == 1 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_weixin')}}{{$t('wallet.payment.text_account')}}</p>
                 <input type="text"
                        v-model="acount"
-                       :placeholder="this.$route.query.type == 3 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
+                       :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
             </div>
             <div class="input-box">
                 <p>{{$t('wallet.payment.text_phone')}}</p>
@@ -175,7 +175,7 @@ export default {
             this.$http.post('http://trex.top/payservice/' + 'user/addUserOtc', data).then(res => {
                 if (res.code == 1000) {
                     this.$layer.open({
-                        content: res.msg,
+                        content: '添加成功',
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
@@ -194,7 +194,7 @@ export default {
             this.$http.post('http://trex.top/payservice/' + 'user/updateUserOtc', data).then(res => {
                 if (res.code == 1000) {
                     this.$layer.open({
-                        content: res.msg,
+                        content: '修改成功',
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })

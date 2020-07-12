@@ -4,7 +4,7 @@
             <van-nav-bar :title="`${$t('wallet.payment.payment_title')}`"
                          fixed
                          left-arrow
-                         @click-left="goback()" />
+                         @click-left="gopage('/bankUser')" />
         </div>
 
         <div class="content-box">
