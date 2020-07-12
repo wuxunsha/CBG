@@ -26,12 +26,12 @@
                        v-model="phone"
                        :placeholder="`${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_phone')}`">
             </div>
-            <div class="input-box">
+            <div class="input-box" v-if="this.$route.query.type != 3">
                 <p>{{$t('wallet.payment.text_qr_code')}}</p>
                 <van-uploader v-model="fileList"
                               multiple
                               :max-count="1"
-                              preview-full-image
+                              preview-full-images
                               upload-icon="plus"
                               :after-read="afterRead"
                               :before-read="beforeRead"
@@ -87,87 +87,126 @@ export default {
             if (!this.phone) {
                 return Toast.fail('请输入联系电话')
             }
-            if (this.fileList.length <= 0) {
+            if(this.$route.query.type != 3) {
+                if (this.fileList.length <= 0) {
+                    return Toast.fail('请添加收款二维码')
+                }
+            }
+            if (this.$route.query.type != 3 && !this.img) {
                 return Toast.fail('请添加收款二维码')
             }
-            if (!this.img) {
-                return Toast.fail('请添加收款二维码')
-            }
-            this.img
 
             if (this.$route.query.mode === '1') {
-                let data = {
-                    'payAccount': this.acount,
-                    // 收款账号
+                if (this.$route.query.type == 3) {
+                    let data = {
+                        'payAccount': this.acount,
+                        // 收款账号
 
-                    'payName': this.name,
-                    // 真实姓名
+                        'payName': this.name,
+                        // 真实姓名
 
-                    'payPhone': this.phone,
-                    // 联系方式
+                        'payPhone': this.phone,
+                        // 联系方式
 
-                    'payType': this.$route.query.type,
-                    // 支付方式：1，支付宝，2，微信，3，银行
-
-                    'payUrl': this.img,
-                    // 收款二维码
-                }
-                this.$http.post('http://trex.top/payservice/' + 'user/addUserOtc', data).then(res => {
-                    console.log(res);
-
-                    if (res.code == 1000) {
-                        this.$layer.open({
-                            content: res.msg,
-                            skin: 'msg',
-                            time: 2 //2秒后自动关闭
-                        })
-                        this.$router.push({ path: '/paymentMethod' })
-                    } else {
-                        this.$layer.open({
-                            content: res.msg,
-                            skin: 'msg',
-                            time: 2 //2秒后自动关闭
-                        })
+                        'payType': this.$route.query.type
+                        // 支付方式：1，支付宝，2，微信，3，银行
                     }
-                })
+                    this.addUserOtc(data)
+                } else {
+                    let data = {
+                        'payAccount': this.acount,
+                        // 收款账号
+
+                        'payName': this.name,
+                        // 真实姓名
+
+                        'payPhone': this.phone,
+                        // 联系方式
+
+                        'payType': this.$route.query.type,
+                        // 支付方式：1，支付宝，2，微信，3，银行
+
+                        'payUrl': this.img,
+                        // 收款二维码
+                    }
+                    this.addUserOtc(data)
+                }
             } else if (this.$route.query.mode === '2') {
-                let data = {
-                    id: this.$route.query.item.id,
-                    'payAccount': this.acount,
-                    // 收款账号
+                if (this.$route.query.type == 3) {
+                    let data = {
+                        id: this.$route.query.item.id,
+                        'payAccount': this.acount,
+                        // 收款账号
 
-                    'payName': this.name,
-                    // 真实姓名
+                        'payName': this.name,
+                        // 真实姓名
 
-                    'payPhone': this.phone,
-                    // 联系方式
+                        'payPhone': this.phone,
+                        // 联系方式
 
-                    'payType': this.$route.query.item.payType,
-                    // 支付方式：1，支付宝，2，微信，3，银行
-
-                    'payUrl': this.img,
-                    // 收款二维码
-                }
-                this.$http.post('http://trex.top/payservice/' + 'user/updateUserOtc', data).then(res => {
-                    console.log(res);
-
-                    if (res.code == 1000) {
-                        this.$layer.open({
-                            content: res.msg,
-                            skin: 'msg',
-                            time: 2 //2秒后自动关闭
-                        })
-                        this.$router.push({ path: '/paymentMethod' })
-                    } else {
-                        this.$layer.open({
-                            content: res.msg,
-                            skin: 'msg',
-                            time: 2 //2秒后自动关闭
-                        })
+                        'payType': this.$route.query.item.payType
+                        // 支付方式：1，支付宝，2，微信，3，银行
                     }
-                })
-            }
+                    this.updateUserOtc(data)
+                } else {
+                    let data = {
+                        id: this.$route.query.item.id,
+                        'payAccount': this.acount,
+                        // 收款账号
 
+                        'payName': this.name,
+                        // 真实姓名
+
+                        'payPhone': this.phone,
+                        // 联系方式
+
+                        'payType': this.$route.query.item.payType,
+                        // 支付方式：1，支付宝，2，微信，3，银行
+
+                        'payUrl': this.img,
+                        // 收款二维码
+                    }
+                    this.updateUserOtc(data)
+                }
+            }
+        },
+        // 添加收款方式
+        addUserOtc(data) {
+            this.$http.post('http://trex.top/payservice/' + 'user/addUserOtc', data).then(res => {
+                if (res.code == 1000) {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    this.$router.push({ path: '/paymentMethod' })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
+        },
+        // 提交编辑收款方式
+        updateUserOtc(data) {
+            this.$http.post('http://trex.top/payservice/' + 'user/updateUserOtc', data).then(res => {
+                if (res.code == 1000) {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    this.$router.push({ path: '/paymentMethod' })
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                }
+            })
         },
         beforeRead(file) {
             if (file.type !== 'image/jpeg' && file.type !== 'image/png') {

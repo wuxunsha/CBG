@@ -28,10 +28,10 @@
         </div>
 
         <!-- 隔断层 -->
-        <div class="cut-off"></div>
+        <!-- <div class="cut-off"></div> -->
 
          <!-- 手机认证 -->
-        <div class="version">
+        <!-- <div class="version">
             <div>
                 {{$t('wallet.safety.safety_phone')}}
             </div>
@@ -40,9 +40,9 @@
                 {{$t('wallet.safety.safety_modify')}}
                 <van-icon name="arrow" />
             </div>
-        </div>
+        </div> -->
         <!-- 邮箱认证 -->
-        <div class="version">
+        <!-- <div class="version">
             <div>
                 {{$t('wallet.safety.safety_mailbox')}}
             </div>
@@ -50,7 +50,7 @@
                 {{$t('wallet.safety.safety_binding')}}
                 <van-icon name="arrow" />
             </div>
-        </div>
+        </div> -->
 
         <!-- 隔断层 -->
         <div class="cut-off"></div>

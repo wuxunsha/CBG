@@ -154,12 +154,14 @@ export default {
         Toast(this.$t('feature.transfer.input_pass'));
         return;
       }
+      if(Number(this.reqParams.amount) > Number(this.balance)) {
+        Toast('转账金额不能超出可用余额');
+        return;
+      }
       this.transfer();
     },
     transfer(){
       transfer(this.reqParams).then(v=>{
-        console.TBListfund
-        (v);
         Toast.success(v.message);
         setTimeout(() => {
           this.goback();

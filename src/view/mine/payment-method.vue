@@ -49,7 +49,7 @@
                     <div class="the-way"
                          v-if="t.payType==3">
                         <div>
-                            <img src="../../assets/wallet/deal/yh.png"
+                            <img src="../../assets/wallet/deal/ying.png"
                                  alt="">
                         </div>
                         <div>
@@ -60,19 +60,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="the-way"
-                     v-if="payInfoList.zfbpayAccount">
-                    <div>
-                        <img src="../../assets/wallet/deal/zfb.png"
-                             alt="">
-                    </div>
-                    <div>
-                        <p>{{payInfoList.zfbpayAccount}}</p>
-                    </div>
-                    <div>
-                        <span @click="editZfb">{{$t('wallet.payment.payment_edit')}}</span>
-                    </div>
-                </div> -->
             </div>
         </div>
 
@@ -110,7 +97,7 @@ export default {
             hidden: true,
             // 收款方式弹窗开关
             popup: false,
-            columns: ['银行卡', '支付宝', '微信'],
+            columns: ['支付宝', '微信', '银行卡'],
             payInfoList: []
         }
     },
@@ -137,7 +124,7 @@ export default {
             this.$router.push({
                 path: '/addPayment',
                 query: {
-                    type: 3,
+                    type: t.payType,
                     mode: '2',
                     item: t
                     // account: this.payInfoList.wxPayAccount,
