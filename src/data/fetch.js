@@ -96,7 +96,7 @@ axios.interceptors.request.use(function (config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/user/getUserTeamInfo' || config.url == tbUrl + '/user/subIdcardInfo') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,

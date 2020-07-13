@@ -97,7 +97,7 @@ export default {
     methods: {
         // 获取用户信息
         getUserInfo() {
-            this.$http.get(this.$lib.newHosts + '/user/getUserInfo').then(res => {
+            this.$http.get('http://trex.top/payservice/user/getUserInfo').then(res => {
                 if (res.code == 1000) {
                     this.user = res.data
                 } else {
@@ -120,10 +120,17 @@ export default {
         },
         // 获取团队信息下面贡献列表
         getUserTeamInfoList() {
-            getUserTeamInfo({ token_: this.$store.state.newToken }).then(res => {
-                if (res.code === '200') {
-                    this.teamInfoList = res.data
-                    this.totalpeople = res.data.length
+            getUserTeamInfo().then(res => {
+                
+            }).catch(e => {
+                if (e.code === 1000) {
+                    this.teamInfoList = e.data
+                    if(e.data.length > 0) {
+                        this.totalpeople = e.data.length
+                    } else {
+                        this.totalpeople = 0
+                    }
+
                 }
             })
         }
