@@ -88,7 +88,7 @@ export default {
             })
         },
         goBuy() {
-            this.$http.get(this.$lib.host + 'cguser/getUserInfo', {
+            this.$http.get(this.$lib.newHosts + '/user/getUserInfo', {
                 params: {
                     token_: this.$store.state.newToken
                 }

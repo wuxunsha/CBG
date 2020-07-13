@@ -41,7 +41,7 @@
                                v-model="serach">
                     </div>
                     <p class="go-buy"
-                       @click="$router.push('/issue')">发布买单</p>
+                       @click="goIssue(1)">发布买单</p>
                 </div>
 
                 <div class="sell"
@@ -62,11 +62,11 @@
                     <div class="sell-footer">
                         <p>
                             <span v-if="i.userInfo">
-                                <img v-if="i.userInfo.zfbPayAccount"
+                                <img v-if="i.userInfo.pay_type == 1"
                                      src="../../assets/wallet/deal/zfb.png">
-                                <img v-if="i.userInfo.wxPayAccount"
+                                <img v-if="i.userInfo.pay_type == 2"
                                      src="../../assets/wallet/deal/wx.png">
-                                <img v-if="i.userInfo.bankPayAccount"
+                                <img v-if="i.userInfo.pay_type == 3"
                                      src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
@@ -106,7 +106,7 @@
                                v-model="serach">
                     </div>
                     <p class="go-buy"
-                       @click="$router.push({path:'/sell',query:{item:''}})">发布卖单</p>
+                       @click="goIssue(2)">发布卖单</p>
                 </div>
                 <div class="sell"
                      v-for="(i,index) in sellList"
@@ -152,6 +152,10 @@
 <script>
 import myFooter from "../../components/wallet/footer.vue";
 import { log } from '../../data/wallet';
+import {
+    mapMutations,
+    mapState
+} from 'vuex'
 export default {
     props: ['footerNavActive'],
     data() {
@@ -171,8 +175,12 @@ export default {
     created() {
         this.getDealList()
     },
+    computed: {
+        ...mapState(['userInfo'])
+    },
     mounted() {
         this.getPrice()
+        console.log(this.userInfo);
     },
     methods: {
         search() {
@@ -204,6 +212,37 @@ export default {
                     this.$store.commit('setAssetsList', this.priceList)
                 }
             })
+        },
+        goIssue(id) {
+            if (this.userInfo.isrz == 1) {
+                if (this.userInfo.payTypeList.length !== 0) {
+                    if (id == 1) {
+                        this.$router.push('/issue')
+                    } else {
+                        this.$router.push({ path: '/sell', query: { item: '' } })
+                    }
+                } else {
+                    Dialog.confirm({
+                        title: '支付方式',
+                        message: '是否添加支付方式',
+                    }).then(() => {
+                        this.$router.push('/paymentMethod')
+                    }).catch(() => {
+                        Dialog.close
+                    });
+                }
+
+            } else {
+                Dialog.confirm({
+                    title: '实名认证',
+                    message: '是否去往实名认证',
+                }).then(() => {
+                    this.$router.push('/identityTwo')
+                }).catch(() => {
+                    Dialog.close
+                });
+            }
+
         },
         getDealList() {
             this.$http.get(this.$lib.host + 'otc/listOrder', {

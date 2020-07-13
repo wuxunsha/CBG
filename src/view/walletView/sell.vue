@@ -54,13 +54,16 @@
             <div class="num">
                 <span>支付方式</span>
                 <div>
-                    <img v-if="userList.zfbpay == 1"
-                         src="../../assets/wallet/deal/zfb.png">
-                    <img v-if="userList.wxpay == 1"
-                         src="../../assets/wallet/deal/wx.png">
-                    <img v-if="userList.bankbpay == 1"
-                         src="../../assets/wallet/deal/ying.png">
-                    <!-- <img src="../../assets/wallet/deal/kao.png"> -->
+                    <p v-for="(item,index) in userList.payTypeList"
+                       :key="index">
+                        <img v-if="item.payType == 1"
+                             src="../../assets/wallet/deal/zfb.png">
+                        <img v-if="item.payType == 2"
+                             src="../../assets/wallet/deal/wx.png">
+                        <img v-if="item.payType == 3"
+                             src="../../assets/wallet/deal/ying.png">
+                    </p>
+
                 </div>
             </div>
 
@@ -132,7 +135,7 @@ export default {
             minPrice: '',
             maxPrice: '',
             price: '',
-            userList: {},
+            userList: [],
             total: ''
         }
     },
@@ -140,7 +143,7 @@ export default {
         chooseCards
     },
     computed: {
-        ...mapState(['userInfo'])
+        // ...mapState(['userInfo'])
     },
     mounted() {
         this.getUserInfo()
@@ -227,15 +230,19 @@ export default {
 
         },
         getUserInfo() {
-            this.$http.get(this.$lib.host + 'cguser/getUserInfo', {
+            console.log(11);
+
+            this.$http.get(this.$lib.newHosts + '/user/getUserInfo', {
                 params: {
                     token_: this.$store.state.newToken
                 }
             }).then(res => {
-                if (res.code == 200) {
+                if (res.code == 1000) {
                     console.log(res);
 
                     this.userList = res.data
+                    console.log(this.userList);
+
                 }
             })
         },
@@ -344,7 +351,7 @@ export default {
                 margin-left: 5px;
             }
             p {
-                margin: 0 10px;
+                margin: 0;
             }
         }
         span {
