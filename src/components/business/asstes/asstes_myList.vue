@@ -7,7 +7,8 @@
         <div class="asset-list">
             <ul>
                 <li v-for="(item, index) in balanceList"
-                    :key="index" @click="assetsDetail(item.coinId)">
+                    :key="index"
+                    @click="assetsDetail(item.coinId)">
                     <div class="asset-list-top">
                         <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')"
                              alt="">
@@ -98,11 +99,11 @@ export default {
         },
         // 跳转资产明细页面
         assetsDetail(coinId) {
-            this.$router.push({ 
-                path: '/assetsDetail_v2', 
-                query: { 
-                    coinId: coinId 
-                } 
+            this.$router.push({
+                path: '/assetsDetail_v2',
+                query: {
+                    coinId: coinId
+                }
             })
         },
         // 保留小数点
@@ -116,6 +117,8 @@ export default {
     mounted() {
     },
     activated() {
+        console.log(this.userInfo);
+
         this.getBalanceAll()
     }
 };

@@ -2,10 +2,12 @@
     <div id="user"
          class="full-screen">
         <div>
-            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`" fixed>
+            <van-nav-bar :title="`${$t('feature.bankUser.nav_title')}`"
+                         fixed>
                 <template #right>
                     <img src="../../assets/business/user/szh2x.png"
-                         alt="" @click="gopage('/setting')">
+                         alt=""
+                         @click="gopage('/setting')">
                 </template>
             </van-nav-bar>
         </div>
@@ -68,7 +70,8 @@
         </div>
 
         <div class="news">
-            <div class="news-box bottom"  @click="gopage('/paymentMethod')">
+            <div class="news-box bottom"
+                 @click="gopage('/paymentMethod')">
                 <img src="../../assets/business/user/skfsh2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_payment_method')}}</span>
@@ -123,14 +126,14 @@ export default {
     methods: {
         // 获取用户信息
         getUserInfo() {
-            getUser({token_: this.$store.state.newToken}).then(res => {
-                if (res.code === '200') {
+            getUser({ token_: this.$store.state.newToken }).then(res => {
+                if (res.code === 1000) {
                     this.user = res.data
                 }
             })
         }
     },
-    created() {
+    activated() {
         this.getUserInfo()
     },
     mounted() {

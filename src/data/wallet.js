@@ -203,13 +203,6 @@ export function qmlcgFanli(params) { //领取
 
 
 
-export function getUser(params) { // 获取我的页面用户信息
-    return get({
-        url: `${cbkPathUrl}cguser/getUserInfo`,
-        params: params
-    })
-}
-
 export function upload(params) { // 上传图片
     return post({
         url: `${cbkPathUrl}userInfoUpload`,
@@ -251,12 +244,6 @@ export function getExtract(params) { //获取公告列表
         params: params
     })
 } //notice`,
-
-export function user_info() { //获取用户信息
-    return get({
-        url: `${cbkPathUrl}cguser/getUserInfo`,
-    })
-} //user_info
 
 export function change_password(params) { //修改用户密码
     return post({
@@ -342,5 +329,18 @@ export function subIdcardInfo(params) { // 提交身份证认证信息
     return post({
         url: `${txPathUrl}user/subIdcardInfo`,
         params
+    })
+}
+
+export function user_info() { //获取用户信息
+    return get({
+        url: `${txPathUrl}user/getUserInfo`,
+    })
+} //user_info
+
+export function getUser(params) { // 获取我的页面用户信息
+    return get({
+        url: `${txPathUrl}user/getUserInfo`,
+        params: params
     })
 }
