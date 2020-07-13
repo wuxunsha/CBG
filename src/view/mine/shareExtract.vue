@@ -97,7 +97,7 @@ export default {
         // 获取用户信息
         getUserInfo() {
             getUser({ token_: this.$store.state.newToken }).then(res => {
-                if (res.code === '200') {
+                if (res.code === 1000) {
                     this.userInfo = res.data
                 }
             })
