@@ -52,21 +52,23 @@
                         <!-- <p>515 / 99.81%</p> -->
                     </div>
                     <div class="sell-center">
-                        <p><span>需求(USDT)</span><span style="color:#353535">{{i.totalNum}}</span><span style="margin:0 0 0 10px">起售(USDT)</span><span style="color:#353535">{{i.minNum}}</span></p>
-                        <p>单价</p>
+                        <p><span>需求(USDT) </span><span style="color:#353535;margin:0 0 0 5px">{{i.totalNum}}</span></p>
+                        <p style="font-size:14px;font-weight:400;color:#a5acae;"><span style="font-size:14px;color:#a5acae;font-weight:400;">单价： </span> {{i.price}}CNY</p>
+
                     </div>
                     <div class="sell-center">
-                        <p><span>限额(CNY)</span><span style="color:#353535">{{i.minAmount}}~{{i.maxAmount}} CNY</span></p>
-                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{i.price}}CNY</p>
+                        <p><span>总价(CNY)</span><span style="color:#353535"></span></p>
+                        <p style="font-size:18px;font-weight:800;color:rgba(33,239,185,1);">{{ Number(i.totalNum) * Number(i.price)}}CNY</p>
                     </div>
                     <div class="sell-footer">
                         <p>
-                            <span v-if="i.userInfo">
-                                <img v-if="i.userInfo.pay_type == 1"
+                            <span v-for="(item,index) in i.payTypeList"
+                                  :key="index">
+                                <img v-if="item.payType == 1"
                                      src="../../assets/wallet/deal/zfb.png">
-                                <img v-if="i.userInfo.pay_type == 2"
+                                <img v-if="item.payType == 2"
                                      src="../../assets/wallet/deal/wx.png">
-                                <img v-if="i.userInfo.pay_type == 3"
+                                <img v-if="item.payType == 3"
                                      src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
@@ -126,12 +128,13 @@
                     </div>
                     <div class="sell-footer">
                         <p>
-                            <span v-if="i.userInfo">
-                                <img v-if="i.userInfo.zfbPayAccount"
+                            <span v-for="(item,index) in i.payTypeList"
+                                  :key="index">
+                                <img v-if="item.payType == 1"
                                      src="../../assets/wallet/deal/zfb.png">
-                                <img v-if="i.userInfo.wxPayAccount"
+                                <img v-if="item.payType == 2"
                                      src="../../assets/wallet/deal/wx.png">
-                                <img v-if="i.userInfo.bankPayAccount"
+                                <img v-if="item.payType == 3"
                                      src="../../assets/wallet/deal/ying.png">
                             </span>
                         </p>
@@ -245,12 +248,8 @@ export default {
 
         },
         getDealList() {
-            this.$http.get(this.$lib.host + 'otc/listOrder', {
-                params: {
-                    token_: this.$store.state.newToken,
-                }
-            }).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/order/orderList').then(res => {
+                if (res.code == 1000) {
                     console.log(res);
                     this.issueList = res.data.filter(e => {
                         if (e.type == 1) {

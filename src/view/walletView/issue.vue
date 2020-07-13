@@ -40,9 +40,24 @@
                 <p style="font-size:12px">{{totleCny}}CNY</p>
             </div>
         </div>
-        <chooseCards v-on:chooseCoin="chooseCoin"
+        <!-- <chooseCards v-on:chooseCoin="chooseCoin"
                      :defaultId="$route.query.coinName"
-                     type="recharge" />
+                     type="recharge" /> -->
+        <div class="issue-me">
+            <p>支付方式</p>
+            <van-checkbox-group v-model="result"
+                                direction="horizontal">
+                <van-checkbox name="2"
+                              icon-size="12px"
+                              style="font-size:12px">微信</van-checkbox>
+                <van-checkbox name="3"
+                              icon-size="12px"
+                              style="font-size:12px">银行卡</van-checkbox>
+                <van-checkbox name="1"
+                              icon-size="12px"
+                              style="font-size:12px">支付宝</van-checkbox>
+            </van-checkbox-group>
+        </div>
 
         <div class="issue-tip">
             <h3>温馨提示</h3>
@@ -90,7 +105,8 @@ import chooseCards from '../../components/wallet/chooseCard'
 import {
     quan_detail
 } from '../../data/wallet';
-import { Popup } from 'vant';
+import { Popup, Checkbox, CheckboxGroup } from 'vant';
+// import { } from 'vant';
 export default {
     data() {
         return {
@@ -98,7 +114,8 @@ export default {
             checked: false,
             priceList: [],
             num: 0,
-            totleCny: 0
+            totleCny: 0,
+            result: []
         }
     },
     components: {
@@ -125,6 +142,15 @@ export default {
 
         },
         goAdd() {
+            if (this.result.length == 0) {
+                this.$layer.open({
+                    content: '请选择支付方式',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                })
+                return
+            }
+
             if (this.checked == false) {
                 this.$layer.open({
                     content: '请勾选阅读规则',
@@ -151,17 +177,22 @@ export default {
                 })
                 return
             }
+
+            let str = JSON.stringify(this.result)
+            str = str.substring(1, str.length - 1)
+            str = str.replace(/"/g, "");
+
             let data = {
-                token_: this.$store.state.newToken,
-                type: '0',
-                totalNum: this.num,
-                minNum: '',
-                minAmount: '',
-                maxAmount: '',
-                price: this.issuePrice,
+                type: 0,
+                totalNum: Number(this.num),
+                minNum: 0,
+                minAmount: 0,
+                maxAmount: 0,
+                price: Number(this.issuePrice),
+                payType: str
             }
-            this.$http.post(this.$lib.host + 'otc/add', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/order/addOtc', data).then(res => {
+                if (res.code == 1000) {
                     console.log(res);
                     this.$router.push('/deal')
                     this.$layer.open({
@@ -190,6 +221,7 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+@import "../../styles/walletVal";
 .issue-info {
     padding: 0 15px;
     width: 100%;
@@ -304,5 +336,16 @@ export default {
     text-align: center;
     color: #fff;
     background-color: #556bf3;
+}
+.issue-me {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #e5e5e5;
+}
+/deep/ van-checkbox-group {
+    display: flex;
 }
 </style>

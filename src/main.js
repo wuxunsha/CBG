@@ -52,6 +52,7 @@ import {
     SwipeItem,
     Dialog,
     Checkbox,
+    CheckboxGroup,
     Notify,
     Tab,
     Tabs,
@@ -71,7 +72,7 @@ import {
     Tabbar,
     TabbarItem
 } from 'vant'
-Vue.use(Button).use(Popup).use(Icon).use(Loading).use(Tag).use(NavBar).use(Swipe).use(SwipeItem).use(Dialog).use(Checkbox).use(Notify).use(Tab).use(Tabs).use(ActionSheet).use(Skeleton).use(Panel).use(Stepper).use(Field).use(Area).use(Overlay).use(Uploader).use(Picker).use(Radio).use(RadioGroup).use(Search).use(Switch).use(Tabbar).use(TabbarItem);
+Vue.use(Button).use(Popup).use(Icon).use(Loading).use(Tag).use(NavBar).use(Swipe).use(SwipeItem).use(Dialog).use(Checkbox).use(Notify).use(Tab).use(Tabs).use(ActionSheet).use(Skeleton).use(Panel).use(Stepper).use(Field).use(Area).use(Overlay).use(Uploader).use(Picker).use(Radio).use(RadioGroup).use(Search).use(Switch).use(Tabbar).use(TabbarItem).use(CheckboxGroup);
 window.Toast = Toast;
 window.Dialog = Dialog;
 import 'vant/lib/index.css';

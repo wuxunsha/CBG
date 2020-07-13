@@ -207,16 +207,15 @@ export default {
             }
 
             let data = {
-                token_: this.$store.state.newToken,
-                type: '1',
-                totalNum: this.sellNum,
-                minNum: this.minNum,
-                minAmount: this.minPrice,
-                maxAmount: this.maxPrice,
-                price: this.price,
+                type: 1,
+                totalNum: Number(this.sellNum),
+                minNum: Number(this.minNum),
+                minAmount: Number(this.minPrice),
+                maxAmount: Number(this.maxPrice),
+                price: Number(this.price),
             }
-            this.$http.post(this.$lib.host + 'otc/add', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/order/addOtc', data).then(res => {
+                if (res.code == 1000) {
                     console.log(res);
                     this.$router.push('/deal')
                     this.$layer.open({
@@ -225,6 +224,12 @@ export default {
                         time: 2 //2秒后自动关闭
                     })
 
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
                 }
             })
 
