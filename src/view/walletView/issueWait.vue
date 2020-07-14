@@ -55,33 +55,39 @@
             </div>
             <div class="total">
                 <p>二维码</p>
-                <p v-if="typeId == 1&&infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.zfbPayPath"></span></p>
-                <p v-else-if="typeId == 2&&infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.wxPayPath"></span></p>
-                <p v-else-if="typeId == 0&&infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.bankPayPath"></span></p>
+                <div v-for="(item,index) in infoList.payTypeList"
+                     :key="index">
+                    <p v-if="typeId == 1&&item.payType == 1"
+                       style="font-size:12px"><span>
+                            <img :src="item.payUrl"></span></p>
+                    <p v-else-if="typeId == 2&&item.payType == 2"
+                       style="font-size:12px"><span>
+                            <img :src="item.payUrl"></span></p>
+                    <p v-else-if="typeId == 0&&item.payType == 3"
+                       style="font-size:12px">
+                        <!-- <span>
+                            <img :src="item.payUrl"></span> -->
+                    </p>
+                </div>
             </div>
             <div class="total">
                 <p v-if="typeId == 1">支付宝账号</p>
                 <p v-else-if="typeId == 2">微信账号</p>
                 <p v-else-if="typeId == 0">银行卡账号</p>
-                <div v-if="infoList.userInfo">
-                    <p v-if="typeId == 1"
-                       style="font-size:12px">{{infoList.userInfo.zfbPayAccount}}<img v-clipboard:copy="infoList.userInfo.zfbPayAccount"
+                <div v-for="(item,index) in infoList.payTypeList"
+                     :key="index">
+                    <p v-if="typeId == 1&&item.payType == 1"
+                       style="font-size:12px">{{item.payAccount}}<img v-clipboard:copy="item.payAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
                              src="../../assets/wallet/deal/fufufu.png"></p>
-                    <p v-else-if="typeId == 2"
-                       style="font-size:12px">{{infoList.userInfo.wxPayAccount}}<img v-clipboard:copy="infoList.userInfo.wxPayAccount"
+                    <p v-if="typeId == 2&&item.payType == 2"
+                       style="font-size:12px">{{item.payAccount}}<img v-clipboard:copy="item.payAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
                              src="../../assets/wallet/deal/fufufu.png"></p>
-                    <p v-else-if="typeId == 0"
-                       style="font-size:12px">{{infoList.userInfo.bankPayAccount}}<img v-clipboard:copy="infoList.userInfo.bankPayAccount"
+                    <p v-if="typeId == 0&&item.payType == 3"
+                       style="font-size:12px">{{item.payAccount}}<img v-clipboard:copy="item.payAccount"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
                              src="../../assets/wallet/deal/fufufu.png"></p>
@@ -279,19 +285,14 @@ export default {
         },
         afterRead(file) {
             let param = new FormData()
-            console.log(file);
+            param.append('file', file.file)
 
-            param.append('fileName', file.file)
-            param.append('type', 1)
-            param.append('orderId', this.infoList.id)
-            param.append('token_', this.$store.state.newToken)
-
-            this.$http.post(this.$lib.host + '/imageUpload', param).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/upload/file', param).then(res => {
+                if (res.code == 1000) {
                     console.log(res);
-                    this.img = res.data.relativePath
+                    this.img = res.data
                     this.$layer.open({
-                        content: res.data.result_msg,
+                        content: res.msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
@@ -339,11 +340,11 @@ export default {
             }
 
             let data = {
-                token_: this.$store.state.newToken,
-                orderId: this.infoList.id,
+                payImgPath: this.img,
+                otcId: this.infoList.id,
             }
-            this.$http.post(this.$lib.host + 'otc/updateYzf', this.qsParams(data)).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/order/updateYzf', data).then(res => {
+                if (res.code == 1000) {
                     this.$router.push({ path: '/orderList', query: { item: this.infoList, img: this.img } })
                     this.$layer.open({
                         content: res.msg,

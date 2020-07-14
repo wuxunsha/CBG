@@ -51,15 +51,20 @@
             </div>
             <div class="total">
                 <p>二维码</p>
-                <p v-if="infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.zfbPayPath"></span></p>
-                <p v-else-if="infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.wxPayPath"></span></p>
-                <p v-else-if="infoList.userInfo"
-                   style="font-size:12px"><span>
-                        <img :src="infoList.userInfo.bankPayPath"></span></p>
+                <div v-for="(item,index) in infoList.payTypeList"
+                     :key="index">
+                    <p v-if="typeId == 1&&item.payType == 1"
+                       style="font-size:12px"><span>
+                            <img :src="item.payUrl"></span></p>
+                    <p v-else-if="typeId == 2&&item.payType == 2"
+                       style="font-size:12px"><span>
+                            <img :src="item.payUrl"></span></p>
+                    <p v-else-if="typeId == 0&&item.payType == 3"
+                       style="font-size:12px">
+                        <!-- <span>
+                            <img :src="item.payUrl"></span> -->
+                    </p>
+                </div>
             </div>
             <div class="total">
                 <p>支付宝账号</p>

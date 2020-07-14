@@ -146,12 +146,8 @@ export default {
             this.tabNum = index;
         },
         getDealList() {
-            this.$http.get(this.$lib.host + 'otc/selectOrderByUser', {
-                params: {
-                    token_: this.$store.state.newToken,
-                }
-            }).then(res => {
-                if (res.code == 200) {
+            this.$http.post(this.$lib.newHosts + '/order/selectOrderByUser').then(res => {
+                if (res.code == 1000) {
                     // console.log(res);
                     this.issueList = res.data.filter(e => {
                         if (e.state == 0 || e.state == 1 || e.state == 4) {
