@@ -107,13 +107,14 @@ export default {
             this.$http.post('http://trex.top/payservice/user/getUserPayType').then(res => {
                 if (res.code == 1000) {
                     this.payInfoList = res.data
-                } else {
-                    this.$layer.open({
-                        content: res.msg,
-                        skin: 'msg',
-                        time: 2 //2秒后自动关闭
-                    })
-                }
+                } 
+                // else {
+                //     this.$layer.open({
+                //         content: res.msg,
+                //         skin: 'msg',
+                //         time: 2 //2秒后自动关闭
+                //     })
+                // }
             })
         },
         onChange(value, index) {

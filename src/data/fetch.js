@@ -98,7 +98,7 @@ axios.interceptors.request.use(function(config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc' || config.url == tbUrl + '/user/getUserTeamInfo') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,
@@ -125,7 +125,7 @@ axios.interceptors.request.use(function(config) {
 });
 
 axios.interceptors.response.use(function(response) {
-    // console.log(response)
+    console.log(response)
     if (response.data.code == 401) {
         Toast.fail(window.localStorage.getItem('lang') == 'en' ? 'please sign in' : '请登录');
         store.commit('set_token', null);
@@ -137,7 +137,7 @@ axios.interceptors.response.use(function(response) {
                 redirect: router.currentRoute.fullPath
             }
         });
-    } else if (response.data.code == 300) {
+    } else if (response.data.code == 300 || response.data.code == 1003) {
         Toast("登录已过期，请重新登录!")
         setTimeout(() => {
             store.commit('set_token', null);

@@ -269,7 +269,9 @@ const lang = {
         text_phone: "聯系電話",
         text_qr_code: "添加收款二維碼",
         text_prompt: "支持JPG/PNG/JPEG格式文件",
-        text_save: "保存"
+        text_save: "保存",
+        text_yhname: "銀行卡歸屬銀行",
+        text_placeholder: "請輸入銀行卡歸屬銀行"
     },
     peopleStock: {
         text_title: "全民來持股",

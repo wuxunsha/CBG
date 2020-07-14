@@ -270,7 +270,9 @@ const lang = {
         text_phone: "联系电话",
         text_qr_code: "添加收款二维码",
         text_prompt: "支持JPG/PNG/JPEG格式文件",
-        text_save: "保存"
+        text_save: "保存",
+        text_yhname: "银行卡归属银行",
+        text_placeholder: "请输入银行卡归属银行"
     },
     peopleStock: {
         text_title: "全民来持股",

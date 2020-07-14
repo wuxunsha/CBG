@@ -84,7 +84,7 @@
             <ul v-else>
                 <li v-for="(item, index) in rechargeList"
                     :key="index">
-                    <div>{{item.coinId === 1 ? 'USDT' : item.coinId === 2 ? 'TB' : item.coinId === 3 ? 'OKB' : item.coinId === 4 ? 'BNB' : 'HT'}}</div>
+                    <div>{{item.coinId === '1001' ? 'USDT' : item.coinId === '1002' ? 'CBK' : item.coinId === '1003' ? 'CBG' :  'BTC'}}</div>
                     <div>{{item.amount}}</div>
                     <div>{{item.addTime}}</div>
                 </li>

@@ -20,6 +20,12 @@
                        v-model="acount"
                        :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
             </div>
+            <div class="input-box" v-if="this.$route.query.type == 3">
+                <p>{{$t('wallet.payment.text_yhname')}}</p>
+                <input type="text"
+                       v-model="acount"
+                       :placeholder="`${$t('wallet.payment.text_placeholder')}`">
+            </div>
             <div class="input-box">
                 <p>{{$t('wallet.payment.text_phone')}}</p>
                 <input type="text"
@@ -34,8 +40,8 @@
                               preview-full-images
                               upload-icon="plus"
                               :after-read="afterRead"
-                              :before-read="beforeRead"
-                              :max-size="2 * 1024 * 1024" />
+                              :before-read="beforeRead" capture=“camera”>
+                </van-uploader>
                 <p>{{$t('wallet.payment.text_prompt')}}</p>
             </div>
         </div>

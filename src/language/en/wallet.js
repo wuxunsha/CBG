@@ -268,7 +268,9 @@ const lang = {
         text_phone: "contact number",
         text_qr_code: "Add payment QR code",
         text_prompt: "Support JPG/PNG/JPEG format files",
-        text_save: "save"
+        text_save: "save",
+        text_yhname: "Bank card belongs to the bank",
+        text_placeholder: "Please enter the bank card belongs to the bank"
     },
     peopleStock: {
         text_title: "All the people hold shares",

@@ -37,7 +37,7 @@
                               :before-read="beforeRead"
                               :after-read="positiveRead"
                               v-model="positiveUrl"
-                              result-type="dataUrl">
+                              result-type="dataUrl" capture=“camera”>
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
@@ -49,7 +49,7 @@
                               deletable
                               :before-read="beforeRead"
                               :after-read="reverseRead"
-                              v-model="reverseUrl">
+                              v-model="reverseUrl" capture=“camera”>
                     <van-button>
                         <div class="up-load">身份证反面</div>
                     </van-button>
@@ -62,7 +62,7 @@
                               deletable
                               :before-read="beforeRead"
                               :after-read="handheldRead"
-                              v-model="handheldUrl">
+                              v-model="handheldUrl" capture=“camera”>
                     <van-button>
                         <div class="up-load">手持身份证照</div>
                     </van-button>

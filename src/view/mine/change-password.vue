@@ -34,7 +34,7 @@
             <div class="captcha">
                 <div>
                     <input type="password"
-                           :placeholder="`${$t('feature.register.input_payPass')}`"
+                           :placeholder="`${$t('wallet.register.form_input_loginPwd')}`"
                            v-model="form.newuserPwd"
                            @blur="blur_event"
                            class="set-password-input"
@@ -51,7 +51,7 @@
             <div class="captcha">
                 <div>
                     <input type="password"
-                           :placeholder="`${$t('feature.register.input_payPass_re')}`"
+                           :placeholder="`${$t('wallet.register.form_input_loginPwd_re')}`"
                            v-model="loginPwd_re"
                            @blur="blur_event"
                            class="set-password-input"
