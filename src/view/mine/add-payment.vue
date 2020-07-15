@@ -40,7 +40,7 @@
                               preview-full-images
                               upload-icon="plus"
                               :after-read="afterRead"
-                              :before-read="beforeRead" capture="camera">
+                              :before-read="beforeRead">
                 </van-uploader>
                 <p>{{$t('wallet.payment.text_prompt')}}</p>
             </div>
