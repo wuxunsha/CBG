@@ -52,6 +52,7 @@ export default {
     props: ['user'],
     data() {
         return {
+            
             token: null,
             // 资产列表
             balanceList: null
@@ -63,7 +64,7 @@ export default {
     methods: {
         // 获取资产列表信息
         getBalanceAll() {
-            TBListfund({ token_: this.$store.state.newToken }).then(res => {
+            TBListfund().then(res => {
                 if (res.code === '200') {
                     this.balanceList = res.data
                 }
@@ -76,7 +77,6 @@ export default {
                 if (res.code === '200') {
                     this.getBalanceAll()
                 } else {
-                    console.log(11);
                     this.$layer.open({
                         content: res.msg,
                         skin: 'msg',
@@ -87,7 +87,6 @@ export default {
                 if (i.code === '200') {
                     this.getBalanceAll()
                 } else {
-                    console.log(11);
                     this.$layer.open({
                         content: i.msg,
                         skin: 'msg',
@@ -117,8 +116,6 @@ export default {
     mounted() {
     },
     activated() {
-        console.log(this.userInfo);
-
         this.getBalanceAll()
     }
 };

@@ -266,3 +266,10 @@ export function transfer(params) { // 转账
         params: params
     })
 }
+
+export function getTotalFund(params) { // 获取总资产
+    return post({
+        url: `${txPathUrl}order/getTotalFund`,
+        params: params
+    })
+}

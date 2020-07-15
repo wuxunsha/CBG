@@ -96,6 +96,9 @@ export default {
             if (!this.acount) {
                 return Toast.fail('请输入账户地址')
             }
+            if(!this.check(this.acount)) {
+                return Toast.fail('请输入正确的银行卡号')
+            }
             if (!this.phone) {
                 return Toast.fail('请输入联系电话')
             }

@@ -49,6 +49,9 @@ import {
     mapMutations,
     mapState
 } from 'vuex'
+import {
+    getTotalFund
+} from '../../../data/wallet'
 export default {
     props: ['user'],
     data() {
@@ -85,17 +88,18 @@ export default {
         isShowIcon() {
             this.isHiddenFlag = !this.isHiddenFlag
         },
-        getNum(itm) {
-            this.$http.get(this.$lib.host + 'tb/getTotalFund', {
-                params: {
-                    token_: this.$store.state.newToken
+        getNum() {
+            getTotalFund().then(res => {
+                if(res.code === 1000) {
+                    this.sumAmount = res.data.totalAmount
                 }
-            }).then(res => {
-                console.log(res);
-                this.sumAmount = res.data.totalAmount
-                console.log(this.sumAmount);
-
             })
+            // this.$http.post('http://trex.top/payservice/order/getTotalFund').then(res => {
+            //     console.log(res);
+            //     this.sumAmount = res.data.totalAmount
+            //     console.log(this.sumAmount);
+
+            // })
         },
     },
     mounted() {

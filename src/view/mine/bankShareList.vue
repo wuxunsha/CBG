@@ -121,17 +121,17 @@ export default {
         // 获取团队信息下面贡献列表
         getUserTeamInfoList() {
             getUserTeamInfo().then(res => {
-                
-            }).catch(e => {
-                if (e.code === 1000) {
-                    this.teamInfoList = e.data
-                    if(e.data.length > 0) {
-                        this.totalpeople = e.data.length
+                if (res.code === 1000) {
+                    if(res.data.length > 0) {
+                        this.teamInfoList = res.data 
+                        this.totalpeople = res.data.length
                     } else {
                         this.totalpeople = 0
                     }
 
                 }
+            }).catch(e => {
+                
             })
         }
     },
