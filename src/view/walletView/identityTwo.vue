@@ -32,12 +32,11 @@
             <div>
                 <van-uploader class="upload-input"
                               :max-count="1"
-                              accept=".jpg, .png"
-                              deletable
+                              multiple
+                              preview-full-images
                               :before-read="beforeRead"
                               :after-read="positiveRead"
-                              v-model="positiveUrl"
-                              result-type="dataUrl" capture=“camera”>
+                              v-model="positiveUrl">
                     <van-button>
                         <div class="up-load">身份证正面</div>
                     </van-button>
@@ -45,11 +44,11 @@
                 <van-uploader class="upload-input"
                               style="text-align:right;"
                               :max-count="1"
-                              accept=".jpg, .png"
-                              deletable
+                              preview-full-images
+                              multiple
                               :before-read="beforeRead"
                               :after-read="reverseRead"
-                              v-model="reverseUrl" capture=“camera”>
+                              v-model="reverseUrl">
                     <van-button>
                         <div class="up-load">身份证反面</div>
                     </van-button>
@@ -58,11 +57,11 @@
             <div>
                 <van-uploader class="upload-input"
                               :max-count="1"
-                              accept=".jpg, .png"
-                              deletable
+                              preview-full-images
+                              multiple
                               :before-read="beforeRead"
                               :after-read="handheldRead"
-                              v-model="handheldUrl" capture=“camera”>
+                              v-model="handheldUrl">
                     <van-button>
                         <div class="up-load">手持身份证照</div>
                     </van-button>
@@ -116,7 +115,9 @@ export default {
             let param = new FormData()
             param.append('file', file.file)
             uploadFile(param).then(res => {
-                console.log(res.code)
+                if (res.code === 1000) {
+                    this.idCardFrontImg = res.data
+                }
             }).catch(e => {
                 if (e.code === 1000) {
                     this.idCardFrontImg = e.data
@@ -128,7 +129,9 @@ export default {
             let param = new FormData()
             param.append('file', file.file)
             uploadFile(param).then(res => {
-                console.log(res.code)
+                if (res.code === 1000) {
+                    this.idCardSideImg = res.data
+                }
             }).catch(e => {
                 if (e.code === 1000) {
                     this.idCardSideImg = e.data
@@ -140,7 +143,9 @@ export default {
             let param = new FormData()
             param.append('file', file.file)
             uploadFile(param).then(res => {
-                console.log(res.code)
+                if (res.code === 1000) {
+                    this.idCardHandImg = res.data
+                }
             }).catch(e => {
                 if (e.code === 1000) {
                     this.idCardHandImg = e.data
@@ -176,7 +181,14 @@ export default {
                 realName: this.name
             }
             subIdcardInfo(data).then(res => {
-                console.log(res.code)
+                if (res.code === 1000) {
+                    Toast.success('提交成功')
+                    setTimeout(() => {
+                        this.$router.push('/bankUser')
+                    }, 1500);
+                } else {
+                    return Toast.fail(res.msg)
+                }
             }).catch(e => {
                 if (e.code === 1000) {
                     Toast.success('提交成功')
