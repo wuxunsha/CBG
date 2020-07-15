@@ -32,7 +32,7 @@
                        :placeholder="`请输入验证码`"
                        v-model="form.yzCode"
                        @blur="blur_event">
-                <forgetGetCode :codeData="{sendAddress:form.userAccount,type:'3'}" />
+                <forgetGetCode :codeData="{phone:form.userAccount}" />
             </div>
 
             <div class="input_gorup">
