@@ -208,14 +208,14 @@ export default {
                 if (res.code == 200) {
                     this.showPop = false
                     this.$layer.open({
-                        content: '预约成功',
+                        content: res.msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
                 } else {
                     this.showPop = false
                     this.$layer.open({
-                        content: '预约失败',
+                        content: res.msg,
                         skin: 'msg',
                         time: 2 //2秒后自动关闭
                     })
