@@ -195,13 +195,6 @@ export function getLoginCode(params) { //忘记登陆密码
     })
 }
 
-export function transfer(params) { // 转账
-    return post({
-        url: `${cbkPathUrl}otc/transfer`,
-        params: params
-    })
-}
-
 export function getUserPayInfo(params) { // 获取用户收款方式
     return get({
         url: `${cbkPathUrl}cguser/getUserPayInfo`,
@@ -256,6 +249,20 @@ export function getUser(params) { // 获取我的页面用户信息
 export function getUserTeamInfo(params) { // 获取团队信息下面贡献列表
     return post({
         url: `${txPathUrl}user/getUserTeamInfo`,
+        params: params
+    })
+}
+
+export function smsPhone(params) { // 转账获取验证码
+    return post({
+        url: `${txPathUrl}open/smsPhone`,
+        params: params
+    })
+}
+
+export function transfer(params) { // 转账
+    return post({
+        url: `${txPathUrl}order/transfer`,
         params: params
     })
 }

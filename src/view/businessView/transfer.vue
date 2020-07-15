@@ -28,7 +28,7 @@
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_id')}}</div>
         <div class="inputItem inputItemButton">
-          <input type="text" :placeholder="`${$t('feature.transfer.input_id')}`" v-model="reqParams.skAccount">
+          <input type="text" :placeholder="`${$t('feature.transfer.input_id')}`" v-model="reqParams.toAccount">
         </div>
       </div>
 
@@ -49,15 +49,15 @@
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_code')}}</div>
         <div class="inputItem flex align inputItemButton">
-            <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.yzCode">
-            <div class="getCode"> <forgetGetCode :codeData="{phone:userInfo.userPhone,type:'2'}" /></div>
+            <input type="number" :placeholder="`${$t('feature.transfer.input_code')}`" v-model="reqParams.noteCode">
+            <div class="getCode"> <forgetGetCode :codeData="{phone:userInfo.userPhone}" /></div>
         </div>
       </div>
 
       <div class="formGroup">
         <div class="title">{{$t('feature.transfer.text_pass')}}</div>
         <div class="inputItem inputItemButton">
-          <input type="number" style="-webkit-text-security:disc" :placeholder="`${$t('feature.transfer.input_pass')}`" v-model="reqParams.payPassWord">
+          <input type="number" style="-webkit-text-security:disc" :placeholder="`${$t('feature.transfer.input_pass')}`" v-model="reqParams.password">
         </div>
       </div>
 
@@ -97,11 +97,12 @@ export default {
     return {
       show:false,
       reqParams:{
+        phone: null,
         amount:null, // 金额
-        skAccount:null, // 收款人账号
-        yzCode:null,//验证码
-        payPassWord:null,//支付密码
-        coinId:null // 币种ID
+        toAccount:null, // 收款人账号
+        noteCode:null,//验证码
+        password:null,//支付密码
+        conidId:null // 币种ID
       },
       currCoin:null,//当前币种
       // 币种列表
@@ -138,7 +139,7 @@ export default {
     },
     //确认转账
     checkParams(){
-      if(!this.reqParams.skAccount){
+      if(!this.reqParams.toAccount){
         Toast(this.$t('feature.transfer.text_id'))
         return;
       }
@@ -146,11 +147,11 @@ export default {
         Toast(this.$t('feature.transfer.input_number'));
         return;
       }
-      if(!this.reqParams.yzCode){
+      if(!this.reqParams.noteCode){
         Toast(this.$t('feature.transfer.input_code'));
         return;
       }
-      if(!this.reqParams.payPassWord){
+      if(!this.reqParams.password){
         Toast(this.$t('feature.transfer.input_pass'));
         return;
       }
@@ -158,23 +159,35 @@ export default {
         Toast('转账金额不能超出可用余额');
         return;
       }
-      this.transfer();
+      this.transfer()
     },
     transfer(){
-      transfer(this.reqParams).then(v=>{
-        Toast.success(v.message);
-        setTimeout(() => {
-          this.goback();
-        }, 1000);
+      let data = {
+        phone: this.userInfo.userPhone,
+        amount: Number(this.reqParams.amount),
+        toAccount: this.reqParams.toAccount,
+        noteCode: this.reqParams.noteCode,
+        password: this.reqParams.password,
+        conidId: Number(this.reqParams.conidId)
+      }
+      transfer(data).then(v=>{
+        if (v.code === 1000) {
+          Toast.success(v.msg)
+          setTimeout(() => {
+            this.goback()
+          }, 1000)
+        } else {
+          Toast.success(v.msg)
+        }
       })
     },
     //获取id名称
     getName(){
-      if(!this.reqParams.skAccount){
+      if(!this.reqParams.toAccount){
         this.idName = null;
         return;
       }
-      idGetName({id:this.reqParams.skAccount}).then(v=>{
+      idGetName({id:this.reqParams.toAccount}).then(v=>{
         if(v.data)
           this.idName  = v.data;
         else
@@ -185,7 +198,7 @@ export default {
     onChange(value){
       console.log(value)
       this.currCoin = value.text
-      this.reqParams.coinId = value.coinId
+      this.reqParams.conidId = value.coinId
       this.balance = value.lastBalance
       this.show = false;
     },
@@ -206,7 +219,7 @@ export default {
           })
           this.coins = res.data
           this.currCoin = res.data[0].text
-          this.reqParams.coinId = res.data[0].coinId
+          this.reqParams.conidId = res.data[0].coinId
           this.balance = res.data[0].lastBalance
         }
       })

@@ -16,15 +16,15 @@
             </div>
             <div class="input-box">
                 <p>{{this.$route.query.type == 3 ? $t('wallet.payment.text_yinghangka') : this.$route.query.type == 1 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_weixin')}}{{$t('wallet.payment.text_account')}}</p>
-                <input type="text"
+                <input type="number"
                        v-model="acount"
-                       :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`">
+                       :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`" @blur="acountBlur">
             </div>
-            <div class="input-box" v-if="this.$route.query.type == 3">
-                <p>{{$t('wallet.payment.text_yhname')}}</p>
-                <input type="text"
-                       v-model="acount"
-                       :placeholder="`${$t('wallet.payment.text_placeholder')}`">
+            <div class="yh-type" v-if="this.$route.query.type == 3 && bankFlag">
+                <p style="width: 100%;">
+                    <span>{{$t('wallet.payment.text_yhname')}}</span>
+                </p>
+                <p>{{bankName}}</p>
             </div>
             <div class="input-box">
                 <p>{{$t('wallet.payment.text_phone')}}</p>
@@ -55,6 +55,9 @@
 </template>
 
 <script>
+import {
+    bankCardAttribution
+} from "@/util/bank"
 export default {
     data() {
         return {
@@ -63,7 +66,10 @@ export default {
             acount: '',
             phone: '',
             img: '',
-            titleName: '添加收款方式'
+            bankName: '',
+            titleName: '添加收款方式',
+            bankFlag: false,
+            bankData: {}
         }
     },
     methods: {
@@ -114,8 +120,12 @@ export default {
                         'payPhone': this.phone,
                         // 联系方式
 
-                        'payType': this.$route.query.type
+                        'payType': this.$route.query.type,
                         // 支付方式：1，支付宝，2，微信，3，银行
+                        'bankCode': this.bankData.bankCode,
+                        'bankName': this.bankData.bankName,
+                        'cardType': this.bankData.cardType,
+                        'cardTypeName': this.bankData.cardTypeName
                     }
                     this.addUserOtc(data)
                 } else {
@@ -150,8 +160,12 @@ export default {
                         'payPhone': this.phone,
                         // 联系方式
 
-                        'payType': this.$route.query.item.payType
+                        'payType': this.$route.query.item.payType,
                         // 支付方式：1，支付宝，2，微信，3，银行
+                         'bankCode': this.bankData.bankCode,
+                        'bankName': this.bankData.bankName,
+                        'cardType': this.bankData.cardType,
+                        'cardTypeName': this.bankData.cardTypeName
                     }
                     this.updateUserOtc(data)
                 } else {
@@ -220,10 +234,24 @@ export default {
                 return false;
             }
             return true;
-        }
-    },
-    computed: {
-
+        },
+        acountBlur() {
+            if(this.acount) {
+                if(this.check(this.acount)) {
+                    let bankInfo = bankCardAttribution(this.acount)
+                    this.bankName = bankInfo.bankName
+                    this.bankData = bankInfo
+                    this.bankFlag = true
+                } else {
+                    return Toast.fail('请输入正确的银行卡号!')
+                }
+            }
+        },
+        // 正则验证银行卡方法
+		check (content) {
+			let regExp = /^([1-9]{1})(\d{15}|\d{18})$/
+            return regExp.test(content) 
+		}
     },
     mounted() {
         if (this.$route.query.mode === '2') {
@@ -239,6 +267,9 @@ export default {
         } else if (this.$route.query.mode === '1') {
             this.titleName = '添加收款方式'
         }
+    },
+    created() {
+    
     }
 };
 
@@ -284,6 +315,23 @@ export default {
             font-weight: 500;
             color: rgba(200, 205, 211, 1);
             margin-top: 15px;
+        }
+    }
+    .yh-type {
+        display: flex;
+        padding-bottom: 20px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgba(235, 235, 235, 1);
+        > p {
+            flex: 1;
+            font-size: 14px;
+            line-height: 14px;
+            font-weight: bold;
+            color: rgba(53, 53, 53, 1);
+        }
+        > p:nth-child(2) {
+            text-align: right;
+            color: blue;
         }
     }
 }

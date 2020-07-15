@@ -20,6 +20,7 @@ const noGifArr = [
     mallBaseUrl + '/wallet/v1/user/info',
     mallBaseUrl + '/product/list',
     registerUrl + 'proxyUrl/wallet/v1/user/send_code',
+    tbUrl + '/open/smsPhone'
 ]; //不显示加载框路由
 const wihteList = [
     oldBaseUrl + 'proxyUrl/order/exchange'
@@ -41,8 +42,9 @@ const request_json = [
     tbUrl + '/order/orderList',
     tbUrl + '/order/addOtc',
     tbUrl + '/order/selectOrderByUser',
-    tbUrl + '/order/updateYzf'
-    // tbUrl + '/upload/file'
+    tbUrl + '/order/updateYzf',
+    tbUrl + '/open/smsPhone',
+    tbUrl + '/order/transfer'
 
 ]; //application/json方式请求接口
 
@@ -100,7 +102,7 @@ axios.interceptors.request.use(function(config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc' || config.url == tbUrl + '/order/selectOrderByUser' || config.url == tbUrl + '/order/updateYzf' || config.url == tbUrl + '/user/getUserTeamInfo') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc' || config.url == tbUrl + '/order/selectOrderByUser' || config.url == tbUrl + '/order/updateYzf' || config.url == tbUrl + '/user/getUserTeamInfo' || config.url == tbUrl + '/open/smsPhone' || config.url == tbUrl + '/order/transfer') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,
