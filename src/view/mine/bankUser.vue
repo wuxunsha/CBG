@@ -60,11 +60,12 @@
 
         <div class="news">
             <div class="news-box"
-                 @click="user.isrz === 1 ? '' : $router.push('/identityTwo')">
+                 @click="user.isrz === 0 ? $router.push('/identityTwo') : ''">
                 <img src="../../assets/business/user/ssrz2x.png"
                      alt="">
                 <span>{{$t('feature.bankUser.text_Authentication')}}</span>
                 <span v-if="user.isrz === 1">{{$t('feature.bankUser.text_verified')}}</span>
+                <span v-else-if="user.isrz === 2">审核中</span>
                 <span v-else>{{$t('feature.bankUser.text_not_certified')}}</span>
             </div>
         </div>

@@ -59,7 +59,7 @@
                     <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
-                            <span>50-10</span>
+                            <span>{{i.minAmount}}-{{i.maxAmount}}</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_zt')}}:</span>
@@ -77,7 +77,7 @@
                             <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                         <p>
-                            <span>{{getLocalTime(i.createTime)}}</span>
+                            <span>{{i.addTime}}</span>
                         </p>
                     </div>
 
@@ -531,36 +531,51 @@ export default {
             this.$refs.setPsd.focus();
         },
         getNewList() {
-            this.$http.get(this.$lib.host + 'qmlcg/selectForClass', {
+            this.$http.get(this.$lib.newHosts + '/qmcg/appoList', {
                 params: {
                     token_: this.$store.state.newToken,
                     orderclass: this.list.level
                 }
             }).then(res => {
-                if (res.code == 200) {
+                if (res.code == 1000) {
                     //预约产业
-                    this.orderList = res.data.filter(e => {
-                        if (e.state == 0) {
-                            return e
-                        }
-                    })
-                    //0-预售状态 6-交接中 1-量产中 3-众筹中 4-众筹成功 5-众筹失败
-                    this.volumeList = res.data.filter(e => {
-                        if (e.state == 6) {
-                            return e
-                        }
-                    })
-                    this.connectList = res.data.filter(e => {
-                        if (e.state == 1) {
-                            return e
-                        }
-                    })
-                    this.crowdList = res.data.filter(e => {
-                        if (e.state == 3) {
-                            return e
-                        }
-                    })
+                    this.orderList = res.data
+                    this.orderList = this.orderList.filter(e => {
+                        if (e.level == this.list.level) {
+                            console.log(e);
 
+                            return e
+                        }
+                    })
+                    // this.orderList = res.data.filter(e => {
+                    //     if (e.state == 0) {
+                    //         return e
+                    //     }
+                    // })
+                    // //0-预售状态 6-交接中 1-量产中 3-众筹中 4-众筹成功 5-众筹失败
+                    // this.volumeList = res.data.filter(e => {
+                    //     if (e.state == 6) {
+                    //         return e
+                    //     }
+                    // })
+                    // this.connectList = res.data.filter(e => {
+                    //     if (e.state == 1) {
+                    //         return e
+                    //     }
+                    // })
+                    // this.crowdList = res.data.filter(e => {
+                    //     if (e.state == 3) {
+                    //         return e
+                    //     }
+                    // })
+
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    return
                 }
             })
         },

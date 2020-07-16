@@ -109,14 +109,6 @@ export function TBListCZinfo(params) { //获取充值记录
     })
 }
 
-export function qmlcgFanli(params) { //领取
-    return get({
-        url: `${cbkPathUrl}qmlcg/fanli`,
-        params: params
-    })
-}
-
-
 
 export function upload(params) { // 上传图片
     return post({
@@ -277,6 +269,13 @@ export function smsFindLoginPhone(params) { // 找回密码验证码
 export function findLoginPwd(params) { //找回密码
     return post({
         url: `${txPathUrl}user/findLoginPwd`,
+        params: params
+    })
+}
+
+export function qmlcgFanli(params) { //领取
+    return post({
+        url: `${txPathUrl}order/getRebate`,
         params: params
     })
 }

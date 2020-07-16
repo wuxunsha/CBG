@@ -48,7 +48,7 @@
                        :placeholder="$t('wallet.register.form_input_code')"
                        v-model="form.code"
                        @blur="blur_event">
-                <getCode :codeData="{type:'register',phone:form.phone,}" />
+                <getCode :codeData="{phone:form.phone,}" />
             </div>
 
             <div class="input_gorup">

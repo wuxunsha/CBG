@@ -52,7 +52,7 @@ export default {
     props: ['user'],
     data() {
         return {
-            
+
             token: null,
             // 资产列表
             balanceList: null
@@ -73,8 +73,8 @@ export default {
         // 领取
         receive(event) {
             event.stopPropagation()
-            qmlcgFanli({ token_: this.$store.state.newToken }).then(res => {
-                if (res.code === '200') {
+            qmlcgFanli().then(res => {
+                if (res.code === '1000') {
                     this.getBalanceAll()
                 } else {
                     this.$layer.open({

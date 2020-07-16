@@ -32,19 +32,27 @@ export default {
                 return false;
             }
             let params = {
-                "to": this.codeData.phone,
-                "func": this.codeData.type
+                "phone": this.codeData.phone,
             }
-            send_message(params).then(v => {
-                if (v.code == 200) {
-                    Toast(v.message);
-                    this.setGetCodeStatue();
+            this.$http.post(this.$lib.newHosts + '/open/smsRegistPhone', params).then(res => {
+                if (res.code == 1000) {
+                    console.log(res);
+                    Toast(res.msg);
                 } else {
-                    Toast(v.message);
+                    Toast(res.msg);
                 }
-            }).catch(i => {
-                Toast(i.message);
             })
+
+            // send_message(params).then(v => {
+            //     if (v.code == 200) {
+            //         Toast(v.message);
+            //         this.setGetCodeStatue();
+            //     } else {
+            //         Toast(v.message);
+            //     }
+            // }).catch(i => {
+            //     Toast(i.message);
+            // })
         }, //getCode
         setGetCodeStatue() { //设置获取验证码状态
             this.second = 60;

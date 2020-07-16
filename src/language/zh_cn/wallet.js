@@ -14,7 +14,7 @@ const lang = {
     register: {
         title: "注册CB",
         form_input_userName: "请输入用户名称",
-        form_input_email: "请输入邮箱或手机号码",
+        form_input_email: "请输入手机号码",
         form_input_second: "秒后重新发送",
         form_input_getCode: "获取验证码",
         form_input_code: "请输入验证码",
@@ -43,7 +43,7 @@ const lang = {
         check_pass_fail: "密码不一致",
         form_btn_back: "确认重置",
         text_prompt: "至少8个字符，必须包含字母及数字",
-        text_phone: "邮箱或手机号"
+        text_phone: "手机号"
     },
     home: {
         text_assets: "总资产",

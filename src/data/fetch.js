@@ -46,8 +46,10 @@ const request_json = [
     tbUrl + '/open/smsPhone',
     tbUrl + '/order/transfer',
     tbUrl + '/user/smsFindLoginPhone',
-    tbUrl + '/user/findLoginPwd'
-
+    tbUrl + '/user/findLoginPwd',
+    tbUrl + '/open/smsRegistPhone',
+    tbUrl + '/qmcg/appoList',
+    tbUrl + '/order/getRebate'
 ]; //application/json方式请求接口
 
 const request_file = [
@@ -104,7 +106,7 @@ axios.interceptors.request.use(function(config) {
         lang = 'zh_cn';
     }
 
-    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc' || config.url == tbUrl + '/order/selectOrderByUser' || config.url == tbUrl + '/order/updateYzf' || config.url == tbUrl + '/user/getUserTeamInfo' || config.url == tbUrl + '/open/smsPhone' || config.url == tbUrl + '/order/transfer' || config.url == tbUrl + '/order/getTotalFund' || config.url == tbUrl + '/user/subIdcardInfo' || config.url == tbUrl + '/user/smsFindLoginPhone' || config.url == tbUrl + '/user/findLoginPwd') {
+    if (config.url == tbUrl + '/withDraw/apply' || config.url == tbUrl + '/upload/file' || config.url == tbUrl + '/user/addUserOtc' || config.url == tbUrl + '/user/getUserPayType' || config.url == tbUrl + '/user/updateUserOtc' || config.url == tbUrl + '/user/getUserInfo' || config.url == tbUrl + '/order/orderList' || config.url == tbUrl + '/order/addOtc' || config.url == tbUrl + '/order/selectOrderByUser' || config.url == tbUrl + '/order/updateYzf' || config.url == tbUrl + '/user/getUserTeamInfo' || config.url == tbUrl + '/open/smsPhone' || config.url == tbUrl + '/order/transfer' || config.url == tbUrl + '/order/getTotalFund' || config.url == tbUrl + '/user/subIdcardInfo' || config.url == tbUrl + '/user/smsFindLoginPhone' || config.url == tbUrl + '/user/findLoginPwd' || config.url == tbUrl + '/open/smsRegistPhone' || config.url == tbUrl + '/qmcg/appoList' || config.url == tbUrl + '/order/getRebate') {
         config.headers = {
             'content-type': contentType,
             'access-token': store.state.newToken,
