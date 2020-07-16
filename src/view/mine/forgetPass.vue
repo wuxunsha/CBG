@@ -30,22 +30,22 @@
                 <input type="number"
                        pattern="\d*"
                        :placeholder="`请输入验证码`"
-                       v-model="form.yzCode"
+                       v-model="form.noteCode"
                        @blur="blur_event">
-                <forgetGetCode :codeData="{phone:form.userAccount}" />
+                <forgetCode :codeData="{userAccount:form.userAccount}" />
             </div>
 
             <div class="input_gorup">
                 <input type="password"
                        :placeholder="$t('wallet.register.form_input_loginPwd')"
-                       v-model="form.newuserPwd"
+                       v-model="form.password"
                        @blur="blur_event">
             </div>
 
             <div class="input_gorup">
                 <input type="password"
                        :placeholder="$t('wallet.register.form_input_loginPwd_re')"
-                       v-model="loginPwd_re"
+                       v-model="form.affPassword"
                        @blur="blur_event">
             </div>
 
@@ -66,7 +66,7 @@
 
 <script>
 import {
-    forgetUserPwd
+    findLoginPwd
 } from '../../data/wallet';
 import {
     validatePhoneNum
@@ -81,24 +81,24 @@ import {
 import {
     Dialog, Toast
 } from 'vant';
-import forgetGetCode from '../../components/wallet/noLoginCode'
+import forgetCode from '../../components/wallet/forgetCode'
 export default {
     data() {
         return {
             show: false,
             form: {
-                "userAccount": null,
-                "yzCode": null,
-                "newuserPwd": null
+                userAccount: null,
+                noteCode: null,
+                password: null,
+                affPassword: null
             },
             // phone: '',
             loginPwd_re: null,
-            payPwd_re: null,
             exist: false//已登录成功
         }
     },
     components: {
-        forgetGetCode
+        forgetCode
     },
     methods: {
         ...mapMutations(['setUserInfo', 'setToken']),
@@ -107,31 +107,31 @@ export default {
                 Toast(`请输入用户账号`)
                 return false;
             }
-            if (!this.form.yzCode) {
+            if (!this.form.noteCode) {
                 Toast(this.$t('wallet.register.form_input_code'))
                 return false;
             }
-            if (!this.form.newuserPwd) {
+            if (!this.form.password) {
                 Toast(this.$t('wallet.register.form_input_loginPwd'))
                 return false;
             }
-            if (!this.loginPwd_re) {
+            if (!this.form.affPassword) {
                 Toast(this.$t('wallet.register.form_input_loginPwd_re'))
                 return false;
             }
-            if (this.loginPwd_re != this.form.newuserPwd) {
+            if (this.form.affPassword != this.form.password) {
                 Toast(this.$t('wallet.register.check_login_pass_login'))
                 return false;
             }
             return true;
-        }, //verifyLoginInfo
+        },
         change_pwd: function () { //提交
 
             if (!this.verifynfo()) {
                 return;
             }
-            forgetUserPwd(this.form).then(data => {
-                Toast(data.msg)
+            findLoginPwd(this.form).then(data => {
+                Toast.success('重置成功')
                 setTimeout(() => {
                     this.gopage_re('/login');
 

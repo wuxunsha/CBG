@@ -12,7 +12,7 @@
 <script>
 let timer;
 import {
-    getCode, getLoginCode
+    smsFindLoginPhone
 } from '../../data/wallet';
 import {
     validatePhoneNum
@@ -25,22 +25,22 @@ export default {
         }
     },
     methods: {
-
-        getCode() { //获取验证码
-            // if (!this.codeData.phone) {
-            //   Toast(this.$t('wallet.getCode.Toast_email'))
-            //   return false;
-            // }
-            let params = {
-                "sendAddress": this.codeData.sendAddress,
-                "type": this.codeData.type
+        //获取验证码
+        getCode() {
+            if(!this.codeData.userAccount) {
+                return Toast('请输入用户名')
             }
-            getLoginCode(params).then(v => {
-                Toast(v.msg);
-                this.setGetCodeStatue();
+            smsFindLoginPhone(this.codeData).then(v => {
+                if(v.code === 1000) {
+                    Toast(v.msg);
+                    this.setGetCodeStatue();
+                } else {
+                    Toast(v.msg)
+                }
             })
-        }, //getCode
-        setGetCodeStatue() { //设置获取验证码状态
+        },
+        //设置获取验证码状态
+        setGetCodeStatue() {
             this.second = 60;
             timer = setInterval(() => {
                 if (this.second > 1) {
@@ -50,16 +50,14 @@ export default {
                     clearInterval(timer);
                 }
             }, 1000)
-        }, //setGetCodeStatue
-
+        }
     },
     mounted() {
 
     },
     beforeDestroy() {
         clearInterval(timer);
-    },
-
+    }
 }
 
 </script>

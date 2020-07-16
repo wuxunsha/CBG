@@ -160,13 +160,6 @@ export function change_password(params) { //修改用户密码
     })
 }
 
-export function forgetUserPwd(params) { //找回密码
-    return post({
-        url: `${cbkPathUrl}otc/forgetUserPwd`,
-        params: qs.stringify(params)
-    })
-}
-
 export function getRollImg(params) { //获取首页轮播图
     return get({
         url: `${cbkPathUrl}qmlcg/getRollImg`,
@@ -270,6 +263,20 @@ export function transfer(params) { // 转账
 export function getTotalFund(params) { // 获取总资产
     return post({
         url: `${txPathUrl}order/getTotalFund`,
+        params: params
+    })
+}
+
+export function smsFindLoginPhone(params) { // 找回密码验证码
+    return post({
+        url: `${txPathUrl}user/smsFindLoginPhone`,
+        params: params
+    })
+}
+
+export function findLoginPwd(params) { //找回密码
+    return post({
+        url: `${txPathUrl}user/findLoginPwd`,
         params: params
     })
 }
