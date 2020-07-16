@@ -14,11 +14,17 @@
                        v-model="name"
                        :placeholder="`${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_name')}`">
             </div>
-            <div class="input-box">
-                <p>{{this.$route.query.type == 3 ? $t('wallet.payment.text_yinghangka') : this.$route.query.type == 1 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_weixin')}}{{$t('wallet.payment.text_account')}}</p>
-                <input type="number"
+            <div class="input-box" v-if="this.$route.query.type != 3">
+                <p>{{this.$route.query.type == 1 ? $t('wallet.payment.text_zhifubao') : $t('wallet.payment.text_weixin')}}{{$t('wallet.payment.text_account')}}</p>
+                <input type="text"
                        v-model="acount"
-                       :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : this.$route.query.type == 1 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`" @blur="acountBlur">
+                       :placeholder="this.$route.query.type == 2 ? `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_weixin')}` + `${$t('wallet.payment.text_account')}` : `${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_zhifubao')}` + `${$t('wallet.payment.text_account')}`">
+            </div>
+            <div class="input-box" v-if="this.$route.query.type == 3">
+                <p>{{$t('wallet.payment.text_yinghangka')}}{{$t('wallet.payment.text_account')}}</p>
+                    <input type="number"
+                       v-model="acount"
+                       :placeholder="`${$t('wallet.payment.text_name_placeholder')}` + `${$t('wallet.payment.text_yinghangka')}` + `${$t('wallet.payment.text_account')}`" @blur="acountBlur">      
             </div>
             <div class="yh-type" v-if="this.$route.query.type == 3 && bankFlag">
                 <p style="width: 100%;">
@@ -96,19 +102,23 @@ export default {
             if (!this.acount) {
                 return Toast.fail('请输入账户地址')
             }
-            if(!this.check(this.acount)) {
-                return Toast.fail('请输入正确的银行卡号')
-            }
             if (!this.phone) {
                 return Toast.fail('请输入联系电话')
             }
-            if(this.$route.query.type != 3) {
-                if (this.fileList.length <= 0) {
-                    return Toast.fail('请添加收款二维码')
+            if(this.$route.query.type == 3) {
+                if(!this.check(this.acount)) {
+                    return Toast.fail('请输入正确的银行卡号')
                 }
             }
-            if (this.$route.query.type != 3 && !this.img) {
-                return Toast.fail('请添加收款二维码')
+            if(this.$route.query.type != 3) {
+                if(this.$route.query.type != 3) {
+                    if (this.fileList.length <= 0) {
+                        return Toast.fail('请添加收款二维码')
+                    }
+                }
+                if (this.$route.query.type != 3 && !this.img) {
+                    return Toast.fail('请添加收款二维码')
+                }
             }
 
             if (this.$route.query.mode === '1') {
