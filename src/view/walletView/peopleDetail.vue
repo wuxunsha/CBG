@@ -537,6 +537,7 @@ export default {
                     this.orderList = res.data
                     this.orderList = this.orderList.filter(e => {
                         if (e.level == this.list.level) {
+
                             console.log(e);
 
                             return e
