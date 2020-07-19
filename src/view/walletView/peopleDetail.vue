@@ -59,7 +59,7 @@
                     <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
-                            <span>{{i.minAmount}}-{{i.maxAmount}}</span>
+                            <span>{{i.lcgConfig.minAmount}}-{{i.lcgConfig.maxAmount}}</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_zt')}}:</span>
@@ -69,15 +69,15 @@
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
                         <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
-                        <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
+                        <span>{{i.lcgConfig.cycle * i.lcgConfig.rate}}%</span>
                     </p>
                     <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cgsj')}}:</span>
-                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
+                            <span>{{i.lcgConfig.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                         <p>
-                            <span>{{i.addTime}}</span>
+                            <span>{{getLocalTime(i.addTime)}}</span>
                         </p>
                     </div>
 
@@ -536,7 +536,7 @@ export default {
                     //预约产业
                     this.orderList = res.data
                     this.orderList = this.orderList.filter(e => {
-                        if (e.level == this.list.level) {
+                        if (e.lcgConfig.level == this.list.level) {
 
                             console.log(e);
 

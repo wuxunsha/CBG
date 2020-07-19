@@ -33,15 +33,15 @@
             <div class="summary">
                 <div>
                     <p>团队总人数</p>
-                    <p>{{totalpeople}}</p>
+                    <p>{{incomeList.sxchildNumber}}</p>
                 </div>
                 <div>
                     <p>推荐收益(USDT)</p>
-                    <p>{{income.ztTotal}}</p>
+                    <p>{{incomeList.ztTotal}}</p>
                 </div>
                 <div>
                     <p>团队收益(USDT)</p>
-                    <p>{{income.teamTotal}}</p>
+                    <p>{{incomeList.teamTotal}}</p>
                 </div>
             </div>
             <div class="summary-title">
@@ -83,10 +83,11 @@ export default {
         return {
             user: {},
             // 收益
-            income: {
-                ztTotal: 0,
-                teamTotal: 0
-            },
+            // income: {
+            //     ztTotal: 0,
+            //     teamTotal: 0
+            // },
+            incomeList: [],
             // 总收益
             totalIncome: 0,
             teamInfoList: [],
@@ -113,15 +114,18 @@ export default {
         getUserTotalIncome() {
             getUserTDtotalIncome({ token_: this.$store.state.newToken }).then(res => {
                 if (res.code === '200') {
-                    this.income = res.data[0]
-                    this.totalIncome = res.data[0].ztTotal + res.data[0].teamTotal
+                    this.incomeList = res.data[0]
                 }
             })
         },
         // 获取团队信息下面贡献列表
         getUserTeamInfoList() {
             getUserTeamInfo({ token_: this.$store.state.newToken }).then(res => {
-                if (res.code === 200) {
+                console.log(res);
+
+                if (res.code == 200) {
+                    console.log(res.data.length);
+
                     if (res.data.length > 0) {
                         this.teamInfoList = res.data
                         this.totalpeople = res.data.length
