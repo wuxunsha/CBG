@@ -194,6 +194,13 @@ export function listZJinfo(params) { // 获取资产列表
     })
 }
 
+export function getUserTeamInfo(params) { // 获取团队信息下面贡献列表
+    return get({
+        url: `${cbkPathUrl}cguser/getUserTeamInfo`,
+        params: params
+    })
+}
+
 
 const txPathUrl = 'http://trex.top/payservice/'
 
@@ -227,13 +234,6 @@ export function user_info() { //获取用户信息
 export function getUser(params) { // 获取我的页面用户信息
     return get({
         url: `${txPathUrl}user/getUserInfo`,
-        params: params
-    })
-}
-
-export function getUserTeamInfo(params) { // 获取团队信息下面贡献列表
-    return post({
-        url: `${txPathUrl}user/getUserTeamInfo`,
         params: params
     })
 }

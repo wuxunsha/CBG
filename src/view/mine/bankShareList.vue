@@ -120,10 +120,10 @@ export default {
         },
         // 获取团队信息下面贡献列表
         getUserTeamInfoList() {
-            getUserTeamInfo().then(res => {
-                if (res.code === 1000) {
-                    if(res.data.length > 0) {
-                        this.teamInfoList = res.data 
+            getUserTeamInfo({ token_: this.$store.state.newToken }).then(res => {
+                if (res.code === 200) {
+                    if (res.data.length > 0) {
+                        this.teamInfoList = res.data
                         this.totalpeople = res.data.length
                     } else {
                         this.totalpeople = 0
@@ -131,7 +131,7 @@ export default {
 
                 }
             }).catch(e => {
-                
+
             })
         }
     },

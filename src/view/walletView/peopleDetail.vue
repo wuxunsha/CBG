@@ -531,13 +531,8 @@ export default {
             this.$refs.setPsd.focus();
         },
         getNewList() {
-            this.$http.get(this.$lib.newHosts + '/qmcg/appoList', {
-                params: {
-                    token_: this.$store.state.newToken,
-                    orderclass: this.list.level
-                }
-            }).then(res => {
-                if (res.code == 1000) {
+            this.$http.get(this.$lib.host + '/qmlcg/listYYDetailForMy').then(res => {
+                if (res.code == 200) {
                     //预约产业
                     this.orderList = res.data
                     this.orderList = this.orderList.filter(e => {
