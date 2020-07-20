@@ -15,7 +15,7 @@
     <div class="actionForm">
       <div class="currency-select" @click="show = true">
         <div class="currency-select-left">
-          <img src="../../assets/wallet/asstes/USDT@2x.png" alt="">
+          <img :src="reqParams.conidId === '1001' ? require('./../../assets/wallet/asstes/USDT.png') : reqParams.conidId === '1002' ? require('./../../assets/wallet/asstes/CBK.png') : reqParams.conidId === '1003' ? require('./../../assets/wallet/asstes/CBG.png') : require('./../../assets/wallet/asstes/BTC.png')" alt="">
           <span>
             {{currCoin}}
           </span>

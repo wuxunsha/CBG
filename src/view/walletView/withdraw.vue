@@ -24,8 +24,7 @@
             <div class="currency-select"
                  @click="popup = true">
                 <div class="currency-select-left">
-                    <img src="../../assets/wallet/asstes/USDT@2x.png"
-                         alt="">
+                    <img :src="coinId === '1004' ? require('./../../assets/wallet/asstes/BTC.png') : coinId === '1002' ? require('./../../assets/wallet/asstes/CBK.png') : coinId === '1003' ? require('./../../assets/wallet/asstes/CBG.png') : require('./../../assets/wallet/asstes/USDT.png')" alt="">
                     <span>
                         {{currCoin}}
                     </span>

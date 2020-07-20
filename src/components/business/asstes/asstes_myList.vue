@@ -10,8 +10,7 @@
                     :key="index"
                     @click="assetsDetail(item.coinId)">
                     <div class="asset-list-top">
-                        <img :src="item.coinId === '1001' ? require('./../../../assets/wallet/asstes/USDT.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/BTC.png')"
-                             alt="">
+                        <img :src="item.coinId === '1004' ? require('./../../../assets/wallet/asstes/BTC.png') : item.coinId === '1002' ? require('./../../../assets/wallet/asstes/CBK.png') : item.coinId === '1003' ? require('./../../../assets/wallet/asstes/CBG.png') : require('./../../../assets/wallet/asstes/USDT.png')" alt="">
                         <span>{{item.coinId === '1001' ? 'USDT' : item.coinId === '1002' ? 'CBK' : item.coinId === '1003' ? 'CBG' : 'BTC'}}</span>
                         <div class="bot-box">
                             <span v-if="item.coinId === '1001'"
