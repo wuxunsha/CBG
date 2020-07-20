@@ -69,7 +69,8 @@
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
                         <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
-                        <span>{{i.lcgConfig.cycle * i.lcgConfig.rate}}%</span>
+                        <!-- <span>{{i.lcgConfig.cycle * i.lcgConfig.rate}}%</span> -->
+                        <span>{{i.lcgConfig.cycle === 1 ? 5: i.lcgConfig.cycle === 5 ? 12 : i.lcgConfig.cycle === 10 ? 20 : 25}}%</span>
                     </p>
                     <div class="order-walth">
                         <p>
