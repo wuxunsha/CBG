@@ -177,7 +177,16 @@ export default {
             this.goback()
           }, 1000)
         } else {
-          Toast.success(v.msg)
+          Toast(v.msg)
+        }
+      }).catch(res => {
+        if (res.code === 1000) {
+          Toast.success(res.msg)
+          setTimeout(() => {
+            this.goback()
+          }, 1000)
+        } else {
+          Toast(res.msg)
         }
       })
     },
