@@ -63,7 +63,9 @@
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_zt')}}:</span>
-                            <span class="status">{{$t('wallet.peopleStock.text_yyz')}}</span>
+                            <span v-if="i.isopen == 0">预约中</span>
+                            <span v-else-if="i.isopen == 1&&i.isWin == 1">预约成功</span>
+                            <span v-else-if="i.isopen == 1&&i.isWin == 0">预约失败</span>
                         </p>
                     </div>
                     <p>
@@ -155,50 +157,35 @@
                  :key="index">
                 <div class="order"
                      style="margin:10px 0 0 0">
-                    <!-- <h3>
-                        <img src="../../assets/wallet/people/time.png">
-                        <span>付款倒计时56:30</span>
-                    </h3> -->
-                    <div class="order-center">
-                        <p>
-                            <span>{{$t('wallet.peopleStock.text_gqbh')}}:</span>
-                            <span>{{i.id}}</span>
-                        </p>
-                        <p>
-                            <span>{{$t('wallet.peopleStock.text_zq')}}:</span>
-                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
-                        </p>
-                    </div>
-                    <div class="order-center">
+                    <h3>{{i.orderclass}}</h3>
+                    <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
-                            <span>{{i.cyFW}}</span>
+                            <span>{{i.lcgConfig.minAmount}}-{{i.lcgConfig.maxAmount}}</span>
                         </p>
                         <p>
-                            <span>{{$t('wallet.peopleStock.text_gfje')}}:</span>
-                            <span>{{i.amount}}U</span>
+                            <span>{{$t('wallet.peopleStock.text_zt')}}:</span>
+                            <span class="status"
+                                  v-if="i.lcgConfig.state == 1">量产中</span>
+                            <span class="status"
+                                  v-if="i.lcgConfig.state == 2">量产结束</span>
                         </p>
                     </div>
-                    <div class="order-center">
+                    <p>
+                        <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
+                        <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
+                        <!-- <span>{{i.lcgConfig.cycle * i.lcgConfig.rate}}%</span> -->
+                        <span>{{i.lcgConfig.cycle === 1 ? 5: i.lcgConfig.cycle === 5 ? 12 : i.lcgConfig.cycle === 10 ? 20 : 25}}%</span>
+                    </p>
+                    <div class="order-walth">
                         <p>
-                            <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
-                            <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
-                            <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
+                            <span>{{$t('wallet.peopleStock.text_cgsj')}}:</span>
+                            <span>{{i.lcgConfig.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                         <p>
-                            <span>{{$t('wallet.peopleStock.text_dqshy')}}:</span>
-                            <span>{{i.amount*(1+i.cycle*i.rate)}}U</span>
-                        </p>
-                    </div>
-                    <div class="order-center">
-                        <p>
-                            <span>TGB:</span>
-                            <span>{{i.amount*i.cycle*i.rate}}*{{(i.otherRate *100).toFixed(2)}}%={{i.amount*i.cycle*i.rate*i.otherRate *100}}</span>
+                            <span>{{getLocalTime(i.addTime)}}</span>
                         </p>
                     </div>
-                    <!-- <div class="go-buy">
-                        收益增值,众筹
-                    </div> -->
 
                 </div>
             </div>
@@ -555,11 +542,11 @@ export default {
                     //         return e
                     //     }
                     // })
-                    // this.connectList = res.data.filter(e => {
-                    //     if (e.state == 1) {
-                    //         return e
-                    //     }
-                    // })
+                    this.connectList = res.data.filter(e => {
+                        if (e.lcgConfig.state !== 0) {
+                            return e
+                        }
+                    })
                     // this.crowdList = res.data.filter(e => {
                     //     if (e.state == 3) {
                     //         return e
