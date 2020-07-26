@@ -66,6 +66,7 @@
                             <span v-if="i.isopen == 0">预约中</span>
                             <span v-else-if="i.isopen == 1&&i.isWin == 1">预约成功</span>
                             <span v-else-if="i.isopen == 1&&i.isWin == 0">预约失败</span>
+                            <span v-else-if="i.isopen == 1&&i.isWin == 2">支付失败</span>
                         </p>
                     </div>
                     <p>
