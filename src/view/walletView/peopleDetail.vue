@@ -154,7 +154,7 @@
         </div>
         <div v-if="tabNum== 2">
             <div class="content-line"
-                 v-for="(i,index) in  connectList"
+                 v-for="(i,index) in connectList"
                  :key="index">
                 <div class="order"
                      style="margin:10px 0 0 0">
@@ -162,29 +162,29 @@
                     <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_industrial')}}:</span>
-                            <span>{{i.lcgConfig.minAmount}}-{{i.lcgConfig.maxAmount}}</span>
+                            <span>{{i.cymin}}-{{i.cymax}}</span>
                         </p>
                         <p>
                             <span>{{$t('wallet.peopleStock.text_zt')}}:</span>
                             <span class="status"
-                                  v-if="i.lcgConfig.state == 1">量产中</span>
+                                  v-if="i.state == 1">量产中</span>
                             <span class="status"
-                                  v-if="i.lcgConfig.state == 2">量产结束</span>
+                                  v-if="i.state == 2">量产结束</span>
                         </p>
                     </div>
                     <p>
                         <span>{{$t('wallet.peopleStock.text_cyshy')}}:</span>
                         <!-- <span>1{{$t('wallet.peopleStock.text_tian')}}/{{i.rate * 100}}%</span> -->
                         <!-- <span>{{i.lcgConfig.cycle * i.lcgConfig.rate}}%</span> -->
-                        <span>{{i.lcgConfig.cycle === 1 ? 5: i.lcgConfig.cycle === 5 ? 12 : i.lcgConfig.cycle === 10 ? 20 : 25}}%</span>
+                        <span>{{i.cycle === 1 ? 5: i.cycle === 5 ? 12 : i.cycle === 10 ? 20 : 25}}%</span>
                     </p>
                     <div class="order-walth">
                         <p>
                             <span>{{$t('wallet.peopleStock.text_cgsj')}}:</span>
-                            <span>{{i.lcgConfig.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
+                            <span>{{i.cycle}}{{$t('wallet.peopleStock.text_tian')}}</span>
                         </p>
                         <p>
-                            <span>{{getLocalTime(i.addTime)}}</span>
+                            <span>{{getLocalTime(i.openTime)}}</span>
                         </p>
                     </div>
 
@@ -508,6 +508,7 @@ export default {
     mounted() {
         this.list = this.$route.query.item
         this.getNewList()
+        this.getliangList()
     },
     methods: {
         demoClick: function (index) {
@@ -543,17 +544,41 @@ export default {
                     //         return e
                     //     }
                     // })
-                    this.connectList = res.data.filter(e => {
-                        if (e.lcgConfig.state !== 0) {
-                            return e
-                        }
-                    })
+
                     // this.crowdList = res.data.filter(e => {
                     //     if (e.state == 3) {
                     //         return e
                     //     }
                     // })
 
+                } else {
+                    this.$layer.open({
+                        content: res.msg,
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    })
+                    return
+                }
+            })
+        },
+        getliangList() {
+            console.log(111);
+
+            this.$http.get(this.$lib.host + '/qmlcg/selectByUser').then(res => {
+                if (res.code == 200) {
+                    console.log(res.data);
+
+                    this.connectList = res.data
+
+                    this.connectList = this.connectList.filter(e => {
+                        if (e.orderclass == this.list.level) {
+
+                            console.log(e);
+
+                            return e
+                        }
+                    })
+                    console.log(this.connectList);
                 } else {
                     this.$layer.open({
                         content: res.msg,
