@@ -34,6 +34,13 @@ export default {
                 } else {
                     Toast(v.msg)
                 }
+            }).catch(res => {
+                if(res.code === 1000) {
+                    Toast(res.msg);
+                    this.setGetCodeStatue();
+                } else {
+                    Toast(res.msg)
+                }
             })
         },
         //设置获取验证码状态
